@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html" xml:lang="en" lang="en"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <ui:composition template="../resources/template/template.xhtml">
+        <ui:define name="header">
+            <h1>Übersicht Ihres Spieltipps</h1>
+        </ui:define>
+
+        <ui:define name="content">
+            <h:form>
+	           <div class = "pfeil">&#11176;<h:commandButton class="inputButton2" value="zurück"
+					 action="zahlungsabwicklung"  />
+					 </div>
+                <br/>
+
+
+
+<p:panelGrid columns="1">
+    <f:facet name="header">
+        <p:graphicImage name="/images/lottohead.png" />
+    </f:facet>
+
+	<p:panelGrid  style="margin-top:5px">
+      <f:facet name="footer">
+        <p:row>
+          <p:column  columns="3" rowspan="3" style=" text-align: center; width: 200px; border-right: 2px solid #ccc7c7">
+                Anschrift
+            </p:column>
+
+             <p:column  style=" text-align: left">
+               <h:outputText value="#{registrierungController.vorname}" style="padding:10px"/>
+                <h:outputText value="#{registrierungController.name}" style="padding:10px"/>
+            </p:column>          
+        </p:row>
+ 
+        <p:row>
+            <p:column style="width:70%; text-align: left">
+               <h:outputText value="#{registrierungController.strasse}" style="padding:10px" />
+               <h:outputText value="#{registrierungController.hausnummer}" />
+            </p:column>
+        </p:row>
+       
+        <p:row>
+            <p:column style="width:70%; text-align: left">
+               <h:outputText value="#{registrierungController.plz}" style="padding:10px"/>
+               <h:outputText value="#{registrierungController.ort}" />
+            </p:column>
+        </p:row>        
+    </f:facet>
+  </p:panelGrid>   
+  
+  
+ 	<p:panelGrid  style="margin-top:5px">
+      <f:facet name="footer">
+        <p:row>
+          <p:column  columns="3" rowspan="6" style="width: 200px; text-align: center; border-right: 2px solid #ccc7c7">
+                Ihre Spieltipps 
+            </p:column>
+
+             <p:column  style=" text-align: left; padding:10px">
+               Losnummer: <h:outputText value="#{lottoscheinEinreichenController.losnummer}" style=" margin-left: 80px"/>
+            </p:column>                      
+        </p:row>
+ 
+        <p:row>
+            <p:column style="width:70%; text-align: left">
+               Anzahl der Tipps: <h:outputText value="#{lottozahlenEingebenController.tipps}" style=" margin-left: 40px"/>
+            </p:column>
+        </p:row>
+       
+        <p:row>
+            <p:column style="width:70%; text-align: left">
+ 			Lottozahlen:  <h:outputText value="" style=" margin-left: 84px"/>
+            </p:column>
+        </p:row>  
+       
+        <p:row>
+            <p:column style="width:70%; text-align: left">
+               Ziehungstage: <h:outputText value="#{lottoscheinEinreichenController.ziehungstage}" style=" margin-left: 67px"/>
+            </p:column>
+        </p:row> 
+        
+         <p:row>
+            <p:column style="width:70%; text-align: left">
+              Laufzeit in Wochen: <h:outputText value="#{lottoscheinEinreichenController.laufzeit}" style=" margin-left: 25px"/>
+            </p:column>
+        </p:row> 
+              
+         <p:row>
+            <p:column style="width:70%; text-align: left">
+              Zusatzlotterien: <h:outputText value="#{lottoscheinEinreichenController.spiele}" style=" margin-left: 60px"/>
+            </p:column>
+        </p:row>      
+         
+    </f:facet>
+  </p:panelGrid>    
+  
+  
+  	<p:panelGrid  style="margin-top:5px">
+      <f:facet name="footer">
+        <p:row>
+          <p:column  columns="3"  style="width: 200px; text-align: center; border-right: 2px solid #ccc7c7">
+               Ihr Spieleinsatz:
+            </p:column>
+
+             <p:column  style="width:70%; text-align: left">
+                <h:outputText value="#{lottoscheinEinreichenController.kostenAsString }" style="padding:10px"/>
+              
+            </p:column>          
+        </p:row>
+ 
+       
+    </f:facet>
+  </p:panelGrid>   
+        
+</p:panelGrid>
+
+
+
+
+
+
+
+                <h:commandButton class="inputButton" value="Verbindlich buchen"
+                                 action="#{lottoscheinEinreichenController.senden}" style="border-radius:10px; font-size:large; width:100%; height: 58px; "/>
+            </h:form>
+        </ui:define>
+
+        <ui:define name="footer">
+
+            footer
+        </ui:define>
+
+    </ui:composition>
+
+</html>

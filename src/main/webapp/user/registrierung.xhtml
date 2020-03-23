@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">  
+    <ui:composition template="../resources/template/template.xhtml">
+        <ui:define name="header">
+            <h1> Registrierung </h1>
+        </ui:define>
+
+        <ui:define name="content">
+        
+      <h:form>
+      
+      		 		<div class = "pfeil">&#11176; <h:commandButton class="inputButton2" value="zurück"
+					 action="anmelden"  />
+					</div> 
+         
+    <p:growl id="growl" sticky="true" showDetail="true"/>
+ 
+    <p:wizard flowListener="#{registrierungController.onFlowProcess}" 
+    						style="width: 70%; background-color: #ffffff; border: 2px solid #b8b8b8; border-radius: 10px; padding: 10px">
+        <p:tab id="personal" title="Personal">
+            <p:panel >
+                <p:messages />
+                <h:panelGrid columns="2" columnClasses="label, value">
+                    <h:outputText value="Vorname: " />
+                    <p:inputText value="#{registrierungController.vorname}" required="true" label="Vorname"/>
+ 
+                    <h:outputText value="Name: " />
+                    <p:inputText value="#{registrierungController.name}" required="true" label="Name"/>
+                   
+                    <h:outputText value="E-Mail: " />
+                    <p:inputText value="#{registrierungController.email}" required="true" label="Email"/>
+                    
+                    <h:outputText value="Benutzername: " />
+                    <p:inputText value="#{registrierungController.benutzername}" required="true" label="Benutzername"/>
+                    
+                     <h:outputText value="Passwort: " />
+                    <p:inputText value="#{registrierungController.passwort}" required="true" label="Passwort"/>
+
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+ 
+        <p:tab id="address" title="Adresse">
+            <p:panel >
+                <p:messages />
+                <h:panelGrid columns="2" columnClasses="label, value">
+                    <h:outputText value="Straße: " />
+                    <p:inputText value="#{registrierungController.strasse}" required="true"/>
+ 
+                    <h:outputText value="Hausnummer: " />
+                    <p:inputText value="#{registrierungController.hausnummer}" required="true" />
+                    
+                    <h:outputText value="Adresszusatz: " />
+                    <p:inputText value="#{registrierungController.adresszusatz}" required="true"/>
+                    
+                    <h:outputText value="Postleitzahl: " />
+                    <p:inputText value="#{registrierungController.plz}" required="true"/>
+ 
+                    <h:outputText value="Ort: " />
+                    <p:inputText value="#{registrierungController.ort}" required="true"/>
+                    
+                    <h:outputText value="Land: " />
+                    <p:inputText value="#{registrierungController.land}" required="true"/>
+ 
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+ 
+        <p:tab id="contact" title="Bank">
+            <p:panel >
+                <p:messages />
+                <h:panelGrid columns="2" columnClasses="label, value">
+                    <h:outputText value="Bank:" />
+                    <p:inputText value="#{registrierungController.bankname}" required="true" label="Bankname"/>
+                    
+                    <h:outputText value="Kontoinhaber: " />
+                    <p:inputText value="#{registrierungController.kontoinhaber}" required="true"/>
+ 
+                    <h:outputText value="BIC: " />
+                    <p:inputText value="#{registrierungController.bic}"/>
+ 
+                    <h:outputText value="IBAN: " />
+                    <p:inputText value="#{registrierungController.iban}"/>
+                </h:panelGrid>
+                
+             
+            </p:panel>
+        </p:tab>
+ 
+
+    </p:wizard>
+    
+    
+               <div align="center"> 
+                 <h:commandButton class="inputButton" value = "#{msg['weiter']}"
+                
+                              action="zahlungsabwicklung" /> 
+                                 </div>
+
+ 
+</h:form>
+
+
+        </ui:define>
+        <ui:define name="footer">
+            footer
+        </ui:define>
+    </ui:composition>
+
+</html>
+

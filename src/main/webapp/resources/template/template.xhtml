@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html" xml:lang="en" lang="en"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>wbs lotto projekt</title>
+	<meta http-equiv="keywords" content="enter,your,keywords,here" />
+	<meta http-equiv="description"
+		content="A short description of this page." />
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<link rel="stylesheet"
+		href="#{request.contextPath}/resources/css/layout.css" />
+</h:head>
+<h:body>
+	
+   <nav>
+   
+	<ul>
+		<ui:insert name="nav" />
+		<li><a href="#{request.contextPath}/user/startseite.faces">Home</a></li>
+		
+		<li><a
+			href="#{request.contextPath}/user/ziehungenAnzeigen.faces">Ziehungen</a>			
+		</li>
+		<li><a
+			href="#{request.contextPath}/user/lottozahlenEingeben.faces">Spielen</a>
+		</li>
+		
+		<li><a
+			href="#{request.contextPath}/user/anmelden.faces">Anmelden </a>
+		</li>
+		
+	
+		<ui:insert name="nav" />
+	</ul>
+	</nav> 
+	
+	<section id="content"> 
+	<header style="margin-bottom: 100px"> 
+	  <div class="image-5" >
+		<h:graphicImage name="images/Kugel-42.png" alt="kugel-42" 
+						style="width: 80px; height: 80px; position: absolute; margin-left: 40px; margin-top: 275px; filter: drop-shadow(5px 8px 5px #636161)"/>
+	     </div>
+	<div class="image-1" >
+		<h:graphicImage name="images/lottohead.png" alt="lottohead" />
+		</div>
+		<div class="image-2" >
+		<h:graphicImage name="images/Bubble 400px.png" alt="bubble" />
+	     </div>
+	     <div class="image-3" >
+		<h:graphicImage name="images/Kugel-7.png" alt="kugel-7" 
+						style="width: 100px; height: 100px; position: absolute; margin-left: 420px; margin-top: 90px; filter: drop-shadow(5px 8px 5px #636161)"/>
+	     </div>
+	       <div class="image-4" >
+		<h:graphicImage name="images/Kugel-20.png" alt="kugel-20" 
+						style="width: 100px; height: 100px; position: absolute; margin-left: 520px; margin-top: 125px; filter: drop-shadow(5px 8px 5px #636161)"/>
+	     </div>
+	    
+	     
+		<ui:insert name="header" /> 
+	</header>
+	<article>
+	</article>
+	<ui:insert name="content" />
+		
+	<footer style="margin-top:5em"> 
+		<ui:insert />
+		© 2019 WBSLotto
+		
+	 </footer> 
+	 </section>
+</h:body>
+</html>

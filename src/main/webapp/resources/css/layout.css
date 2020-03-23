@@ -1,0 +1,1162 @@
+@import url(http://fonts.googleapis.com/css?family=Muli|Titillium+Web:400,600);
+
+/* reset */
+* {
+margin: 0;
+padding: 0;
+-moz-box-sizing: border-box;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+}
+
+header, footer, section, aside, nav, article { display: block;}
+
+body {
+background-color: #f1f4f8;
+font-size: 0.95em;
+font-family: Arial, SunSans-Regular, Sans-Serif;
+color: #564b47;
+}
+pre, code {
+font-size: 1.3em;
+}
+
+a {color: #3A5D6A;}
+/*a:visited {color:#ff6677;}
+a:hover {color: #564b47;}
+a:active { color:#3A5D6A;} */
+
+/* -----  header -----   */
+
+h1 {
+    margin: 1em 0 0.5em 0;
+    color: #959494;
+    font-weight: 600;
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 36px;
+    line-height: 40px;
+    padding: 15px 15px 15px 15%;
+    background-color: #f1f4f8;
+  /*  box-shadow: 
+        inset 0 0 0 1px rgba(53,86,129, 0.4), 
+        inset 0 0 5px rgba(53,86,129, 0.5),
+        inset -285px 0 35px white;
+    border-radius: 0 10px 0 10px;*/
+    /* background: #fff url(../images/lotto_logo.png) no-repeat center left; */
+}
+ 
+h2 {
+	color: #959494;
+    margin: 1em 0 0.5em 0;
+    font-weight: normal;
+    position: relative;
+    text-shadow: 0 -1px rgba(0,0,0,0.6);
+    font-size: 28px;
+    line-height: 40px;
+  /*  background: #3A5D6A;
+    background: rgba(53,86,129, 0.8);
+    border: 1px solid #fff;     
+    color: white;
+    border-radius: 0 10px 0 10px;
+    box-shadow: inset 0 0 5px rgba(53,86,129, 0.5); */
+    padding: 5px 15px;
+    font-family: 'Muli', sans-serif;
+}
+ 
+h3 {
+    margin: 0.8em 0 0.5em 0;
+    color: #333;
+    font-weight: 600;
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 22px;
+    line-height: 40px;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(53,86,129, 0.3);
+}
+ 
+h4 {
+    margin: 1em 0 0.5em 0;
+    font-weight: 600;
+    font-family: 'Titillium Web', sans-serif;
+    position: relative;
+    font-size: 18px;
+    line-height: 20px;
+    color: #788699;
+    font-family: 'Muli', sans-serif;
+}
+
+h5 {
+    margin: 1em 0 0.5em 0;
+    color: #959494;
+    font-weight: 600;
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 36px;
+    line-height: 40px;
+    padding: 15px 15px 15px 1%;
+    background-color: #f1f4f8;
+    
+}
+
+img.flag {
+	vertical-align:middle;
+	padding: 3px 10px 5px 0;
+	}
+img{border:none;}
+
+img.edit_button {
+	
+	height: 34px;
+	
+}
+
+/* -------------- navigavtion------------- */
+nav {
+	font-size: 22px;
+	color:#7A7C7E;
+	background: #f1f4f8;
+	width: 250px; 
+	position: fixed;
+	left: 0;
+	top: 0;
+	height:100%;
+	padding:200px 40px 20px 50px;
+	text-align: left;
+	/* border-right: solid #E5E1C8 3px; */
+}
+
+nav li.user{
+	  font-weight: 600;
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 20px;
+    color:#6a3a44;
+}
+
+nav ul { list-style-type: none; }
+nav li {padding-bottom: 20px;
+		font-family:
+}
+nav a {
+color: #91999C;
+/*border-right: solid #3A5D6A 2px;*/
+text-decoration: none;
+line-height:25px;
+padding-right: 10px;
+}
+nav a:visited {
+	color:#9BADA7;
+	border-right: solid #9BADA7 2px;}
+nav a:hover {
+	/*color: #C5C5AF;*/
+	background-color: #ffffff;
+	border-radius:25px;
+	padding-top: 10px;
+	padding-left: 20px;
+	padding-bottom: 10px;
+	padding-right: 20px;
+	
+
+}
+
+/* ----------------- content--------------------- */
+
+
+section#content {
+	padding: 20px;
+	margin:0 0 0 250px;
+	background-color: #f1f4f8;
+	max-width: 1100px;
+    min-width:550px;
+    min-height: 900px;
+    border-left: solid #98abc6;
+    
+}
+p, pre{
+padding:  0 0 20px;
+line-height:1.5em;
+}
+
+/* ----------header for logo-------------- */
+header {
+	padding:0 0 0 0;
+	/* background: url(../images/lotto_logo.png) no-repeat top right; */
+	background-color: #f1f4f8;
+}
+	
+header img{ padding: 0 0 10px;}
+
+.image-1{
+	float: left;	
+	margin-top: 80px;
+}
+
+.image-2{
+	padding-left: 50px;
+	margin-left: 620px;
+	margin-bottom: -220px;	
+	-webkit-filter: drop-shadow(5px 5px 5px #636161 );
+     filter: drop-shadow(5px 5px 5px #636161);
+}
+
+
+
+/* -----------footer--------------------------- */
+footer { border-top: 1px solid #769897;
+
+padding: 20px;
+clear:both;
+}
+
+
+
+/* ------- input -------------------- */
+
+.inputTipp {
+    display: block;
+    font-size: 28px;
+    text-align: right;
+    padding: 5px;
+    border: 4px solid #F1B720;
+    border-radius: 5px;
+    color: #333;
+    transition: all 0.3s ease-out;
+}
+ 
+.inputTipp:hover {
+    border-radius: 8px
+}
+ 
+.inputTipp:focus {
+    outline: none;
+    border-radius: 8px;
+    border-color: #EBD292;
+}
+
+
+
+
+/* -------- input button --------  */
+
+.inputButton {
+    display: inline-block;
+    padding: 10px 70px 10px 70px;
+    margin: 30px;
+    background: #294977;
+    font-size: large;
+    color: white;
+
+    text-decoration: none;
+    border-radius:30px;
+   
+}
+ 
+.inputButton2 {
+	color: #959494;
+	background: none;
+	border: none;
+	font-size: 20px;
+}
+
+.pfeil {
+	color: #959494;
+	font-size: 40px;
+}
+
+
+.inputButton:hover {
+    background: #36609e;
+}
+
+
+/* -------- input page button --------  */
+
+.inputPageButton {
+    display: inline-block;
+    padding: 10px;
+    margin: 10px;
+    background: #3A5D6A;
+	border-radius:10px;
+    font-size: 26px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+ 
+.inputPageButton:hover {
+    background: #0AF
+}
+
+/* -------- green label --------  */
+
+.labelGreen {
+    display: inline-block;
+	background-color: green;
+	width: 20;
+}
+
+/* -------- red label --------  */
+
+.labelRed {
+    display: inline-block;
+	background-color: red;
+	width: 20;
+}
+
+/* -------- gray button --------  */
+
+.buttonGray {
+    display: inline-block;
+	width: 46px;
+	height: 46px; 
+    font-size: large;
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* -------- yellow button --------  */
+
+.buttonYellow {
+    display: inline-block;
+    background-color: yellow;
+	width: 46px;
+	height: 46px; 
+    font-size: large;
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* -------- radio button --------  */
+
+.radioButton {
+ 	border-radius: 9px;
+	width: 18px;
+	height: 18px;
+}
+
+/* -------- radio button --------  */
+
+.radioButtonSelected {
+    background: #3A5D6A;
+	border-radius: 9px;
+	width: 18px;
+	height: 18px;
+}
+
+/*------- registrierung obereButtons---- */
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight{
+	background: #85b2cb -webkit-gradient(linear,left top,left bottom,from(rgba(0,0,0,0.25)),to(rgba(0,0,0,0)));
+}
+
+
+/* ----------------- übersicht Tabelle--------*/
+
+.ui-panelgrid .ui-panelgrid-footer {
+
+    text-align: left;
+    padding: 2px 5px;
+    float: left;
+    border: 2px solid #ccc7c7;
+    border-radius: 1em;
+    width: 100%;
+
+}
+
+.ui-widget-header {
+	background: transparent;
+	border: 1px solid #f1f4f8;	
+}
+
+.ui-widget-content {
+	background: transparent;
+}
+
+.ui-widget-content {
+	border: transparent;
+}
+
+
+/* ---------- inline links ---------------------- */
+
+.inline-link {
+    display: inline-block;
+    margin: 0 0.2em;
+    padding: 3px;
+    background: #769897;
+    border-radius: 2px;
+    transition: all 0.3s ease-out; 
+    /* Font styles */
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+}
+ 
+.inline-link:hover {
+    background: #53A7EA
+}
+ 
+.inline-link:active {
+    background: #C4E1F8
+}
+ 
+.inline-link:visited {
+    background: #D6A47C
+}
+
+
+/* -------- form -------------------------- */
+
+.form-l {
+    /* Size and position */
+    width: 300px;
+    margin: 60px auto 30px;
+    padding: 20px;
+    position: relative;
+ 
+    /* Font styles */
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+    color: #E5E1C8;
+    background-color: #3A5D6A;
+    border-radius: 5px;
+    
+}
+ 
+.form-l h3 {
+    margin: 0.8em 0 0.5em 0;
+    color: #E5E1C8;
+    font-weight: 600;
+    font-family: 'Titillium Web', sans-serif;
+    line-height: 40px;
+    text-transform: uppercase;
+    font-size: 22px;
+    padding-bottom: 20px;
+}
+
+.form-l input[type=text],
+.form-l input[type=password] {
+    /* Size and position */
+    width: 100%;
+    padding: 8px 4px 8px 10px;
+    margin-bottom: 15px;
+ 
+    /* Styles */
+    border: 1px solid #769897; /* Fallback */
+    background: #3A5D6A;
+    border-radius: 2px;
+    box-shadow: 
+        0 1px 0 rgba(255,255,255,0.2), 
+        inset 0 1px 1px rgba(0,0,0,0.1);
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+ 
+    /* Font styles */
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+    color: #fff;
+    font-size: 16px;
+}
+
+.form-l input::-webkit-input-placeholder {
+    color: #9BADA7;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.15);
+}
+ 
+.form-l input:-moz-placeholder {
+    color: #9BADA7;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.15);
+}
+ 
+.form-l input:-ms-input-placeholder {
+    color: #9BADA7;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.15);
+}
+
+.form-l input[type=text]:hover,
+.form-l input[type=password]:hover {
+    border-color: #E5E1C8;
+}
+ 
+.form-l input[type=text]:focus,
+.form-l input[type=password]:focus,
+.form-l input[type=submit]:focus {
+    box-shadow: 
+        0 1px 0 rgba(255,255,255,0.2), 
+        inset 0 1px 1px rgba(0,0,0,0.1),
+        0 0 0 3px rgba(255,255,255,0.15);
+    outline: none;
+}
+ 
+/* Fallback */
+.no-boxshadow .form-l input[type=text]:focus,
+.no-boxshadow .form-l input[type=password]:focus {
+    outline: 1px solid white;
+}
+
+.form-l input[type=submit] {
+    /* Size and position */
+    width: 100%;
+    padding: 8px 5px;
+     
+    /* Styles */
+    background: linear-gradient(rgba(99,64,86,0.5), rgba(76,49,65,0.7));    
+    border-radius: 5px;
+    border: 1px solid #4e3043;
+    box-shadow: 
+        inset 0 1px rgba(255,255,255,0.4), 
+        0 2px 1px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+ 
+    /* Font styles */
+    color: #E5E1C8;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+}
+ 
+.form-l input[type=submit]:hover {
+    box-shadow: 
+        inset 0 1px rgba(255,255,255,0.2), 
+        inset 0 20px 30px rgba(99,64,86,0.5);
+}
+ 
+/* Fallback */
+.no-boxshadow .form-l input[type=submit]:hover {
+    background: #594642;
+}
+
+.form-l label {
+    padding: 0 0 5px 2px;
+    cursor: pointer;
+}
+ 
+.form-l label:hover ~ input {
+    border-color: #E5E1C8;
+}
+ 
+.no-placeholder .form-l label {
+    display: block;
+}
+
+/* ------  Tables ------  */
+
+table {
+  border-collapse: collapse;
+  width: 1000px;
+ 
+}
+th {
+  padding: 0.25rem;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+  background: #fff;
+}
+
+td {
+  padding: 0.25rem;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+  
+}
+
+
+
+tbody tr:nth-child(odd) {
+  background: transparent;
+}
+
+/* ---- Formular Registrierung ----- */
+
+.label {
+        width:20%;
+        padding:4px;
+    }
+ 
+    .value {
+        width:80%;
+        padding:4px;
+    }
+ 
+    .grid {
+        width:100%;
+    }
+ 
+    .error {
+        color: red;
+    }
+ 
+    .outputLabel {
+        font-weight: bold;
+    }
+ 
+    .grid {
+        width:33%;
+        padding:4px;
+    }
+
+/*---- Startseite Tipp ---- */
+
+.CardSliderItem__content {
+	background: #ffffff;
+	display: block;
+	padding: 16px 0;
+	font-size: 1rem;
+	border: solid 1px gray;
+	border-radius: 10px;
+	width: 700px;
+	
+}
+
+/* ---------- selectManyButton ----------------- */
+
+.selectManyButtonStyleClass.ui-button.ui-state-hover,
+.selectManyButtonStyleClass.ui-state-hover {
+    background-color: #85CB88;
+}
+
+.selectManyButtonStyleClass.ui-state-active {
+    background-color: green;
+}
+
+.selectManyButtonStyleClass div:first-child span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(2) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(3) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(4) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(5) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(6) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(7) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(8) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(9) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(10) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(11) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(12) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(13) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(14) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(15) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(16) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(17) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(18) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(19) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(20) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(21) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(22) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(23) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(24) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(25) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(26) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(27) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(28) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(29) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(30) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(31) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(32) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(33) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(34) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(35) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(36) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(37) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(38) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(39) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(40) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(41) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(42) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(43) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(44) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(45) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(46) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(47) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(48) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+
+.selectManyButtonStyleClass div:nth-child(49) span {
+    background-position: left center;
+    background-repeat: no-repeat;
+    font-size: large;
+	text-align: center;
+	vertical-align: middle;
+    margin-top: 12px;
+    width: 46px;
+    height: 34px;
+}
+

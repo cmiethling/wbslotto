@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html" xml:lang="en" lang="en"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+    
+    
+    <ui:composition template="../resources/template/template.xhtml">
+        <ui:define name="header">
+            <h1>Lottozahlen eingeben</h1>
+        </ui:define>
+        <ui:define name="content">
+            <h:form>
+            
+            <div class = "pfeil">&#11176; <h:commandButton class="inputButton2" value="zurück"
+					 action="startseite"  />
+					</div> 
+             
+				<!-- 
+				<ui:param name="buttonText" value="#{lottozahlenEingebenController.zahl}"></ui:param>
+				<h:outputText value="#{buttonText}"/>
+				<br/>
+				-->
+		
+ 				<p:inputNumber type="hidden" id="tipp" value='#{lottozahlenEingebenController.tipp}'/>
+ 				
+ 				<p:inputText type="hidden" id="tipp1" value='#{lottozahlenEingebenController.radioBtn1Class}'/>
+ 				<p:inputText type="hidden" id="tipp2" value='#{lottozahlenEingebenController.radioBtn2Class}'/>
+ 				<p:inputText type="hidden" id="tipp3" value='#{lottozahlenEingebenController.radioBtn3Class}'/>
+ 				<p:inputText type="hidden" id="tipp4" value='#{lottozahlenEingebenController.radioBtn4Class}'/>
+ 				<p:inputText type="hidden" id="tipp5" value='#{lottozahlenEingebenController.radioBtn5Class}'/>
+ 				<p:inputText type="hidden" id="tipp6" value='#{lottozahlenEingebenController.radioBtn6Class}'/>
+ 				<p:inputText type="hidden" id="tipp7" value='#{lottozahlenEingebenController.radioBtn7Class}'/>
+ 				<p:inputText type="hidden" id="tipp8" value='#{lottozahlenEingebenController.radioBtn8Class}'/>
+ 				<p:inputText type="hidden" id="tipp9" value='#{lottozahlenEingebenController.radioBtn9Class}'/>
+ 				<p:inputText type="hidden" id="tipp10" value='#{lottozahlenEingebenController.radioBtn10Class}'/>
+ 				<p:inputText type="hidden" id="tipp11" value='#{lottozahlenEingebenController.radioBtn11Class}'/>
+ 				<p:inputText type="hidden" id="tipp12" value='#{lottozahlenEingebenController.radioBtn12Class}'/>
+ 				
+ 				<p:inputText type="hidden" id="valid1" value='#{lottozahlenEingebenController.valid1Class}'/>
+ 				<p:inputText type="hidden" id="valid2" value='#{lottozahlenEingebenController.valid2Class}'/>
+ 				<p:inputText type="hidden" id="valid3" value='#{lottozahlenEingebenController.valid3Class}'/>
+ 				<p:inputText type="hidden" id="valid4" value='#{lottozahlenEingebenController.valid4Class}'/>
+ 				<p:inputText type="hidden" id="valid5" value='#{lottozahlenEingebenController.valid5Class}'/>
+ 				<p:inputText type="hidden" id="valid6" value='#{lottozahlenEingebenController.valid6Class}'/>
+ 				<p:inputText type="hidden" id="valid7" value='#{lottozahlenEingebenController.valid7Class}'/>
+ 				<p:inputText type="hidden" id="valid8" value='#{lottozahlenEingebenController.valid8Class}'/>
+ 				<p:inputText type="hidden" id="valid9" value='#{lottozahlenEingebenController.valid9Class}'/>
+ 				<p:inputText type="hidden" id="valid10" value='#{lottozahlenEingebenController.valid10Class}'/>
+ 				<p:inputText type="hidden" id="valid11" value='#{lottozahlenEingebenController.valid11Class}'/>
+ 				<p:inputText type="hidden" id="valid12" value='#{lottozahlenEingebenController.valid12Class}'/>
+
+ 				<table style="width: 100%; height: 360px; ">
+ 				<tr>
+				<td style="width: 290px; ">
+				<div align="left">
+					<table style="width: 280px; height: 100%; ">
+ 					<tr>
+						<td>
+							<h:commandButton class = "#{lottozahlenEingebenController.radioBtn1Class}" value="" action="#{lottozahlenEingebenController.select(1)}" />
+						</td>
+						<td>
+							<h:outputLabel value="Tipp 1:"></h:outputLabel>
+ 						</td>
+ 						<td>
+							<h:inputText
+								value="#{lottozahlenEingebenController.tipp1}">
+							</h:inputText>
+						</td>
+						<td style="width:20;">
+		 		            <c:set var="valid" value="#{lottozahlenEingebenController.valid1Class}"/>
+				            <c:if test="#{valid>''}">
+								<h:outputLabel class="#{lottozahlenEingebenController.valid1Class}" value="__"></h:outputLabel>
+		            	    </c:if>
+ 						</td>
+					</tr>
+ 					<tr>
+						<td>
+							<h:commandButton class = "#{lottozahlenEingebenController.radioBtn2Class}" value="" action="#{lottozahlenEingebenController.select(2)}" />
+						</td>
+						<td>
+							<h:outputLabel value="Tipp 2:"></h:outputLabel>
+ 						</td>
+ 						<td>
+							<h:inputText
+								value="#{lottozahlenEingebenController.tipp2}">
+							</h:inputText>
+						</td>
+						<td style="width:20;">
+		 		            <c:set var="valid" value="#{lottozahlenEingebenController.valid2Class}"/>
+				            <c:if test="#{valid>''}">
+								<h:outputLabel class="#{lottozahlenEingebenController.valid2Class}" value="__"></h:outputLabel>
+		            	    </c:if>
+ 						</td>
+					</tr>
+ 					<tr>
+						<td>
+							<h:commandButton class = "#{lottozahlenEingebenController.radioBtn3Class}" value="" action="#{lottozahlenEingebenController.select(3)}" />
+						</td>
+						<td>
+							<h:outputLabel value="Tipp 3:"></h:outputLabel>
+ 						</td>
+ 						<td>
+							<h:inputText
+								value="#{lottozahlenEingebenController.tipp3}">
+							</h:inputText>
+						</td>
+						<td style="width:20;">
+		 		            <c:set var="valid" value="#{lottozahlenEingebenController.valid3Class}"/>
+				            <c:if test="#{valid>''}">
+								<h:outputLabel class="#{lottozahlenEingebenController.valid3Class}" value="__"></h:outputLabel>
+		            	    </c:if>
+ 						</td>
+					</tr>
+ 					<tr>
+						<td>
+							<h:commandButton class = "#{lottozahlenEingebenController.radioBtn4Class}" value="" action="#{lottozahlenEingebenController.select(4)}" />
+						</td>
+						<td>
+							<h:outputLabel value="Tipp 4:"></h:outputLabel>
+ 						</td>
+ 						<td>
+							<h:inputText
+								value="#{lottozahlenEingebenController.tipp4}">
+							</h:inputText>
+						</td>
+						<td style="width:20;">
+		 		            <c:set var="valid" value="#{lottozahlenEingebenController.valid4Class}"/>
+				            <c:if test="#{valid>''}">
+								<h:outputLabel class="#{lottozahlenEingebenController.valid4Class}" value="__"></h:outputLabel>
+		            	    </c:if>
+ 						</td>
+					</tr>
+ 					<tr>
+						<td>
+							<h:commandButton class = "#{lottozahlenEingebenController.radioBtn5Class}" value="" action="#{lottozahlenEingebenController.select(5)}" />
+						</td>
+						<td>
+							<h:outputLabel value="Tipp 5:"></h:outputLabel>
+ 						</td>
+ 						<td>
+							<h:inputText
+								value="#{lottozahlenEingebenController.tipp5}">
+							</h:inputText>
+						</td>
+						<td style="width:20;">
+		 		            <c:set var="valid" value="#{lottozahlenEingebenController.valid5Class}"/>
+				            <c:if test="#{valid>''}">
+								<h:outputLabel class="#{lottozahlenEingebenController.valid5Class}" value="__"></h:outputLabel>
+		            	    </c:if>
+ 						</td>
+					</tr>
+ 					<tr>
+						<td>
+							<h:commandButton class = "#{lottozahlenEingebenController.radioBtn6Class}" value="" action="#{lottozahlenEingebenController.select(6)}" />
+						</td>
+						<td>
+							<h:outputLabel value="Tipp 6:"></h:outputLabel>
+ 						</td>
+ 						<td>
+							<h:inputText
+								value="#{lottozahlenEingebenController.tipp6}">
+							</h:inputText>
+						</td>
+						<td style="width:20;">
+		 		            <c:set var="valid" value="#{lottozahlenEingebenController.valid6Class}"/>
+				            <c:if test="#{valid>''}">
+								<h:outputLabel class="#{lottozahlenEingebenController.valid6Class}" value="__"></h:outputLabel>
+		            	    </c:if>
+ 						</td>
+					</tr>
+ 					<tr>
+						<td>
+							<h:commandButton class = "#{lottozahlenEingebenController.radioBtn7Class}" value="" action="#{lottozahlenEingebenController.select(7)}" />
+						</td>
+						<td>
+							<h:outputLabel value="Tipp 7:"></h:outputLabel>
+ 						</td>
+ 						<td>
+							<h:inputText
+								value="#{lottozahlenEingebenController.tipp7}">
+							</h:inputText>
+						</td>
+						<td style="width:20;">
+		 		            <c:set var="valid" value="#{lottozahlenEingebenController.valid7Class}"/>
+				            <c:if test="#{valid>''}">
+								<h:outputLabel class="#{lottozahlenEingebenController.valid7Class}" value="__"></h:outputLabel>
+		            	    </c:if>
+ 						</td>
+					</tr>
+ 					<tr>
+						<td>
+							<h:commandButton class = "#{lottozahlenEingebenController.radioBtn8Class}" value="" action="#{lottozahlenEingebenController.select(8)}" />
+						</td>
+						<td>
+							<h:outputLabel value="Tipp 8:"></h:outputLabel>
+ 						</td>
+ 						<td>
+							<h:inputText
+								value="#{lottozahlenEingebenController.tipp8}">
+							</h:inputText>
+						</td>
+						<td style="width:20;">
+		 		            <c:set var="valid" value="#{lottozahlenEingebenController.valid8Class}"/>
+				            <c:if test="#{valid>''}">
+								<h:outputLabel class="#{lottozahlenEingebenController.valid8Class}" value="__"></h:outputLabel>
+		            	    </c:if>
+ 						</td>
+					</tr>
+ 					<tr>
+						<td>
+							<h:commandButton class = "#{lottozahlenEingebenController.radioBtn9Class}" value="" action="#{lottozahlenEingebenController.select(9)}" />
+						</td>
+						<td>
+							<h:outputLabel value="Tipp 9:"></h:outputLabel>
+ 						</td>
+ 						<td>
+							<h:inputText
+								value="#{lottozahlenEingebenController.tipp9}">
+							</h:inputText>
+						</td>
+						<td style="width:20;">
+		 		            <c:set var="valid" value="#{lottozahlenEingebenController.valid9Class}"/>
+				            <c:if test="#{valid>''}">
+								<h:outputLabel class="#{lottozahlenEingebenController.valid9Class}" value="__"></h:outputLabel>
+		            	    </c:if>
+ 						</td>
+					</tr>
+ 					<tr>
+						<td>
+							<h:commandButton class = "#{lottozahlenEingebenController.radioBtn10Class}" value="" action="#{lottozahlenEingebenController.select(10)}" />
+						</td>
+						<td>
+							<h:outputLabel value="Tipp 10:"></h:outputLabel>
+ 						</td>
+ 						<td>
+							<h:inputText
+								value="#{lottozahlenEingebenController.tipp10}">
+							</h:inputText>
+						</td>
+						<td style="width:20;">
+		 		            <c:set var="valid" value="#{lottozahlenEingebenController.valid10Class}"/>
+				            <c:if test="#{valid>''}">
+								<h:outputLabel class="#{lottozahlenEingebenController.valid10Class}" value="__"></h:outputLabel>
+		            	    </c:if>
+ 						</td>
+					</tr>
+ 					<tr>
+						<td>
+							<h:commandButton class = "#{lottozahlenEingebenController.radioBtn11Class}" value="" action="#{lottozahlenEingebenController.select(11)}" />
+						</td>
+						<td>
+							<h:outputLabel value="Tipp 11:"></h:outputLabel>
+ 						</td>
+ 						<td>
+							<h:inputText
+								value="#{lottozahlenEingebenController.tipp11}">
+							</h:inputText>
+						</td>
+						<td style="width:20;">
+		 		            <c:set var="valid" value="#{lottozahlenEingebenController.valid11Class}"/>
+				            <c:if test="#{valid>''}">
+								<h:outputLabel class="#{lottozahlenEingebenController.valid11Class}" value="__"></h:outputLabel>
+		            	    </c:if>
+ 						</td>
+					</tr>
+ 					<tr>
+						<td>
+							<h:commandButton class = "#{lottozahlenEingebenController.radioBtn12Class}" value="" action="#{lottozahlenEingebenController.select(12)}" />
+ 						</td>
+						<td style="width: 90px; ">
+							<h:outputLabel value="Tipp 12:"></h:outputLabel>
+ 						</td>
+ 						<td>
+							<h:inputText
+								value="#{lottozahlenEingebenController.tipp12}">
+							</h:inputText>
+						</td>
+						<td style="width:20;">
+		 		            <c:set var="valid" value="#{lottozahlenEingebenController.valid12Class}"/>
+				            <c:if test="#{valid>''}">
+								<h:outputLabel class="#{lottozahlenEingebenController.valid12Class}" value="__"></h:outputLabel>
+		            	    </c:if>
+ 						</td>
+					</tr>
+					</table>
+					
+ 				</div>
+				</td>
+				<td>
+	            <div align="center">
+	            <h:form id = "zahlen">
+ 					<h:commandButton class="#{lottozahlenEingebenController.btn1Class}" value="1" action="#{lottozahlenEingebenController.buttonSenden(1)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn2Class}" value="2" action="#{lottozahlenEingebenController.buttonSenden(2)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn3Class}" value="3" action="#{lottozahlenEingebenController.buttonSenden(3)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn4Class}" value="4" action="#{lottozahlenEingebenController.buttonSenden(4)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn5Class}" value="5" action="#{lottozahlenEingebenController.buttonSenden(5)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn6Class}" value="6" action="#{lottozahlenEingebenController.buttonSenden(6)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn7Class}" value="7" action="#{lottozahlenEingebenController.buttonSenden(7)}"/>
+					<br/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn8Class}" value="8" action="#{lottozahlenEingebenController.buttonSenden(8)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn9Class}" value="9" action="#{lottozahlenEingebenController.buttonSenden(9)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn10Class}" value="10" action="#{lottozahlenEingebenController.buttonSenden(10)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn11Class}" value="11" action="#{lottozahlenEingebenController.buttonSenden(11)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn12Class}" value="12" action="#{lottozahlenEingebenController.buttonSenden(12)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn13Class}" value="13" action="#{lottozahlenEingebenController.buttonSenden(13)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn14Class}" value="14" action="#{lottozahlenEingebenController.buttonSenden(14)}"/>
+					<br/>
+ 					<h:commandButton class="#{lottozahlenEingebenController.btn15Class}" value="15" action="#{lottozahlenEingebenController.buttonSenden(15)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn16Class}" value="16" action="#{lottozahlenEingebenController.buttonSenden(16)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn17Class}" value="17" action="#{lottozahlenEingebenController.buttonSenden(17)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn18Class}" value="18" action="#{lottozahlenEingebenController.buttonSenden(18)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn19Class}" value="19" action="#{lottozahlenEingebenController.buttonSenden(19)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn20Class}" value="20" action="#{lottozahlenEingebenController.buttonSenden(20)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn21Class}" value="21" action="#{lottozahlenEingebenController.buttonSenden(21)}"/>
+					<br/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn22Class}" value="22" action="#{lottozahlenEingebenController.buttonSenden(22)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn23Class}" value="23" action="#{lottozahlenEingebenController.buttonSenden(23)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn24Class}" value="24" action="#{lottozahlenEingebenController.buttonSenden(24)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn25Class}" value="25" action="#{lottozahlenEingebenController.buttonSenden(25)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn26Class}" value="26" action="#{lottozahlenEingebenController.buttonSenden(26)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn27Class}" value="27" action="#{lottozahlenEingebenController.buttonSenden(27)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn28Class}" value="28" action="#{lottozahlenEingebenController.buttonSenden(28)}"/>
+					<br/>
+ 					<h:commandButton class="#{lottozahlenEingebenController.btn29Class}" value="29" action="#{lottozahlenEingebenController.buttonSenden(29)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn30Class}" value="30" action="#{lottozahlenEingebenController.buttonSenden(30)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn31Class}" value="31" action="#{lottozahlenEingebenController.buttonSenden(31)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn32Class}" value="32" action="#{lottozahlenEingebenController.buttonSenden(32)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn33Class}" value="33" action="#{lottozahlenEingebenController.buttonSenden(33)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn34Class}" value="34" action="#{lottozahlenEingebenController.buttonSenden(34)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn35Class}" value="35" action="#{lottozahlenEingebenController.buttonSenden(35)}"/>
+					<br/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn36Class}" value="36" action="#{lottozahlenEingebenController.buttonSenden(36)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn37Class}" value="37" action="#{lottozahlenEingebenController.buttonSenden(37)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn38Class}" value="38" action="#{lottozahlenEingebenController.buttonSenden(38)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn39Class}" value="39" action="#{lottozahlenEingebenController.buttonSenden(39)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn40Class}" value="40" action="#{lottozahlenEingebenController.buttonSenden(40)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn41Class}" value="41" action="#{lottozahlenEingebenController.buttonSenden(41)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn42Class}" value="42" action="#{lottozahlenEingebenController.buttonSenden(42)}"/>
+					<br/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn43Class}" value="43" action="#{lottozahlenEingebenController.buttonSenden(43)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn44Class}" value="44" action="#{lottozahlenEingebenController.buttonSenden(44)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn45Class}" value="45" action="#{lottozahlenEingebenController.buttonSenden(45)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn46Class}" value="46" action="#{lottozahlenEingebenController.buttonSenden(46)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn47Class}" value="47" update="zahlen" action="#{lottozahlenEingebenController.buttonSenden(47)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn48Class}" value="48" action="#{lottozahlenEingebenController.buttonSenden(48)}"/>
+					<h:commandButton class="#{lottozahlenEingebenController.btn49Class}" value="49" action="#{lottozahlenEingebenController.buttonSenden(49)}"/>
+					<br/>
+					
+					</h:form>
+				</div>
+				</td>
+				</tr>
+				</table>
+			
+			<br/>
+					
+					<div align="center">
+					 
+				<h:commandButton class="inputButton" value="weiter"
+				     action="lottoscheinEinreichen" />
+				     
+					
+				</div>
+						 
+
+			</h:form>
+
+        </ui:define>
+
+        <ui:define name="footer">
+			<ui:include src="/resources/template/footer.xhtml"/>
+        </ui:define>
+
+    </ui:composition>
+
+</html>

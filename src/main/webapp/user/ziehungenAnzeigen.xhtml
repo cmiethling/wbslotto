@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html" xml:lang="en" lang="en"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="../resources/template/template.xhtml">  <!--  -->
+        <ui:define name="header">
+            <h1>Ziehungen anzeigen</h1>
+        </ui:define>
+        <ui:define name="content">
+            <h:form>
+            <!--p:dataTable =  elemente eines facelets werden auf ui components gemappt -->
+                <p:dataTable var="ziehung" value="#{ziehungenAnzeigenController.ziehungen}" rows="10"  
+                             paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15">
+                    <p:column headerText="#{msg['ziehungId']}:">
+                        <h:outputText value="#{ziehung.ziehungid}" />
+                    </p:column>
+                   
+                    <p:column headerText="#{msg['ziehungsdatum']}:">
+                        <p:outputLabel value="#{ziehung.ziehungsdatum}"  >
+                            <f:convertDateTime/>
+                        </p:outputLabel>
+                    </p:column>
+                    
+
+                    <p:column headerText="#{msg['ziehungszahlen']}:">
+                    <!-- 
+                        <h:outputLabel value="#{ziehungenAnzeigenController.ziehungszahlen(ziehung)}" />
+                        -->
+                    </p:column>
+
+                    <p:column headerText="#{msg['spiel77']}:">
+                        <h:outputLabel value="#{ziehung.spiel77}" />
+                    </p:column>
+
+                    <f:facet name="paginatorTopLeft">
+                        <p:commandButton type="button" icon="fa fa-sync" />
+                    </f:facet>
+                    
+                   
+                    <f:facet name="paginatorBottomRight">
+                        <p:commandButton type="button" icon="fa fa-cloud-upload" />
+                    </f:facet>
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+
+        <ui:define name="footer">
+
+            footer
+        </ui:define>
+
+    </ui:composition>
+
+</html>

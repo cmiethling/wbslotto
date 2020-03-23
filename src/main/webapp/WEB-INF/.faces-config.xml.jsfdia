@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#user#registrierung.xhtml"
+  PATH="/user/registrierung.xhtml" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#user#registrierung.xhtml:0" NAME="item"
+   PATH="/user/registrierung.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="ok:#{RegistrierungController.senden}:#user#zahlungsabwicklung.xhtml"
+    NAME="output" PATH="/user/zahlungsabwicklung.xhtml"
+    TARGET="rules:#user#zahlungsabwicklung.xhtml"
+    TITLE="#{RegistrierungController.senden}:ok" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#user#zahlungsabwicklung.xhtml"
+  PATH="/user/zahlungsabwicklung.xhtml" SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>

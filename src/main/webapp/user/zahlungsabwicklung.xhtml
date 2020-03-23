@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html" xml:lang="en" lang="en"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="../resources/template/template.xhtml">
+	<ui:define name="header">
+		<h5>Wählen Sie eine Zahlungsweise aus</h5>
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form>
+		
+		  <div class = "pfeil">&#11176;<h:commandButton class="inputButton2" value="zurück"
+					 action="lottoscheinEinreichen"  />
+					 </div>
+
+
+			<p:accordionPanel style="width: 80%">
+				<p:ajax event="tabChange" listener="#{zahlungsAbwicklungController.onChange}" />
+				<p:tab id="bank" title="#{msg['bank']}">
+					<p:panelGrid columns="2" cellpadding="10" layout="grid" >
+
+						<p:outputLabel  for="iban" value="#{msg['bankverbindungIBAN']}" />
+
+						<p:inputMask id="iban"
+							value="#{zahlungsAbwicklungController.iban}"
+							mask="aa99-9999-9999-9999-9999-99" size="30" />
+
+						<p:outputLabel for="bic" value="#{msg['bankverbindungBIC']}" />
+
+						<p:inputMask id="bic" value="#{zahlungsAbwicklungController.bic}"
+							mask="aaaaaaaa" />
+
+						<p:outputLabel for="bankName" value="#{msg['bankverbindungName']}" />
+
+						<p:inputText id="bankName"
+							value="#{zahlungsAbwicklungController.bankName}" />
+
+						<p:outputLabel for="kontoinhaber"
+							value="#{msg['bankverbindungKontoinhaber']}" />
+
+						<p:inputText id="kontoinhaber"
+							value="#{zahlungsAbwicklungController.kontoinhaber}" />
+
+					</p:panelGrid>
+				</p:tab>
+				<p:tab id="creditcard" title="#{msg['kreditkarte']}">
+					<p:panelGrid columns="2" cellpadding="10" layout="grid">
+						<p:outputLabel for="kreditkarteName"
+							value="#{msg['kreditkarteName']}" />
+						<p:inputText id="kreditkarteName"
+							value="#{zahlungsAbwicklungController.kreditkarteName}" />
+					
+						<p:outputLabel for="kartennummer"
+							value="#{msg['kreditkarteNummer']}" />
+						<p:inputMask id="kartennummer"
+							value="#{zahlungsAbwicklungController.kreditkarteNummer}"
+							mask="999-999-999-999" />
+					
+						<p:outputLabel for="ablaufdatum"
+							value="#{msg['kreditkarteAblaufdatum']}" />
+						<p:inputMask id="ablaufdatum"
+							value="#{zahlungsAbwicklungController.kreditkarteAblaufdatum}"
+							mask="99.99.9999" />
+					</p:panelGrid>
+				</p:tab>
+				<p:tab id="paypal" title="#{msg['paypal']}">
+					<p:panelGrid columns="2" cellpadding="10"  layout="grid">
+
+						<p:outputLabel for="paypalName" value="#{msg['paypalName']}" />
+						<p:inputText id="paypalName"
+							value="#{zahlungsAbwicklungController.paypalName}" />
+
+					</p:panelGrid>
+				</p:tab>
+			</p:accordionPanel>
+
+			<br />
+			
+          <div align="center">
+			<h:commandButton class="inputButton" value="#{msg['weiter']}"
+				action="uebersicht" />
+				</div>
+				
+		</h:form>
+	</ui:define>
+
+	<ui:define name="footer">
+
+            footer
+        </ui:define>
+
+</ui:composition>
+
+</html>

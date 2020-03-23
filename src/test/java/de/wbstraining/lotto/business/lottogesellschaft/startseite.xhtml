@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html" xml:lang="en" lang="en"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <ui:composition template="../resources/template/template.xhtml">
+        <ui:define name="header">
+            <h1>Herzlich Willkommen</h1>
+            <h2>bei WBS Lotto</h2>
+        </ui:define>
+
+        <ui:define name="content">
+            <h:form>
+
+                <h:panelGrid columns="1">
+                   
+
+
+                </h:panelGrid>
+                <br/>
+
+
+        <h:commandButton class="inputButton" value = "Lotto 6aus49 spielen" action = "lottozahlenEingeben" />
+        
+
+        
+        
+        
+   <p:contentFlow style="height: 300px; width:1300px" >
+		<p:graphicImage name="images/transparent.png"  styleClass="content" style="background: #ffffff; border: 1px solid #000000; border-radius: 10px; height: 200px; width: 400px">		
+		<p style="position:absolute; padding:10px; width: 400px; font-size: 15px;">
+		<b style="color: #294977">1. Lottozahlen tippen</b><br/>
+		<br/>
+		Bitte wählen Sie ein Tippfeld aus und die dazugehörigen Zahlen. In einem Tippfeld müssen Sie 6 Zahlen ankreuzen.</p>		
+		</p:graphicImage> 
+		
+		<p:graphicImage name="images/transparent.png"   styleClass="content" style="background: #ffffff; border: 1px solid #000000; border-radius: 10px; height: 200px; width: 400px">		
+		<p style="position:absolute; padding:10px; width: 400px; font-size: 15px;">
+		<b style="color: #294977">2. Losnummer angeben</b><br/>
+		<br/>
+		Die Losnummer können Sie einfach per Eingabe von Nummern angeben. Die letzte Ziffer der Losnummer ist Ihre Superzahl für Lotto 6aus49.</p>		
+		</p:graphicImage>
+		
+		<p:graphicImage name="images/transparent.png"   styleClass="content" style="background: #ffffff; border: 1px solid #000000; border-radius: 10px; height: 200px; width: 400px">		
+		<p style="position:absolute; padding:10px; width: 400px; font-size: 15px;">
+		<b style="color: #294977">3. Zusatzlotterien wählen</b><br/>
+		<br/>
+		Sie möchten auch an den Zusatzlotterien Spiel 77 oder Super 6 teilnehmen?
+		Mit der Spielscheinnummer definieren Sie auch die Nummern für die Zusatzlotterien.</p>		
+		</p:graphicImage>
+		
+		<p:graphicImage name="images/transparent.png"  styleClass="content" style="background: #ffffff; border: 1px solid #000000; border-radius: 10px; height: 200px; width: 400px">		
+		<p style="position:absolute; padding:10px; width: 400px; font-size: 15px;">
+		<b style="color: #294977">4. Ziehungen und Anzahl der Wochen wählen</b><br/>
+		<br/>
+		Wählen Sie die Ziehung am Mittwoch, am Samstag oder an beiden kommenden Ziehungstagen von Lotto 6aus49 aus.
+		Als Laufzeit für Ihren Lottoschein können Sie zwischen einer und acht Wochen wählen.</p>		
+		</p:graphicImage>
+		
+		<p:graphicImage name="images/transparent.png"  styleClass="content" style="background: #ffffff; border: 1px solid #000000; border-radius: 10px; height: 200px; width: 400px">		
+		<p style="position:absolute; padding:10px; width: 400px; font-size: 15px;">
+		<b style="color: #294977">5. Übersicht Ihres Spieltipps</b><br/>
+		<br/>
+		Ihren Spieltipp fassen wir noch einmal in einer Übersicht mit allen relevanten Angaben zusammen.</p>		
+		</p:graphicImage>
+		
+		</p:contentFlow>
+               
+
+       </h:form>
+            
+            
+            
+        </ui:define>
+        
+ 
+        
+
+
+        <ui:define name="footer">
+
+            footer
+        </ui:define>
+
+    </ui:composition>
+
+</html>
