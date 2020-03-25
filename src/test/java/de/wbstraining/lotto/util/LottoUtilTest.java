@@ -10,10 +10,6 @@ public class LottoUtilTest {
 
 	@Test
 	public void testRandomTipp() {
-		// wie sieht ein aussagekräftiger test der methode randomTipp() aus
-		// es muss genau 6 einserbits geben
-		// die niedrigste erlaubte bitposition ist 1 (nicht 0 ...!)
-		// die höchste erlaubte bitposition ist 49
 		boolean ok = false;
 		long tippAsBits = LottoUtil.randomTipp();
 		ok = tippAsBits > 0 && Long.bitCount(tippAsBits) == 6 && Long.lowestOneBit(tippAsBits) > 1L

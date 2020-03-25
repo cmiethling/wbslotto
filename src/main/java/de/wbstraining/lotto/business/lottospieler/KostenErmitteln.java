@@ -211,7 +211,8 @@ public class KostenErmitteln implements KostenErmittelnLocal {
 
 //Help Inner-Methods:
         // ============================================
-        private Gebuehr findGebuehrForSpielTag(List<Gebuehr> gebuehren,
+        @Override
+        public Gebuehr findGebuehrForSpielTag(List<Gebuehr> gebuehren,
                 Date spielTag) {
                 Optional<Gebuehr> optGebuerForSpielTag = gebuehren.stream()
                         .filter(g -> g.getGueltigbis()

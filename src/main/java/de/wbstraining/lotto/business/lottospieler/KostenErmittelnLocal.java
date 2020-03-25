@@ -1,7 +1,11 @@
 package de.wbstraining.lotto.business.lottospieler;
 
+import java.util.Date;
+import java.util.List;
+
 import de.wbstraining.lotto.dto.KostenDetailedDto;
 import de.wbstraining.lotto.dto.KostenDto;
+import de.wbstraining.lotto.persistence.model.Gebuehr;
 import de.wbstraining.lotto.persistence.model.Lottoschein;
 
 public interface KostenErmittelnLocal {
@@ -11,4 +15,7 @@ public interface KostenErmittelnLocal {
 	public int kostenErmitteln(KostenDto kosten);
 
 	public KostenDetailedDto kostenErmittelnDetailed(KostenDto kosten);
+	
+	public Gebuehr findGebuehrForSpielTag(List<Gebuehr> gebuehren,
+            Date spielTag);
 }

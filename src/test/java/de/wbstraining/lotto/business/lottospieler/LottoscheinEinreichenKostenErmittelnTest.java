@@ -1,7 +1,5 @@
 package de.wbstraining.lotto.business.lottospieler;
 
-import static org.junit.Assert.assertEquals;
-
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -15,12 +13,15 @@ import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Ignore;
 import org.junit.Test;
+import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 
 import de.wbstraining.lotto.cache.GebuehrenCacheLocal;
+import de.wbstraining.lotto.dto.KostenDto;
 import de.wbstraining.lotto.persistence.dao.GebuehrFacadeLocal;
 import de.wbstraining.lotto.persistence.model.Gebuehr;
 import de.wbstraining.lotto.populatedb.CleanDatabaseLocal;
+
 
 @RunWith(Arquillian.class)
 public class LottoscheinEinreichenKostenErmittelnTest {
@@ -49,26 +50,7 @@ public class LottoscheinEinreichenKostenErmittelnTest {
 	@Ignore
 	@Test
 	public void testKostenErmitteln() {
-		// ----------------------------------------------------------------------------------
-		// A C H T U N G:
-		// Test läuft nicht an den Ziehungstagen Mittwoch und Samstag
-		// An Ziehungstagen:
-		// LocalDate abgabeDatum = LocalDate.now().plusDays(1);
-		// An allen anderen Tagen:
-		// LocalDate abgabeDatum = LocalDate.now();
-		//
-		// Solange, bis Refactoring auf DateTime-API im gesamten Lottoprojekt durchgeführt.
-		// --------------------------------------------------------
-		// Zeitstempel LocalDate.now()
-		// Lottoschein wird abgegeben LocalDate.now() mit einer Laufzeit von 4 Wochen,
-		// 4 Tipps, Spiel 77, Super6
-		//
-		// Gebührenrecord ist gültig von LocalDate.now().minusYears(1)
-		// bis LocalDate.now().plusYears(1)
-		//
-		// grundgebuehr: 60
-		// einsatzSpiel77: 250
-		// einsatzSuper6: 125
+		
 		// einsatzLotto: 100
 		//
 		// Grundgebuehr: 60
@@ -99,7 +81,7 @@ public class LottoscheinEinreichenKostenErmittelnTest {
 
 		gebuehrenCache.init();
 
-		LocalDate abgabeDatum = LocalDate.now().plusDays(1);
+		// LocalDate abgabeDatum = LocalDate.now().plusDays(1);
 
 		boolean isMittwoch = true;
 		boolean isSamstag = true;
@@ -110,14 +92,22 @@ public class LottoscheinEinreichenKostenErmittelnTest {
 
 		int kostenExpected;
 		int kostenActual;
+		
+		KostenDto dto = new KostenDto();
+		dto.setAbgabeDatum(now);
+		dto.setAnzahlTipps(anzahlTipps);
+		dto.setLaufzeit(laufzeit);
+		dto.setMittwoch(isMittwoch);
+		dto.setSamstag(isSamstag);
+		dto.setSpiel77(isSpiel77);
+		dto.setSuper6(isSuper6);
 
 		kostenExpected = 6260;
-//		kostenActual = lottoscheinEinreichenKostenErmitteln.kostenermitteln(abgabeDatum, laufzeit, isMittwoch,
-//				isSamstag, anzahlTipps, isSuper6, isSpiel77);
+		kostenActual = lottoscheinEinreichenKostenErmitteln.kostenErmitteln(dto);
 
 		cleanDatabase.cleanDatabase("mydbtest");
 
-		//assertEquals(kostenExpected, kostenActual);
+		assertEquals(kostenExpected, kostenActual);
 
 	}
 
@@ -125,20 +115,7 @@ public class LottoscheinEinreichenKostenErmittelnTest {
 	@Test
 	public void testKostenErmittelnMitGebuehrenwechsel() {
 
-		// ----------------------------------------------------------------------------------
-		// A C H T U N G:
-		// Test läuft nicht an den Ziehungstagen Mittwoch und Samstag
-		// An Ziehungstagen:
-		// LocalDate abgabeDatum = LocalDate.now().plusDays(1);
-		// An allen anderen Tagen:
-		// LocalDate abgabeDatum = LocalDate.now();
-		//
-		// Solange, bis Refactoring auf DateTime-API im gesamten Lottoprojekt durchgeführt.
-		// --------------------------------------------------------
-		// Zeitstempel LocalDate.now()
-		// Lottoschein wird abgegeben LocalDate.now() mit einer Laufzeit von 8 Wochen,
-		// 4 Tipps, Spiel 77, Super6
-		//
+		
 		// 1. Gebührenrecord ist gültig von LocalDate.now().minusYears(1)
 		// bis LocalDate.now().plusWeeks(6)
 		//
@@ -206,17 +183,27 @@ public class LottoscheinEinreichenKostenErmittelnTest {
 		boolean isSuper6 = true;
 		int laufzeit = 8;
 		int anzahlTipps = 4;
+		
+		KostenDto dto = new KostenDto();
+		dto.setAbgabeDatum(now);
+		dto.setAnzahlTipps(anzahlTipps);
+		dto.setLaufzeit(laufzeit);
+		dto.setMittwoch(isMittwoch);
+		dto.setSamstag(isSamstag);
+		dto.setSpiel77(isSpiel77);
+		dto.setSuper6(isSuper6);
 
-		int kostenActual1;
-		int kostenExpected1 = 15560;
+		int kostenActual;
+		int kostenExpected = 15560;
 
-//		kostenActual1 = lottoscheinEinreichenKostenErmitteln.kostenermitteln(abgabeDatum, laufzeit, isMittwoch,
-//				isSamstag, anzahlTipps, isSuper6, isSpiel77);
+		kostenActual = lottoscheinEinreichenKostenErmitteln.kostenErmitteln(dto);
 
 		cleanDatabase.cleanDatabase("mydbtest");
 
 		// TODO
-		assert(true);
+		assert(kostenActual == kostenExpected);
 
 	}
+
 }
+

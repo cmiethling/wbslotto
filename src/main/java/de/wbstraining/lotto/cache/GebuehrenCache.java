@@ -15,44 +15,6 @@ import de.wbstraining.lotto.persistence.dao.GebuehrFacadeLocal;
 import de.wbstraining.lotto.persistence.model.Gebuehr;
 import de.wbstraining.lotto.util.LottoDatumUtil;
 
-// Wir überlegen uns wie man ermitteln kann, wie hoch die kosten für das einreichen eines lottoscheins sind
-// Wir müssen berücksichtigen: die gültigen gebühren können sich während der laufzeit ändern.
-// Datenbankzugriffe sind teuer
-// Wie hoch schätzen sie den aufwand, wie hoch ist das Risiko, dass sie sich stark verschätzen?
-
-/* Datenbankzugriff und abgreifen aller Gebührensätze die innerhalb des Zeitraums des Lottoscheins gültig sind, 
- * anfangen oder aufhören. (Frage ob Startzeitpunkt  vor und Endzeitpunkt nach einer Ziehung liegt)
- * 
- * (GETALL Gebühr WHERE FirstZiehnungdatum <= Gültigbis 
- * AND (FirstZiehnungdatum > Gültigab OR Gültigab <= Lastziehungsdatum) )
- * 
- * Eintragen dieser Gebührensätze in einer Liste, prüfen ob die Liste mehr als ein Element hat
- Wenn nicht Berechnung der Kosten nach Standard Muster (Multiplikation jedes einzelnen Kostenpunktes
- mit der Anzahl ihres auftretens, addition dieser Ergebnisse. Ausgabe Gesamtwert oder einer Map je nach Anforderung)
- 
- Falls es verschiedene Gebührensätze sind, dann aufteilung Anzahl der Ziehungen in einem Gebührenzeitraum 
- und ausrechnen nach Standard Muster.
-*/
-
-// Von Herrn Zäpernick:
-/*
- * eine singleton ejb baut in @PostConstruct eine Map auf:
- * - key: LocalDate; value: der für dieses datum gültige record der tabelle gebühr
- * 
- * sie bietet die folgenden methoden an:
- * - gebuehrByDatum()
- * - has GeguehrenWechesl(datumErsteZiehung, datumLetzteZiehung)
- * 
- * diese map wird bei anlegen neuer records in der tabelle gebuehr aktualisiert
- * (oder über einen ejb timer service)
- * 
- * AbgabeKostenErmitteln lässt sich eine referenz auf diese singleton ejb einspritzen
- * und wird in LottoscheinEinreichen eingespritzt, das seinerseits in LottoscheinEinreichenController
- * eingespritzt wird
- * 
- * aufwand: stunden
- * risiko: gering
- */
 
 @Singleton
 public class GebuehrenCache implements GebuehrenCacheLocal {

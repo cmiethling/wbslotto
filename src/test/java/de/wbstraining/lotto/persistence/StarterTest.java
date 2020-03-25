@@ -18,6 +18,7 @@ import de.wbstraining.lotto.persistence.dao.KundeFacadeLocal;
 import de.wbstraining.lotto.populatedb.CleanDatabaseLocal;
 import de.wbstraining.lotto.populatedb.PopulateDatabaseLocal;
 
+
 @RunWith(Arquillian.class)
 public class StarterTest {
 
@@ -61,5 +62,6 @@ public class StarterTest {
 	}
 
 }
+
 
 
