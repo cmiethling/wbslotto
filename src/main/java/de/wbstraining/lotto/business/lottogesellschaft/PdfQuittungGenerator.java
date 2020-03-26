@@ -1,15 +1,5 @@
 package de.wbstraining.lotto.business.lottogesellschaft;
 
-import java.net.MalformedURLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.concurrent.ThreadLocalRandom;
-
-import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.io.source.ByteArrayOutputStream;
 import com.itextpdf.kernel.color.Color;
 import com.itextpdf.kernel.color.DeviceRgb;
@@ -20,10 +10,12 @@ import com.itextpdf.layout.Document;
 import com.itextpdf.layout.Style;
 import com.itextpdf.layout.border.Border;
 import com.itextpdf.layout.border.SolidBorder;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.io.image.ImageDataFactory;
+
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.LineSeparator;
-import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
 import com.itextpdf.layout.property.UnitValue;
@@ -33,6 +25,20 @@ import de.wbstraining.lotto.dto.KostenDetailedDto;
 import de.wbstraining.lotto.dto.KostenDetailedDto.Item;
 import de.wbstraining.lotto.persistence.model.Adresse;
 import de.wbstraining.lotto.persistence.model.Gebuehr;
+
+import java.net.MalformedURLException;
+import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class PdfQuittungGenerator {
 
@@ -77,12 +83,19 @@ public class PdfQuittungGenerator {
                 document.add(createTableRechnung(auftrag));
 
                 document.add(newLine());
+
                 // add Einzelheiten der Zahlung
                 Style style = new Style().setFontSize(22).setBold().setTextAlignment(TextAlignment.LEFT);
                 Paragraph p = new Paragraph("Einzelheiten der Zahlung");
                 p.addStyle(style);
                 document.add(p);
                 document.add(newLine());
+                DecimalFormat myFormatter = new DecimalFormat("#,##0.00");
+
+                document.add(
+                                new Paragraph("Grundgebühr: \t" + myFormatter.format(kostenDetailedDto.getGrundgebuehr() / 100.0) + "\t €"));
+                document.add(newLine());
+                pdf.addNewPage();
 
                 document.add(createTableZahlungseinzelheiten(kostenDetailedDto));
 
@@ -141,21 +154,22 @@ public class PdfQuittungGenerator {
 
                 document.add(newLine());
                 document.add(newLine());
-                
+
                 // add Einzelheiten der Zahlung
                 Style style = new Style().setFontSize(22).setBold().setTextAlignment(TextAlignment.LEFT);
                 Paragraph p = new Paragraph("Einzelheiten der Zahlung");
                 p.addStyle(style);
                 document.add(p);
                 document.add(newLine());
-                // TODO
+
                 LocalDate ersteDatum = gebueren.keySet().stream().limit(1).findFirst().get();
                 Gebuehr ersteGebuehr = gebueren.remove(ersteDatum);
-                        
-                document.add(new Paragraph("Grundgebühr: \t"
-                                + String.valueOf(ersteGebuehr.getGrundgebuehr())+ "\t €" ));
-                document.add(newLine());        
-                
+
+                DecimalFormat myFormatter = new DecimalFormat("#,##0.00");
+
+                document.add(new Paragraph("Grundgebühr: \t" + myFormatter.format(ersteGebuehr.getGrundgebuehr()) + "\t €"));
+                document.add(newLine());
+
                 document.add(createTableZahlungseinzelheiten(gebueren));
                 // add Ende
                 document.add(newLine());
@@ -246,7 +260,8 @@ public class PdfQuittungGenerator {
                 Style style;
                 String str;
                 LocalDate date = LocalDate.now();
-                DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
+//                DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
                 style = new Style().setFontSize(12).setTextAlignment(TextAlignment.RIGHT);
                 str = "WBS Lotto \r" + "Lockwitzer Str. 23 \r" + "01219 Dresden";
@@ -300,6 +315,8 @@ public class PdfQuittungGenerator {
 
                 Table table = new Table(4);
 
+                DecimalFormat myFormatter = new DecimalFormat("#,##0.00");
+
                 table.addCell(createTextCell("Pos", 50, TextAlignment.JUSTIFIED).setBorderBottom(new SolidBorder(color, .1f))
                                 .setBorderRight(new SolidBorder(color, .1f)));
                 table.addCell(createTextCell("Artikel", 300, TextAlignment.JUSTIFIED)
@@ -315,82 +332,99 @@ public class PdfQuittungGenerator {
                                 .setBorderRight(new SolidBorder(color, .1f)));
                 table.addCell(createTextCell("1", 30, TextAlignment.JUSTIFIED).setBorderBottom(new SolidBorder(color, .1f))
                                 .setBorderRight(new SolidBorder(color, .1f)));
-                table.addCell(createTextCell((auftrag.getKosten() / 100.0) + " €", 30, TextAlignment.JUSTIFIED)
-                                .setBorderBottom(new SolidBorder(color, .1f)));
+                table.addCell(
+                                createTextCell(myFormatter.format(auftrag.getKosten() / 100.0) + " €", 30, TextAlignment.JUSTIFIED)
+                                                .setBorderBottom(new SolidBorder(color, .1f)));
                 return table;
         }
 
         private static Table createTableZahlungseinzelheiten(KostenDetailedDto kostenDetailedDto) {
 
                 Table table = new Table(5);
-                // Color color = new DeviceRgb(175, 205, 222);
+
                 Color color = Color.LIGHT_GRAY;
 
-                table.addCell(createTextCell("ZiehungsDatum", 100, TextAlignment.JUSTIFIED)
+                table.addCell(createTextCell("Gültig ab Datum", 100, TextAlignment.JUSTIFIED)
                                 .setBorderBottom(new SolidBorder(color, .1f)).setBorderRight(new SolidBorder(color, .1f)));
-                table.addCell(createTextCell("Grundgebühr", 100, TextAlignment.JUSTIFIED)
+                table.addCell(createTextCell("Anzahl Ziehungen", 100, TextAlignment.JUSTIFIED)
                                 .setBorderBottom(new SolidBorder(color, .1f)).setBorderRight(new SolidBorder(color, .1f)));
                 table.addCell(createTextCell("Einsatz pro Tipp", 100, TextAlignment.JUSTIFIED)
                                 .setBorderBottom(new SolidBorder(color, .1f)).setBorderRight(new SolidBorder(color, .1f)));
-                table.addCell(createTextCell("EinsatzSpiel77", 100, TextAlignment.JUSTIFIED)
+                table.addCell(createTextCell("Einsatz Spiel 77", 100, TextAlignment.JUSTIFIED)
                                 .setBorderBottom(new SolidBorder(color, .1f)).setBorderRight(new SolidBorder(color, .1f)));
-                table.addCell(createTextCell("EinsatzSuper6", 100, TextAlignment.JUSTIFIED)
+                table.addCell(createTextCell("Einsatz Super 6", 100, TextAlignment.JUSTIFIED)
                                 .setBorderBottom(new SolidBorder(color, .1f)).setBorderRight(new SolidBorder(color, .1f)));
-
-                // TODO
-//                LocalDate ersteDatum = gebueren.keySet().stream().limit(1).findFirst().get();
-//                Gebuehr ersteGebuehr = gebueren.remove(ersteDatum);
-//                
-////                table.addCell(createTextCell(ersteDatum.toString(), 100, TextAlignment.JUSTIFIED).setBorderBottom(new SolidBorder(color, .1f))
-////                                .setBorderRight(new SolidBorder(color, .1f)));
-//                table.addCell(createTextCell(ersteDatum.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")), 100, TextAlignment.JUSTIFIED).setBorderBottom(new SolidBorder(color, .1f))
-//                                .setBorderRight(new SolidBorder(color, .1f)));
-//                
-//                table.addCell(createTextCell(String.valueOf(ersteGebuehr.getGrundgebuehr()) , 100, TextAlignment.JUSTIFIED).setBorderBottom(new SolidBorder(color, .1f))
-//                                .setBorderRight(new SolidBorder(color, .1f)));
-//                table.addCell(createTextCell(String.valueOf(ersteGebuehr.getEinsatzprotipp()) , 100, TextAlignment.JUSTIFIED).setBorderBottom(new SolidBorder(color, .1f))
-//                                .setBorderRight(new SolidBorder(color, .1f)));
-//                table.addCell(createTextCell(String.valueOf(ersteGebuehr.getEinsatzspiel77()) , 100, TextAlignment.JUSTIFIED).setBorderBottom(new SolidBorder(color, .1f))
-//                                .setBorderRight(new SolidBorder(color, .1f)));
-//                table.addCell(createTextCell(String.valueOf(ersteGebuehr.getEinsatzsuper6()) , 100, TextAlignment.JUSTIFIED).setBorderBottom(new SolidBorder(color, .1f))
-//                                .setBorderRight(new SolidBorder(color, .1f)));
 
                 Map<LocalDate, Item> tipps = kostenDetailedDto.getEinsatzTipps();
                 Map<LocalDate, Item> sp77 = kostenDetailedDto.getEinsatzSpiel77();
                 Map<LocalDate, Item> sup6 = kostenDetailedDto.getEinsatzSuper6();
-        
+                LocalDate abgabeDatum = kostenDetailedDto.getAbgabeDatum().toInstant().atZone(ZoneId.systemDefault())
+                                .toLocalDate();
+
                 Set<LocalDate> dates = tipps.keySet();
-                Map<LocalDate, Integer[]> gebuehrmap = new TreeMap<>();
-                for(LocalDate date : dates) {
-                        Integer[] gebuehrzeile = new Integer[4];
-                        gebuehrzeile[0] = 0; // Platzhalter für Grundgebühr
-                        gebuehrzeile[1] = tipps.get(date).getGrundEinsatz(); 
-                        gebuehrzeile[0] = sp77.get(date).getGrundEinsatz(); 
-                        gebuehrzeile[0] = sup6.get(date).getGrundEinsatz(); 
+
+                DecimalFormat myFormatter = new DecimalFormat("#,##0.00");
+                
+                Map<LocalDate, String[]> gebuehrmap = new TreeMap<>();
+                for (LocalDate date : dates) {
+                        String[] gebuehrzeile = new String[4];
+                        gebuehrzeile[0] = String.format("%03d",tipps.get(date).getAnzahlZiehungen()); // Neu Anzahl Ziehungen
+                        gebuehrzeile[1] = myFormatter.format(tipps.get(date).getGrundEinsatz() / 100.0) + "\t €";
+                        gebuehrzeile[2] = myFormatter.format(sp77.get(date).getGrundEinsatz() / 100.0) + "\t €";
+                        gebuehrzeile[3] = myFormatter.format(sup6.get(date).getGrundEinsatz() / 100.0) + "\t €";
+                        if (abgabeDatum.isAfter(date)) {
+                                date = abgabeDatum;
+                        }
                         gebuehrmap.put(date, gebuehrzeile);
-                }
+                }                
                 
-                        
-                gebuehrmap.forEach((date,zeile)->{ 
-                table.addCell(createTextCell(date.toString(), 100, TextAlignment.JUSTIFIED).setBorderBottom(new SolidBorder(color, .1f))
-                                .setBorderRight(new SolidBorder(color, .1f)));
-                table.addCell(createTextCell(zeile[0].toString() , 100, TextAlignment.JUSTIFIED).setBorderBottom(new SolidBorder(color, .1f))
-                                .setBorderRight(new SolidBorder(color, .1f)));
                 
-                table.addCell(createTextCell(String.valueOf(zeile[1]) , 100, TextAlignment.JUSTIFIED).setBorderBottom(new SolidBorder(color, .1f))
-                                .setBorderRight(new SolidBorder(color, .1f)));
-                table.addCell(createTextCell(String.valueOf(zeile[2]) , 100, TextAlignment.JUSTIFIED).setBorderBottom(new SolidBorder(color, .1f))
-                                .setBorderRight(new SolidBorder(color, .1f)));
-                table.addCell(createTextCell(String.valueOf(zeile[3]) , 100, TextAlignment.JUSTIFIED).setBorderBottom(new SolidBorder(color, .1f))
-                                .setBorderRight(new SolidBorder(color, .1f)));
+                // wir verwenden zeile[1] bis [3] für Geld und die zeile[0] für Anzahl Ziehungen
+                gebuehrmap.forEach((date, zeile) -> {
+                        table.addCell(createTextCell(date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")), 100, TextAlignment.JUSTIFIED)
+                                        .setBorderBottom(new SolidBorder(color, .1f)).setBorderRight(new SolidBorder(color, .1f)));
+                        // diese Zeile "Grundgebühr" wird ersetzt durch Anzahl Ziehungen
+                        table.addCell(createTextCell(zeile[0], 100, TextAlignment.CENTER)
+                                        .setBorderBottom(new SolidBorder(color, .1f)).setBorderRight(new SolidBorder(color, .1f)));
+                        table.addCell(createTextCell(zeile[1], 100, TextAlignment.RIGHT)
+                                        .setBorderBottom(new SolidBorder(color, .1f)).setBorderRight(new SolidBorder(color, .1f)));
+                        table.addCell(createTextCell(zeile[2], 100, TextAlignment.RIGHT)
+                                        .setBorderBottom(new SolidBorder(color, .1f)).setBorderRight(new SolidBorder(color, .1f)));
+                        table.addCell(createTextCell(zeile[3], 100, TextAlignment.RIGHT)
+                                        .setBorderBottom(new SolidBorder(color, .1f)).setBorderRight(new SolidBorder(color, .1f)));
                 });
-                
+
+        //         Map<LocalDate, Gebuehr> gebuehrmap = new TreeMap<>();
+//                for (LocalDate date : dates) {
+//                        Gebuehr gebuehrzeile = new Gebuehr();
+//                        
+//                        gebuehrzeile.set(kostenDetailedDto.getGrundgebuehr()); // Platzhalter für Grundgebühr
+//                        gebuehrzeile.setEinsatzprotipp(tipps.get(date).getGrundEinsatz());
+//                        gebuehrzeile.setEinsatzspiel77(sp77.get(date).getGrundEinsatz());
+//                        gebuehrzeile.setEinsatzsuper6(sup6.get(date).getGrundEinsatz());
+//                        gebuehrmap.put(date, gebuehrzeile);
+//                }
+
+
+//                gebuehrmap.forEach((date, gebuehr) -> {
+//                        table.addCell(
+//                                        createTextCell(date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")), 100, TextAlignment.JUSTIFIED)
+//                                                        .setBorderBottom(new SolidBorder(color, .1f)).setBorderRight(new SolidBorder(color, .1f)));
+//                        table.addCell(createTextCell(myFormatter.format(gebuehr.getEinsatzprotipp()) + "\t €", 100,
+//                                        TextAlignment.JUSTIFIED).setBorderBottom(new SolidBorder(color, .1f))
+//                                                        .setBorderRight(new SolidBorder(color, .1f)));
+//                        table.addCell(createTextCell(myFormatter.format(gebuehr.getEinsatzspiel77()) + "\t €", 100,
+//                                        TextAlignment.JUSTIFIED).setBorderBottom(new SolidBorder(color, .1f))
+//                                                        .setBorderRight(new SolidBorder(color, .1f)));
+//                        table.addCell(createTextCell(myFormatter.format(gebuehr.getEinsatzsuper6()) + "\t €", 100,
+//                                        TextAlignment.JUSTIFIED).setBorderBottom(new SolidBorder(color, .1f))
+//                                                        .setBorderRight(new SolidBorder(color, .1f)));
+//                });
 
                 return table;
         }
 
         private static Table createTableZahlungseinzelheiten(Map<LocalDate, Gebuehr> gebueren) {
-                                
 
                 Table table = new Table(4);
                 Color color = new DeviceRgb(175, 205, 222);
@@ -447,13 +481,3 @@ public class PdfQuittungGenerator {
                 return cell;
         }
 }
-
-//----------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-

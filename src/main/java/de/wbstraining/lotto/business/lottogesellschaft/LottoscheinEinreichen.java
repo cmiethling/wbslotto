@@ -2,11 +2,9 @@ package de.wbstraining.lotto.business.lottogesellschaft;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -14,7 +12,6 @@ import javax.ejb.Stateless;
 import de.wbstraining.lotto.business.lottospieler.KostenErmittelnLocal;
 import de.wbstraining.lotto.cache.AdresseCacheLocal;
 import de.wbstraining.lotto.cache.DBCacheLocal;
-import de.wbstraining.lotto.cache.GebuehrenCacheLocal;
 import de.wbstraining.lotto.dto.KostenDetailedDto;
 import de.wbstraining.lotto.dto.KostenDto;
 import de.wbstraining.lotto.mail.MailQueueSenderLocal;
@@ -22,7 +19,6 @@ import de.wbstraining.lotto.persistence.dao.GebuehrFacadeLocal;
 import de.wbstraining.lotto.persistence.dao.LottoscheinFacadeLocal;
 import de.wbstraining.lotto.persistence.dao.LottoscheinziehungFacadeLocal;
 import de.wbstraining.lotto.persistence.model.Adresse;
-import de.wbstraining.lotto.persistence.model.Gebuehr;
 import de.wbstraining.lotto.persistence.model.Lottoschein;
 import de.wbstraining.lotto.persistence.model.Lottoscheinziehung;
 import de.wbstraining.lotto.persistence.model.Ziehung;
@@ -48,10 +44,6 @@ public class LottoscheinEinreichen implements LottoscheinEinreichenLocal {
 
         @EJB
         private KostenErmittelnLocal kostenErmittelnLocal;
-// 
-
-        @EJB
-        private GebuehrenCacheLocal gebuehrenCacheLocal;
 
         @EJB
         private MailQueueSenderLocal mailQueueSender;
@@ -73,10 +65,6 @@ public class LottoscheinEinreichen implements LottoscheinEinreichenLocal {
                 dateList = LottoDatumUtil.ziehungsTage(schein.getAbgabedatum(), schein.getIsmittwoch(), schein.getIssamstag(),
                                 18, 19, schein.getLaufzeit());
 
-                // TODO
-
-                int kosten = kostenErmittelnLocal.kostenErmitteln(schein);
-
                 kostenDto.setAbgabeDatum(schein.getAbgabedatum());
                 kostenDto.setAnzahlTipps(ByteLongConverter.byteToLong(schein.getTipps()).length);
                 kostenDto.setLaufzeit(schein.getLaufzeit());
@@ -87,10 +75,7 @@ public class LottoscheinEinreichen implements LottoscheinEinreichenLocal {
 
                 kostenDetailedDto = kostenErmittelnLocal.kostenErmittelnDetailed(kostenDto);
 
-                List<Gebuehr> gebuehren = gebuehrFacadeLocal.findAll();
-                Map<LocalDate, Gebuehr> mapGebuehren = createGebuehrenMap(dateList, gebuehren);
-
-                kosten = kostenDetailedDto.getGesamtbetrag();
+                int kosten = kostenDetailedDto.getGesamtbetrag();
 
                 List<Adresse> adreseeList = adresseCache.getAdresseListByKundeId(schein.getKundeid());
                 Auftrag auftrag = new Auftrag(schein.getBelegnummer(), schein.getKundeid().getName(), schein.getLaufzeit(),
@@ -98,9 +83,25 @@ public class LottoscheinEinreichen implements LottoscheinEinreichenLocal {
                                 schein.getIsmittwoch(), schein.getIssamstag(), schein.getTipps().length / 8);
 
                 AuftragKunde auftragKunde = new AuftragKunde(schein.getKundeid(), adreseeList);
-                mailQueueSender.sendEmail("lottouser@lotto.test", "new message from wbslotto", "new receipt from wbs lotto",
-                                PdfQuittungGenerator.createPDFAsByteArray(auftrag, auftragKunde, mapGebuehren));
-                // PdfQuittungGenerator.createPDFAsByteArray(auftrag,auftragKunde,kostenDetailedDto));
+                
+                StringBuilder sbContent = new StringBuilder("");
+                LocalDate localDatum = datum.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                
+                sbContent.append("\t\t\t\t\t\t Dresden, den "+localDatum.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))+"\n\n\n");
+                
+                sbContent.append("Hallo Frau/Herr "+schein.getKundeid().getName()+",\n");
+                sbContent.append("\n");
+                sbContent.append("Anbei erhalten Sie den Rechnungsbeleg zu Ihrem gebuchten Lottotipp.\n\n");
+                sbContent.append("WBS Lotto hofft Sie auch bald wieder als einen unserer Kunden begrüssen zu dürfen.\n");
+                sbContent.append("\n\n\n");
+                sbContent.append("Mit freundlichen Grüssen\n\n");
+                sbContent.append("\n\n");
+                sbContent.append("Ihr Team von WBS Lotto");                
+                
+                
+                mailQueueSender.sendEmail("lottouser@lotto.test", "Zusendung des Rechnungsbeleges Ihres gebuchten Lottotipps", sbContent.toString(),
+
+                 PdfQuittungGenerator.createPDFAsByteArray(auftrag,auftragKunde,kostenDetailedDto));
                 int nr = 1;
                 for (Date date : dateList) {
                         ziehung = dBCacheLocal.ziehungByDatum(date);
@@ -117,44 +118,8 @@ public class LottoscheinEinreichen implements LottoscheinEinreichenLocal {
                         lottoscheinziehungFacadeLocal.create(lottoscheinziehung);
                         nr++;
 
-                        // Map<LocalDate, Gebuehr> gebuerenKosten =
-                        // lottoscheinEinreichenKostenErmitteln.getGebuerenKosten();
-                        // int kosten = lottoscheinEinreichenKostenErmitteln.kostenermitteln(schein);
-                        // schein.setKosten(kosten);
-
-                        // Map<LocalDate, Gebuehr> gebuerenKosten =
-                        // lottoscheinEinreichenKostenErmitteln.getGebuerenKosten();
-
-                        // TODO
-//                        Map<LocalDate, Gebuehr> gebuerenKosten = null;
-//                        
-//                        mailQueueSender.sendEmail("lottouser@lotto.test", "new message from wbslotto", "new receipt from wbs lotto",
-//                                        //PdfQuittungGenerator.createPdfFromAuftrag(auftrag));
-//                                        PdfQuittungGenerator.createPDFAsByteArray(auftrag,auftragKunde,gebuerenKosten));
                 }
         }
 
-        // ============================================
-
-        private Map<LocalDate, Gebuehr> createGebuehrenMap(List<Date> dateList, List<Gebuehr> gebuehren) {
-
-                Map<LocalDate, Gebuehr> gebuehrenMap = new HashMap<>();
-
-                for (Date spielTag : dateList) {
-
-                        Optional<Gebuehr> optGebuerForSpielTag = gebuehren.stream().filter(g -> g.getGueltigbis().after(spielTag))
-                                        .filter(g -> g.getGueltigab().before(spielTag))
-                                        .max((g1, g2) -> g1.getGueltigab().compareTo(g2.getGueltigab()));
-
-                        Gebuehr gebuerForSpielTag = optGebuerForSpielTag
-                                        .orElseThrow(() -> new IllegalArgumentException("no record in gebuehr..."));
-
-                        LocalDate localSpielTag = spielTag.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
-                        gebuehrenMap.put(localSpielTag, gebuerForSpielTag);
-
-                }
-                return gebuehrenMap;
-        }
 
 }
