@@ -25,11 +25,9 @@ public class StarterTest {
 	@Deployment
 	public static Archive<?> createTestArchive() {
 		return ShrinkWrap.create(WebArchive.class, "test.war")
-				.addPackages(true,"de.wbstraining.lotto.persistence",
-						"de.wbstraining.lotto.populatedb",
-						"de.wbstraining.lotto.util",
-						"de.wbstraining.lotto.business",
-						"de.wbstraining.lotto.cache","de.wbstraining.lotto.mail")
+				.addPackages(true, "de.wbstraining.lotto.persistence", "de.wbstraining.lotto.populatedb",
+						"de.wbstraining.lotto.util", "de.wbstraining.lotto.business.lottospieler", "de.wbstraining.lotto.cache",
+						"de.wbstraining.lotto.mail","de.wbstraining.lotto.dto","de.wbstraining.lotto.business.lottogesellschaft" )
 				.addAsResource("META-INF/persistence.xml").addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
 
