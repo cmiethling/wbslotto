@@ -61,7 +61,7 @@ public class ZiehungAuswertenServlet extends HttpServlet {
 //			out.println("populateDB benoetigte Zeit: " + (t2 - t1) + "ms<br>");
 
 			log.log(Level.INFO, "ziehungAuswerten...");
-			Ziehung zie = ziehungFacade.findAll().get(1);
+			Ziehung zie = ziehungFacade.find(1L);
 			t1 = System.currentTimeMillis();
 			ziehungAuswerten.ziehungAuswerten(zie);
 			t2 = System.currentTimeMillis();

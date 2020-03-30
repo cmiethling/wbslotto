@@ -1,12 +1,15 @@
 package de.wbstraining.lotto.business.lottogesellschaft;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.ejb.EJB;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -17,6 +20,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import de.wbstraining.lotto.persistence.dao.LottoscheinziehungFacadeLocal;
 import de.wbstraining.lotto.persistence.dao.SpielFacadeLocal;
 import de.wbstraining.lotto.persistence.dao.ZiehungFacadeLocal;
 import de.wbstraining.lotto.persistence.model.Lottoscheinziehung;
@@ -44,6 +48,12 @@ public class ZiehungAuswertenTest {
 
 	@EJB
 	private SpielFacadeLocal spielFacade;
+	
+	@EJB
+	private LottoscheinziehungFacadeLocal lottoscheinZiehungFacade;;
+	
+	@PersistenceContext(unitName = "corejsfPU")
+    private EntityManager em;
 
 	@Test
 	public void ziehungAuswerten() {
@@ -56,14 +66,19 @@ public class ZiehungAuswertenTest {
 		spiele.stream().forEach(s -> spielMap.put(s.getName(), s));
 		Ziehung ziehung = ziehungFacade.find(1L);
 		ziehungAuswerten.ziehungAuswerten(ziehung);
-		List<Lottoscheinziehung> lzList = ziehung.getLottoscheinziehungList();
+		
+		TypedQuery<Lottoscheinziehung> query = em.createQuery("SELECT lz FROM Lottoscheinziehung lz where lz.ziehungid.ziehungid = 1L", Lottoscheinziehung.class);
+		
+		List<Lottoscheinziehung> lzList = query.getResultList();
+		anzahlSpiel77TotalActual = lzList.stream()
+				
+				.filter(
+				lz -> lz.getGewinnklasseidspiel77() != null && lz.getGewinnklasseidspiel77().getSpielid()
+				.getName().equals("Spiel 77")).count();
 		anzahlSuper6TotalActual = lzList.stream().filter(
-				lz -> lz.getGewinnklasseidspiel77().getSpielid()
+				lz -> lz.getGewinnklasseidsuper6() != null && lz.getGewinnklasseidsuper6().getSpielid()
 				.getName().equals("Super 6")).count();
-		anzahlSpiel77TotalActual = lzList.stream().filter(
-				lz -> lz.getGewinnklasseidsuper6().getSpielid()
-				.getName().equals("Spiel77")).count();
-		assertTrue(anzahlSpiel77TotalActual == anzahlSpiel77TotalExpected
-				&& anzahlSuper6TotalActual == anzahlSuper6TotalExpected);
+		assertEquals(anzahlSuper6TotalExpected, anzahlSuper6TotalActual);
+		assertEquals(anzahlSpiel77TotalExpected, anzahlSpiel77TotalActual);
 	}
 }

@@ -38,8 +38,8 @@ public class LottoscheinEinreichenKostenErmittelnTest {
 	@EJB
 	private GebuehrFacadeLocal gebuehrFacade;
 
-	@EJB
-	private CleanDatabaseLocal cleanDatabase;
+//	@EJB
+//	private CleanDatabaseLocal cleanDatabase;
 
 	@EJB
 	private KostenErmittelnLocal lottoscheinEinreichenKostenErmitteln;
@@ -66,7 +66,7 @@ public class LottoscheinEinreichenKostenErmittelnTest {
 
 		Gebuehr gebuehr = new Gebuehr();
 
-		cleanDatabase.cleanDatabase("mydbtest");
+		// cleanDatabase.cleanDatabase("mydbtest");
 
 		gebuehr.setGrundgebuehr(60);
 		gebuehr.setEinsatzprotipp(100);
@@ -105,7 +105,7 @@ public class LottoscheinEinreichenKostenErmittelnTest {
 		kostenExpected = 6260;
 		kostenActual = lottoscheinEinreichenKostenErmitteln.kostenErmitteln(dto);
 
-		cleanDatabase.cleanDatabase("mydbtest");
+		// cleanDatabase.cleanDatabase("mydbtest");
 
 		assertEquals(kostenExpected, kostenActual);
 

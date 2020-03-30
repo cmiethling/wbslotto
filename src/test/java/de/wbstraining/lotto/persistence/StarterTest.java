@@ -40,7 +40,7 @@ public class StarterTest {
 	@EJB
 	private PopulateDatabaseLocal populateDatabase;
 
-	// @Ignore
+	@Ignore
 	@Test
 	public void testCleanAndPopulateDatabase() {
 		

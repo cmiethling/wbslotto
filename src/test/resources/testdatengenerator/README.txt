@@ -1,5 +1,5 @@
 /* PRECONDITION: die tabelle kunden (adresse, bankverbindung) muss bereits bestückt sein.
-
+ * für die ziehungsauswertung muss zusätzlich gwinnklasse und gebuehr bestückt sein
  * der generator ezeugt die gewünschte anzahl von treffern in den gewinnklassen
  * der einzelnen spiele für alle e c h t e n gewinnklassen.
 
