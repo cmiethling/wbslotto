@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns="http://testdatengenerierung.jpacore.wbs/lotto"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+           elementFormDefault="qualified" targetNamespace="http://testdatengenerierung.jpacore.wbs/lotto">
+
+    <xs:simpleType name="belegNummer">
+        <xs:restriction base="xs:long">
+            <xs:pattern value="\d{11}" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="superzahl">
+        <xs:restriction base="xs:int">
+            <xs:minInclusive value="0" />
+            <xs:maxInclusive value="9" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="spiel77">
+        <xs:restriction base="xs:int">
+            <xs:pattern value="\d{7}" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="super6">
+        <xs:restriction base="xs:int">
+            <xs:pattern value="\d{6}" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:element name="anzahl6Aus49ProGkl">
+        <xs:complexType>
+            <xs:sequence minOccurs="10" maxOccurs="10">
+                <xs:element name="anzahl" type="xs:int">
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="anzahlSpiel77ProGkl">
+        <xs:complexType>
+            <xs:sequence minOccurs="8" maxOccurs="8">
+                <xs:element name="anzahl" type="xs:int">
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="anzahlSuper6ProGkl">
+        <xs:complexType>
+            <xs:sequence minOccurs="7" maxOccurs="7">
+                <xs:element name="anzahl" type="xs:int">
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="testdatengenerator">
+        <xs:complexType>
+            <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                <xs:element name="cZiehung" type="cZiehung"></xs:element>
+            </xs:sequence>
+            <xs:attribute name="datumErsteZiehung" type="xs:date"
+                                      use="required">
+            </xs:attribute>
+            <xs:attribute name="belegnummernStart" type="belegNummer"
+                                      use="required">
+            </xs:attribute>
+            <xs:attribute name="txBlocksize" type="xs:int"
+                                      use="required">
+            </xs:attribute>
+
+        </xs:complexType>
+    </xs:element>
+
+
+    <xs:complexType name="cZiehung">
+        <xs:sequence minOccurs="1">
+            <xs:element ref="anzahl6Aus49ProGkl" minOccurs="1"
+                                    maxOccurs="1" />
+            <xs:element ref="anzahlSpiel77ProGkl" minOccurs="1"
+                                    maxOccurs="1" />
+            <xs:element ref="anzahlSuper6ProGkl" minOccurs="1"
+                                    maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="zahlenAlsBits" type="xs:unsignedInt"
+                              use="required">
+        </xs:attribute>
+        <xs:attribute name="superzahl" type="superzahl" use="required"></xs:attribute>
+        <xs:attribute name="spiel77" type="spiel77" use="required"></xs:attribute>
+        <xs:attribute name="super6" type="super6" use="required"></xs:attribute>
+        <xs:attribute name="anzahlTippsProSchein" type="xs:int" use="required"></xs:attribute>
+    </xs:complexType>
+
+</xs:schema>
+
+
