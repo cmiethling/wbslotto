@@ -258,7 +258,7 @@ public class CZiehungTestdatenGenerator implements CZiehungTestdatenGeneratorLoc
 		generateScheineSuper6(config, ziehung, belegNr);
 	}
 
-	@Asynchronous
+	// @Asynchronous
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@Override
 	public void generiereTestDatenFuerMehrereZiehungen(Testdatengenerator generator) {

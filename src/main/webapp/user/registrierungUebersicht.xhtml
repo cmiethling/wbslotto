@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html" xml:lang="en" lang="en"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="../resources/template/template.xhtml">
+	<ui:define name="header">
+		<h1>Übersicht Ihrer Registrierungsdaten</h1>
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form>
+			<div class="pfeil">
+				&#11176;
+				<h:commandButton class="inputButton2" value="zurück"
+					action="registrierung" />
+			</div>
+			<br />
+
+
+
+			<p:panelGrid columns="1">
+				<f:facet name="header">
+					<p:graphicImage name="/images/lottohead.png" />
+				</f:facet>
+
+				<p:panelGrid style="margin-top:5px">
+					<f:facet name="footer">
+						<p:row>
+							<p:column columns="3" rowspan="6" style=" text-align: center; width: 200px; border-right: 2px solid #ccc7c7">
+				                Anmeldedaten
+
+				            </p:column>
+							<p:column style=" text-align: left">
+								<h:outputText value="#{registrierungController.vorname}"
+									style="padding:10px" />
+								<h:outputText value="#{registrierungController.name}"
+									style="padding:10px" />
+							</p:column>
+						</p:row>
+
+						<p:row>				            
+							<p:column style="width:70%; text-align: left">
+								<h:outputText value="Benutzername: " style="padding:10px" />
+								<h:outputText value="#{registrierungController.benutzerName}"
+									style="padding:10px" />
+							</p:column>
+						</p:row>
+
+						<p:row>				            							
+							<p:column style="width:70%; text-align: left">
+								<h:outputText value="EMail: " style="padding:10px" />
+								<h:outputText value="#{registrierungController.email}"
+									style="padding:10px" />
+							</p:column>
+						</p:row>
+
+						<p:row>				            							
+							<p:column style="width:70%; text-align: left">
+								<h:outputText value="Kennwort: " style="padding:10px" />
+								<h:outputText value="#{registrierungController.passwort}"
+									style="padding:10px" />
+							</p:column>						
+						</p:row>
+						
+					</f:facet>
+				</p:panelGrid>
+				
+				<p:panelGrid style="margin-top:5px">
+					<f:facet name="footer">
+						<p:row>
+							<p:column columns="3" rowspan="6" style=" text-align: center; width: 200px; border-right: 2px solid #ccc7c7">
+				                Anschrift
+				            </p:column>
+
+							<p:column style="width:70%; text-align: left">
+								<h:outputText value="#{registrierungController.strasse}"
+									style="padding:10px" />
+								<h:outputText value="#{registrierungController.hausnummer}" style="padding:10px" />
+								<h:outputText value="#{registrierungController.adresszusatz}" />
+							</p:column>
+						</p:row>
+
+						<p:row>
+							<p:column style="width:70%; text-align: left">
+								<h:outputText value="#{registrierungController.plz}"
+									style="padding:10px" />
+								<h:outputText value="#{registrierungController.ort}" />
+							</p:column>
+						</p:row>
+						<p:row>
+							<p:column style="width:70%; text-align: left">
+								<h:outputText value="(" style="padding:10px" />
+								<h:outputText value="#{registrierungController.land}" />
+								<h:outputText value=") " style="padding:10px" />
+							</p:column>
+						</p:row>
+						
+					</f:facet>
+				</p:panelGrid>
+				
+				<p:panelGrid style="margin-top:5px">
+					<f:facet name="footer">
+
+						<p:row>
+							<p:column columns="3" rowspan="6" style=" text-align: center; width: 200px; border-right: 2px solid #ccc7c7">
+				                Bankdaten
+				            </p:column>
+
+							<p:column style="width:70%; text-align: left">
+								<h:outputText value="Kontoinhaber: " style="padding:10px" />
+								<h:outputText value="#{registrierungController.kontoinhaber}"
+									style="padding:10px" />
+							</p:column>
+						</p:row>
+
+						<p:row>				            							
+							<p:column style="width:70%; text-align: left">
+								<h:outputText value="Bank: " style="padding:10px" />
+								<h:outputText value="#{registrierungController.bankname}"
+									style="padding:10px" />
+							</p:column>
+						</p:row>
+
+						<p:row>				            														
+							<p:column style="width:70%; text-align: left">
+								<h:outputText value="BIC: " style="padding:10px" />
+								<h:outputText value="#{registrierungController.bic}"
+									style="padding:10px" />
+							</p:column>
+						</p:row>
+
+						<p:row>				            							
+							<p:column style="width:70%; text-align: left">
+								<h:outputText value="IBAN: " style="padding:10px" />
+								<h:outputText value="#{registrierungController.iban}"
+									style="padding:10px" />
+							</p:column>
+						</p:row>
+
+					</f:facet>
+				</p:panelGrid>
+
+
+			</p:panelGrid>
+
+
+
+
+			<h:commandButton class="inputButton"
+				value="Registrierung abschließen"
+				action="#{registrierungController.senden}"
+				style="border-radius:10px; font-size:large; width:100%; height: 58px; " />
+		</h:form>
+	</ui:define>
+
+	<ui:define name="footer">
+
+            footer
+        </ui:define>
+
+</ui:composition>
+
+</html>

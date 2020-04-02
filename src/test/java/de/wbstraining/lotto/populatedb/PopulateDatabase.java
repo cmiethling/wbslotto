@@ -24,6 +24,6 @@ public class PopulateDatabase implements PopulateDatabaseLocal {
 		populateGebuehr.populateGebuehr();
 		populateKunde.populateKunde();
 		populateSpielUndGewinnklasse.populateSpielUndGewinnklasse();
-		populateZiehungUndLottoschein.populateZiehungUndLottoschein();
+		// populateZiehungUndLottoschein.populateZiehungUndLottoschein();
 	}
 }
