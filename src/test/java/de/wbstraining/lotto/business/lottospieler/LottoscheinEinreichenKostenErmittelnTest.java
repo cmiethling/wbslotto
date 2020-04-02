@@ -13,6 +13,7 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -20,7 +21,6 @@ import de.wbstraining.lotto.cache.GebuehrenCacheLocal;
 import de.wbstraining.lotto.dto.KostenDto;
 import de.wbstraining.lotto.persistence.dao.GebuehrFacadeLocal;
 import de.wbstraining.lotto.persistence.model.Gebuehr;
-import de.wbstraining.lotto.populatedb.CleanDatabaseLocal;
 
 
 @RunWith(Arquillian.class)
@@ -47,7 +47,7 @@ public class LottoscheinEinreichenKostenErmittelnTest {
 	@EJB
 	private GebuehrenCacheLocal gebuehrenCache;
 
-	// @Ignore
+	@Ignore
 	@Test
 	public void testKostenErmitteln() {
 		

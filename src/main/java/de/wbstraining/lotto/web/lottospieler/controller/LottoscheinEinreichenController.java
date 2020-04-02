@@ -163,14 +163,20 @@ public class LottoscheinEinreichenController implements Serializable {
 
 	public String senden() {
 
+		Kunde kunde = null;
+
 		// TODO registrierung und einreichen des lottoscheins entkoppeln
-		if (!isRegistriert()) {
-			registrierungController.senden();
-		}
+		/*
+		 * if (!isRegistriert()) { registrierungController.senden(); kunde =
+		 * registrierungController.getKunde(); }
+		 */
+		kunde = kundeFacadeLocal.find(kundeId);
+
+		System.out.println("KundeId: " + kundeId);
+		System.out.println("Kunde: " + kunde);
 
 		Date datum = new Date();
 		Lottoschein schein = new Lottoschein();
-		Kunde kunde = kundeFacadeLocal.find(kundeId);
 
 		schein.setKundeid(kunde);
 		schein.setAbgabedatum(datum);
@@ -189,6 +195,7 @@ public class LottoscheinEinreichenController implements Serializable {
 			schein.setIsmittwoch(Boolean.TRUE);
 
 		schein.setKosten(0);
+
 		schein.setLosnummer(Integer.parseInt(losnummer));
 		schein.setTipps(LottoUtil.randomTippsAsByteArray(anzahlTipps));
 
@@ -216,10 +223,12 @@ public class LottoscheinEinreichenController implements Serializable {
 			dto.setAbgabeDatum(null);
 			// ...
 			/*
-			int kosten = lottoscheinEinreichenKostenErmitteln.kostenermitteln(LocalDate.now(),
-					Integer.parseInt(laufzeit), ziehungstage.contains("isMittwoch"), ziehungstage.contains("isSamstag"),
-					anzahlTipps, spiele.contains("super6"), spiele.contains("spiel77"));
-					*/
+			 * int kosten =
+			 * lottoscheinEinreichenKostenErmitteln.kostenermitteln(LocalDate.now(),
+			 * Integer.parseInt(laufzeit), ziehungstage.contains("isMittwoch"),
+			 * ziehungstage.contains("isSamstag"), anzahlTipps, spiele.contains("super6"),
+			 * spiele.contains("spiel77"));
+			 */
 			int kosten = 123;
 			kostenAsString = String.format("EUR %.2f", kosten / 100.0);
 		}

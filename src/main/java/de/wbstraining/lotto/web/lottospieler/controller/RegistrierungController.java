@@ -13,19 +13,21 @@ import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.validation.constraints.Pattern;
 
 import org.primefaces.event.FlowEvent;
 
-import de.wbstraining.lotto.persistence.dao.GroupsFacadeLocal;
 import de.wbstraining.lotto.persistence.dao.KundeFacadeLocal;
-import de.wbstraining.lotto.persistence.dao.UsersFacadeLocal;
+import de.wbstraining.lotto.persistence.dao.UserRolesFacadeLocal;
+import de.wbstraining.lotto.persistence.dao.Users2FacadeLocal;
 import de.wbstraining.lotto.persistence.model.Adresse;
 import de.wbstraining.lotto.persistence.model.Bankverbindung;
 import de.wbstraining.lotto.persistence.model.Kunde;
+import de.wbstraining.lotto.persistence.model.Users2;
+import de.wbstraining.lotto.util.UtilSecurity;
+
+
 
 /**
  *
@@ -33,145 +35,180 @@ import de.wbstraining.lotto.persistence.model.Kunde;
  */
 
 @Named(value = "registrierungController")
-/*@RequestScoped*/
+/* @RequestScoped */
 @SessionScoped
 
-public class RegistrierungController implements Serializable{
+public class RegistrierungController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-    @EJB
-    private KundeFacadeLocal kundeFacadeLocal;  //nur private KundeFacadeLocal kundeFacadeLocal => weil die untergeordneten Tabellen mit angelegt werden
-    
-    // TODO cachen
-    @EJB
-    private GroupsFacadeLocal groupsFacade;
-    
-    @EJB
-    UsersFacadeLocal usersFacade;
-    
-    //Tabelle Kunde
-    private String name;
-    private String vorname;
-    // oder @Email
-    @Pattern(regexp="^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
-    private String email;
-    private String benutzername;
-    private String passwort;
-    
-    //Tabelle Adresse
-    private String adresszusatz;
-    private String strasse;
-    private String hausnummer;
-    private String plz;
-    private String ort;
-    private String land;
-    
-    //Tabelle Bankverbindung
-    private String iban;
-    private String bic;
-    private String bankname;
-    private String kontoinhaber;
-    
-    private boolean skip;
-    
- 
+	@EJB
+	private KundeFacadeLocal kundeFacadeLocal; // nur private KundeFacadeLocal kundeFacadeLocal => weil die
 
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getName() {
-        return name;
-    }
+	@EJB
+    private UserRolesFacadeLocal userRolesFacadeLocal;
+    
+    @EJB
+    Users2FacadeLocal users2FacadeLocal;
+    												// untergeordneten Tabellen mit angelegt werden
 
-    public void setVorname(String vorname) {
-        this.vorname = vorname;
-    }
-    public String getVorname() {
-        return vorname;
-    }
-    
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public String getEmail() {
-        return email;
-    }
-    
+
+	// Tabelle Kunde
+	private String name;
+	private String vorname;
+	// oder @Email
+	@Pattern(regexp = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
+	private String email;
+	private String benutzername;
+	private String passwort;
+	private Kunde kunde;
+
+	// Tabelle Adresse
+	private String adresszusatz;
+	private String strasse;
+	private String hausnummer;
+	private String plz;
+	private String ort;
+	private String land;
+
+	// Tabelle Bankverbindung
+	private String iban;
+	private String bic;
+	private String bankname;
+	private String kontoinhaber;
+
+	private boolean skip;
+	
+	public String getSuccessMessage() {
+		return successMessage;
+	}
+
+	public void setSuccessMessage(String successMessage) {
+		this.successMessage = successMessage;
+	}
+
+	private String successMessage;
+
+	public Kunde getKunde() {
+		return kunde;
+	}
+
+	public void setKunde(Kunde kunde) {
+		this.kunde = kunde;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setBenutzerName(String benutzername) {
+		this.benutzername = benutzername;
+	}
+
+	public String getBenutzerName() {
+		return benutzername;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setVorname(String vorname) {
+		this.vorname = vorname;
+	}
+
+	public String getVorname() {
+		return vorname;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
 	public String getAdresszusatz() {
 		return adresszusatz;
 	}
+
 	public void setAdresszusatz(String adresszusatz) {
 		this.adresszusatz = adresszusatz;
 	}
-    
-    public void setStrasse(String strasse) {
-        this.strasse = strasse;
-    }
-    public String getStrasse() {
-        return strasse;
-    }
-    
-    public void setHausnummer(String hausnummer) {
-        this.hausnummer = hausnummer;
-    }
-    public String getHausnummer() {
-        return hausnummer;
-    }
 
-    public void setPlz(String plz) {
-        this.plz = plz;
-    }
-    public String getPlz() {
-        return plz;
-    }
-    
-    public void setOrt(String ort) {
-        this.ort = ort;
-    }
-    public String getOrt() {
-        return ort;
-    }
-    
-    public void setLand(String land) {
-        this.land = land;
-    }
-    public String getLand() {
-        return land;
-    }
-    
-    public void setIban(String iban) {
-        this.iban = iban;
-    }
-    public String getIban() {
-        return iban;
-    }
-    
-    public void setBic(String bic) {
-        this.bic = bic;
-    }
-    public String getBic() {
-        return bic;
-    }
-    
-   
-    public void setBankname(String bankname) {
-        this.bankname = bankname;
-    }
-    public String getBankname() {
-        return bankname;
-    }
-    
-    
-    
-    public void setKontoinhaber(String kontoinhaber) {
-        this.kontoinhaber = kontoinhaber;
-    }
-    public String getKontoinhaber() {
-        return kontoinhaber;
-    }
-    
- 
+	public void setStrasse(String strasse) {
+		this.strasse = strasse;
+	}
+
+	public String getStrasse() {
+		return strasse;
+	}
+
+	public void setHausnummer(String hausnummer) {
+		this.hausnummer = hausnummer;
+	}
+
+	public String getHausnummer() {
+		return hausnummer;
+	}
+
+	public void setPlz(String plz) {
+		this.plz = plz;
+	}
+
+	public String getPlz() {
+		return plz;
+	}
+
+	public void setOrt(String ort) {
+		this.ort = ort;
+	}
+
+	public String getOrt() {
+		return ort;
+	}
+
+	public void setLand(String land) {
+		this.land = land;
+	}
+
+	public String getLand() {
+		return land;
+	}
+
+	public void setIban(String iban) {
+		this.iban = iban;
+	}
+
+	public String getIban() {
+		return iban;
+	}
+
+	public void setBic(String bic) {
+		this.bic = bic;
+	}
+
+	public String getBic() {
+		return bic;
+	}
+
+	public void setBankname(String bankname) {
+		this.bankname = bankname;
+	}
+
+	public String getBankname() {
+		return bankname;
+	}
+
+	public void setKontoinhaber(String kontoinhaber) {
+		this.kontoinhaber = kontoinhaber;
+	}
+
+	public String getKontoinhaber() {
+		return kontoinhaber;
+	}
+
     public String senden() {
     	
         Date date = new Date();
@@ -218,61 +255,74 @@ public class RegistrierungController implements Serializable{
         bankverbindung.setLastmodified(date);
         kunde.setBankverbindungList(Arrays.asList(bankverbindung));
         
-        // verbindung zu users und groups
-        // TODO bearbeiten, harte codierung der id rausnehmen, cachen
-        // TODO allgemeine cache-strategie umsetzen
         
-        /*
-        Groups group = groupsFacade.find(0L);
-        
-        Users user = new Users();
-        user.setKunde(kunde);
-        
-        // TODO hash-algorithmus auf passwort anwenden
-        user.setPassword(passwort);
-        List<Groups> groupsList = new ArrayList<>();
-        groupsList.add(group);
-        user.setGroupsList(groupsList);
-        */
-        
+		Users2 user = new Users2();				
+		user.setUsername(name);
+		String securePassword = UtilSecurity.str2Md(passwort);	
+		System.out.println(securePassword);
+		user.setPassword(securePassword);
+//		user.setKundeid(kunde);
+
+	
+		
         kundeFacadeLocal.create(kunde);
+		user.setKundeid(kunde);
+		users2FacadeLocal.create(user);
+		
+		// ToDo Verbindung User zu UserRoles aufbauen; entsprechend UserRoles persistieren
+		//-----------------------------------------------------------------------------------
+//		user.setUserRolesList(Arrays.asList(userRoles)); 		
+//		UserRoles userRoles = new UserRoles();
+//		userRoles.setRole("Benutzer");
+//		userRoles.setUserName(benutzername);
+//		userRoles.setUserid(user);
+//		userRolesFacadeLocal.create(userRoles);
+		
+        save();
 		
         return "ok";
        
     }
-    public boolean isSkip() {
-        return skip;
-    }
- 
-    public void setSkip(boolean skip) {
-        this.skip = skip;
-    }
-    
-    public String onFlowProcess(FlowEvent event) {
-        if(skip) {
-            skip = false;   //reset in case user goes back
-            return "confirm";
-        }
-        else {
-            return event.getNewStep();
-        }
-    }
-    
-    public void save() {
-    	FacesMessage msg = new FacesMessage("Successful", "Welcome :" + getVorname());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
+	
+
+	public boolean isSkip() {
+		return skip;
+	}
+
+	public void setSkip(boolean skip) {
+		this.skip = skip;
+	}
+
+	public String onFlowProcess(FlowEvent event) {
+		if (skip) {
+			skip = false; // reset in case user goes back
+			return "confirm";
+		} else {
+			return event.getNewStep();
+		}
+	}
+
+	public void save() {
+		//FacesMessage msg = new FacesMessage("Erfolgreiche Registrierung", "Herzlichen Willkommen bei WBS Lotto :" + getVorname()+" "+getName());
+		//FacesContext.getCurrentInstance().addMessage(null, msg);
+		
+		successMessage = "Herzlich Willkommen bei WBS Lotto : " + getVorname()+" "+getName()+" !!";
+	}
+
 	public String getBenutzername() {
 		return benutzername;
 	}
+
 	public void setBenutzername(String benutzername) {
 		this.benutzername = benutzername;
 	}
+
 	public String getPasswort() {
 		return passwort;
 	}
+
 	public void setPasswort(String passwort) {
 		this.passwort = passwort;
 	}
-    
+
 }

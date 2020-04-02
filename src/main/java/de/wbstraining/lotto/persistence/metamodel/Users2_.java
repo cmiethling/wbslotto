@@ -1,12 +1,10 @@
 package de.wbstraining.lotto.persistence.metamodel;
 
 import javax.annotation.Generated;
-import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
 import de.wbstraining.lotto.persistence.model.Kunde;
-import de.wbstraining.lotto.persistence.model.UserRoles;
 import de.wbstraining.lotto.persistence.model.Users2;
 
 
