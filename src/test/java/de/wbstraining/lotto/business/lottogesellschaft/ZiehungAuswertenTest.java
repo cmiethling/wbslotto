@@ -1,5 +1,6 @@
 package de.wbstraining.lotto.business.lottogesellschaft;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,8 +24,8 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
 
 import de.wbstraining.lotto.persistence.dao.LottoscheinziehungFacadeLocal;
 import de.wbstraining.lotto.persistence.dao.SpielFacadeLocal;
@@ -37,20 +38,22 @@ import de.wbstraining.lotto.populatedb.PopulateDatabaseLocal;
 import de.wbstraining.lotto.testdatengenerierung.CZiehungTestdatenGeneratorLocal;
 import de.wbstraining.lotto.testdatengenerierung.Testdatengenerator;
 
-
 @RunWith(Arquillian.class)
 public class ZiehungAuswertenTest {
 
 	@Deployment
 	public static Archive<?> createTestArchive() {
-		return ShrinkWrap.create(WebArchive.class, "test.war")
+		WebArchive archive = ShrinkWrap.create(WebArchive.class, "test.war")
 				.addPackages(true, "de.wbstraining.lotto.persistence", "de.wbstraining.lotto.populatedb",
 						"de.wbstraining.lotto.util", "de.wbstraining.lotto.business.lottospieler",
 						"de.wbstraining.lotto.cache", "de.wbstraining.lotto.mail", "de.wbstraining.lotto.dto",
-						"de.wbstraining.lotto.business.lottogesellschaft","de.wbstraining.lotto.web.lottospieler.controller",
-						"org.primefaces.event","de.wbstraining.lotto.testdatengenerierung")
-			
+						"de.wbstraining.lotto.business.lottogesellschaft",
+						"de.wbstraining.lotto.web.lottospieler.controller", "org.primefaces.event",
+						"de.wbstraining.lotto.testdatengenerierung")
+				.addAsResource(new File("src/test/resources/testdatengenerator/testdatengenerator.xml"))
+				.addAsResource(new File("src/test/resources/testdatengenerator/testdatengenerator.xsd"))
 				.addAsResource("META-INF/persistence.xml").addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+		return archive;
 	}
 
 	@EJB
@@ -64,13 +67,13 @@ public class ZiehungAuswertenTest {
 
 	@EJB
 	private LottoscheinziehungFacadeLocal lottoscheinZiehungFacade;
-	
+
 	@EJB
 	CleanDatabaseLocal cleanDatabase;
-	
+
 	@EJB
 	PopulateDatabaseLocal populateDatabase;
-	
+
 	@EJB
 	CZiehungTestdatenGeneratorLocal cZiehungTestdatenGenerator;
 
@@ -79,12 +82,11 @@ public class ZiehungAuswertenTest {
 
 	@Test
 	public void ziehungAuswerten() throws Exception {
+
+		String schemaPath = "testdatengenerator.xsd";
+		String xmlPath = "testdatengenerator.xml";
 		
-//		String schemaPath = "../../../../resources/testdatengenerator/testdatengenerator.xsd";
-//		String xmlPath = "../../../../resources/testdatengenerator/testdatengenerator.xml";
-		String schemaPath = "D:\\tmp\\testdatengenerator.xsd";
-		String xmlPath = "D:\\tmp\\testdatengenerator.xml";
-		StreamSource schemaSource = new StreamSource(schemaPath);
+		StreamSource schemaSource = new StreamSource(getClass().getClassLoader().getResourceAsStream(schemaPath));
 		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 		Schema schema = schemaFactory.newSchema(schemaSource);
 
@@ -92,10 +94,12 @@ public class ZiehungAuswertenTest {
 
 		Unmarshaller um = context.createUnmarshaller();
 		um.setSchema(schema);
-		JAXBElement<Testdatengenerator> nodeElement = um.unmarshal(new StreamSource(xmlPath),
+		JAXBElement<Testdatengenerator> nodeElement = um.unmarshal(
+				new StreamSource(getClass().getClassLoader().getResourceAsStream(xmlPath)),
 				Testdatengenerator.class);
 		Testdatengenerator generator = nodeElement.getValue();
-				
+		System.out.println(generator.getBelegnummernStart());
+
 		cleanDatabase.cleanDatabase("mydbtest");
 		
 		populateDatabase.populateDatabase();

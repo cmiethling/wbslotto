@@ -75,7 +75,7 @@ public class CZiehungTestdatenGenerator implements CZiehungTestdatenGeneratorLoc
 		logger.log(Level.INFO, s);
 	}
 
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	// @TransactionAttribute(TransactionAttributeType.REQUIRED)
 	private void generateSchein(Date abgabeDatum, Kunde kunde, int losnummer, byte[] tipps, int kosten,
 			boolean isMittwoch, boolean isSamstag, long belegnummer, Ziehung ziehung, boolean isSpiel77,
 			boolean isSuper6) {
@@ -112,7 +112,7 @@ public class CZiehungTestdatenGenerator implements CZiehungTestdatenGeneratorLoc
 		lottoscheinziehungFacadeLocal.create(lottoscheinziehung);
 	}
 
-	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
+	// @TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	private void generateScheine6Aus49(CZiehung config, Ziehung ziehung, AtomicLong belegNr) {
 		int anzahlBloecke;
 		int anzahlRest;
@@ -131,7 +131,7 @@ public class CZiehungTestdatenGenerator implements CZiehungTestdatenGeneratorLoc
 		}
 	}
 
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	// @TransactionAttribute(TransactionAttributeType.REQUIRED)
 	private void generateScheine6Aus49Block(int gkl, CZiehung config, Ziehung ziehung, int anzahl, AtomicLong belegNr) {
 		int losnummer = TestdatenGeneratorUtil.generateLosnummer6Aus49(config.getSuperzahl(), config.getSpiel77(),
 				config.getSuper6(), gkl);
@@ -150,7 +150,7 @@ public class CZiehungTestdatenGenerator implements CZiehungTestdatenGeneratorLoc
 		}
 	}
 
-	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
+	// @TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	private void generateScheineSpiel77(CZiehung config, Ziehung ziehung, AtomicLong belegNr) {
 		int anzahlBloecke;
 		int anzahlRest;
@@ -170,7 +170,7 @@ public class CZiehungTestdatenGenerator implements CZiehungTestdatenGeneratorLoc
 		}
 	}
 
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	// @TransactionAttribute(TransactionAttributeType.REQUIRED)
 	private void generateScheineSpiel77Block(int losnummer, CZiehung config, Ziehung ziehung, int anzahl,
 			AtomicLong belegNr) {
 		byte[] tipps = TestdatenGeneratorUtil.generateTippsFuerEinenSchein(config.getZahlenAlsBits(), 0,
@@ -189,7 +189,7 @@ public class CZiehungTestdatenGenerator implements CZiehungTestdatenGeneratorLoc
 
 	}
 
-	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
+	// @TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	private void generateScheineSuper6(CZiehung config, Ziehung ziehung, AtomicLong belegNr) {
 		int anzahlBloecke;
 		int anzahlRest;
@@ -209,7 +209,7 @@ public class CZiehungTestdatenGenerator implements CZiehungTestdatenGeneratorLoc
 		}
 	}
 
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	// @TransactionAttribute(TransactionAttributeType.REQUIRED)
 	private void generateScheineSuper6Block(int losnummer, CZiehung config, Ziehung ziehung, int anzahl,
 			AtomicLong belegNr) {
 		byte[] tipps = TestdatenGeneratorUtil.generateTippsFuerEinenSchein(config.getZahlenAlsBits(), 0,
@@ -228,7 +228,7 @@ public class CZiehungTestdatenGenerator implements CZiehungTestdatenGeneratorLoc
 
 	}
 
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	// @TransactionAttribute(TransactionAttributeType.REQUIRED)
 	private Ziehung createZiehung(CZiehung config, Date ziehungsDatum) {
 		Ziehung ziehung = new Ziehung();
 		Date date = new Date();
@@ -248,7 +248,7 @@ public class CZiehungTestdatenGenerator implements CZiehungTestdatenGeneratorLoc
 	}
 
 	// generierung von testdaten für eine ziehung
-	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
+	// @TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	private void generiereTestDatenFuerEineZiehung(CZiehung config, Date datum, AtomicLong belegNr) {
 		Ziehung ziehung = createZiehung(config, datum);
 		writeLog("ziehungId: " + ziehung.getZiehungid());
@@ -259,7 +259,7 @@ public class CZiehungTestdatenGenerator implements CZiehungTestdatenGeneratorLoc
 	}
 
 	// @Asynchronous
-	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
+	// @TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@Override
 	public void generiereTestDatenFuerMehrereZiehungen(Testdatengenerator generator) {
 		long belegNummernStart = generator.belegnummernStart;
