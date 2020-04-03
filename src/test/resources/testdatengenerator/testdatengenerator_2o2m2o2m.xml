@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testdatengenerator belegnummernStart="90000000000"
+	datumErsteZiehung="2020-06-01" txBlocksize="200"
+	xmlns="http://testdatengenerierung.jpacore.wbs/lotto"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://testdatengenerierung.jpacore.wbs/lotto testdatengenerator.xsd ">
+	<!-- 2o2m2o2m >> o = ohne Gkl1,  m = mit Gkl1 >> Jackpot bei Ziehung 3, 7 
+	wobei bei Ziehung 3 Gewinn durch 2 Gewinner geteilt wird -->
+	<cZiehung spiel77="7777777" super6="666666" superzahl="1"
+		zahlenAlsBits="126" anzahlTippsProSchein="2"> 
+		<anzahl6Aus49ProGkl>
+			<anzahl>100</anzahl>  
+			<anzahl>0</anzahl>
+			<anzahl>2</anzahl>
+			<anzahl>3</anzahl>
+			<anzahl>4</anzahl>
+			<anzahl>5</anzahl>
+			<anzahl>6</anzahl>
+			<anzahl>7</anzahl>
+			<anzahl>8</anzahl>
+			<anzahl>9</anzahl>
+		</anzahl6Aus49ProGkl>
+		<anzahlSpiel77ProGkl>
+			<anzahl>100</anzahl>
+			<anzahl>1</anzahl>
+			<anzahl>2</anzahl>
+			<anzahl>3</anzahl>
+			<anzahl>4</anzahl>
+			<anzahl>5</anzahl>
+			<anzahl>6</anzahl>
+			<anzahl>7</anzahl>
+		</anzahlSpiel77ProGkl>
+		<anzahlSuper6ProGkl>
+			<anzahl>100</anzahl> 
+			<anzahl>1</anzahl>
+			<anzahl>2</anzahl>
+			<anzahl>3</anzahl>
+			<anzahl>4</anzahl>
+			<anzahl>5</anzahl>
+			<anzahl>6</anzahl>
+		</anzahlSuper6ProGkl>
+	</cZiehung>
+	
+	<cZiehung spiel77="7777777" super6="666666" superzahl="1"
+		zahlenAlsBits="126" anzahlTippsProSchein="2"> 
+		<anzahl6Aus49ProGkl>
+			
+			<anzahl>100</anzahl> 
+			
+			<anzahl>0</anzahl>
+			<anzahl>2</anzahl>
+			<anzahl>3</anzahl>
+			<anzahl>4</anzahl>
+			<anzahl>5</anzahl>
+			<anzahl>6</anzahl>
+			<anzahl>7</anzahl>
+			<anzahl>8</anzahl>
+			<anzahl>9</anzahl>
+		</anzahl6Aus49ProGkl>
+		<anzahlSpiel77ProGkl>
+			
+			<anzahl>100</anzahl> 
+			
+			<anzahl>1</anzahl>
+			<anzahl>2</anzahl>
+			<anzahl>3</anzahl>
+			<anzahl>4</anzahl>
+			<anzahl>5</anzahl>
+			<anzahl>6</anzahl>
+			<anzahl>7</anzahl>
+		</anzahlSpiel77ProGkl>
+		<anzahlSuper6ProGkl>
+			
+			<anzahl>100</anzahl> 
+			
+			<anzahl>1</anzahl>
+			<anzahl>2</anzahl>
+			<anzahl>3</anzahl>
+			<anzahl>4</anzahl>
+			<anzahl>5</anzahl>
+			<anzahl>6</anzahl>
+		</anzahlSuper6ProGkl>
+	</cZiehung>
+ 
+ 
+ <!-- 2Gewinner Gkl1!!! -->
+<cZiehung spiel77="7777777" super6="666666" superzahl="1"
+		zahlenAlsBits="126" anzahlTippsProSchein="2"> 
+		<anzahl6Aus49ProGkl>
+			
+			<anzahl>100</anzahl> 
+			
+			<anzahl>2</anzahl>
+			<anzahl>2</anzahl>
+			<anzahl>3</anzahl>
+			<anzahl>4</anzahl>
+			<anzahl>5</anzahl>
+			<anzahl>6</anzahl>
+			<anzahl>7</anzahl>
+			<anzahl>8</anzahl>
+			<anzahl>9</anzahl>
+		</anzahl6Aus49ProGkl>
+		<anzahlSpiel77ProGkl>
+			
+			<anzahl>100</anzahl> 
+			
+			<anzahl>1</anzahl>
+			<anzahl>2</anzahl>
+			<anzahl>3</anzahl>
+			<anzahl>4</anzahl>
+			<anzahl>5</anzahl>
+			<anzahl>6</anzahl>
+			<anzahl>7</anzahl>
+		</anzahlSpiel77ProGkl>
+		<anzahlSuper6ProGkl>
+			
+			<anzahl>100</anzahl> 
+			
+			<anzahl>1</anzahl>
+			<anzahl>2</anzahl>
+			<anzahl>3</anzahl>
+			<anzahl>4</anzahl>
+			<anzahl>5</anzahl>
+			<anzahl>6</anzahl>
+		</anzahlSuper6ProGkl>
+	</cZiehung>
+ 
+<cZiehung spiel77="7777777" super6="666666" superzahl="1"
+		zahlenAlsBits="126" anzahlTippsProSchein="2"> 
+		<anzahl6Aus49ProGkl>
+			
+			<anzahl>100</anzahl> 
+			
+			<anzahl>1</anzahl>
+			<anzahl>2</anzahl>
+			<anzahl>3</anzahl>
+			<anzahl>4</anzahl>
+			<anzahl>5</anzahl>
+			<anzahl>6</anzahl>
+			<anzahl>7</anzahl>
+			<anzahl>8</anzahl>
+			<anzahl>9</anzahl>
+		</anzahl6Aus49ProGkl>
+		<anzahlSpiel77ProGkl>
+			
+			<anzahl>100</anzahl> 
+			
+			<anzahl>1</anzahl>
+			<anzahl>2</anzahl>
+			<anzahl>3</anzahl>
+			<anzahl>4</anzahl>
+			<anzahl>5</anzahl>
+			<anzahl>6</anzahl>
+			<anzahl>7</anzahl>
+		</anzahlSpiel77ProGkl>
+		<anzahlSuper6ProGkl>
+			
+			<anzahl>100</anzahl> 
+			
+			<anzahl>1</anzahl>
+			<anzahl>2</anzahl>
+			<anzahl>3</anzahl>
+			<anzahl>4</anzahl>
+			<anzahl>5</anzahl>
+			<anzahl>6</anzahl>
+		</anzahlSuper6ProGkl>
+	</cZiehung>
+
+
+ 	<cZiehung spiel77="7777777" super6="666666" superzahl="1"
+		zahlenAlsBits="126" anzahlTippsProSchein="2">  
+		<anzahl6Aus49ProGkl>
+			<anzahl>100</anzahl>
+			<anzahl>0</anzahl>
+			<anzahl>2</anzahl>
+			<anzahl>3</anzahl>
+			<anzahl>4</anzahl>
+			<anzahl>5</anzahl>
+			<anzahl>6</anzahl>
+			<anzahl>7</anzahl>
+			<anzahl>8</anzahl>
+			<anzahl>9</anzahl>
+		</anzahl6Aus49ProGkl>
+		<anzahlSpiel77ProGkl>
+			<anzahl>100</anzahl> 
+			<anzahl>1</anzahl>
+			<anzahl>2</anzahl>
+			<anzahl>3</anzahl>
+			<anzahl>4</anzahl>
+			<anzahl>5</anzahl>
+			<anzahl>6</anzahl>
+			<anzahl>7</anzahl>
+		</anzahlSpiel77ProGkl>
+		<anzahlSuper6ProGkl>
+			<anzahl>100</anzahl> 
+			<anzahl>1</anzahl>
+			<anzahl>2</anzahl>
+			<anzahl>3</anzahl>
+			<anzahl>4</anzahl>
+			<anzahl>5</anzahl>
+			<anzahl>6</anzahl>
+		</anzahlSuper6ProGkl>
+	</cZiehung>
+	
+	<cZiehung spiel77="7777777" super6="666666" superzahl="1"
+		zahlenAlsBits="126" anzahlTippsProSchein="2">  
+		<anzahl6Aus49ProGkl>
+			<anzahl>100</anzahl>
+			<anzahl>0</anzahl>
+			<anzahl>2</anzahl>
+			<anzahl>3</anzahl>
+			<anzahl>4</anzahl>
+			<anzahl>5</anzahl>
+			<anzahl>6</anzahl>
+			<anzahl>7</anzahl>
+			<anzahl>8</anzahl>
+			<anzahl>9</anzahl>
+		</anzahl6Aus49ProGkl>
+		<anzahlSpiel77ProGkl>
+			<anzahl>100</anzahl> 
+			<anzahl>1</anzahl>
+			<anzahl>2</anzahl>
+			<anzahl>3</anzahl>
+			<anzahl>4</anzahl>
+			<anzahl>5</anzahl>
+			<anzahl>6</anzahl>
+			<anzahl>7</anzahl>
+		</anzahlSpiel77ProGkl>
+		<anzahlSuper6ProGkl>
+			<anzahl>100</anzahl> 
+			<anzahl>1</anzahl>
+			<anzahl>2</anzahl>
+			<anzahl>3</anzahl>
+			<anzahl>4</anzahl>
+			<anzahl>5</anzahl>
+			<anzahl>6</anzahl>
+		</anzahlSuper6ProGkl>
+	</cZiehung>
+
+<cZiehung spiel77="7777777" super6="666666" superzahl="1"
+		zahlenAlsBits="126" anzahlTippsProSchein="2"> 
+		<anzahl6Aus49ProGkl>			
+			<anzahl>100</anzahl> 
+						
+			<anzahl>1</anzahl>
+			<anzahl>2</anzahl>
+			<anzahl>3</anzahl>
+			<anzahl>4</anzahl>
+			<anzahl>5</anzahl>
+			<anzahl>6</anzahl>
+			<anzahl>7</anzahl>
+			<anzahl>8</anzahl>
+			<anzahl>9</anzahl>
+		</anzahl6Aus49ProGkl>
+		<anzahlSpiel77ProGkl>
+			
+			<anzahl>100</anzahl> 
+			
+			<anzahl>1</anzahl>
+			<anzahl>2</anzahl>
+			<anzahl>3</anzahl>
+			<anzahl>4</anzahl>
+			<anzahl>5</anzahl>
+			<anzahl>6</anzahl>
+			<anzahl>7</anzahl>
+		</anzahlSpiel77ProGkl>
+		<anzahlSuper6ProGkl>
+			
+			<anzahl>100</anzahl> 
+			
+			<anzahl>1</anzahl>
+			<anzahl>2</anzahl>
+			<anzahl>3</anzahl>
+			<anzahl>4</anzahl>
+			<anzahl>5</anzahl>
+			<anzahl>6</anzahl>
+		</anzahlSuper6ProGkl>
+	</cZiehung>
+ 
+<cZiehung spiel77="7777777" super6="666666" superzahl="1"
+		zahlenAlsBits="126" anzahlTippsProSchein="2"> 
+		<anzahl6Aus49ProGkl>
+			
+			<anzahl>100</anzahl> 
+			
+			<anzahl>1</anzahl>
+			<anzahl>2</anzahl>
+			<anzahl>3</anzahl>
+			<anzahl>4</anzahl>
+			<anzahl>5</anzahl>
+			<anzahl>6</anzahl>
+			<anzahl>7</anzahl>
+			<anzahl>8</anzahl>
+			<anzahl>9</anzahl>
+		</anzahl6Aus49ProGkl>
+		<anzahlSpiel77ProGkl>
+			
+			<anzahl>100</anzahl> 
+			
+			<anzahl>1</anzahl>
+			<anzahl>2</anzahl>
+			<anzahl>3</anzahl>
+			<anzahl>4</anzahl>
+			<anzahl>5</anzahl>
+			<anzahl>6</anzahl>
+			<anzahl>7</anzahl>
+		</anzahlSpiel77ProGkl>
+		<anzahlSuper6ProGkl>
+			
+			<anzahl>100</anzahl> 
+			
+			<anzahl>1</anzahl>
+			<anzahl>2</anzahl>
+			<anzahl>3</anzahl>
+			<anzahl>4</anzahl>
+			<anzahl>5</anzahl>
+			<anzahl>6</anzahl>
+		</anzahlSuper6ProGkl>
+	</cZiehung>
+	
+
+</testdatengenerator>
