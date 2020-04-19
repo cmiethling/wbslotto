@@ -23,13 +23,13 @@ public class LottozahlenEingebenController implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private int zahl;
 	private String zahlen;
 
 	private int tipp;
 	private int tipps;
-	
+
 	private String tipp1;
 	private String tipp2;
 	private String tipp3;
@@ -55,7 +55,7 @@ public class LottozahlenEingebenController implements Serializable {
 	private String radioBtn10Class = "radioButton";
 	private String radioBtn11Class = "radioButton";
 	private String radioBtn12Class = "radioButton";
-	
+
 	private int isValid1;
 	private int isValid2;
 	private int isValid3;
@@ -81,7 +81,7 @@ public class LottozahlenEingebenController implements Serializable {
 	private String valid10Class;
 	private String valid11Class;
 	private String valid12Class;
-	
+
 	private String btn1Class = "buttonGray";
 	private String btn2Class = "buttonGray";
 	private String btn3Class = "buttonGray";
@@ -139,156 +139,276 @@ public class LottozahlenEingebenController implements Serializable {
 	}
 
 	public String delete(int i) {
-		return "ok";
+		return "ok2";
 	}
-	
+
 	public void setZahlen() {
-		btn[1] = 0; btn1Class = "buttonGray";		
-		btn[2] = 0; btn2Class = "buttonGray";
-		btn[3] = 0; btn3Class = "buttonGray";
-		btn[4] = 0; btn4Class = "buttonGray";
-		btn[5] = 0; btn5Class = "buttonGray";
-		btn[6] = 0; btn6Class = "buttonGray";
-		btn[7] = 0; btn7Class = "buttonGray";
-		btn[8] = 0; btn8Class = "buttonGray";
-		btn[9] = 0; btn9Class = "buttonGray";
-		btn[10] = 0; btn10Class = "buttonGray";
-		btn[11] = 0; btn11Class = "buttonGray";
-		btn[12] = 0; btn12Class = "buttonGray";
-		btn[13] = 0; btn13Class = "buttonGray";
-		btn[14] = 0; btn14Class = "buttonGray";
-		btn[15] = 0; btn15Class = "buttonGray";
-		btn[16] = 0; btn16Class = "buttonGray";
-		btn[17] = 0; btn17Class = "buttonGray";
-		btn[18] = 0; btn18Class = "buttonGray";
-		btn[19] = 0; btn19Class = "buttonGray";
-		btn[20] = 0; btn20Class = "buttonGray";
-		btn[21] = 0; btn21Class = "buttonGray";
-		btn[22] = 0; btn22Class = "buttonGray";
-		btn[23] = 0; btn23Class = "buttonGray";
-		btn[24] = 0; btn24Class = "buttonGray";
-		btn[25] = 0; btn25Class = "buttonGray";
-		btn[26] = 0; btn26Class = "buttonGray";
-		btn[27] = 0; btn27Class = "buttonGray";
-		btn[28] = 0; btn28Class = "buttonGray";
-		btn[29] = 0; btn29Class = "buttonGray";
-		btn[30] = 0; btn30Class = "buttonGray";
-		btn[31] = 0; btn31Class = "buttonGray";
-		btn[32] = 0; btn32Class = "buttonGray";
-		btn[33] = 0; btn33Class = "buttonGray";
-		btn[34] = 0; btn34Class = "buttonGray";
-		btn[35] = 0; btn35Class = "buttonGray";
-		btn[36] = 0; btn36Class = "buttonGray";
-		btn[37] = 0; btn37Class = "buttonGray";
-		btn[38] = 0; btn38Class = "buttonGray";
-		btn[39] = 0; btn39Class = "buttonGray";
-		btn[40] = 0; btn40Class = "buttonGray";
-		btn[41] = 0; btn41Class = "buttonGray";
-		btn[42] = 0; btn42Class = "buttonGray";
-		btn[43] = 0; btn43Class = "buttonGray";
-		btn[44] = 0; btn44Class = "buttonGray";
-		btn[45] = 0; btn45Class = "buttonGray";
-		btn[46] = 0; btn46Class = "buttonGray";
-		btn[47] = 0; btn47Class = "buttonGray";
-		btn[48] = 0; btn48Class = "buttonGray";
-		btn[49] = 0; btn49Class = "buttonGray";
+		btn[1] = 0;
+		btn1Class = "buttonGray";
+		btn[2] = 0;
+		btn2Class = "buttonGray";
+		btn[3] = 0;
+		btn3Class = "buttonGray";
+		btn[4] = 0;
+		btn4Class = "buttonGray";
+		btn[5] = 0;
+		btn5Class = "buttonGray";
+		btn[6] = 0;
+		btn6Class = "buttonGray";
+		btn[7] = 0;
+		btn7Class = "buttonGray";
+		btn[8] = 0;
+		btn8Class = "buttonGray";
+		btn[9] = 0;
+		btn9Class = "buttonGray";
+		btn[10] = 0;
+		btn10Class = "buttonGray";
+		btn[11] = 0;
+		btn11Class = "buttonGray";
+		btn[12] = 0;
+		btn12Class = "buttonGray";
+		btn[13] = 0;
+		btn13Class = "buttonGray";
+		btn[14] = 0;
+		btn14Class = "buttonGray";
+		btn[15] = 0;
+		btn15Class = "buttonGray";
+		btn[16] = 0;
+		btn16Class = "buttonGray";
+		btn[17] = 0;
+		btn17Class = "buttonGray";
+		btn[18] = 0;
+		btn18Class = "buttonGray";
+		btn[19] = 0;
+		btn19Class = "buttonGray";
+		btn[20] = 0;
+		btn20Class = "buttonGray";
+		btn[21] = 0;
+		btn21Class = "buttonGray";
+		btn[22] = 0;
+		btn22Class = "buttonGray";
+		btn[23] = 0;
+		btn23Class = "buttonGray";
+		btn[24] = 0;
+		btn24Class = "buttonGray";
+		btn[25] = 0;
+		btn25Class = "buttonGray";
+		btn[26] = 0;
+		btn26Class = "buttonGray";
+		btn[27] = 0;
+		btn27Class = "buttonGray";
+		btn[28] = 0;
+		btn28Class = "buttonGray";
+		btn[29] = 0;
+		btn29Class = "buttonGray";
+		btn[30] = 0;
+		btn30Class = "buttonGray";
+		btn[31] = 0;
+		btn31Class = "buttonGray";
+		btn[32] = 0;
+		btn32Class = "buttonGray";
+		btn[33] = 0;
+		btn33Class = "buttonGray";
+		btn[34] = 0;
+		btn34Class = "buttonGray";
+		btn[35] = 0;
+		btn35Class = "buttonGray";
+		btn[36] = 0;
+		btn36Class = "buttonGray";
+		btn[37] = 0;
+		btn37Class = "buttonGray";
+		btn[38] = 0;
+		btn38Class = "buttonGray";
+		btn[39] = 0;
+		btn39Class = "buttonGray";
+		btn[40] = 0;
+		btn40Class = "buttonGray";
+		btn[41] = 0;
+		btn41Class = "buttonGray";
+		btn[42] = 0;
+		btn42Class = "buttonGray";
+		btn[43] = 0;
+		btn43Class = "buttonGray";
+		btn[44] = 0;
+		btn44Class = "buttonGray";
+		btn[45] = 0;
+		btn45Class = "buttonGray";
+		btn[46] = 0;
+		btn46Class = "buttonGray";
+		btn[47] = 0;
+		btn47Class = "buttonGray";
+		btn[48] = 0;
+		btn48Class = "buttonGray";
+		btn[49] = 0;
+		btn49Class = "buttonGray";
 
 		int i;
 		int count = 0;
 		String[] items = zahlen.split(" ");
-		
-		for(String s : items) {
+
+		for (String s : items) {
 			try {
-				if (!s.equals(""))
-				{	
+				if (!s.equals("")) {
 					i = Integer.parseInt(s);
 					if ((i > 0) && (i < 50)) {
 						btn[i] = 1;
 						count++;
 					}
 				}
+			} catch (Exception e) {
 			}
-			catch (Exception e) {
-			}
-			
+
 			if (count == 6)
 				break;
 		}
 	}
-	
 
 	public String select(int i) {
 		if (tipp > 0) {
-			radioBtn1Class = "radioButton";	
-			radioBtn2Class = "radioButton";	
-			radioBtn3Class = "radioButton";	
-			radioBtn4Class = "radioButton";	
-			radioBtn5Class = "radioButton";	
-			radioBtn6Class = "radioButton";	
-			radioBtn7Class = "radioButton";	
-			radioBtn8Class = "radioButton";	
-			radioBtn9Class = "radioButton";	
-			radioBtn10Class = "radioButton";	
-			radioBtn11Class = "radioButton";	
-			radioBtn12Class = "radioButton";	
+			radioBtn1Class = "radioButton";
+			radioBtn2Class = "radioButton";
+			radioBtn3Class = "radioButton";
+			radioBtn4Class = "radioButton";
+			radioBtn5Class = "radioButton";
+			radioBtn6Class = "radioButton";
+			radioBtn7Class = "radioButton";
+			radioBtn8Class = "radioButton";
+			radioBtn9Class = "radioButton";
+			radioBtn10Class = "radioButton";
+			radioBtn11Class = "radioButton";
+			radioBtn12Class = "radioButton";
 			switch (tipp) {
-				case 1: zahlen = tipp1; break;
-				case 2: zahlen = tipp2; break;
-				case 3: zahlen = tipp3; break;
-				case 4: zahlen = tipp4; break;
-				case 5: zahlen = tipp5; break;
-				case 6: zahlen = tipp6; break;
-				case 7: zahlen = tipp7; break;
-				case 8: zahlen = tipp8; break;
-				case 9: zahlen = tipp9; break;
-				case 10: zahlen = tipp10; break;
-				case 11: zahlen = tipp11; break;
-				case 12: zahlen = tipp12; break;
+			case 1:
+				zahlen = tipp1;
+				break;
+			case 2:
+				zahlen = tipp2;
+				break;
+			case 3:
+				zahlen = tipp3;
+				break;
+			case 4:
+				zahlen = tipp4;
+				break;
+			case 5:
+				zahlen = tipp5;
+				break;
+			case 6:
+				zahlen = tipp6;
+				break;
+			case 7:
+				zahlen = tipp7;
+				break;
+			case 8:
+				zahlen = tipp8;
+				break;
+			case 9:
+				zahlen = tipp9;
+				break;
+			case 10:
+				zahlen = tipp10;
+				break;
+			case 11:
+				zahlen = tipp11;
+				break;
+			case 12:
+				zahlen = tipp12;
+				break;
 			}
-			if (zahlen == null) zahlen = "";
+			if (zahlen == null)
+				zahlen = "";
 			setZahlen();
 			checkZahlen();
 		}
 
 		tipp = i;
 		switch (tipp) {
-			case 1: zahlen = tipp1; radioBtn1Class = "radioButtonSelected"; break;
-			case 2: zahlen = tipp2; radioBtn2Class = "radioButtonSelected"; break;
-			case 3: zahlen = tipp3; radioBtn3Class = "radioButtonSelected"; break;
-			case 4: zahlen = tipp4; radioBtn4Class = "radioButtonSelected"; break;
-			case 5: zahlen = tipp5; radioBtn5Class = "radioButtonSelected"; break;
-			case 6: zahlen = tipp6; radioBtn6Class = "radioButtonSelected"; break;
-			case 7: zahlen = tipp7; radioBtn7Class = "radioButtonSelected"; break;
-			case 8: zahlen = tipp8; radioBtn8Class = "radioButtonSelected"; break;
-			case 9: zahlen = tipp9; radioBtn9Class = "radioButtonSelected"; break;
-			case 10: zahlen = tipp10; radioBtn10Class = "radioButtonSelected"; break;
-			case 11: zahlen = tipp11; radioBtn11Class = "radioButtonSelected"; break;
-			case 12: zahlen = tipp12; radioBtn12Class = "radioButtonSelected"; break;
+		case 1:
+			zahlen = tipp1;
+			radioBtn1Class = "radioButtonSelected";
+			break;
+		case 2:
+			zahlen = tipp2;
+			radioBtn2Class = "radioButtonSelected";
+			break;
+		case 3:
+			zahlen = tipp3;
+			radioBtn3Class = "radioButtonSelected";
+			break;
+		case 4:
+			zahlen = tipp4;
+			radioBtn4Class = "radioButtonSelected";
+			break;
+		case 5:
+			zahlen = tipp5;
+			radioBtn5Class = "radioButtonSelected";
+			break;
+		case 6:
+			zahlen = tipp6;
+			radioBtn6Class = "radioButtonSelected";
+			break;
+		case 7:
+			zahlen = tipp7;
+			radioBtn7Class = "radioButtonSelected";
+			break;
+		case 8:
+			zahlen = tipp8;
+			radioBtn8Class = "radioButtonSelected";
+			break;
+		case 9:
+			zahlen = tipp9;
+			radioBtn9Class = "radioButtonSelected";
+			break;
+		case 10:
+			zahlen = tipp10;
+			radioBtn10Class = "radioButtonSelected";
+			break;
+		case 11:
+			zahlen = tipp11;
+			radioBtn11Class = "radioButtonSelected";
+			break;
+		case 12:
+			zahlen = tipp12;
+			radioBtn12Class = "radioButtonSelected";
+			break;
 		}
-		
-		if (zahlen == null) zahlen = "";
+
+		if (zahlen == null)
+			zahlen = "";
 		setZahlen();
 		checkZahlen();
-		return "ok";
+		return "ok2";
 	}
-	
+
 	public int checkTipps() {
 		tipps = 0;
-		if (isValid1 == 2) tipps++;
-		if (isValid2 == 2) tipps++;
-		if (isValid3 == 2) tipps++;
-		if (isValid4 == 2) tipps++;
-		if (isValid5 == 2) tipps++;
-		if (isValid6 == 2) tipps++;
-		if (isValid7 == 2) tipps++;
-		if (isValid8 == 2) tipps++;
-		if (isValid9 == 2) tipps++;
-		if (isValid10 == 2) tipps++;
-		if (isValid11 == 2) tipps++;
-		if (isValid12 == 2) tipps++;
+		if (isValid1 == 2)
+			tipps++;
+		if (isValid2 == 2)
+			tipps++;
+		if (isValid3 == 2)
+			tipps++;
+		if (isValid4 == 2)
+			tipps++;
+		if (isValid5 == 2)
+			tipps++;
+		if (isValid6 == 2)
+			tipps++;
+		if (isValid7 == 2)
+			tipps++;
+		if (isValid8 == 2)
+			tipps++;
+		if (isValid9 == 2)
+			tipps++;
+		if (isValid10 == 2)
+			tipps++;
+		if (isValid11 == 2)
+			tipps++;
+		if (isValid12 == 2)
+			tipps++;
 		return tipps;
 	}
-	
+
 	public void checkZahlen() {
 		int isValid;
 		String validClass;
@@ -296,91 +416,380 @@ public class LottozahlenEingebenController implements Serializable {
 		zahlen = "";
 		for (int i = 1; i < 50; i++) {
 			switch (i) {
-				case 1:  if (btn[i] == 1) {zahlen = zahlen + i + " "; btn1Class = "buttonYellow";} break;
-				case 2:  if (btn[i] == 1) {zahlen = zahlen + i + " "; btn2Class = "buttonYellow";} break;
-				case 3:  if (btn[i] == 1) {zahlen = zahlen + i + " "; btn3Class = "buttonYellow";} break;
-				case 4:  if (btn[i] == 1) {zahlen = zahlen + i + " "; btn4Class = "buttonYellow";} break;
-				case 5:  if (btn[i] == 1) {zahlen = zahlen + i + " "; btn5Class = "buttonYellow";} break;
-				case 6:  if (btn[i] == 1) {zahlen = zahlen + i + " "; btn6Class = "buttonYellow";} break;
-				case 7:  if (btn[i] == 1) {zahlen = zahlen + i + " "; btn7Class = "buttonYellow";} break;
-				case 8:  if (btn[i] == 1) {zahlen = zahlen + i + " "; btn8Class = "buttonYellow";} break;
-				case 9:  if (btn[i] == 1) {zahlen = zahlen + i + " "; btn9Class = "buttonYellow";} break;
-				case 10: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn10Class = "buttonYellow";} break;
-				case 11: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn11Class = "buttonYellow";} break;
-				case 12: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn12Class = "buttonYellow";} break;
-				case 13: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn13Class = "buttonYellow";} break;
-				case 14: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn14Class = "buttonYellow";} break;
-				case 15: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn15Class = "buttonYellow";} break;
-				case 16: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn16Class = "buttonYellow";} break;
-				case 17: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn17Class = "buttonYellow";} break;
-				case 18: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn18Class = "buttonYellow";} break;
-				case 19: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn19Class = "buttonYellow";} break;
-				case 20: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn20Class = "buttonYellow";} break;
-				case 21: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn21Class = "buttonYellow";} break;
-				case 22: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn22Class = "buttonYellow";} break;
-				case 23: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn23Class = "buttonYellow";} break;
-				case 24: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn24Class = "buttonYellow";} break;
-				case 25: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn25Class = "buttonYellow";} break;
-				case 26: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn26Class = "buttonYellow";} break;
-				case 27: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn27Class = "buttonYellow";} break;
-				case 28: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn28Class = "buttonYellow";} break;
-				case 29: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn29Class = "buttonYellow";} break;
-				case 30: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn30Class = "buttonYellow";} break;
-				case 31: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn31Class = "buttonYellow";} break;
-				case 32: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn32Class = "buttonYellow";} break;
-				case 33: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn33Class = "buttonYellow";} break;
-				case 34: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn34Class = "buttonYellow";} break;
-				case 35: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn35Class = "buttonYellow";} break;
-				case 36: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn36Class = "buttonYellow";} break;
-				case 37: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn37Class = "buttonYellow";} break;
-				case 38: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn38Class = "buttonYellow";} break;
-				case 39: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn39Class = "buttonYellow";} break;
-				case 40: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn40Class = "buttonYellow";} break;
-				case 41: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn41Class = "buttonYellow";} break;
-				case 42: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn42Class = "buttonYellow";} break;
-				case 43: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn43Class = "buttonYellow";} break;
-				case 44: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn44Class = "buttonYellow";} break;
-				case 45: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn45Class = "buttonYellow";} break;
-				case 46: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn46Class = "buttonYellow";} break;
-				case 47: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn47Class = "buttonYellow";} break;
-				case 48: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn48Class = "buttonYellow";} break;
-				case 49: if (btn[i] == 1) {zahlen = zahlen + i + " "; btn49Class = "buttonYellow";} break;
+			case 1:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn1Class = "buttonYellow";
+				}
+				break;
+			case 2:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn2Class = "buttonYellow";
+				}
+				break;
+			case 3:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn3Class = "buttonYellow";
+				}
+				break;
+			case 4:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn4Class = "buttonYellow";
+				}
+				break;
+			case 5:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn5Class = "buttonYellow";
+				}
+				break;
+			case 6:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn6Class = "buttonYellow";
+				}
+				break;
+			case 7:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn7Class = "buttonYellow";
+				}
+				break;
+			case 8:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn8Class = "buttonYellow";
+				}
+				break;
+			case 9:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn9Class = "buttonYellow";
+				}
+				break;
+			case 10:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn10Class = "buttonYellow";
+				}
+				break;
+			case 11:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn11Class = "buttonYellow";
+				}
+				break;
+			case 12:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn12Class = "buttonYellow";
+				}
+				break;
+			case 13:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn13Class = "buttonYellow";
+				}
+				break;
+			case 14:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn14Class = "buttonYellow";
+				}
+				break;
+			case 15:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn15Class = "buttonYellow";
+				}
+				break;
+			case 16:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn16Class = "buttonYellow";
+				}
+				break;
+			case 17:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn17Class = "buttonYellow";
+				}
+				break;
+			case 18:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn18Class = "buttonYellow";
+				}
+				break;
+			case 19:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn19Class = "buttonYellow";
+				}
+				break;
+			case 20:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn20Class = "buttonYellow";
+				}
+				break;
+			case 21:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn21Class = "buttonYellow";
+				}
+				break;
+			case 22:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn22Class = "buttonYellow";
+				}
+				break;
+			case 23:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn23Class = "buttonYellow";
+				}
+				break;
+			case 24:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn24Class = "buttonYellow";
+				}
+				break;
+			case 25:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn25Class = "buttonYellow";
+				}
+				break;
+			case 26:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn26Class = "buttonYellow";
+				}
+				break;
+			case 27:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn27Class = "buttonYellow";
+				}
+				break;
+			case 28:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn28Class = "buttonYellow";
+				}
+				break;
+			case 29:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn29Class = "buttonYellow";
+				}
+				break;
+			case 30:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn30Class = "buttonYellow";
+				}
+				break;
+			case 31:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn31Class = "buttonYellow";
+				}
+				break;
+			case 32:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn32Class = "buttonYellow";
+				}
+				break;
+			case 33:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn33Class = "buttonYellow";
+				}
+				break;
+			case 34:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn34Class = "buttonYellow";
+				}
+				break;
+			case 35:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn35Class = "buttonYellow";
+				}
+				break;
+			case 36:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn36Class = "buttonYellow";
+				}
+				break;
+			case 37:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn37Class = "buttonYellow";
+				}
+				break;
+			case 38:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn38Class = "buttonYellow";
+				}
+				break;
+			case 39:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn39Class = "buttonYellow";
+				}
+				break;
+			case 40:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn40Class = "buttonYellow";
+				}
+				break;
+			case 41:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn41Class = "buttonYellow";
+				}
+				break;
+			case 42:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn42Class = "buttonYellow";
+				}
+				break;
+			case 43:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn43Class = "buttonYellow";
+				}
+				break;
+			case 44:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn44Class = "buttonYellow";
+				}
+				break;
+			case 45:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn45Class = "buttonYellow";
+				}
+				break;
+			case 46:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn46Class = "buttonYellow";
+				}
+				break;
+			case 47:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn47Class = "buttonYellow";
+				}
+				break;
+			case 48:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn48Class = "buttonYellow";
+				}
+				break;
+			case 49:
+				if (btn[i] == 1) {
+					zahlen = zahlen + i + " ";
+					btn49Class = "buttonYellow";
+				}
+				break;
 			}
 		}
-		
+
 		String[] items = zahlen.split(" ");
 		if (zahlen.isEmpty()) {
 			isValid = 0;
 			validClass = "";
-		}
-		else if (items.length == 6) {
-			
+		} else if (items.length == 6) {
+
 			isValid = 2;
 			validClass = "labelGreen";
-		}
-		else
-		{
+		} else {
 			isValid = 1;
 			validClass = "labelRed";
 		}
 
 		switch (tipp) {
-			case 1: tipp1 = zahlen; isValid1 = isValid; valid1Class = validClass; break;
-			case 2: tipp2 = zahlen; isValid2 = isValid; valid2Class = validClass; break;
-			case 3: tipp3 = zahlen; isValid3 = isValid; valid3Class = validClass; break;
-			case 4: tipp4 = zahlen; isValid4 = isValid; valid4Class = validClass; break;
-			case 5: tipp5 = zahlen; isValid5 = isValid; valid5Class = validClass; break;
-			case 6: tipp6 = zahlen; isValid6 = isValid; valid6Class = validClass; break;
-			case 7: tipp7 = zahlen; isValid7 = isValid; valid7Class = validClass; break;
-			case 8: tipp8 = zahlen; isValid8 = isValid; valid8Class = validClass; break;
-			case 9: tipp9 = zahlen; isValid9 = isValid; valid9Class = validClass; break;
-			case 10: tipp10 = zahlen; isValid10 = isValid; valid10Class = validClass; break;
-			case 11: tipp11 = zahlen; isValid11 = isValid; valid11Class = validClass; break;
-			case 12: tipp12 = zahlen; isValid12 = isValid; valid12Class = validClass; break;
+		case 1:
+			tipp1 = zahlen;
+			isValid1 = isValid;
+			valid1Class = validClass;
+			break;
+		case 2:
+			tipp2 = zahlen;
+			isValid2 = isValid;
+			valid2Class = validClass;
+			break;
+		case 3:
+			tipp3 = zahlen;
+			isValid3 = isValid;
+			valid3Class = validClass;
+			break;
+		case 4:
+			tipp4 = zahlen;
+			isValid4 = isValid;
+			valid4Class = validClass;
+			break;
+		case 5:
+			tipp5 = zahlen;
+			isValid5 = isValid;
+			valid5Class = validClass;
+			break;
+		case 6:
+			tipp6 = zahlen;
+			isValid6 = isValid;
+			valid6Class = validClass;
+			break;
+		case 7:
+			tipp7 = zahlen;
+			isValid7 = isValid;
+			valid7Class = validClass;
+			break;
+		case 8:
+			tipp8 = zahlen;
+			isValid8 = isValid;
+			valid8Class = validClass;
+			break;
+		case 9:
+			tipp9 = zahlen;
+			isValid9 = isValid;
+			valid9Class = validClass;
+			break;
+		case 10:
+			tipp10 = zahlen;
+			isValid10 = isValid;
+			valid10Class = validClass;
+			break;
+		case 11:
+			tipp11 = zahlen;
+			isValid11 = isValid;
+			valid11Class = validClass;
+			break;
+		case 12:
+			tipp12 = zahlen;
+			isValid12 = isValid;
+			valid12Class = validClass;
+			break;
 		}
-	
-	}
 
+	}
 
 	public String buttonSenden(int i) {
 		boolean found = false;
@@ -390,18 +799,42 @@ public class LottozahlenEingebenController implements Serializable {
 			radioBtn1Class = "radioButtonSelected";
 		}
 		switch (tipp) {
-			case 1: zahlen = tipp1; break;
-			case 2: zahlen = tipp2; break;
-			case 3: zahlen = tipp3; break;
-			case 4: zahlen = tipp4; break;
-			case 5: zahlen = tipp5; break;
-			case 6: zahlen = tipp6; break;
-			case 7: zahlen = tipp7; break;
-			case 8: zahlen = tipp8; break;
-			case 9: zahlen = tipp9; break;
-			case 10: zahlen = tipp10; break;
-			case 11: zahlen = tipp11; break;
-			case 12: zahlen = tipp12; break;
+		case 1:
+			zahlen = tipp1;
+			break;
+		case 2:
+			zahlen = tipp2;
+			break;
+		case 3:
+			zahlen = tipp3;
+			break;
+		case 4:
+			zahlen = tipp4;
+			break;
+		case 5:
+			zahlen = tipp5;
+			break;
+		case 6:
+			zahlen = tipp6;
+			break;
+		case 7:
+			zahlen = tipp7;
+			break;
+		case 8:
+			zahlen = tipp8;
+			break;
+		case 9:
+			zahlen = tipp9;
+			break;
+		case 10:
+			zahlen = tipp10;
+			break;
+		case 11:
+			zahlen = tipp11;
+			break;
+		case 12:
+			zahlen = tipp12;
+			break;
 		}
 
 		setZahlen();
@@ -410,21 +843,19 @@ public class LottozahlenEingebenController implements Serializable {
 		if (zahlen == null)
 			zahlen = "";
 		else {
-		
+
 			String[] items = zahlen.split(" ");
-			if (items.length > 1)
-			{
+			if (items.length > 1) {
 				for (int j = 0; j < items.length; j++) {
-				    set.add(items[j]);
-				    try {
-				    	if (Integer.parseInt(items[j]) == i)
-				    		found = true;
-				    }
-				    catch (Exception e) {
-				    }
+					set.add(items[j]);
+					try {
+						if (Integer.parseInt(items[j]) == i)
+							found = true;
+					} catch (Exception e) {
+					}
 				}
 			}
-			    
+
 			if ((set.size() < 6) || (found == true)) {
 				btn[i] = (btn[i] + 1) % 2;
 			}
@@ -432,7 +863,7 @@ public class LottozahlenEingebenController implements Serializable {
 		checkZahlen();
 		checkTipps();
 
-		return "ok";
+		return "ok2";
 	}
 
 	public int getZahl() {
@@ -1242,6 +1673,7 @@ public class LottozahlenEingebenController implements Serializable {
 	public void setBtn(int[] btn) {
 		this.btn = btn;
 	}
+
 	public int getTipps() {
 		return tipps;
 	}
@@ -1250,5 +1682,4 @@ public class LottozahlenEingebenController implements Serializable {
 		this.tipps = tipps;
 	}
 
-	
 }

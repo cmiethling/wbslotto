@@ -69,6 +69,6 @@
 
      -->
     <welcome-file-list>
-        <welcome-file>index.faces</welcome-file>
+       	<welcome-file>user/startseite.faces</welcome-file>
     </welcome-file-list>
 </web-app>
