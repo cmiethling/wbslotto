@@ -18,10 +18,10 @@ import org.junit.Test;
 
 public class LottoDatum8UtilTest {
 
-	final int ziehungszeitMi = 18;
+	final int ziehungszeitMi = 18; // Standardzeit
 	final int ziehungszeitSa = 15;
 	final LocalDate so = LocalDate.of(2020, 03, 1); // So 18Uhr
-	final LocalTime abgabeschluss = LocalTime.of(ziehungszeitMi, 0);
+	final LocalTime abgSchluMi = LocalTime.of(ziehungszeitMi, 0);
 	final LocalTime abgSchluSa = LocalTime.of(ziehungszeitSa, 0);
 	final int laufzeit = 3;
 
@@ -29,17 +29,20 @@ public class LottoDatum8UtilTest {
 	public void naechsterZiehungstagRichtig() {
 
 		List<LocalDateTime> abgaben = Arrays.asList(
-			LocalDateTime.of(so, abgabeschluss), // So
-			LocalDateTime.of(so.plusDays(3), abgabeschluss.minusHours(1)), // Mi 17Uhr
-			LocalDateTime.of(so.plusDays(3), abgabeschluss), // Mi 18Uhr
-			LocalDateTime.of(so.plusDays(6), abgabeschluss.minusHours(1)), // Sa 17Uhr
-			LocalDateTime.of(so.plusDays(6), abgabeschluss)); // Sa 18Uhr
+			LocalDateTime.of(so, abgSchluMi), // So
+			LocalDateTime.of(so.plusDays(3), abgSchluMi.minusHours(1)), // Mi 17Uhr
+			LocalDateTime.of(so.plusDays(3), abgSchluMi.plusHours(1)), // Mi 18Uhr
+			LocalDateTime.of(so.plusDays(4), abgSchluMi), // Do 18Uhr
+			LocalDateTime.of(so.plusDays(5), abgSchluMi), // Fr 18Uhr
+			LocalDateTime.of(so.plusDays(6), abgSchluMi.minusHours(1)), // Sa 17Uhr
+			LocalDateTime.of(so.plusDays(6), abgSchluMi)); // Sa 18Uhr
 
+		LocalDate sa200307 = LocalDate.of(2020, 03, 07);
 		List<LocalDate> ziehungsDatums = Arrays.asList(
-			// Mi (fuer So, Mi)
+			// Mi (fuer So, Mi17Uhr)
 			LocalDate.of(2020, 03, 04), LocalDate.of(2020, 03, 04),
-			// Sa (fuer Mi18Uhr, Sa)
-			LocalDate.of(2020, 03, 07), LocalDate.of(2020, 03, 07),
+			// Sa (fuer Mi18Uhr, Do, Fr, Sa)
+			sa200307, sa200307, sa200307, sa200307,
 			// Mi fuer Sa 18Uhr
 			LocalDate.of(2020, 03, 11));
 
@@ -55,9 +58,9 @@ public class LottoDatum8UtilTest {
 	public void ersterZiehungstagRichtig() {
 
 		List<LocalDateTime> abgaben = Arrays.asList(
-			LocalDateTime.of(so, abgabeschluss), // So
-			LocalDateTime.of(so.plusDays(3), abgabeschluss.minusHours(1)), // Mi 17Uhr
-			LocalDateTime.of(so.plusDays(3), abgabeschluss), // Mi 18Uhr
+			LocalDateTime.of(so, abgSchluMi), // So
+			LocalDateTime.of(so.plusDays(3), abgSchluMi.minusHours(1)), // Mi 17Uhr
+			LocalDateTime.of(so.plusDays(3), abgSchluMi), // Mi 18Uhr
 			LocalDateTime.of(so.plusDays(6), abgSchluSa.minusHours(1)), // Sa 14Uhr
 			LocalDateTime.of(so.plusDays(6), abgSchluSa)); // Sa 15Uhr
 
@@ -81,12 +84,19 @@ public class LottoDatum8UtilTest {
 			});
 	}
 
+	@Test // fuer Coverage
+	public void ersterZiehungstagNurMittwochRichtig() {
+		assertTrue(so.plusDays(3) // Mi 18Uhr
+			.equals(ersterZiehungstag(so.plusDays(3), abgSchluMi.minusHours(2), true,
+				false, ziehungszeitMi, ziehungszeitSa)));
+	}
+
 	@Test
 	public void ersterZiehungstagAllExc() {
 //	@formatter:off		
 //	isMittwoch + isSamstag
 		try {
-			ersterZiehungstag(so, abgabeschluss, false, false, ziehungszeitMi,
+			ersterZiehungstag(so, abgSchluMi, false, false, ziehungszeitMi,
 				ziehungszeitSa).toString();
 			fail("isMittwoch und isSamstag failed...");
 		} catch (IllegalArgumentException e) {
@@ -94,21 +104,21 @@ public class LottoDatum8UtilTest {
 		}
 //	abgabeschlussMi
 		try {
-			ersterZiehungstag(so, abgabeschluss, true, true, -1, ziehungszeitSa);
+			ersterZiehungstag(so, abgSchluMi, true, true, -1, ziehungszeitSa);
 			fail("abgabeschlussMi -1 failed...");
 		} catch (IllegalArgumentException e) {}
 		try {
-			ersterZiehungstag(so, abgabeschluss, true, true, 25, ziehungszeitSa);
+			ersterZiehungstag(so, abgSchluMi, true, true, 25, ziehungszeitSa);
 			fail("abgabeschlussMi 25 failed...");
 		} catch (IllegalArgumentException e) {}
 		
 //	abgabeschlussSa
 		try {
-			ersterZiehungstag(so, abgabeschluss, true, true, ziehungszeitMi, -1);
+			ersterZiehungstag(so, abgSchluMi, true, true, ziehungszeitMi, -1);
 			fail("abgabeschlussSa -1 failed...");
 		} catch (IllegalArgumentException e) {}
 		try {
-			ersterZiehungstag(so, abgabeschluss, true, true, ziehungszeitMi, 25);
+			ersterZiehungstag(so, abgSchluMi, true, true, ziehungszeitMi, 25);
 			fail("abgabeschlussSa 25 failed...");
 		} catch (IllegalArgumentException e) {}
 //	@formatter:on
@@ -125,7 +135,7 @@ public class LottoDatum8UtilTest {
 			LocalDate.of(2020, 03, 18), LocalDate.of(2020, 03, 21));
 
 		assertEquals(ziehungenSaMi3Wo, // ..... 12 Uhr
-			ziehungsTage(so, abgabeschluss.minusHours(6), true, true, ziehungszeitMi,
+			ziehungsTage(so, abgSchluMi.minusHours(6), true, true, ziehungszeitMi,
 				ziehungszeitSa, laufzeit));
 
 //		
@@ -136,7 +146,7 @@ public class LottoDatum8UtilTest {
 			LocalDate.of(2020, 03, 25), // Wo4
 			LocalDate.of(2020, 04, 01));// Wo5
 
-		assertEquals(ziehungenMi5Wo, ziehungsTage(so, abgabeschluss.minusHours(6),
+		assertEquals(ziehungenMi5Wo, ziehungsTage(so, abgSchluMi.minusHours(6),
 			true, false, ziehungszeitMi, ziehungszeitSa, 5));
 
 //		
@@ -144,7 +154,7 @@ public class LottoDatum8UtilTest {
 			LocalDate.of(2020, 03, 07), // Wo1
 			LocalDate.of(2020, 03, 14)); // Wo2
 
-		assertEquals(ziehungenSa2Wo, ziehungsTage(so, abgabeschluss.minusHours(6),
+		assertEquals(ziehungenSa2Wo, ziehungsTage(so, abgSchluMi.minusHours(6),
 			false, true, ziehungszeitMi, ziehungszeitSa, 2));
 	}
 
@@ -153,20 +163,20 @@ public class LottoDatum8UtilTest {
 //	@formatter:off
 //		abgabeschlussMi
 		try {
-			ziehungsTage(so, abgabeschluss, true, true, -1, ziehungszeitSa, laufzeit);
+			ziehungsTage(so, abgSchluMi, true, true, -1, ziehungszeitSa, laufzeit);
 			fail("adgabeschlussMi -1 failed...");
 		} catch (IllegalArgumentException e) {}
 		try {
-			ziehungsTage(so, abgabeschluss, true, true, 25, ziehungszeitSa, laufzeit);
+			ziehungsTage(so, abgSchluMi, true, true, 25, ziehungszeitSa, laufzeit);
 			fail("adgabeschlussMi 25 failed...");
 		} catch (IllegalArgumentException e) {}
 //		abgabeschlussSa
 		try {
-			ziehungsTage(so, abgabeschluss, true, true, ziehungszeitMi, -1, laufzeit);
+			ziehungsTage(so, abgSchluMi, true, true, ziehungszeitMi, -1, laufzeit);
 			fail("adgabeschlussSa -1 failed...");
 		} catch (IllegalArgumentException e) {}
 		try {
-			ziehungsTage(so, abgabeschluss, true, true, ziehungszeitMi, 25, laufzeit);
+			ziehungsTage(so, abgSchluMi, true, true, ziehungszeitMi, 25, laufzeit);
 			fail("adgabeschlussSa 25 failed...");
 		} catch (IllegalArgumentException e) {}
 //		@formatter:on
@@ -174,13 +184,12 @@ public class LottoDatum8UtilTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void ziehungsTageLaufzeitIllArgExc() {
-		ziehungsTage(so, abgabeschluss, true, true, ziehungszeitMi, ziehungszeitSa,
-			0);
+		ziehungsTage(so, abgSchluMi, true, true, ziehungszeitMi, ziehungszeitSa, 0);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void ziehungsTageIsMiIsSaIllArgExc() {
-		ziehungsTage(so, abgabeschluss, false, false, ziehungszeitMi,
-			ziehungszeitSa, laufzeit);
+		ziehungsTage(so, abgSchluMi, false, false, ziehungszeitMi, ziehungszeitSa,
+			laufzeit);
 	}
 }

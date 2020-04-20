@@ -25,7 +25,7 @@ public final class LottoDatum8Util {
 			return mittwochUndSamstag(abgabe, abgabeschlussMittwoch,
 				abgabeschlussSamstag);
 		} else if (isMittwoch) {
-			return nurEinTag(abgabe, abgabeschlussSamstag, DayOfWeek.WEDNESDAY);
+			return nurEinTag(abgabe, abgabeschlussMittwoch, DayOfWeek.WEDNESDAY);
 		} else {
 			return nurEinTag(abgabe, abgabeschlussSamstag, DayOfWeek.SATURDAY);
 		}
