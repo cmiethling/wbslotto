@@ -6,8 +6,8 @@
 package de.wbstraining.lotto.persistence.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -19,10 +19,9 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import de.wbstraining.lotto.persistence.util.LocalDateAttributeConverter;
 import de.wbstraining.lotto.persistence.util.LocalDateTimeAttributeConverter;
 
 /**
@@ -68,11 +67,11 @@ public class Gebuehr implements Serializable {
 	@Column(name = "einsatzsuper6")
 	private int einsatzsuper6;
 	@Column(name = "gueltigab")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date gueltigab;
+	@Convert(converter = LocalDateAttributeConverter.class)
+	private LocalDate gueltigab;
 	@Column(name = "gueltigbis")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date gueltigbis;
+	@Convert(converter = LocalDateAttributeConverter.class)
+	private LocalDate gueltigbis;
 	@Basic(optional = false)
 	@NotNull
 	@Column(name = "created")
@@ -146,19 +145,19 @@ public class Gebuehr implements Serializable {
 		this.einsatzsuper6 = einsatzsuper6;
 	}
 
-	public Date getGueltigab() {
+	public LocalDate getGueltigab() {
 		return gueltigab;
 	}
 
-	public void setGueltigab(Date gueltigab) {
+	public void setGueltigab(LocalDate gueltigab) {
 		this.gueltigab = gueltigab;
 	}
 
-	public Date getGueltigbis() {
+	public LocalDate getGueltigbis() {
 		return gueltigbis;
 	}
 
-	public void setGueltigbis(Date gueltigbis) {
+	public void setGueltigbis(LocalDate gueltigbis) {
 		this.gueltigbis = gueltigbis;
 	}
 

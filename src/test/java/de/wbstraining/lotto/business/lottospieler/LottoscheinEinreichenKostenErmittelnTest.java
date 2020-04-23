@@ -3,7 +3,7 @@ package de.wbstraining.lotto.business.lottospieler;
 import static org.junit.Assert.assertEquals;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.ejb.EJB;
 
@@ -64,11 +64,11 @@ public class LottoscheinEinreichenKostenErmittelnTest {
 		//
 		// Total: 6260
 		// ----------------------------------------------------------------------------------
-		Date now = java.sql.Date.valueOf(LocalDate.now());
-		Date gueltigAb = java.sql.Date.valueOf(LocalDate.now()
-			.minusYears(1));
-		Date gueltigBis = java.sql.Date.valueOf(LocalDate.now()
-			.plusYears(1));
+		LocalDateTime now = LocalDateTime.now();
+		LocalDate gueltigAb = now.minusYears(1)
+			.toLocalDate();
+		LocalDate gueltigBis = now.plusYears(1)
+			.toLocalDate();
 
 		Gebuehr gebuehr = new Gebuehr();
 
@@ -80,8 +80,8 @@ public class LottoscheinEinreichenKostenErmittelnTest {
 		gebuehr.setEinsatzsuper6(125);
 		gebuehr.setGueltigab(gueltigAb);
 		gebuehr.setGueltigbis(gueltigBis);
-		gebuehr.setCreated(LottoDatum8Util.Date2LocalDateTime(now));
-		gebuehr.setLastmodified(LottoDatum8Util.Date2LocalDateTime(now));
+		gebuehr.setCreated(now);
+		gebuehr.setLastmodified(now);
 
 		gebuehrFacade.create(gebuehr);
 
@@ -100,7 +100,7 @@ public class LottoscheinEinreichenKostenErmittelnTest {
 		int kostenActual;
 
 		KostenDto dto = new KostenDto();
-		dto.setAbgabeDatum(now);
+		dto.setAbgabeDatum(LottoDatum8Util.localDate2Date(now.toLocalDate()));
 		dto.setAnzahlTipps(anzahlTipps);
 		dto.setLaufzeit(laufzeit);
 		dto.setMittwoch(isMittwoch);
