@@ -200,7 +200,7 @@ public class KostenErmitteln implements KostenErmittelnLocal {
 	@Override
 	public Gebuehr findGebuehrForSpielTag(List<Gebuehr> gebuehren,
 		Date spielTag) {
-		LocalDate tmp = LottoDatum8Util.Date2LocalDate(spielTag);
+		LocalDate tmp = LottoDatum8Util.date2LocalDate(spielTag);
 		Optional<Gebuehr> optGebuerForSpielTag = gebuehren.stream()
 			.filter(g -> g.getGueltigbis()
 				.isAfter(tmp))

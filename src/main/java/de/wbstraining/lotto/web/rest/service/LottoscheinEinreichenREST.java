@@ -1,7 +1,7 @@
 package de.wbstraining.lotto.web.rest.service;
 
 import java.math.BigInteger;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -19,46 +19,49 @@ import de.wbstraining.lotto.util.LottoUtil;
 @Stateless
 @Path("/einreichen")
 public class LottoscheinEinreichenREST {
-	
+
 	@EJB
 	private LottoscheinEinreichenLocal lottoscheinEinreichen;
-	
+
 	@EJB
 	private KundeFacadeLocal kundeFacade;
-	
+
 	// hilfsmethode zur generierung eins xml-descriptors
 	// der parameter id wird ignoriert...
 	// aufruf mit ausgabeumlenkung
 	// kann dann wieder weggeworfen werden...
 	/*
-	@GET
-	@Path("{id}")
-	@Produces({ "application/xml", "application/json" })
-	public LottoscheinEinreichenDto einreichen() {
-		LottoscheinEinreichenDto dto = new LottoscheinEinreichenDto();
-		dto.setAbgabeDatum(new Date());
-		dto.setKundeid(1L);
-		dto.setMittwoch(true);
-		dto.setSamstag(true);
-		dto.setSpiel77(true);
-		dto.setSuper6(true);
-		dto.setLaufzeit(5);
-		byte[] tipps = LottoUtil.randomTippsAsByteArray(6);
-		dto.setTippsBase64(LottoUtil.encodeTippsBase64(tipps));
-		return dto;
-	}
-	*/
-	
+	 * @GET
+	 * 
+	 * @Path("{id}")
+	 * 
+	 * @Produces({ "application/xml", "application/json" })
+	 * public LottoscheinEinreichenDto einreichen() {
+	 * LottoscheinEinreichenDto dto = new LottoscheinEinreichenDto();
+	 * dto.setAbgabeDatum(new Date());
+	 * dto.setKundeid(1L);
+	 * dto.setMittwoch(true);
+	 * dto.setSamstag(true);
+	 * dto.setSpiel77(true);
+	 * dto.setSuper6(true);
+	 * dto.setLaufzeit(5);
+	 * byte[] tipps = LottoUtil.randomTippsAsByteArray(6);
+	 * dto.setTippsBase64(LottoUtil.encodeTippsBase64(tipps));
+	 * return dto;
+	 * }
+	 */
+
 	@PUT
 	@Consumes({ "application/xml", "application/json" })
 	public void einreichen(LottoscheinEinreichenDto dto) {
-		Date date = new Date();
+		LocalDateTime date = LocalDateTime.now();
 		Long kundid = dto.getKundeid();
 		Kunde kunde = kundeFacade.find(kundid);
 		Lottoschein schein = new Lottoschein();
 		schein.setKundeid(kunde);
 		schein.setAbgabedatum(dto.getAbgabeDatum());
-		schein.setBelegnummer((BigInteger.valueOf((long) (Math.random() * 100_000_000_000L))));
+		schein.setBelegnummer(
+			(BigInteger.valueOf((long) (Math.random() * 100_000_000_000L))));
 		schein.setCreated(date);
 		schein.setLastmodified(date);
 		schein.setIsabgeschlossen(Boolean.FALSE);

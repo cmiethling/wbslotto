@@ -3,6 +3,7 @@ package de.wbstraining.lotto.populatedb;
 import java.math.BigInteger;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,11 +25,13 @@ import de.wbstraining.lotto.persistence.model.Kunde;
 import de.wbstraining.lotto.persistence.model.Lottoschein;
 import de.wbstraining.lotto.persistence.model.Lottoscheinziehung;
 import de.wbstraining.lotto.persistence.model.Ziehung;
+import de.wbstraining.lotto.util.LottoDatum8Util;
 import de.wbstraining.lotto.util.LottoDatumUtil;
 import de.wbstraining.lotto.util.LottoUtil;
 
 @Stateless
-public class PopulateZiehungUndLottoschein implements PopulateZiehungUndLottoscheinLocal {
+public class PopulateZiehungUndLottoschein
+	implements PopulateZiehungUndLottoscheinLocal {
 
 	// injections
 
@@ -62,7 +65,8 @@ public class PopulateZiehungUndLottoschein implements PopulateZiehungUndLottosch
 	public void populateZiehungUndLottoschein() {
 
 		// ziehungen erzeugen und cache aufbauen
-		List<Date> dates = LottoDatumUtil.ziehungsTage(new Date(), true, true, 18, 19, 20);
+		List<Date> dates = LottoDatumUtil.ziehungsTage(new Date(), true, true, 18,
+			19, 20);
 		LocalDate ziehungsDatumAsLocalDate;
 		Ziehung ziehung;
 		Kunde kunde;
@@ -85,7 +89,8 @@ public class PopulateZiehungUndLottoschein implements PopulateZiehungUndLottosch
 		for (int n = 0; n < anzahlZiehungen; n++) {
 			for (int m = 0; m < anzahlLottoscheineProZiehung; m++) {
 				kunde = randomKunde();
-				lottoschein = createLottoschein(kunde, ziehungen.get(n).getZiehungsdatum());
+				lottoschein = createLottoschein(kunde, ziehungen.get(n)
+					.getZiehungsdatum());
 				lottoscheinEinreichen(lottoschein);
 			}
 		}
@@ -96,12 +101,14 @@ public class PopulateZiehungUndLottoschein implements PopulateZiehungUndLottosch
 	}
 
 	private LocalDate date2LocalDate(Date datum) {
-		return Instant.ofEpochMilli(datum.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+		return Instant.ofEpochMilli(datum.getTime())
+			.atZone(ZoneId.systemDefault())
+			.toLocalDate();
 	}
 
 	private Ziehung createZiehung(Date ziehungsDatum) {
 
-		Date aktuellesDatum = new Date();
+		LocalDateTime aktuellesDatum = LocalDateTime.now();
 		Ziehung ziehung = new Ziehung();
 
 		ziehung.setEinsatzlotto(BigInteger.ZERO);
@@ -121,11 +128,12 @@ public class PopulateZiehungUndLottoschein implements PopulateZiehungUndLottosch
 
 	private Lottoschein createLottoschein(Kunde kunde, Date abgabeDatum) {
 		Lottoschein schein = new Lottoschein();
-		Date datum = new Date();
+		LocalDateTime datum = LocalDateTime.now();
 		boolean isMittwoch = random.nextBoolean();
 		schein.setKundeid(kunde);
 		schein.setAbgabedatum(abgabeDatum);
-		schein.setBelegnummer(BigInteger.valueOf((long) (Math.random() * 1_000_000_000)));
+		schein.setBelegnummer(
+			BigInteger.valueOf((long) (Math.random() * 1_000_000_000)));
 		schein.setCreated(datum);
 		schein.setLastmodified(datum);
 		schein.setIsabgeschlossen(Boolean.FALSE);
@@ -133,10 +141,12 @@ public class PopulateZiehungUndLottoschein implements PopulateZiehungUndLottosch
 		schein.setIssuper6(random.nextBoolean());
 		schein.setLaufzeit(laufzeiten[random.nextInt(laufzeiten.length)]);
 		schein.setKosten(0);
-		schein.setLosnummer(10_000_000 + ThreadLocalRandom.current().nextInt(90_000_000));
+		schein.setLosnummer(10_000_000 + ThreadLocalRandom.current()
+			.nextInt(90_000_000));
 		schein.setIsmittwoch(isMittwoch);
 		schein.setIssamstag(!isMittwoch ? true : random.nextBoolean());
-		schein.setTipps(LottoUtil.randomTippsAsByteArray(ThreadLocalRandom.current().nextInt(12) + 1));
+		schein.setTipps(LottoUtil.randomTippsAsByteArray(ThreadLocalRandom.current()
+			.nextInt(12) + 1));
 		return schein;
 	}
 
@@ -146,9 +156,10 @@ public class PopulateZiehungUndLottoschein implements PopulateZiehungUndLottosch
 		Date datum = new Date();
 		List<Date> dateList;
 		lottoscheinFacade.create(schein);
-		dateList = LottoDatumUtil.ziehungsTage(schein.getAbgabedatum(), schein.getIsmittwoch(), schein.getIssamstag(),
-				18, 19, schein.getLaufzeit());
-		int nr = 1; 
+		dateList = LottoDatumUtil.ziehungsTage(schein.getAbgabedatum(),
+			schein.getIsmittwoch(), schein.getIssamstag(), 18, 19,
+			schein.getLaufzeit());
+		int nr = 1;
 		for (Date date : dateList) {
 			ziehung = ziehungenByDate.get(date2LocalDate(date));
 			lottoscheinziehung = new Lottoscheinziehung();
@@ -159,8 +170,9 @@ public class PopulateZiehungUndLottoschein implements PopulateZiehungUndLottosch
 			lottoscheinziehung.setGewinnklasseidsuper6(null);
 			lottoscheinziehung.setIsabgeschlossen(false);
 			lottoscheinziehung.setIsletzteziehung(nr == (dateList.size()));
-			lottoscheinziehung.setCreated(datum);
-			lottoscheinziehung.setLastmodified(datum);
+			lottoscheinziehung.setCreated(LottoDatum8Util.Date2LocalDateTime(datum));
+			lottoscheinziehung
+				.setLastmodified(LottoDatum8Util.Date2LocalDateTime(datum));
 			lottoscheinziehungFacade.create(lottoscheinziehung);
 			nr++;
 		}

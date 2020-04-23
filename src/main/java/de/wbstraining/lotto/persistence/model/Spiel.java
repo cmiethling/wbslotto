@@ -6,11 +6,13 @@
 package de.wbstraining.lotto.persistence.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,10 +21,10 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import de.wbstraining.lotto.persistence.util.LocalDateTimeAttributeConverter;
 
 /**
  *
@@ -31,152 +33,156 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "spiel")
 @NamedQueries({
-    @NamedQuery(name = "Spiel.findAll", query = "SELECT s FROM Spiel s"),
-    @NamedQuery(name = "Spiel.findBySpielid", query = "SELECT s FROM Spiel s WHERE s.spielid = :spielid"),
-    @NamedQuery(name = "Spiel.findByName", query = "SELECT s FROM Spiel s WHERE s.name = :name"),
-    @NamedQuery(name = "Spiel.findByBeschreibung", query = "SELECT s FROM Spiel s WHERE s.beschreibung = :beschreibung"),
-    @NamedQuery(name = "Spiel.findByPfadanleitung", query = "SELECT s FROM Spiel s WHERE s.pfadanleitung = :pfadanleitung"),
-    @NamedQuery(name = "Spiel.findByCreated", query = "SELECT s FROM Spiel s WHERE s.created = :created"),
-    @NamedQuery(name = "Spiel.findByLastmodified", query = "SELECT s FROM Spiel s WHERE s.lastmodified = :lastmodified"),
-    @NamedQuery(name = "Spiel.findByVersion", query = "SELECT s FROM Spiel s WHERE s.version = :version")})
+	@NamedQuery(name = "Spiel.findAll", query = "SELECT s FROM Spiel s"),
+	@NamedQuery(name = "Spiel.findBySpielid", query = "SELECT s FROM Spiel s WHERE s.spielid = :spielid"),
+	@NamedQuery(name = "Spiel.findByName", query = "SELECT s FROM Spiel s WHERE s.name = :name"),
+	@NamedQuery(name = "Spiel.findByBeschreibung", query = "SELECT s FROM Spiel s WHERE s.beschreibung = :beschreibung"),
+	@NamedQuery(name = "Spiel.findByPfadanleitung", query = "SELECT s FROM Spiel s WHERE s.pfadanleitung = :pfadanleitung"),
+	@NamedQuery(name = "Spiel.findByCreated", query = "SELECT s FROM Spiel s WHERE s.created = :created"),
+	@NamedQuery(name = "Spiel.findByLastmodified", query = "SELECT s FROM Spiel s WHERE s.lastmodified = :lastmodified"),
+	@NamedQuery(name = "Spiel.findByVersion", query = "SELECT s FROM Spiel s WHERE s.version = :version") })
 public class Spiel implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "spielid")
-    private Long spielid;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "name")
-    private String name;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 1023)
-    @Column(name = "beschreibung")
-    private String beschreibung;
-    @Size(max = 255)
-    @Column(name = "pfadanleitung")
-    private String pfadanleitung;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "created")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date created;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "lastmodified")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastmodified;
-    @Column(name = "version")
-    private Integer version;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "spielid")
-    private List<Gewinnklasse> gewinnklasseList;
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Basic(optional = false)
+	@Column(name = "spielid")
+	private Long spielid;
+	@Basic(optional = false)
+	@NotNull
+	@Size(min = 1, max = 255)
+	@Column(name = "name")
+	private String name;
+	@Basic(optional = false)
+	@NotNull
+	@Size(min = 1, max = 1023)
+	@Column(name = "beschreibung")
+	private String beschreibung;
+	@Size(max = 255)
+	@Column(name = "pfadanleitung")
+	private String pfadanleitung;
+	@Basic(optional = false)
+	@NotNull
+	@Column(name = "created")
+	@Convert(converter = LocalDateTimeAttributeConverter.class)
+	private LocalDateTime created;
+	@Basic(optional = false)
+	@NotNull
+	@Column(name = "lastmodified")
+	@Convert(converter = LocalDateTimeAttributeConverter.class)
+	private LocalDateTime lastmodified;
 
-    public Spiel() {
-    }
+	@Column(name = "version")
+	private Integer version;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "spielid")
+	private List<Gewinnklasse> gewinnklasseList;
 
-    public Spiel(Long spielid) {
-        this.spielid = spielid;
-    }
+	public Spiel() {
+	}
 
-    public Spiel(Long spielid, String name, String beschreibung, Date created, Date lastmodified) {
-        this.spielid = spielid;
-        this.name = name;
-        this.beschreibung = beschreibung;
-        this.created = created;
-        this.lastmodified = lastmodified;
-    }
+	public Spiel(Long spielid) {
+		this.spielid = spielid;
+	}
 
-    public Long getSpielid() {
-        return spielid;
-    }
+	public Spiel(Long spielid, String name, String beschreibung,
+		LocalDateTime created, LocalDateTime lastmodified) {
+		this.spielid = spielid;
+		this.name = name;
+		this.beschreibung = beschreibung;
+		this.created = created;
+		this.lastmodified = lastmodified;
+	}
 
-    public void setSpielid(Long spielid) {
-        this.spielid = spielid;
-    }
+	public Long getSpielid() {
+		return spielid;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setSpielid(Long spielid) {
+		this.spielid = spielid;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getBeschreibung() {
-        return beschreibung;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setBeschreibung(String beschreibung) {
-        this.beschreibung = beschreibung;
-    }
+	public String getBeschreibung() {
+		return beschreibung;
+	}
 
-    public String getPfadanleitung() {
-        return pfadanleitung;
-    }
+	public void setBeschreibung(String beschreibung) {
+		this.beschreibung = beschreibung;
+	}
 
-    public void setPfadanleitung(String pfadanleitung) {
-        this.pfadanleitung = pfadanleitung;
-    }
+	public String getPfadanleitung() {
+		return pfadanleitung;
+	}
 
-    public Date getCreated() {
-        return created;
-    }
+	public void setPfadanleitung(String pfadanleitung) {
+		this.pfadanleitung = pfadanleitung;
+	}
 
-    public void setCreated(Date created) {
-        this.created = created;
-    }
+	public LocalDateTime getCreated() {
+		return created;
+	}
 
-    public Date getLastmodified() {
-        return lastmodified;
-    }
+	public void setCreated(LocalDateTime created) {
+		this.created = created;
+	}
 
-    public void setLastmodified(Date lastmodified) {
-        this.lastmodified = lastmodified;
-    }
+	public LocalDateTime getLastmodified() {
+		return lastmodified;
+	}
 
-    public Integer getVersion() {
-        return version;
-    }
+	public void setLastmodified(LocalDateTime lastmodified) {
+		this.lastmodified = lastmodified;
+	}
 
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
+	public Integer getVersion() {
+		return version;
+	}
 
-    public List<Gewinnklasse> getGewinnklasseList() {
-        return gewinnklasseList;
-    }
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
 
-    public void setGewinnklasseList(List<Gewinnklasse> gewinnklasseList) {
-        this.gewinnklasseList = gewinnklasseList;
-    }
+	public List<Gewinnklasse> getGewinnklasseList() {
+		return gewinnklasseList;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (spielid != null ? spielid.hashCode() : 0);
-        return hash;
-    }
+	public void setGewinnklasseList(List<Gewinnklasse> gewinnklasseList) {
+		this.gewinnklasseList = gewinnklasseList;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Spiel)) {
-            return false;
-        }
-        Spiel other = (Spiel) object;
-        if ((this.spielid == null && other.spielid != null) || (this.spielid != null && !this.spielid.equals(other.spielid))) {
-            return false;
-        }
-        return true;
-    }
+	@Override
+	public int hashCode() {
+		int hash = 0;
+		hash += (spielid != null ? spielid.hashCode() : 0);
+		return hash;
+	}
 
-    @Override
-    public String toString() {
-        return "wbs.corejpa.persistence.Spiel[ spielid=" + spielid + " ]";
-    }
-    
+	@Override
+	public boolean equals(Object object) {
+		// TODO: Warning - this method won't work in the case the id fields are not
+		// set
+		if (!(object instanceof Spiel)) {
+			return false;
+		}
+		Spiel other = (Spiel) object;
+		if ((this.spielid == null && other.spielid != null)
+			|| (this.spielid != null && !this.spielid.equals(other.spielid))) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "wbs.corejpa.persistence.Spiel[ spielid=" + spielid + " ]";
+	}
+
 }

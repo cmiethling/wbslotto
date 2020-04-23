@@ -65,8 +65,8 @@ public final class LottoDatum8Util {
 		return ziehungsTage;
 	}
 
-//	Converter Meths
-//	Im code: localDate2Date(, date2LocalDate(
+//############## Converter Meths ############################
+//	Im code: localDate2Date(, date2LocalDate(, date2LocalDateTime(
 	public static Date localDate2Date(LocalDate locDate) {
 		return locDate == null ? null : Date.valueOf(locDate);
 	}

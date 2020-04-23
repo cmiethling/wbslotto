@@ -93,7 +93,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 
 	private long einsatzSpiel77;
 	private long einsatzLotto;
-	private Date jetzt;
+	private LocalDateTime jetzt;
 // Value: anzGewinner dieser Gewinnklasse
 	private ConcurrentMap<Gewinnklasse, Integer> anzGewinnerProKlasse;
 
@@ -109,7 +109,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 
 //	############### Konstruktor ###############
 	public ZiehungAuswerten() {
-		jetzt = new Date();
+		jetzt = LocalDateTime.now();
 		anzSpiel77 = new AtomicInteger();
 		anzSuper6 = new AtomicInteger();
 		summeAnzahlTipps = new AtomicInteger();
@@ -749,7 +749,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 
     // Preparation Jackpot. "Templ" is "Tamplate"
     // ==================
-    Date jpTemplDate = new Date();
+    LocalDateTime jpTemplDate = LocalDateTime.now();
     Jackpot jackpotToPersist = new Jackpot();
     jackpotToPersist.setCreated(jpTemplDate);
     jackpotToPersist.setZiehungid(ziehung);
@@ -1029,6 +1029,6 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 		// mit anzGewinner=0 initialisieren
 		anzGewinnerProKlasse = gewinnklassen.stream()
 			.collect(Collectors.toConcurrentMap(gkl -> gkl, gkl -> 0));
-		jetzt = new Date();
+		jetzt = LocalDateTime.now();
 	}
 }

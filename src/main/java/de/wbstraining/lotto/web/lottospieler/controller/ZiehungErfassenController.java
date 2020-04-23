@@ -6,6 +6,7 @@
 package de.wbstraining.lotto.web.lottospieler.controller;
 
 import java.math.BigInteger;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -24,7 +25,6 @@ import javax.validation.constraints.Pattern;
 import de.wbstraining.lotto.persistence.dao.ZiehungFacadeLocal;
 import de.wbstraining.lotto.persistence.model.Ziehung;
 
-
 /**
  *
  * @author gz1
@@ -34,43 +34,43 @@ import de.wbstraining.lotto.persistence.model.Ziehung;
 @Named
 public class ZiehungErfassenController {
 
-    @EJB
-    private ZiehungFacadeLocal ziehungFacadeLocal;
+	@EJB
+	private ZiehungFacadeLocal ziehungFacadeLocal;
 
-    private Date ziehungsDatum;
-    private String zahlenAlsBits;
-    @Min(1)
-    @Max(9)
-    private int superzahl;
-    @Pattern(regexp="\\d{7}")
-    private String spiel77;
-    @Pattern(regexp="\\d{6}")
-    private String super6;
+	private Date ziehungsDatum;
+	private String zahlenAlsBits;
+	@Min(1)
+	@Max(9)
+	private int superzahl;
+	@Pattern(regexp = "\\d{7}")
+	private String spiel77;
+	@Pattern(regexp = "\\d{6}")
+	private String super6;
 
-    public String senden() {
+	public String senden() {
 
-        Ziehung ziehung = new Ziehung();
+		Ziehung ziehung = new Ziehung();
 
-        Date date = new Date();
-        ziehung.setEinsatzlotto(BigInteger.ZERO);
-        ziehung.setEinsatzspiel77(BigInteger.ZERO);
-        ziehung.setEinsatzsuper6(BigInteger.ZERO);
-        ziehung.setSpiel77(Integer.parseInt(spiel77));
-        ziehung.setSuper6(Integer.parseInt(super6));
-        ziehung.setSuperzahl(superzahl);
-        ziehung.setZahlenalsbits(BigInteger.valueOf(convertToLong(zahlenAlsBits)));
-        ziehung.setStatus(0);
-        ziehung.setZiehungsdatum(ziehungsDatum);
-        ziehung.setCreated(date);
-        ziehung.setLastmodified(date);
+		LocalDateTime date = LocalDateTime.now();
+		ziehung.setEinsatzlotto(BigInteger.ZERO);
+		ziehung.setEinsatzspiel77(BigInteger.ZERO);
+		ziehung.setEinsatzsuper6(BigInteger.ZERO);
+		ziehung.setSpiel77(Integer.parseInt(spiel77));
+		ziehung.setSuper6(Integer.parseInt(super6));
+		ziehung.setSuperzahl(superzahl);
+		ziehung.setZahlenalsbits(BigInteger.valueOf(convertToLong(zahlenAlsBits)));
+		ziehung.setStatus(0);
+		ziehung.setZiehungsdatum(ziehungsDatum);
+		ziehung.setCreated(date);
+		ziehung.setLastmodified(date);
 
-        ziehungFacadeLocal.create(ziehung);
-        
-        return "ok";
-    }
-    
-    private long convertToLong(String zahlenAlsString) {
-    	long zahlenAlsLong = 0;
+		ziehungFacadeLocal.create(ziehung);
+
+		return "ok";
+	}
+
+	private long convertToLong(String zahlenAlsString) {
+		long zahlenAlsLong = 0;
 		boolean isOk = true;
 		String[] tokens = zahlenAlsString.split(",");
 		if (tokens.length == 6) {
@@ -85,63 +85,68 @@ public class ZiehungErfassenController {
 			isOk = false;
 		}
 		if (isOk) {
-			if (Long.bitCount(zahlenAlsLong) != 6 || Long.highestOneBit(zahlenAlsLong) > (1L << 49)
-					|| zahlenAlsLong % 2 == 1 || zahlenAlsLong < 0) {
+			if (Long.bitCount(zahlenAlsLong) != 6
+				|| Long.highestOneBit(zahlenAlsLong) > (1L << 49)
+				|| zahlenAlsLong % 2 == 1 || zahlenAlsLong < 0) {
 				isOk = false;
 			}
 		}
 		return isOk ? zahlenAlsLong : -1;
-    }
-    
-    public void validate(FacesContext context, UIComponent component, Object obj) throws ValidatorException {
-    	String zahlenAlsString = (String) obj;
+	}
+
+	public void validate(FacesContext context, UIComponent component, Object obj)
+		throws ValidatorException {
+		String zahlenAlsString = (String) obj;
 		long zahlenAlsLong = convertToLong(zahlenAlsString);
 		if (zahlenAlsLong < 0) {
-			Locale locale = FacesContext.getCurrentInstance().getViewRoot().getLocale();
-			String msg = ResourceBundle.getBundle("messages", locale).getString("errZiehungszahlen");
+			Locale locale = FacesContext.getCurrentInstance()
+				.getViewRoot()
+				.getLocale();
+			String msg = ResourceBundle.getBundle("messages", locale)
+				.getString("errZiehungszahlen");
 			FacesMessage message = new FacesMessage(msg);
 			throw new ValidatorException(message);
 		}
 
 	}
 
-    public Date getZiehungsDatum() {
-        return ziehungsDatum;
-    }
+	public Date getZiehungsDatum() {
+		return ziehungsDatum;
+	}
 
-    public void setZiehungsDatum(Date ziehungsDatum) {
-        this.ziehungsDatum = ziehungsDatum;
-    }
+	public void setZiehungsDatum(Date ziehungsDatum) {
+		this.ziehungsDatum = ziehungsDatum;
+	}
 
-    public String getZahlenAlsBits() {
-        return zahlenAlsBits;
-    }
+	public String getZahlenAlsBits() {
+		return zahlenAlsBits;
+	}
 
-    public void setZahlenAlsBits(String zahlenAlsBits) {
-        this.zahlenAlsBits = zahlenAlsBits;
-    }
+	public void setZahlenAlsBits(String zahlenAlsBits) {
+		this.zahlenAlsBits = zahlenAlsBits;
+	}
 
-    public int getSuperzahl() {
-        return superzahl;
-    }
+	public int getSuperzahl() {
+		return superzahl;
+	}
 
-    public void setSuperzahl(int superzahl) {
-        this.superzahl = superzahl;
-    }
+	public void setSuperzahl(int superzahl) {
+		this.superzahl = superzahl;
+	}
 
-    public String getSpiel77() {
-        return spiel77;
-    }
+	public String getSpiel77() {
+		return spiel77;
+	}
 
-    public void setSpiel77(String spiel77) {
-        this.spiel77 = spiel77;
-    }
+	public void setSpiel77(String spiel77) {
+		this.spiel77 = spiel77;
+	}
 
-    public String getSuper6() {
-        return super6;
-    }
+	public String getSuper6() {
+		return super6;
+	}
 
-    public void setSuper6(String super6) {
-        this.super6 = super6;
-    }
+	public void setSuper6(String super6) {
+		this.super6 = super6;
+	}
 }
