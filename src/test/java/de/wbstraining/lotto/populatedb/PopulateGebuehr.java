@@ -14,8 +14,7 @@ import javax.ejb.Stateless;
 
 import de.wbstraining.lotto.persistence.dao.GebuehrFacadeLocal;
 import de.wbstraining.lotto.persistence.model.Gebuehr;
-
-
+import de.wbstraining.lotto.util.LottoDatum8Util;
 
 /**
  *
@@ -24,22 +23,23 @@ import de.wbstraining.lotto.persistence.model.Gebuehr;
 @Stateless
 public class PopulateGebuehr implements PopulateGebuehrLocal {
 
-    @EJB
-    private GebuehrFacadeLocal gebuehrFacadeLocal;
-    
-    @Override
-    public void populateGebuehr() {
-        Date date = new Date();
-        GregorianCalendar cal = new GregorianCalendar(2022, Calendar.DECEMBER, 31);
-        Gebuehr gebuehr = new Gebuehr();
-        gebuehr.setGrundgebuehr(60);
-        gebuehr.setEinsatzprotipp(100);
-        gebuehr.setEinsatzspiel77(250);
-        gebuehr.setEinsatzsuper6(125);
-        gebuehr.setGueltigab(new GregorianCalendar(2015, Calendar.JANUARY, 1).getTime());
-        gebuehr.setGueltigbis(cal.getTime());
-        gebuehr.setCreated(date);
-        gebuehr.setLastmodified(date);
-        gebuehrFacadeLocal.create(gebuehr);
-    }
+	@EJB
+	private GebuehrFacadeLocal gebuehrFacadeLocal;
+
+	@Override
+	public void populateGebuehr() {
+		Date date = new Date();
+		GregorianCalendar cal = new GregorianCalendar(2022, Calendar.DECEMBER, 31);
+		Gebuehr gebuehr = new Gebuehr();
+		gebuehr.setGrundgebuehr(60);
+		gebuehr.setEinsatzprotipp(100);
+		gebuehr.setEinsatzspiel77(250);
+		gebuehr.setEinsatzsuper6(125);
+		gebuehr
+			.setGueltigab(new GregorianCalendar(2015, Calendar.JANUARY, 1).getTime());
+		gebuehr.setGueltigbis(cal.getTime());
+		gebuehr.setCreated(LottoDatum8Util.Date2LocalDateTime(date));
+		gebuehr.setLastmodified(LottoDatum8Util.Date2LocalDateTime(date));
+		gebuehrFacadeLocal.create(gebuehr);
+	}
 }
