@@ -1,9 +1,13 @@
 package de.wbstraining.lotto.util;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.DayOfWeek;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +63,34 @@ public final class LottoDatum8Util {
 				.plusDays(1);
 		}
 		return ziehungsTage;
+	}
+
+//	Converter Meths
+//	Im code: localDate2Date(, date2LocalDate(
+	public static Date localDate2Date(LocalDate locDate) {
+		return locDate == null ? null : Date.valueOf(locDate);
+	}
+
+	public static LocalDate date2LocalDate(java.util.Date date) {
+		return date == null ? null
+			: Instant.ofEpochMilli(date.getTime())
+				.atZone(ZoneId.systemDefault())
+				.toLocalDate();
+	}
+
+	public static LocalDateTime date2LocalDateTime(java.util.Date date) {
+		return date == null ? null
+			: Instant.ofEpochMilli(date.getTime())
+				.atZone(ZoneId.systemDefault())
+				.toLocalDateTime();
+	}
+
+	public static Timestamp localDateTime2Timestamp(LocalDateTime locDateTime) {
+		return locDateTime == null ? null : Timestamp.valueOf(locDateTime);
+	}
+
+	public static LocalDateTime timestamp2LocalDateTime(Timestamp sqlTimestamp) {
+		return sqlTimestamp == null ? null : sqlTimestamp.toLocalDateTime();
 	}
 
 //##############################################################
