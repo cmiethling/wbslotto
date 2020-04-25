@@ -8,7 +8,6 @@ package de.wbstraining.lotto.persistence.model;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Basic;
@@ -24,8 +23,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -79,8 +76,8 @@ public class Kunde implements Serializable {
 	@Column(name = "dispo")
 	private BigInteger dispo;
 	@Column(name = "gesperrt")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date gesperrt;
+	@Convert(converter = LocalDateTimeAttributeConverter.class)
+	private LocalDateTime gesperrt;
 	@Column(name = "isannahmestelle")
 	private Boolean isannahmestelle;
 	@Basic(optional = false)
@@ -168,11 +165,11 @@ public class Kunde implements Serializable {
 		this.dispo = dispo;
 	}
 
-	public Date getGesperrt() {
+	public LocalDateTime getGesperrt() {
 		return gesperrt;
 	}
 
-	public void setGesperrt(Date gesperrt) {
+	public void setGesperrt(LocalDateTime gesperrt) {
 		this.gesperrt = gesperrt;
 	}
 

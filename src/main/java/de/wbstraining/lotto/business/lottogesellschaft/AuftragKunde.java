@@ -3,7 +3,6 @@ package de.wbstraining.lotto.business.lottogesellschaft;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 import de.wbstraining.lotto.persistence.model.Adresse;
@@ -47,7 +46,7 @@ public class AuftragKunde implements Serializable {
 		return kunde.getDispo();
 	}
 
-	public Date getGesperrt() {
+	public LocalDateTime getGesperrt() {
 		return kunde.getGesperrt();
 	}
 
