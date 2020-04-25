@@ -23,7 +23,6 @@ import de.wbstraining.lotto.persistence.dao.ZiehungFacadeLocal;
 import de.wbstraining.lotto.persistence.model.Kunde;
 import de.wbstraining.lotto.persistence.model.Ziehung;
 
-
 /**
  *
  * @author gz1
@@ -34,37 +33,40 @@ import de.wbstraining.lotto.persistence.model.Ziehung;
 @Singleton
 
 public class PopulateDBCache implements PopulateDBCacheLocal {
-    
-    private List<Kunde> kunden;
-    private Map<LocalDate, Ziehung> ziehungenByDatum;
-    
-    @EJB
-    private KundeFacadeLocal kundeFacadeLocal;
-    
-    @EJB
-    private ZiehungFacadeLocal ziehungFacadeLocal;
 
-    @Override
-    public Kunde randomKunde() {
-        return kunden.get(ThreadLocalRandom.current().nextInt(kunden.size()));
-    }
+	private List<Kunde> kunden;
+	private Map<LocalDate, Ziehung> ziehungenByDatum;
 
-    @Override
-    public Ziehung ziehungByDatum(Date datum) {
-        return ziehungenByDatum.get(date2LocalDate(datum));
-    }
+	@EJB
+	private KundeFacadeLocal kundeFacadeLocal;
 
-    @PostConstruct
-    @Override
-    public void loadKundenUndZiehungen() {
-        kunden = kundeFacadeLocal.findAll();
-        ziehungenByDatum = new HashMap<>();
-        for(Ziehung ziehung : ziehungFacadeLocal.findAll()) {
-            ziehungenByDatum.put(date2LocalDate(ziehung.getZiehungsdatum()), ziehung);
-        }
-    }
-    
-    private LocalDate date2LocalDate(Date datum) {
-    	return Instant.ofEpochMilli(datum.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
-    }
+	@EJB
+	private ZiehungFacadeLocal ziehungFacadeLocal;
+
+	@Override
+	public Kunde randomKunde() {
+		return kunden.get(ThreadLocalRandom.current()
+			.nextInt(kunden.size()));
+	}
+
+	@Override
+	public Ziehung ziehungByDatum(Date datum) {
+		return ziehungenByDatum.get(date2LocalDate(datum));
+	}
+
+	@PostConstruct
+	@Override
+	public void loadKundenUndZiehungen() {
+		kunden = kundeFacadeLocal.findAll();
+		ziehungenByDatum = new HashMap<>();
+		for (Ziehung ziehung : ziehungFacadeLocal.findAll()) {
+			ziehungenByDatum.put(ziehung.getZiehungsdatum(), ziehung);
+		}
+	}
+
+	private LocalDate date2LocalDate(Date datum) {
+		return Instant.ofEpochMilli(datum.getTime())
+			.atZone(ZoneId.systemDefault())
+			.toLocalDate();
+	}
 }

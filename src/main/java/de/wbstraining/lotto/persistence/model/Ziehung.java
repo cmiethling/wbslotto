@@ -7,8 +7,8 @@ package de.wbstraining.lotto.persistence.model;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Basic;
@@ -23,10 +23,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import de.wbstraining.lotto.persistence.util.LocalDateAttributeConverter;
 import de.wbstraining.lotto.persistence.util.LocalDateTimeAttributeConverter;
 
 /**
@@ -62,8 +61,8 @@ public class Ziehung implements Serializable {
 	@Basic(optional = false)
 	@NotNull
 	@Column(name = "ziehungsdatum")
-	@Temporal(TemporalType.DATE)
-	private Date ziehungsdatum;
+	@Convert(converter = LocalDateAttributeConverter.class)
+	private LocalDate ziehungsdatum;
 	@Column(name = "zahlenalsbits")
 	private BigInteger zahlenalsbits;
 	@Column(name = "superzahl")
@@ -107,7 +106,7 @@ public class Ziehung implements Serializable {
 		this.ziehungid = ziehungid;
 	}
 
-	public Ziehung(Long ziehungid, Date ziehungsdatum, LocalDateTime created,
+	public Ziehung(Long ziehungid, LocalDate ziehungsdatum, LocalDateTime created,
 		LocalDateTime lastmodified) {
 		this.ziehungid = ziehungid;
 		this.ziehungsdatum = ziehungsdatum;
@@ -123,11 +122,11 @@ public class Ziehung implements Serializable {
 		this.ziehungid = ziehungid;
 	}
 
-	public Date getZiehungsdatum() {
+	public LocalDate getZiehungsdatum() {
 		return ziehungsdatum;
 	}
 
-	public void setZiehungsdatum(Date ziehungsdatum) {
+	public void setZiehungsdatum(LocalDate ziehungsdatum) {
 		this.ziehungsdatum = ziehungsdatum;
 	}
 

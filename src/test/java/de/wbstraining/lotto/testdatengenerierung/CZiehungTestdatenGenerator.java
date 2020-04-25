@@ -6,7 +6,7 @@
 package de.wbstraining.lotto.testdatengenerierung;
 
 import java.math.BigInteger;
-import java.text.DateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -28,6 +28,7 @@ import de.wbstraining.lotto.persistence.model.Kunde;
 import de.wbstraining.lotto.persistence.model.Lottoschein;
 import de.wbstraining.lotto.persistence.model.Lottoscheinziehung;
 import de.wbstraining.lotto.persistence.model.Ziehung;
+import de.wbstraining.lotto.util.LottoDatum8Util;
 import de.wbstraining.lotto.util.LottoDatumUtil;
 
 /**
@@ -76,7 +77,7 @@ public class CZiehungTestdatenGenerator
 	}
 
 	// @TransactionAttribute(TransactionAttributeType.REQUIRED)
-	private void generateSchein(Date abgabeDatum, Kunde kunde, int losnummer,
+	private void generateSchein(LocalDate abgabeDatum, Kunde kunde, int losnummer,
 		byte[] tipps, int kosten, boolean isMittwoch, boolean isSamstag,
 		long belegnummer, Ziehung ziehung, boolean isSpiel77, boolean isSuper6) {
 		Lottoschein schein = new Lottoschein();
@@ -84,7 +85,7 @@ public class CZiehungTestdatenGenerator
 
 		schein.setCreated(date);
 		schein.setLastmodified(date);
-		schein.setAbgabedatum(abgabeDatum);
+		schein.setAbgabedatum(LottoDatum8Util.localDate2Date(abgabeDatum));
 		schein.setKundeid(kunde);
 		schein.setIsabgeschlossen(Boolean.FALSE);
 		schein.setIsmittwoch(isMittwoch);
@@ -149,7 +150,7 @@ public class CZiehungTestdatenGenerator
 		boolean isSamstag = TestdatenGeneratorUtil
 			.isSamstag(ziehung.getZiehungsdatum());
 		int anzahlKunden = kunden.size();
-		Date abgabeDatum = ziehung.getZiehungsdatum();
+		LocalDate abgabeDatum = ziehung.getZiehungsdatum();
 		int kdnr;
 		for (int i = 0; i < anzahl; i++) {
 			kdnr = (int) (Math.random() * anzahlKunden);
@@ -197,7 +198,7 @@ public class CZiehungTestdatenGenerator
 		boolean isSamstag = TestdatenGeneratorUtil
 			.isSamstag(ziehung.getZiehungsdatum());
 		int anzahlKunden = kunden.size();
-		Date abgabeDatum = ziehung.getZiehungsdatum();
+		LocalDate abgabeDatum = ziehung.getZiehungsdatum();
 		int kdnr;
 		for (int i = 0; i < anzahl; i++) {
 			kdnr = (int) (Math.random() * anzahlKunden);
@@ -245,7 +246,7 @@ public class CZiehungTestdatenGenerator
 		boolean isSamstag = TestdatenGeneratorUtil
 			.isSamstag(ziehung.getZiehungsdatum());
 		int anzahlKunden = kunden.size();
-		Date abgabeDatum = ziehung.getZiehungsdatum();
+		LocalDate abgabeDatum = ziehung.getZiehungsdatum();
 		int kdnr;
 		for (int i = 0; i < anzahl; i++) {
 			kdnr = (int) (Math.random() * anzahlKunden);
@@ -256,7 +257,7 @@ public class CZiehungTestdatenGenerator
 	}
 
 	// @TransactionAttribute(TransactionAttributeType.REQUIRED)
-	private Ziehung createZiehung(CZiehung config, Date ziehungsDatum) {
+	private Ziehung createZiehung(CZiehung config, LocalDate ziehungsDatum) {
 		Ziehung ziehung = new Ziehung();
 		LocalDateTime date = LocalDateTime.now();
 
@@ -277,12 +278,12 @@ public class CZiehungTestdatenGenerator
 
 	// generierung von testdaten für eine ziehung
 	// @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-	private void generiereTestDatenFuerEineZiehung(CZiehung config, Date datum,
-		AtomicLong belegNr) {
+	private void generiereTestDatenFuerEineZiehung(CZiehung config,
+		LocalDate datum, AtomicLong belegNr) {
 		Ziehung ziehung = createZiehung(config, datum);
 		writeLog("ziehungId: " + ziehung.getZiehungid());
-		writeLog("datum: " + DateFormat.getInstance()
-			.format(ziehung.getZiehungsdatum()));
+		writeLog("datum: " + ziehung.getZiehungsdatum());
+
 		generateScheine6Aus49(config, ziehung, belegNr);
 		generateScheineSpiel77(config, ziehung, belegNr);
 		generateScheineSuper6(config, ziehung, belegNr);
@@ -310,7 +311,8 @@ public class CZiehungTestdatenGenerator
 		writeLog("anzahl ziehungen: " + configList.size());
 		writeLog("txBlocksize: " + generator.getTxBlocksize());
 		for (CZiehung config : configList) {
-			generiereTestDatenFuerEineZiehung(config, ziehungsTage.get(i), belegNr);
+			generiereTestDatenFuerEineZiehung(config,
+				LottoDatum8Util.date2LocalDate(ziehungsTage.get(i)), belegNr);
 			i++;
 		}
 		writeLog("end generierung der ziehungen...");

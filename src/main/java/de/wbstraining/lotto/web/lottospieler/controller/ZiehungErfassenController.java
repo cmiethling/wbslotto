@@ -6,8 +6,8 @@
 package de.wbstraining.lotto.web.lottospieler.controller;
 
 import java.math.BigInteger;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -37,7 +37,7 @@ public class ZiehungErfassenController {
 	@EJB
 	private ZiehungFacadeLocal ziehungFacadeLocal;
 
-	private Date ziehungsDatum;
+	private LocalDate ziehungsDatum;
 	private String zahlenAlsBits;
 	@Min(1)
 	@Max(9)
@@ -110,11 +110,11 @@ public class ZiehungErfassenController {
 
 	}
 
-	public Date getZiehungsDatum() {
+	public LocalDate getZiehungsDatum() {
 		return ziehungsDatum;
 	}
 
-	public void setZiehungsDatum(Date ziehungsDatum) {
+	public void setZiehungsDatum(LocalDate ziehungsDatum) {
 		this.ziehungsDatum = ziehungsDatum;
 	}
 

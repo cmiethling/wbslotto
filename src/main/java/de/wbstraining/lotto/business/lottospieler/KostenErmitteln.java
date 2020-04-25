@@ -65,7 +65,8 @@ public class KostenErmitteln implements KostenErmittelnLocal {
 		scheinDatums.stream()
 			.forEach(spieltag -> {
 
-				Gebuehr g = findGebuehrForSpielTag(gebuehren, spieltag);
+				Gebuehr g = findGebuehrForSpielTag(gebuehren,
+					LottoDatum8Util.date2LocalDate(spieltag));
 
 				final int einsatzProTipp = g.getEinsatzprotipp();
 
@@ -129,8 +130,8 @@ public class KostenErmitteln implements KostenErmittelnLocal {
 		detailedKosten.setSuper6(kosten.isSuper6());
 
 		Date erstesZiehungsdatum = LottoDatumUtil.ersterZiehungstag(abgabeDatum,
-			isMittwoch, isSamstag, ABGABESCHLUSSMITTWOCH, ABGABESCHLUSSSAMSTAG); // in
-																																						// DBCacheLocal
+			isMittwoch, isSamstag, ABGABESCHLUSSMITTWOCH, ABGABESCHLUSSSAMSTAG);
+		LocalDate tmp = LottoDatum8Util.date2LocalDate(erstesZiehungsdatum);
 
 		detailedKosten.setDatumErsteZiehung(erstesZiehungsdatum);
 
@@ -141,8 +142,7 @@ public class KostenErmitteln implements KostenErmittelnLocal {
 			kosten.getLaufzeit());
 
 //                einmalig Grundgebuehr 
-		Gebuehr gebuehrForFirstSpielTag = findGebuehrForSpielTag(gebuehren,
-			erstesZiehungsdatum);
+		Gebuehr gebuehrForFirstSpielTag = findGebuehrForSpielTag(gebuehren, tmp);
 		detailedKosten.setGrundgebuehr(gebuehrForFirstSpielTag.getGrundgebuehr());
 
 //                if (dto.isSpiel77()) {
@@ -160,7 +160,8 @@ public class KostenErmitteln implements KostenErmittelnLocal {
 
 		int anzahlZiehungenTmp = 0;
 		for (Date date : ziehungsDatums) {
-			gNeu = findGebuehrForSpielTag(gebuehren, date);
+			gNeu = findGebuehrForSpielTag(gebuehren,
+				LottoDatum8Util.date2LocalDate(date));
 			if (gAktuell == null) {
 				gAktuell = gNeu;
 				anzahlZiehungenTmp = 1; // erster Ziehungstag
@@ -199,13 +200,12 @@ public class KostenErmitteln implements KostenErmittelnLocal {
 	// ============================================
 	@Override
 	public Gebuehr findGebuehrForSpielTag(List<Gebuehr> gebuehren,
-		Date spielTag) {
-		LocalDate tmp = LottoDatum8Util.date2LocalDate(spielTag);
+		LocalDate spielTag) {
 		Optional<Gebuehr> optGebuerForSpielTag = gebuehren.stream()
 			.filter(g -> g.getGueltigbis()
-				.isAfter(tmp))
+				.isAfter(spielTag))
 			.filter(g -> g.getGueltigab()
-				.isBefore(tmp))
+				.isBefore(spielTag))
 			.max((g1, g2) -> g1.getGueltigab()
 				.compareTo(g2.getGueltigab()));
 

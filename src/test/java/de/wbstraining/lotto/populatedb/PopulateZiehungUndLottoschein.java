@@ -1,10 +1,8 @@
 package de.wbstraining.lotto.populatedb;
 
 import java.math.BigInteger;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -76,8 +74,8 @@ public class PopulateZiehungUndLottoschein
 		int anzahlLottoscheineProZiehung = 20;
 
 		for (Date ziehungsDatum : dates) {
-			ziehung = createZiehung(ziehungsDatum);
-			ziehungsDatumAsLocalDate = date2LocalDate(ziehungsDatum);
+			ziehung = createZiehung(LottoDatum8Util.date2LocalDate(ziehungsDatum));
+			ziehungsDatumAsLocalDate = LottoDatum8Util.date2LocalDate(ziehungsDatum);
 			ziehungenByDate.put(ziehungsDatumAsLocalDate, ziehung);
 		}
 
@@ -100,13 +98,7 @@ public class PopulateZiehungUndLottoschein
 		return kunden.get(random.nextInt(kunden.size()));
 	}
 
-	private LocalDate date2LocalDate(Date datum) {
-		return Instant.ofEpochMilli(datum.getTime())
-			.atZone(ZoneId.systemDefault())
-			.toLocalDate();
-	}
-
-	private Ziehung createZiehung(Date ziehungsDatum) {
+	private Ziehung createZiehung(LocalDate ziehungsDatum) {
 
 		LocalDateTime aktuellesDatum = LocalDateTime.now();
 		Ziehung ziehung = new Ziehung();
@@ -126,12 +118,12 @@ public class PopulateZiehungUndLottoschein
 		return ziehung;
 	}
 
-	private Lottoschein createLottoschein(Kunde kunde, Date abgabeDatum) {
+	private Lottoschein createLottoschein(Kunde kunde, LocalDate abgabeDatum) {
 		Lottoschein schein = new Lottoschein();
 		LocalDateTime datum = LocalDateTime.now();
 		boolean isMittwoch = random.nextBoolean();
 		schein.setKundeid(kunde);
-		schein.setAbgabedatum(abgabeDatum);
+		schein.setAbgabedatum(LottoDatum8Util.localDate2Date(abgabeDatum));
 		schein.setBelegnummer(
 			BigInteger.valueOf((long) (Math.random() * 1_000_000_000)));
 		schein.setCreated(datum);
@@ -161,7 +153,7 @@ public class PopulateZiehungUndLottoschein
 			schein.getLaufzeit());
 		int nr = 1;
 		for (Date date : dateList) {
-			ziehung = ziehungenByDate.get(date2LocalDate(date));
+			ziehung = ziehungenByDate.get(LottoDatum8Util.date2LocalDate(date));
 			lottoscheinziehung = new Lottoscheinziehung();
 			lottoscheinziehung.setLottoscheinid(schein);
 			lottoscheinziehung.setZiehungnr(nr);

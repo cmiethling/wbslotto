@@ -2,6 +2,7 @@ package de.wbstraining.lotto.business.lottogesellschaft;
 
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.ZoneId;
@@ -42,6 +43,7 @@ import de.wbstraining.lotto.persistence.model.Lottoscheinziehung6aus49;
 import de.wbstraining.lotto.persistence.model.Ziehung;
 import de.wbstraining.lotto.persistence.util.JPAQueriesLocal;
 import de.wbstraining.lotto.util.ByteLongConverter;
+import de.wbstraining.lotto.util.LottoDatum8Util;
 import de.wbstraining.lotto.util.LottoUtil;
 
 /**
@@ -206,7 +208,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 	 */
 	private void loadData(Ziehung ziehung) {
 		this.zie = ziehung;
-		Date ziehungsdatum = zie.getZiehungsdatum();
+		LocalDate ziehungsdatum = zie.getZiehungsdatum();
 
 		geb = kostenErmitteln.findGebuehrForSpielTag(gebuehrFacade.findAll(),
 			ziehungsdatum);
@@ -665,7 +667,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
               .filter(jp -> jp.getGewinnklasseid().getSpielid().getName().equals(spielName))
               .filter(jp -> jp.getZiehungid().getStatus()==1)   //TODO For Christian --- it is Important
               // would be good, if indexing and sorting in DB
-              .filter(jp -> (jp.getZiehungid().getZiehungsdatum().before(ziehung.getZiehungsdatum())))                                                                                                                                                                                                                                 
+              .filter(jp -> (jp.getZiehungid().getZiehungsdatum().isBefore(ziehung.getZiehungsdatum())))                                                                                                                                                                                                                                 
               .max((jp1, jp2) -> jp1.getZiehungid().getZiehungsdatum()
                               .compareTo(jp2.getZiehungid().getZiehungsdatum()));
     }
@@ -678,7 +680,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
     Calendar cal = Calendar.getInstance();
     cal.setFirstDayOfWeek(Calendar.SUNDAY);
 
-    Date ziehDatum = ziehung.getZiehungsdatum();
+    Date ziehDatum = LottoDatum8Util.localDate2Date(ziehung.getZiehungsdatum());
 
     Date parsedZiehDate = new Date();
     try {
@@ -719,6 +721,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
     }
 
     Date lastZiehDate = Date.from(cal.toInstant().atZone(ZoneId.systemDefault()).toInstant());
+    LocalDate lastZiehDate2 = LottoDatum8Util.date2LocalDate(lastZiehDate);
 //    System.out.println("lastZiehDate: " + lastZiehDate);
 //    System.out.println("lastJackpotDate: "
 //                    + (lastJkpotBeforeZieh_opt.isPresent() ? lastJkpotBeforeZieh_opt.get().getZiehungid().getZiehungsdatum()
@@ -796,7 +799,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
     // If date is old (Jackpot is won before) -> we must have new Jackpot wit Nr 1
     // from "anzahlziehungen"
     else if (lastJkpotBeforeZieh_opt.isPresent()
-                && (lastJkpotBeforeZieh_opt.get().getZiehungid().getZiehungsdatum().before(lastZiehDate))) {
+                && (lastJkpotBeforeZieh_opt.get().getZiehungid().getZiehungsdatum().isBefore(lastZiehDate2))) {
         // Someone had won before
         
         commulJPotGewinn = jackPotGewinn;
@@ -809,8 +812,8 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
     // If Standard
     else if (lastJkpotBeforeZieh_opt.isPresent()
         && lastJkpotBeforeZieh_opt.get().getAnzahlziehungen() < (maxTimesJpot - 1)
-        && lastJkpotBeforeZieh_opt.get().getZiehungid().getZiehungsdatum().before(ziehung.getZiehungsdatum())
-        && lastJkpotBeforeZieh_opt.get().getZiehungid().getZiehungsdatum().compareTo(lastZiehDate) >= 0) {
+        && lastJkpotBeforeZieh_opt.get().getZiehungid().getZiehungsdatum().isBefore(ziehung.getZiehungsdatum())
+        && lastJkpotBeforeZieh_opt.get().getZiehungid().getZiehungsdatum().compareTo(lastZiehDate2) >= 0) {
         
         if (gwnkls1.getIsabsolut()) {
             commulJPotGewinn = lastJkpotBeforeZieh_opt.get().getBetragkumuliert() + jackPotGewinn;

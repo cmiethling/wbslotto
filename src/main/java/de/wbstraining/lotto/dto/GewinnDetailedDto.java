@@ -1,7 +1,7 @@
 package de.wbstraining.lotto.dto;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,46 +17,49 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name = "gewinnDetailedDto")
 public class GewinnDetailedDto implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
-	static class Pair6Aus49 implements Serializable{
+
+	static class Pair6Aus49 implements Serializable {
 		private static final long serialVersionUID = 1L;
-		
+
 		int gkl;
 		long quote;
-		
+
 		public Pair6Aus49(int gkl, long quote) {
 			this.gkl = gkl;
 			this.quote = quote;
 		}
+
 		public int getGkl() {
 			return gkl;
 		}
+
 		public void setGkl(int gkl) {
 			this.gkl = gkl;
 		}
+
 		public long getQuote() {
 			return quote;
 		}
+
 		public void setQuote(long quote) {
 			this.quote = quote;
 		}
-		
-		
+
 	}
-	
+
 	private long belegNr;
-	private Date ziehungsDatum;
+	private LocalDate ziehungsDatum;
 	private int gklSpiel77;
 	private long quoteSpiel77;
-	
+
 	private int gklSuper6;
 	private long quoteSuper6;
-	
+
 	// key: tippNr
 	private Map<Integer, Pair6Aus49> gkl6Aus49 = new HashMap<>();
-	
+
 	public long getBelegNr() {
 		return belegNr;
 	}
@@ -65,11 +68,11 @@ public class GewinnDetailedDto implements Serializable {
 		this.belegNr = belegNr;
 	}
 
-	public Date getZiehungsDatum() {
+	public LocalDate getZiehungsDatum() {
 		return ziehungsDatum;
 	}
 
-	public void setZiehungsDatum(Date ziehungsDatum) {
+	public void setZiehungsDatum(LocalDate ziehungsDatum) {
 		this.ziehungsDatum = ziehungsDatum;
 	}
 
@@ -104,7 +107,7 @@ public class GewinnDetailedDto implements Serializable {
 	public void setQuoteSuper6(long quoteSuper6) {
 		this.quoteSuper6 = quoteSuper6;
 	}
-	
+
 	public void addPair6Aus49(int tippNr, int gkl, long quote) {
 		gkl6Aus49.put(tippNr, new Pair6Aus49(gkl, quote));
 	}
