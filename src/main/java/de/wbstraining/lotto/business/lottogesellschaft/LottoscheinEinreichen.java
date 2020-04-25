@@ -128,9 +128,9 @@ public class LottoscheinEinreichen implements LottoscheinEinreichenLocal {
 			lottoscheinziehung.setGewinnklasseidsuper6(null);
 			lottoscheinziehung.setIsabgeschlossen(false);
 			lottoscheinziehung.setZiehungnr(nr);
-			lottoscheinziehung.setCreated(LottoDatum8Util.Date2LocalDateTime(datum));
+			lottoscheinziehung.setCreated(LottoDatum8Util.date2LocalDateTime(datum));
 			lottoscheinziehung
-				.setLastmodified(LottoDatum8Util.Date2LocalDateTime(datum));
+				.setLastmodified(LottoDatum8Util.date2LocalDateTime(datum));
 			lottoscheinziehung.setIsletzteziehung(nr == (dateList.size()));
 			lottoscheinziehungFacadeLocal.create(lottoscheinziehung);
 			nr++;

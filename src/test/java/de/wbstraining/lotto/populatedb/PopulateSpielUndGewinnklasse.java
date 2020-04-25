@@ -6,10 +6,9 @@
 package de.wbstraining.lotto.populatedb;
 
 import java.math.BigInteger;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.time.Month;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -18,7 +17,6 @@ import de.wbstraining.lotto.persistence.dao.GewinnklasseFacadeLocal;
 import de.wbstraining.lotto.persistence.dao.SpielFacadeLocal;
 import de.wbstraining.lotto.persistence.model.Gewinnklasse;
 import de.wbstraining.lotto.persistence.model.Spiel;
-import de.wbstraining.lotto.util.LottoDatum8Util;
 
 /**
  *
@@ -32,9 +30,9 @@ public class PopulateSpielUndGewinnklasse
 	@EJB
 	private GewinnklasseFacadeLocal gewinnklasseFacade;
 
-	private void populateGewinnklassen(Date date, Date gueltigBis, Spiel spiel,
-		String[] gewinnKlassen) {
-		LocalDateTime tmp = LottoDatum8Util.date2LocalDateTime(date);
+	private void populateGewinnklassen(LocalDate gueltigAb, LocalDate gueltigBis,
+		Spiel spiel, String[] gewinnKlassen) {
+
 		Gewinnklasse gewinnklasse;
 		String[] items;
 
@@ -46,15 +44,15 @@ public class PopulateSpielUndGewinnklasse
 
 			gewinnklasse.setSpielid(spiel);
 			// das müssen wir noch automatisch machen
-			gewinnklasse.setCreated(tmp);
+			gewinnklasse.setCreated(gueltigAb.atStartOfDay());
 			// das müssen wir noch automatisch machen
-			gewinnklasse.setLastmodified(tmp);
+			gewinnklasse.setLastmodified(gueltigAb.atStartOfDay());
 			gewinnklasse.setBeschreibung(items[0]);
 			gewinnklasse.setGewinnklassenr(Integer.parseInt(items[1]));
 			gewinnklasse.setBezeichnunglatein(items[2]);
 			gewinnklasse.setBetrag(BigInteger.valueOf(Long.parseLong(items[3])));
 			gewinnklasse.setIsabsolut(Boolean.valueOf(items[4]));
-			gewinnklasse.setGueltigab(date);
+			gewinnklasse.setGueltigab(gueltigAb);
 			gewinnklasse.setGueltigbis(gueltigBis);
 
 			gewinnklasseFacade.create(gewinnklasse);
@@ -98,10 +96,9 @@ public class PopulateSpielUndGewinnklasse
 			"1 richtige Endziffer,6,VI,250,true" };
 
 		LocalDateTime date = LocalDateTime.now();
-		Date gueltigAb = new GregorianCalendar(2015, Calendar.DECEMBER, 31)
-			.getTime();
-		Date gueltigBis = new GregorianCalendar(2020, Calendar.DECEMBER, 31)
-			.getTime();
+		LocalDate gueltigAb = LocalDate.of(2015, Month.JANUARY, 1);
+		LocalDate gueltigBis = gueltigAb.plusYears(10)
+			.minusDays(1);
 
 		Spiel sechsAus49 = new Spiel();
 		Spiel super6 = new Spiel();

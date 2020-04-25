@@ -170,9 +170,9 @@ public class PopulateZiehungUndLottoschein
 			lottoscheinziehung.setGewinnklasseidsuper6(null);
 			lottoscheinziehung.setIsabgeschlossen(false);
 			lottoscheinziehung.setIsletzteziehung(nr == (dateList.size()));
-			lottoscheinziehung.setCreated(LottoDatum8Util.Date2LocalDateTime(datum));
+			lottoscheinziehung.setCreated(LottoDatum8Util.date2LocalDateTime(datum));
 			lottoscheinziehung
-				.setLastmodified(LottoDatum8Util.Date2LocalDateTime(datum));
+				.setLastmodified(LottoDatum8Util.date2LocalDateTime(datum));
 			lottoscheinziehungFacade.create(lottoscheinziehung);
 			nr++;
 		}
