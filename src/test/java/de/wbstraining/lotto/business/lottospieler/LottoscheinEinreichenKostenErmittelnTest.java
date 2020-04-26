@@ -100,7 +100,7 @@ public class LottoscheinEinreichenKostenErmittelnTest {
 		int kostenActual;
 
 		KostenDto dto = new KostenDto();
-		dto.setAbgabeDatum(LottoDatum8Util.localDate2Date(now.toLocalDate()));
+		dto.setAbgabeDatum(now);
 		dto.setAnzahlTipps(anzahlTipps);
 		dto.setLaufzeit(laufzeit);
 		dto.setMittwoch(isMittwoch);

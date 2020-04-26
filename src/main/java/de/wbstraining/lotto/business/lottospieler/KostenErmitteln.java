@@ -1,6 +1,7 @@
 package de.wbstraining.lotto.business.lottospieler;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -52,8 +53,9 @@ public class KostenErmitteln implements KostenErmittelnLocal {
 	public int kostenErmitteln(Lottoschein schein) {
 
 		List<Date> scheinDatums = LottoDatumUtil.ziehungsTage(
-			schein.getAbgabedatum(), schein.getIsmittwoch(), schein.getIssamstag(),
-			ABGABESCHLUSSMITTWOCH, ABGABESCHLUSSSAMSTAG, schein.getLaufzeit());
+			LottoDatum8Util.localDateTime2Date(schein.getAbgabedatum()),
+			schein.getIsmittwoch(), schein.getIssamstag(), ABGABESCHLUSSMITTWOCH,
+			ABGABESCHLUSSSAMSTAG, schein.getLaufzeit());
 
 //  Date ersterSpieltag = scheinDatums.get(0);
 		List<Gebuehr> gebuehren = gebuehrFacade.findAll();
@@ -115,7 +117,7 @@ public class KostenErmitteln implements KostenErmittelnLocal {
 
 	@Override
 	public KostenDetailedDto kostenErmittelnDetailed(KostenDto kosten) {
-		Date abgabeDatum = kosten.getAbgabeDatum();
+		LocalDateTime abgabeDatum = kosten.getAbgabeDatum();
 		boolean isMittwoch = kosten.isMittwoch();
 		boolean isSamstag = kosten.isSamstag();
 
@@ -129,7 +131,8 @@ public class KostenErmitteln implements KostenErmittelnLocal {
 		detailedKosten.setSpiel77(kosten.isSpiel77());
 		detailedKosten.setSuper6(kosten.isSuper6());
 
-		Date erstesZiehungsdatum = LottoDatumUtil.ersterZiehungstag(abgabeDatum,
+		Date abgabeDatum2 = LottoDatum8Util.localDateTime2Date(abgabeDatum);
+		Date erstesZiehungsdatum = LottoDatumUtil.ersterZiehungstag(abgabeDatum2,
 			isMittwoch, isSamstag, ABGABESCHLUSSMITTWOCH, ABGABESCHLUSSSAMSTAG);
 		LocalDate tmp = LottoDatum8Util.date2LocalDate(erstesZiehungsdatum);
 
@@ -137,7 +140,7 @@ public class KostenErmitteln implements KostenErmittelnLocal {
 
 		List<Gebuehr> gebuehren = gebuehrFacade.findAll();
 
-		List<Date> ziehungsDatums = LottoDatumUtil.ziehungsTage(abgabeDatum,
+		List<Date> ziehungsDatums = LottoDatumUtil.ziehungsTage(abgabeDatum2,
 			isMittwoch, isSamstag, ABGABESCHLUSSMITTWOCH, ABGABESCHLUSSSAMSTAG,
 			kosten.getLaufzeit());
 

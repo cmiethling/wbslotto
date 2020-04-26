@@ -66,9 +66,15 @@ public final class LottoDatum8Util {
 	}
 
 //############## Converter Meths ############################
-//	Im code: localDate2Date(, date2LocalDate(, date2LocalDateTime(
+//	Im code: localDate2Date(, date2LocalDate(, date2LocalDateTime(, localDateTime2Date(
 	public static Date localDate2Date(LocalDate locDate) {
 		return locDate == null ? null : Date.valueOf(locDate);
+	}
+
+	public static java.util.Date localDateTime2Date(LocalDateTime locDate) {
+		return locDate == null ? null
+			: Date.from(locDate.atZone(ZoneId.systemDefault())
+				.toInstant());
 	}
 
 	public static LocalDate date2LocalDate(java.util.Date date) {

@@ -85,7 +85,7 @@ public class CZiehungTestdatenGenerator
 
 		schein.setCreated(date);
 		schein.setLastmodified(date);
-		schein.setAbgabedatum(LottoDatum8Util.localDate2Date(abgabeDatum));
+		schein.setAbgabedatum(abgabeDatum.atStartOfDay());
 		schein.setKundeid(kunde);
 		schein.setIsabgeschlossen(Boolean.FALSE);
 		schein.setIsmittwoch(isMittwoch);

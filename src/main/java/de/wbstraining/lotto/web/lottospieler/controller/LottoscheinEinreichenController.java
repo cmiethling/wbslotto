@@ -10,7 +10,6 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -180,11 +179,10 @@ public class LottoscheinEinreichenController implements Serializable {
 		System.out.println("Kunde: " + kunde);
 
 		LocalDateTime datum = LocalDateTime.now();
-		Date datum2 = new Date();
 		Lottoschein schein = new Lottoschein();
 
 		schein.setKundeid(kunde);
-		schein.setAbgabedatum(datum2);
+		schein.setAbgabedatum(datum);
 		schein.setBelegnummer(
 			(BigInteger.valueOf((long) (Math.random() * 1_000_000_000))));
 		schein.setCreated(datum);

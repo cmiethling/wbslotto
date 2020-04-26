@@ -8,7 +8,6 @@ package de.wbstraining.lotto.persistence.model;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Basic;
@@ -26,8 +25,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import de.wbstraining.lotto.persistence.util.LocalDateTimeAttributeConverter;
@@ -87,8 +84,8 @@ public class Lottoschein implements Serializable {
 	@Basic(optional = false)
 	@NotNull
 	@Column(name = "abgabedatum")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date abgabedatum;
+	@Convert(converter = LocalDateTimeAttributeConverter.class)
+	private LocalDateTime abgabedatum;
 	@Column(name = "kosten")
 	private Integer kosten;
 	@Column(name = "status")
@@ -118,8 +115,9 @@ public class Lottoschein implements Serializable {
 		this.lottoscheinid = lottoscheinid;
 	}
 
-	public Lottoschein(Long lottoscheinid, int losnummer, Date abgabedatum,
-		LocalDateTime created, LocalDateTime lastmodified) {
+	public Lottoschein(Long lottoscheinid, int losnummer,
+		LocalDateTime abgabedatum, LocalDateTime created,
+		LocalDateTime lastmodified) {
 		this.lottoscheinid = lottoscheinid;
 		this.losnummer = losnummer;
 		this.abgabedatum = abgabedatum;
@@ -207,11 +205,11 @@ public class Lottoschein implements Serializable {
 		this.isabgeschlossen = isabgeschlossen;
 	}
 
-	public Date getAbgabedatum() {
+	public LocalDateTime getAbgabedatum() {
 		return abgabedatum;
 	}
 
-	public void setAbgabedatum(Date abgabedatum) {
+	public void setAbgabedatum(LocalDateTime abgabedatum) {
 		this.abgabedatum = abgabedatum;
 	}
 
