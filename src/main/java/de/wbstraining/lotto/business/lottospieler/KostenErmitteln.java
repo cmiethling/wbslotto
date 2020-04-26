@@ -56,7 +56,6 @@ public class KostenErmitteln implements KostenErmittelnLocal {
 			schein.getIsmittwoch(), schein.getIssamstag(), ABGABESCHLUSSMITTWOCH,
 			ABGABESCHLUSSSAMSTAG, schein.getLaufzeit());
 
-//  Date ersterSpieltag = scheinDatums.get(0);
 		List<Gebuehr> gebuehren = gebuehrFacade.findAll();
 
 //  1long = 1tipp
@@ -147,16 +146,7 @@ public class KostenErmitteln implements KostenErmittelnLocal {
 			erstesZiehungsdatum);
 		detailedKosten.setGrundgebuehr(gebuehrForFirstSpielTag.getGrundgebuehr());
 
-//                if (dto.isSpiel77()) {
-//                        final int anzahlZiehungen = dto.getLaufzeit() * miSa;
-//                        /*
-//                         * public void putEinsatz(Map<LocalDate, Item> einsatz, Date gueltigAb,
-//                         * int grundEinsatz, int anzahlZiehungen) {
-//                         */
-//                        dto.putEinsatz(dto.getEinsatzSpiel77(), gebuehrForFirstSpielTag.getGueltigab(),
-//                                gebuehrForFirstSpielTag.getEinsatzspiel77(), anzahlZiehungen);
-//                }
-
+//	Dimitri
 		Gebuehr gAktuell = null;
 		Gebuehr gNeu = null;
 
