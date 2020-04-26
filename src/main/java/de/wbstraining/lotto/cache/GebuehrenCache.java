@@ -2,7 +2,6 @@ package de.wbstraining.lotto.cache;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -14,7 +13,6 @@ import javax.ejb.Singleton;
 import de.wbstraining.lotto.persistence.dao.GebuehrFacadeLocal;
 import de.wbstraining.lotto.persistence.model.Gebuehr;
 import de.wbstraining.lotto.util.LottoDatum8Util;
-import de.wbstraining.lotto.util.LottoDatumUtil;
 
 @Singleton
 public class GebuehrenCache implements GebuehrenCacheLocal {
@@ -34,8 +32,8 @@ public class GebuehrenCache implements GebuehrenCacheLocal {
 	public void init() {
 		gebuehrenmap = new TreeMap<LocalDate, Gebuehr>();
 		LocalTime timeNow = LocalTime.now();
-		date = LottoDatum8Util.ersterZiehungstag(LocalDate.now(), timeNow, true, true,
-			18, 19);
+		date = LottoDatum8Util.ersterZiehungstag(LocalDate.now(), timeNow, true,
+			true, 18, 19);
 
 		// Nächstes Ziehungsdatum
 		gebuehrenliste = gebuehrfacadelocal.findAll(); // Importieren aller Gebühren
@@ -64,8 +62,8 @@ public class GebuehrenCache implements GebuehrenCacheLocal {
 
 	@Override
 	public Gebuehr gebuehrByDatum(LocalDate datum) {
-		return gebuehrenmap.get(toLocalDate(
-			LottoDatumUtil.ersterZiehungstag(toDate(datum), true, true, 18, 19)));
+		return gebuehrenmap.get(LottoDatum8Util.ersterZiehungstag(datum,
+			LocalTime.MIN, true, true, 18, 19));
 	}
 
 	@Override
@@ -89,14 +87,6 @@ public class GebuehrenCache implements GebuehrenCacheLocal {
 	@Override
 	public Map<LocalDate, Gebuehr> getGebuehrenmap() {
 		return gebuehrenmap;
-	}
-
-	private LocalDate toLocalDate(Date dateToConvert) {
-		return new java.sql.Date(dateToConvert.getTime()).toLocalDate();
-	}
-
-	private Date toDate(LocalDate dateToConvert) {
-		return java.sql.Date.valueOf(dateToConvert);
 	}
 
 }

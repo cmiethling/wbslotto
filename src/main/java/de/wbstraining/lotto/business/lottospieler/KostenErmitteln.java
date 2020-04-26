@@ -132,9 +132,9 @@ public class KostenErmitteln implements KostenErmittelnLocal {
 		detailedKosten.setSuper6(kosten.isSuper6());
 
 		Date abgabeDatum2 = LottoDatum8Util.localDateTime2Date(abgabeDatum);
-		Date erstesZiehungsdatum = LottoDatumUtil.ersterZiehungstag(abgabeDatum2,
-			isMittwoch, isSamstag, ABGABESCHLUSSMITTWOCH, ABGABESCHLUSSSAMSTAG);
-		LocalDate tmp = LottoDatum8Util.date2LocalDate(erstesZiehungsdatum);
+		LocalDate erstesZiehungsdatum = LottoDatum8Util.ersterZiehungstag(
+			abgabeDatum.toLocalDate(), abgabeDatum.toLocalTime(), isMittwoch,
+			isSamstag, ABGABESCHLUSSMITTWOCH, ABGABESCHLUSSSAMSTAG);
 
 		detailedKosten.setDatumErsteZiehung(erstesZiehungsdatum);
 
@@ -145,7 +145,8 @@ public class KostenErmitteln implements KostenErmittelnLocal {
 			kosten.getLaufzeit());
 
 //                einmalig Grundgebuehr 
-		Gebuehr gebuehrForFirstSpielTag = findGebuehrForSpielTag(gebuehren, tmp);
+		Gebuehr gebuehrForFirstSpielTag = findGebuehrForSpielTag(gebuehren,
+			erstesZiehungsdatum);
 		detailedKosten.setGrundgebuehr(gebuehrForFirstSpielTag.getGrundgebuehr());
 
 //                if (dto.isSpiel77()) {

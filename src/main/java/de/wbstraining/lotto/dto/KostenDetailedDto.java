@@ -3,7 +3,6 @@ package de.wbstraining.lotto.dto;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -66,7 +65,7 @@ public class KostenDetailedDto implements Serializable {
 	}
 
 	private LocalDateTime abgabeDatum;
-	private Date datumErsteZiehung;
+	private LocalDate datumErsteZiehung;
 
 	private int laufzeit;
 	private int anzahlTipps;
@@ -119,11 +118,11 @@ public class KostenDetailedDto implements Serializable {
 		this.abgabeDatum = abgabeDatum;
 	}
 
-	public Date getDatumErsteZiehung() {
+	public LocalDate getDatumErsteZiehung() {
 		return datumErsteZiehung;
 	}
 
-	public void setDatumErsteZiehung(Date datumErsteZiehung) {
+	public void setDatumErsteZiehung(LocalDate datumErsteZiehung) {
 		this.datumErsteZiehung = datumErsteZiehung;
 	}
 
