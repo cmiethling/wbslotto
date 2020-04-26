@@ -8,7 +8,6 @@ package de.wbstraining.lotto.testdatengenerierung;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Level;
@@ -19,6 +18,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import de.wbstraining.lotto.persistence.dao.KundeFacadeLocal;
 import de.wbstraining.lotto.persistence.dao.LottoscheinFacadeLocal;
@@ -297,15 +297,17 @@ public class CZiehungTestdatenGenerator
 		AtomicLong belegNr = new AtomicLong(belegNummernStart);
 		int blockSize = generator.getTxBlocksize();
 
-		Date datumErsteZiehung = generator.datumErsteZiehung.toGregorianCalendar()
-			.getTime();
-		LocalDateTime datumErsteZiehung2 = LottoDatum8Util
-			.date2LocalDateTime(datumErsteZiehung);
+		XMLGregorianCalendar xmlGregCal = generator.datumErsteZiehung;
+		LocalDateTime dateErsteZie = xmlGregCal.toGregorianCalendar()
+			.toZonedDateTime()
+			.toLocalDateTime();
+//		writeLog("datumErsteZiehung: " + dateErsteZie);
+
 		List<CZiehung> configList = generator.getCZiehung();
 		setInitialValues(blockSize, belegNummernStart);
 		List<LocalDate> ziehungsTage = LottoDatum8Util.ziehungsTage(
-			datumErsteZiehung2.toLocalDate(), datumErsteZiehung2.toLocalTime(), true,
-			true, 18, 19, generator.getCZiehung()
+			dateErsteZie.toLocalDate(), dateErsteZie.toLocalTime(), true, true, 18,
+			19, generator.getCZiehung()
 				.size());
 
 		int i = 0;

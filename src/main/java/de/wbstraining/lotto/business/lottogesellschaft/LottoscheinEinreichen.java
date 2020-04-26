@@ -2,9 +2,7 @@ package de.wbstraining.lotto.business.lottogesellschaft;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -60,7 +58,8 @@ public class LottoscheinEinreichen implements LottoscheinEinreichenLocal {
 		KostenDto kostenDto = new KostenDto();
 		KostenDetailedDto kostenDetailedDto;
 
-		Date datum = new Date();
+		LocalDateTime datum = LocalDateTime.now();
+
 		List<LocalDate> dateList;
 		lottoscheinFacadeLocal.create(schein);
 
@@ -94,13 +93,9 @@ public class LottoscheinEinreichen implements LottoscheinEinreichenLocal {
 			adreseeList);
 
 		StringBuilder sbContent = new StringBuilder("");
-		LocalDate localDatum = datum.toInstant()
-			.atZone(ZoneId.systemDefault())
-			.toLocalDate();
 
-		sbContent.append("\t\t\t\t\t\t Dresden, den "
-			+ localDatum.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
-			+ "\n\n\n");
+		sbContent.append("\t\t\t\t\t\t Dresden, den " + datum.toLocalDate()
+			.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) + "\n\n\n");
 
 		sbContent.append("Hallo Frau/Herr " + schein.getKundeid()
 			.getName() + ",\n");
@@ -130,9 +125,8 @@ public class LottoscheinEinreichen implements LottoscheinEinreichenLocal {
 			lottoscheinziehung.setGewinnklasseidsuper6(null);
 			lottoscheinziehung.setIsabgeschlossen(false);
 			lottoscheinziehung.setZiehungnr(nr);
-			lottoscheinziehung.setCreated(LottoDatum8Util.date2LocalDateTime(datum));
-			lottoscheinziehung
-				.setLastmodified(LottoDatum8Util.date2LocalDateTime(datum));
+			lottoscheinziehung.setCreated(datum);
+			lottoscheinziehung.setLastmodified(datum);
 			lottoscheinziehung.setIsletzteziehung(nr == (dateList.size()));
 			lottoscheinziehungFacadeLocal.create(lottoscheinziehung);
 			nr++;

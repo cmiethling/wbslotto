@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -144,7 +143,7 @@ public class PopulateZiehungUndLottoschein
 
 		Ziehung ziehung;
 		Lottoscheinziehung lottoscheinziehung;
-		Date datum = new Date();
+		LocalDateTime datum = LocalDateTime.now();
 		List<LocalDate> dateList;
 		lottoscheinFacade.create(schein);
 		LocalDateTime abgabeDatum = schein.getAbgabedatum();
@@ -163,9 +162,8 @@ public class PopulateZiehungUndLottoschein
 			lottoscheinziehung.setGewinnklasseidsuper6(null);
 			lottoscheinziehung.setIsabgeschlossen(false);
 			lottoscheinziehung.setIsletzteziehung(nr == (dateList.size()));
-			lottoscheinziehung.setCreated(LottoDatum8Util.date2LocalDateTime(datum));
-			lottoscheinziehung
-				.setLastmodified(LottoDatum8Util.date2LocalDateTime(datum));
+			lottoscheinziehung.setCreated(datum);
+			lottoscheinziehung.setLastmodified(datum);
 			lottoscheinziehungFacade.create(lottoscheinziehung);
 			nr++;
 		}
