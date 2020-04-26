@@ -42,6 +42,11 @@ import de.wbstraining.lotto.testdatengenerierung.Testdatengenerator;
 @RunWith(Arquillian.class)
 public class ZiehungAuswertenTest {
 
+	private static String schemaPath = "testdatengenerator.xsd";
+//	private static String xmlPath = "testdatengenerator.xml";
+//	private static String xmlPath = "testdatengenerator_2o2m2o2m.xml";
+	private static String xmlPath = "testdatengenerator_15zieOhneGkl1.xml";
+
 	@Deployment
 	public static Archive<?> createTestArchive() {
 		WebArchive archive = ShrinkWrap.create(WebArchive.class, "test.war")
@@ -53,10 +58,10 @@ public class ZiehungAuswertenTest {
 				"de.wbstraining.lotto.business.lottogesellschaft",
 				"de.wbstraining.lotto.web.lottospieler.controller",
 				"org.primefaces.event", "de.wbstraining.lotto.testdatengenerierung")
-			.addAsResource(new File(
-				"src/test/resources/testdatengenerator/testdatengenerator.xml"))
-			.addAsResource(new File(
-				"src/test/resources/testdatengenerator/testdatengenerator.xsd"))
+			.addAsResource(
+				new File("src/test/resources/testdatengenerator/" + xmlPath))
+			.addAsResource(
+				new File("src/test/resources/testdatengenerator/" + schemaPath))
 			.addAsResource("META-INF/persistence.xml")
 			.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 		return archive;
@@ -89,9 +94,6 @@ public class ZiehungAuswertenTest {
 	@Test
 	public void ziehungAuswerten() throws Exception {
 
-		String schemaPath = "testdatengenerator.xsd";
-		String xmlPath = "testdatengenerator.xml";
-
 		StreamSource schemaSource = new StreamSource(getClass().getClassLoader()
 			.getResourceAsStream(schemaPath));
 		SchemaFactory schemaFactory = SchemaFactory
@@ -114,10 +116,9 @@ public class ZiehungAuswertenTest {
 		cZiehungTestdatenGenerator
 			.generiereTestDatenFuerMehrereZiehungen(generator);
 
-//		Ziehung ziehung = ziehungFacade.find(1L);
-//		ziehungAuswerten.ziehungAuswerten(ziehung);
-		List<Ziehung> zies = ziehungFacade.findAll();
-		zies.forEach(ziehungAuswerten::ziehungAuswerten);
+//		Alle Ziehungen auswerten
+		List<Ziehung> ziehungen = ziehungFacade.findAll();
+		ziehungen.forEach(ziehungAuswerten::ziehungAuswerten);
 
 		List<Spiel> spiele = spielFacade.findAll();
 		Map<String, Spiel> spielMap = new HashMap<>();
