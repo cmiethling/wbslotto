@@ -1,7 +1,7 @@
 package de.wbstraining.lotto.cache;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +13,7 @@ import javax.ejb.Singleton;
 
 import de.wbstraining.lotto.persistence.dao.GebuehrFacadeLocal;
 import de.wbstraining.lotto.persistence.model.Gebuehr;
+import de.wbstraining.lotto.util.LottoDatum8Util;
 import de.wbstraining.lotto.util.LottoDatumUtil;
 
 @Singleton
@@ -32,10 +33,10 @@ public class GebuehrenCache implements GebuehrenCacheLocal {
 	@PostConstruct
 	public void init() {
 		gebuehrenmap = new TreeMap<LocalDate, Gebuehr>();
-		date = LottoDatumUtil.naechsterZiehungstag(new Date())
-			.toInstant()
-			.atZone(ZoneId.systemDefault())
-			.toLocalDate();
+		LocalTime timeNow = LocalTime.now();
+		date = LottoDatum8Util.ersterZiehungstag(LocalDate.now(), timeNow, true, true,
+			18, 19);
+
 		// Nächstes Ziehungsdatum
 		gebuehrenliste = gebuehrfacadelocal.findAll(); // Importieren aller Gebühren
 																										// aus Datenbank
@@ -55,10 +56,9 @@ public class GebuehrenCache implements GebuehrenCacheLocal {
 			}
 			gebuehrenmap.putIfAbsent(date, aktuellegebuehr); // Übergabe in die Map
 
-			date = new java.sql.Date(
-				LottoDatumUtil.naechsterZiehungstag(java.sql.Date.valueOf(date))
-					.getTime()).toLocalDate(); // nächstes Ziehungsdatum für die nächste
-																			// Schleife
+			// naechstes Ziehungsdatum für die naechste Schleife
+			date = LottoDatum8Util.ersterZiehungstag(date.plusDays(1), timeNow, true,
+				true, 18, 19);
 		}
 	}
 
@@ -76,9 +76,7 @@ public class GebuehrenCache implements GebuehrenCacheLocal {
 			.compareTo((gebuehrenmap.get(datumLetzteZiehung)).getGebuehrid()) == 0) {
 			return false;
 		} else { // Wenn die beiden Gebuehrenobjekte der ersten und letzten Ziehung
-							// identisch
-			// sind,
-			// gibt es keinen Gebührenwechsel
+							// identisch sind, gibt es keinen Gebührenwechsel
 			return true;
 		}
 	}
