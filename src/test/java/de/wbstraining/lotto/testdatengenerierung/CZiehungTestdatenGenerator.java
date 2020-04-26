@@ -29,7 +29,6 @@ import de.wbstraining.lotto.persistence.model.Lottoschein;
 import de.wbstraining.lotto.persistence.model.Lottoscheinziehung;
 import de.wbstraining.lotto.persistence.model.Ziehung;
 import de.wbstraining.lotto.util.LottoDatum8Util;
-import de.wbstraining.lotto.util.LottoDatumUtil;
 
 /**
  *
@@ -297,12 +296,16 @@ public class CZiehungTestdatenGenerator
 		long belegNummernStart = generator.belegnummernStart;
 		AtomicLong belegNr = new AtomicLong(belegNummernStart);
 		int blockSize = generator.getTxBlocksize();
+
 		Date datumErsteZiehung = generator.datumErsteZiehung.toGregorianCalendar()
 			.getTime();
+		LocalDateTime datumErsteZiehung2 = LottoDatum8Util
+			.date2LocalDateTime(datumErsteZiehung);
 		List<CZiehung> configList = generator.getCZiehung();
 		setInitialValues(blockSize, belegNummernStart);
-		List<Date> ziehungsTage = LottoDatumUtil.ziehungsTage(datumErsteZiehung,
-			true, true, 18, 19, generator.getCZiehung()
+		List<LocalDate> ziehungsTage = LottoDatum8Util.ziehungsTage(
+			datumErsteZiehung2.toLocalDate(), datumErsteZiehung2.toLocalTime(), true,
+			true, 18, 19, generator.getCZiehung()
 				.size());
 
 		int i = 0;
@@ -311,8 +314,7 @@ public class CZiehungTestdatenGenerator
 		writeLog("anzahl ziehungen: " + configList.size());
 		writeLog("txBlocksize: " + generator.getTxBlocksize());
 		for (CZiehung config : configList) {
-			generiereTestDatenFuerEineZiehung(config,
-				LottoDatum8Util.date2LocalDate(ziehungsTage.get(i)), belegNr);
+			generiereTestDatenFuerEineZiehung(config, ziehungsTage.get(i), belegNr);
 			i++;
 		}
 		writeLog("end generierung der ziehungen...");

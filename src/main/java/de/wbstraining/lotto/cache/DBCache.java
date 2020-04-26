@@ -5,10 +5,7 @@
  */
 package de.wbstraining.lotto.cache;
 
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,8 +45,8 @@ public class DBCache implements DBCacheLocal {
 	}
 
 	@Override
-	public Ziehung ziehungByDatum(Date datum) {
-		return ziehungenByDatum.get(date2LocalDate(datum));
+	public Ziehung ziehungByDatum(LocalDate datum) {
+		return ziehungenByDatum.get(datum);
 	}
 
 	@PostConstruct
@@ -60,11 +57,5 @@ public class DBCache implements DBCacheLocal {
 		for (Ziehung ziehung : ziehungFacadeLocal.findAll()) {
 			ziehungenByDatum.put(ziehung.getZiehungsdatum(), ziehung);
 		}
-	}
-
-	private LocalDate date2LocalDate(Date datum) {
-		return Instant.ofEpochMilli(datum.getTime())
-			.atZone(ZoneId.systemDefault())
-			.toLocalDate();
 	}
 }

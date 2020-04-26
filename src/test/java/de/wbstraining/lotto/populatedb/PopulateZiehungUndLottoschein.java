@@ -3,6 +3,7 @@ package de.wbstraining.lotto.populatedb;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,7 +25,6 @@ import de.wbstraining.lotto.persistence.model.Lottoschein;
 import de.wbstraining.lotto.persistence.model.Lottoscheinziehung;
 import de.wbstraining.lotto.persistence.model.Ziehung;
 import de.wbstraining.lotto.util.LottoDatum8Util;
-import de.wbstraining.lotto.util.LottoDatumUtil;
 import de.wbstraining.lotto.util.LottoUtil;
 
 @Stateless
@@ -63,9 +63,8 @@ public class PopulateZiehungUndLottoschein
 	public void populateZiehungUndLottoschein() {
 
 		// ziehungen erzeugen und cache aufbauen
-		List<Date> dates = LottoDatumUtil.ziehungsTage(new Date(), true, true, 18,
-			19, 20);
-		LocalDate ziehungsDatumAsLocalDate;
+		List<LocalDate> dates = LottoDatum8Util.ziehungsTage(LocalDate.now(),
+			LocalTime.now(), true, true, 18, 19, 20);
 		Ziehung ziehung;
 		Kunde kunde;
 		Lottoschein lottoschein;
@@ -73,10 +72,9 @@ public class PopulateZiehungUndLottoschein
 		int anzahlZiehungen = 10;
 		int anzahlLottoscheineProZiehung = 20;
 
-		for (Date ziehungsDatum : dates) {
-			ziehung = createZiehung(LottoDatum8Util.date2LocalDate(ziehungsDatum));
-			ziehungsDatumAsLocalDate = LottoDatum8Util.date2LocalDate(ziehungsDatum);
-			ziehungenByDate.put(ziehungsDatumAsLocalDate, ziehung);
+		for (LocalDate ziehungsDatum : dates) {
+			ziehung = createZiehung(ziehungsDatum);
+			ziehungenByDate.put(ziehungsDatum, ziehung);
 		}
 
 		List<Ziehung> ziehungen = new ArrayList<>();
@@ -143,17 +141,20 @@ public class PopulateZiehungUndLottoschein
 	}
 
 	private void lottoscheinEinreichen(Lottoschein schein) {
+
 		Ziehung ziehung;
 		Lottoscheinziehung lottoscheinziehung;
 		Date datum = new Date();
-		List<Date> dateList;
+		List<LocalDate> dateList;
 		lottoscheinFacade.create(schein);
-		dateList = LottoDatumUtil.ziehungsTage(LottoDatum8Util.localDateTime2Date(schein.getAbgabedatum()),
-			schein.getIsmittwoch(), schein.getIssamstag(), 18, 19,
-			schein.getLaufzeit());
+		LocalDateTime abgabeDatum = schein.getAbgabedatum();
+
+		dateList = LottoDatum8Util.ziehungsTage(abgabeDatum.toLocalDate(),
+			abgabeDatum.toLocalTime(), schein.getIsmittwoch(), schein.getIssamstag(),
+			18, 19, schein.getLaufzeit());
 		int nr = 1;
-		for (Date date : dateList) {
-			ziehung = ziehungenByDate.get(LottoDatum8Util.date2LocalDate(date));
+		for (LocalDate date : dateList) {
+			ziehung = ziehungenByDate.get(date);
 			lottoscheinziehung = new Lottoscheinziehung();
 			lottoscheinziehung.setLottoscheinid(schein);
 			lottoscheinziehung.setZiehungnr(nr);

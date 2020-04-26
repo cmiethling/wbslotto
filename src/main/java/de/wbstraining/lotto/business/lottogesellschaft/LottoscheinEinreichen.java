@@ -1,6 +1,7 @@
 package de.wbstraining.lotto.business.lottogesellschaft;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -24,7 +25,6 @@ import de.wbstraining.lotto.persistence.model.Lottoscheinziehung;
 import de.wbstraining.lotto.persistence.model.Ziehung;
 import de.wbstraining.lotto.util.ByteLongConverter;
 import de.wbstraining.lotto.util.LottoDatum8Util;
-import de.wbstraining.lotto.util.LottoDatumUtil;
 
 @Stateless
 public class LottoscheinEinreichen implements LottoscheinEinreichenLocal {
@@ -61,12 +61,13 @@ public class LottoscheinEinreichen implements LottoscheinEinreichenLocal {
 		KostenDetailedDto kostenDetailedDto;
 
 		Date datum = new Date();
-		List<Date> dateList;
+		List<LocalDate> dateList;
 		lottoscheinFacadeLocal.create(schein);
-		Date tmp = LottoDatum8Util.localDateTime2Date(schein.getAbgabedatum());
 
-		dateList = LottoDatumUtil.ziehungsTage(tmp, schein.getIsmittwoch(),
-			schein.getIssamstag(), 18, 19, schein.getLaufzeit());
+		LocalDateTime abgabeDatum = schein.getAbgabedatum();
+		dateList = LottoDatum8Util.ziehungsTage(abgabeDatum.toLocalDate(),
+			abgabeDatum.toLocalTime(), schein.getIsmittwoch(), schein.getIssamstag(),
+			18, 19, schein.getLaufzeit());
 
 		kostenDto.setAbgabeDatum(schein.getAbgabedatum());
 		kostenDto
@@ -120,7 +121,7 @@ public class LottoscheinEinreichen implements LottoscheinEinreichenLocal {
 			PdfQuittungGenerator.createPDFAsByteArray(auftrag, auftragKunde,
 				kostenDetailedDto));
 		int nr = 1;
-		for (Date date : dateList) {
+		for (LocalDate date : dateList) {
 			ziehung = dBCacheLocal.ziehungByDatum(date);
 			lottoscheinziehung = new Lottoscheinziehung();
 			lottoscheinziehung.setZiehungid(ziehung);

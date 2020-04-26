@@ -5,7 +5,7 @@
  */
 package de.wbstraining.lotto.cache;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.ejb.Local;
 
@@ -18,8 +18,10 @@ import de.wbstraining.lotto.persistence.model.Ziehung;
  */
 @Local
 public interface DBCacheLocal {
-    
-    public Kunde randomKunde();
-    public Ziehung ziehungByDatum(Date datum);
-    public void loadKundenUndZiehungen();
+
+	public Kunde randomKunde();
+
+	public Ziehung ziehungByDatum(LocalDate datum);
+
+	public void loadKundenUndZiehungen();
 }

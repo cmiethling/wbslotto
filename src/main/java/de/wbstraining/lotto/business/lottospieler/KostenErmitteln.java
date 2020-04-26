@@ -3,7 +3,6 @@ package de.wbstraining.lotto.business.lottospieler;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -19,7 +18,6 @@ import de.wbstraining.lotto.persistence.model.Gebuehr;
 import de.wbstraining.lotto.persistence.model.Lottoschein;
 import de.wbstraining.lotto.util.ByteLongConverter;
 import de.wbstraining.lotto.util.LottoDatum8Util;
-import de.wbstraining.lotto.util.LottoDatumUtil;
 import de.wbstraining.lotto.util.LottoUtil;
 
 /**
@@ -52,8 +50,9 @@ public class KostenErmitteln implements KostenErmittelnLocal {
 	@Override
 	public int kostenErmitteln(Lottoschein schein) {
 
-		List<Date> scheinDatums = LottoDatumUtil.ziehungsTage(
-			LottoDatum8Util.localDateTime2Date(schein.getAbgabedatum()),
+		LocalDateTime abgabeDatum = schein.getAbgabedatum();
+		List<LocalDate> scheinDatums = LottoDatum8Util.ziehungsTage(
+			abgabeDatum.toLocalDate(), abgabeDatum.toLocalTime(),
 			schein.getIsmittwoch(), schein.getIssamstag(), ABGABESCHLUSSMITTWOCH,
 			ABGABESCHLUSSSAMSTAG, schein.getLaufzeit());
 
@@ -67,8 +66,7 @@ public class KostenErmitteln implements KostenErmittelnLocal {
 		scheinDatums.stream()
 			.forEach(spieltag -> {
 
-				Gebuehr g = findGebuehrForSpielTag(gebuehren,
-					LottoDatum8Util.date2LocalDate(spieltag));
+				Gebuehr g = findGebuehrForSpielTag(gebuehren, spieltag);
 
 				final int einsatzProTipp = g.getEinsatzprotipp();
 
@@ -131,7 +129,6 @@ public class KostenErmitteln implements KostenErmittelnLocal {
 		detailedKosten.setSpiel77(kosten.isSpiel77());
 		detailedKosten.setSuper6(kosten.isSuper6());
 
-		Date abgabeDatum2 = LottoDatum8Util.localDateTime2Date(abgabeDatum);
 		LocalDate erstesZiehungsdatum = LottoDatum8Util.ersterZiehungstag(
 			abgabeDatum.toLocalDate(), abgabeDatum.toLocalTime(), isMittwoch,
 			isSamstag, ABGABESCHLUSSMITTWOCH, ABGABESCHLUSSSAMSTAG);
@@ -140,8 +137,9 @@ public class KostenErmitteln implements KostenErmittelnLocal {
 
 		List<Gebuehr> gebuehren = gebuehrFacade.findAll();
 
-		List<Date> ziehungsDatums = LottoDatumUtil.ziehungsTage(abgabeDatum2,
-			isMittwoch, isSamstag, ABGABESCHLUSSMITTWOCH, ABGABESCHLUSSSAMSTAG,
+		List<LocalDate> ziehungsDatums = LottoDatum8Util.ziehungsTage(
+			abgabeDatum.toLocalDate(), abgabeDatum.toLocalTime(), isMittwoch,
+			isSamstag, ABGABESCHLUSSMITTWOCH, ABGABESCHLUSSSAMSTAG,
 			kosten.getLaufzeit());
 
 //                einmalig Grundgebuehr 
@@ -163,9 +161,8 @@ public class KostenErmitteln implements KostenErmittelnLocal {
 		Gebuehr gNeu = null;
 
 		int anzahlZiehungenTmp = 0;
-		for (Date date : ziehungsDatums) {
-			gNeu = findGebuehrForSpielTag(gebuehren,
-				LottoDatum8Util.date2LocalDate(date));
+		for (LocalDate date : ziehungsDatums) {
+			gNeu = findGebuehrForSpielTag(gebuehren, date);
 			if (gAktuell == null) {
 				gAktuell = gNeu;
 				anzahlZiehungenTmp = 1; // erster Ziehungstag
