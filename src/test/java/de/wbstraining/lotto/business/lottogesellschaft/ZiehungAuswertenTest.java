@@ -43,8 +43,8 @@ import de.wbstraining.lotto.testdatengenerierung.Testdatengenerator;
 public class ZiehungAuswertenTest {
 
 	private static String schemaPath = "testdatengenerator.xsd";
-	private static String xmlPath = "testdatengenerator.xml";
-//	private static String xmlPath = "testdatengenerator_2o2m2o2m.xml";
+//	private static String xmlPath = "testdatengenerator.xml";
+	private static String xmlPath = "testdatengenerator_2o2m2o2m.xml";
 //	private static String xmlPath = "testdatengenerator_15zieOhneGkl1.xml";
 
 	@Deployment
