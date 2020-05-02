@@ -6,9 +6,9 @@
 package de.wbstraining.lotto.populatedb;
 
 import java.math.BigInteger;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -23,13 +23,15 @@ import de.wbstraining.lotto.persistence.model.Spiel;
  * @author gz1
  */
 @Stateless
-public class PopulateSpielUndGewinnklasse implements PopulateSpielUndGewinnklasseLocal {
+public class PopulateSpielUndGewinnklasse
+	implements PopulateSpielUndGewinnklasseLocal {
 	@EJB
 	private SpielFacadeLocal spielFacade;
 	@EJB
 	private GewinnklasseFacadeLocal gewinnklasseFacade;
 
-	private void populateGewinnklassen(Date date, Date gueltigBis, Spiel spiel, String[] gewinnKlassen) {
+	private void populateGewinnklassen(LocalDate gueltigAb, LocalDate gueltigBis,
+		Spiel spiel, String[] gewinnKlassen) {
 
 		Gewinnklasse gewinnklasse;
 		String[] items;
@@ -42,15 +44,15 @@ public class PopulateSpielUndGewinnklasse implements PopulateSpielUndGewinnklass
 
 			gewinnklasse.setSpielid(spiel);
 			// das müssen wir noch automatisch machen
-			gewinnklasse.setCreated(date);
+			gewinnklasse.setCreated(gueltigAb.atStartOfDay());
 			// das müssen wir noch automatisch machen
-			gewinnklasse.setLastmodified(date);
+			gewinnklasse.setLastmodified(gueltigAb.atStartOfDay());
 			gewinnklasse.setBeschreibung(items[0]);
 			gewinnklasse.setGewinnklassenr(Integer.parseInt(items[1]));
 			gewinnklasse.setBezeichnunglatein(items[2]);
 			gewinnklasse.setBetrag(BigInteger.valueOf(Long.parseLong(items[3])));
 			gewinnklasse.setIsabsolut(Boolean.valueOf(items[4]));
-			gewinnklasse.setGueltigab(date);
+			gewinnklasse.setGueltigab(gueltigAb);
 			gewinnklasse.setGueltigbis(gueltigBis);
 
 			gewinnklasseFacade.create(gewinnklasse);
@@ -64,32 +66,39 @@ public class PopulateSpielUndGewinnklasse implements PopulateSpielUndGewinnklass
 		// bezeichnungLatein
 		// betrag
 		// isAbsolut
-		String[] gewinnklassen6Aus49 = { "6 Richtige + SZ,1,I,1280,false", "6 Richtige,2,II,1000,false",
-				"5 Richtige + SZ,3,III,500,false", "5 Richtige,4,IV,1500,false", "4 Richtige + SZ,5,V,500,false",
-				"4 Richtige,6,VI,1000,false", "3 Richtige + SZ,7,VII,1000,false", "3 Richtige,8,VIII,4500,false",
-				"2 Richtige + SZ,9,IX,500,true" };
+		String[] gewinnklassen6Aus49 = { "6 Richtige + SZ,1,I,1280,false",
+			"6 Richtige,2,II,1000,false", "5 Richtige + SZ,3,III,500,false",
+			"5 Richtige,4,IV,1500,false", "4 Richtige + SZ,5,V,500,false",
+			"4 Richtige,6,VI,1000,false", "3 Richtige + SZ,7,VII,1000,false",
+			"3 Richtige,8,VIII,4500,false", "2 Richtige + SZ,9,IX,500,true" };
 		// beschreibung
 		// gewinnklasseNr
 		// bezeichnungLatein
 		// betrag
 		// isAbsolut
-		String[] gewinnklassenSpiel77 = { "richtige Gewinnzahl,1,I,0,true", "6 richtige Endziffern,2,II,7777700,true",
-				"5 richtige Endziffern,3,III,777700,true", "4 richtige Endziffern,4,IV,77700,true",
-				"3 richtige Endziffern,5,V,7700,true", "2 richtige Endziffern,6,VI,1700,true",
-				"1 richtige Endziffer,7,VII,500,true" };
+		String[] gewinnklassenSpiel77 = { "richtige Gewinnzahl,1,I,0,true",
+			"6 richtige Endziffern,2,II,7777700,true",
+			"5 richtige Endziffern,3,III,777700,true",
+			"4 richtige Endziffern,4,IV,77700,true",
+			"3 richtige Endziffern,5,V,7700,true",
+			"2 richtige Endziffern,6,VI,1700,true",
+			"1 richtige Endziffer,7,VII,500,true" };
 		// beschreibung
 		// gewinnklasseNr
 		// bezeichnungLatein
 		// betrag
 		// isAbsolut
 		String[] gewinnklassenSuper6 = { "6 richtige Endziffern,1,I,10000000,true",
-				"5 richtige Endziffern,2,II,666600,true", "4 richtige Endziffern,3,III,66600,true",
-				"3 richtige Endziffern,4,IV,6600,true", "2 richtige Endziffern,5,V,600,true",
-				"1 richtige Endziffer,6,VI,250,true" };
+			"5 richtige Endziffern,2,II,666600,true",
+			"4 richtige Endziffern,3,III,66600,true",
+			"3 richtige Endziffern,4,IV,6600,true",
+			"2 richtige Endziffern,5,V,600,true",
+			"1 richtige Endziffer,6,VI,250,true" };
 
-		Date date = new Date();
-		Date gueltigAb = new GregorianCalendar(2015, Calendar.DECEMBER, 31).getTime();
-		Date gueltigBis = new GregorianCalendar(2020, Calendar.DECEMBER, 31).getTime();
+		LocalDateTime date = LocalDateTime.now();
+		LocalDate gueltigAb = LocalDate.of(2015, Month.JANUARY, 1);
+		LocalDate gueltigBis = gueltigAb.plusYears(10)
+			.minusDays(1);
 
 		Spiel sechsAus49 = new Spiel();
 		Spiel super6 = new Spiel();
@@ -117,7 +126,8 @@ public class PopulateSpielUndGewinnklasse implements PopulateSpielUndGewinnklass
 		spielFacade.create(super6);
 		spielFacade.create(spiel77);
 
-		populateGewinnklassen(gueltigAb, gueltigBis, sechsAus49, gewinnklassen6Aus49);
+		populateGewinnklassen(gueltigAb, gueltigBis, sechsAus49,
+			gewinnklassen6Aus49);
 		populateGewinnklassen(gueltigAb, gueltigBis, spiel77, gewinnklassenSpiel77);
 		populateGewinnklassen(gueltigAb, gueltigBis, super6, gewinnklassenSuper6);
 	}

@@ -1,5 +1,6 @@
 ## Code-Beiträge von mir
 
+### während der Weiterbildung
 - [business.ZiehungAuswerten.java](https://github.com/cmiethli/wbslotto/blob/3f818fcc3cc653640cb02c00aea4e04f137b384c/src/main/java/de/wbstraining/lotto/business/lottogesellschaft/ZiehungAuswerten.java#L47)
   - **Herzstück des Projektes**: Hier wird eine Ziehung ausgewertet und sowohl die Einnahmen der Lottogesellschaft, als auch die Gewinne der Spieler berechnet und persistiert.
   - in Zusammenarbeit mit Dimitri
@@ -11,3 +12,6 @@
   - in Zusammenarbeit mit Martin und Dimitri
     - Dimitris Beiträge: [putEinsaetzeInKstnDtlDtoObj()](https://github.com/cmiethli/wbslotto/blob/3f818fcc3cc653640cb02c00aea4e04f137b384c/src/main/java/de/wbstraining/lotto/business/lottospieler/KostenErmitteln.java#L229), [Zeilen 169-210](https://github.com/cmiethli/wbslotto/blob/3f818fcc3cc653640cb02c00aea4e04f137b384c/src/main/java/de/wbstraining/lotto/business/lottospieler/KostenErmitteln.java#L168)
     - Mein Beitrag: *Rest*
+    
+### nach der Weiterbildung
+- Portierung zum neuen Java 8 Date/Time API

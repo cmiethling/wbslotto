@@ -7,9 +7,9 @@ package de.wbstraining.lotto.web.lottospieler.controller;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -27,8 +27,6 @@ import de.wbstraining.lotto.persistence.model.Kunde;
 import de.wbstraining.lotto.persistence.model.Users2;
 import de.wbstraining.lotto.util.UtilSecurity;
 
-
-
 /**
  *
  * @author gz1
@@ -43,15 +41,15 @@ public class RegistrierungController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
-	private KundeFacadeLocal kundeFacadeLocal; // nur private KundeFacadeLocal kundeFacadeLocal => weil die
+	private KundeFacadeLocal kundeFacadeLocal; // nur private KundeFacadeLocal
+																							// kundeFacadeLocal => weil die
 
 	@EJB
-    private UserRolesFacadeLocal userRolesFacadeLocal;
-    
-    @EJB
-    Users2FacadeLocal users2FacadeLocal;
-    												// untergeordneten Tabellen mit angelegt werden
+	private UserRolesFacadeLocal userRolesFacadeLocal;
 
+	@EJB
+	Users2FacadeLocal users2FacadeLocal;
+	// untergeordneten Tabellen mit angelegt werden
 
 	// Tabelle Kunde
 	private String name;
@@ -78,7 +76,7 @@ public class RegistrierungController implements Serializable {
 	private String kontoinhaber;
 
 	private boolean skip;
-	
+
 	public String getSuccessMessage() {
 		return successMessage;
 	}
@@ -108,7 +106,7 @@ public class RegistrierungController implements Serializable {
 	public String getBenutzerName() {
 		return benutzername;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -209,81 +207,77 @@ public class RegistrierungController implements Serializable {
 		return kontoinhaber;
 	}
 
-    public String senden() {
-    	
-        Date date = new Date();
-        
-        //Kundendaten
-    	Kunde kunde = new Kunde();   
-    	kunde.setDispo(BigInteger.ZERO);
-    	kunde.setGesperrt(null);
-    	kunde.setGuthaben(BigInteger.ZERO);
-    	kunde.setIsannahmestelle(Boolean.FALSE);
-        kunde.setName(name);
-        kunde.setVorname(vorname);
-        kunde.setEmail(email);
-        kunde.setCreated(date);
-        kunde.setLastmodified(date);
-        
-        //Adressdaten
-        Adresse adresse;
-        kunde.setAdresseList(new ArrayList<Adresse>());
-        adresse = new Adresse();
-        adresse.setKundeid(kunde);
-        adresse.setAdressenr(1);
-        adresse.setStrasse(strasse);
-        adresse.setHausnummer(hausnummer);
-        adresse.setAdresszusatz(adresszusatz);
-        adresse.setPlz(plz);
-        adresse.setOrt(ort);
-        adresse.setLand(land);
-        adresse.setCreated(date);
-        adresse.setLastmodified(date);
-        kunde.setAdresseList(Arrays.asList(adresse));
-        
+	public String senden() {
 
-        // Bankverbindung anlegen
-        Bankverbindung bankverbindung;
-        bankverbindung = new Bankverbindung();
-        bankverbindung.setKundeid(kunde);
-        bankverbindung.setBankverbindungnr(1);
-        bankverbindung.setIban(iban);
-        bankverbindung.setBic(bic);
-        bankverbindung.setName(bankname);
-        bankverbindung.setKontoinhaber(kunde.getVorname() + " " + kunde.getName());
-        bankverbindung.setCreated(date);
-        bankverbindung.setLastmodified(date);
-        kunde.setBankverbindungList(Arrays.asList(bankverbindung));
-        
-        
-		Users2 user = new Users2();				
+		LocalDateTime now = LocalDateTime.now();
+
+		// Kundendaten
+		Kunde kunde = new Kunde();
+		kunde.setDispo(BigInteger.ZERO);
+		kunde.setGesperrt(null);
+		kunde.setGuthaben(BigInteger.ZERO);
+		kunde.setIsannahmestelle(Boolean.FALSE);
+		kunde.setName(name);
+		kunde.setVorname(vorname);
+		kunde.setEmail(email);
+		kunde.setCreated(now);
+		kunde.setLastmodified(now);
+
+		// Adressdaten
+		Adresse adresse;
+		kunde.setAdresseList(new ArrayList<Adresse>());
+		adresse = new Adresse();
+		adresse.setKundeid(kunde);
+		adresse.setAdressenr(1);
+		adresse.setStrasse(strasse);
+		adresse.setHausnummer(hausnummer);
+		adresse.setAdresszusatz(adresszusatz);
+		adresse.setPlz(plz);
+		adresse.setOrt(ort);
+		adresse.setLand(land);
+		adresse.setCreated(now);
+		adresse.setLastmodified(now);
+		kunde.setAdresseList(Arrays.asList(adresse));
+
+		// Bankverbindung anlegen
+		Bankverbindung bankverbindung;
+		bankverbindung = new Bankverbindung();
+		bankverbindung.setKundeid(kunde);
+		bankverbindung.setBankverbindungnr(1);
+		bankverbindung.setIban(iban);
+		bankverbindung.setBic(bic);
+		bankverbindung.setName(bankname);
+		bankverbindung.setKontoinhaber(kunde.getVorname() + " " + kunde.getName());
+		bankverbindung.setCreated(now);
+		bankverbindung.setLastmodified(now);
+		kunde.setBankverbindungList(Arrays.asList(bankverbindung));
+
+		Users2 user = new Users2();
 		user.setUsername(name);
-		String securePassword = UtilSecurity.str2Md(passwort);	
+		String securePassword = UtilSecurity.str2Md(passwort);
 		System.out.println(securePassword);
 		user.setPassword(securePassword);
 //		user.setKundeid(kunde);
 
-	
-		
-        kundeFacadeLocal.create(kunde);
+		kundeFacadeLocal.create(kunde);
 		user.setKundeid(kunde);
 		users2FacadeLocal.create(user);
-		
-		// ToDo Verbindung User zu UserRoles aufbauen; entsprechend UserRoles persistieren
-		//-----------------------------------------------------------------------------------
+
+		// ToDo Verbindung User zu UserRoles aufbauen; entsprechend UserRoles
+		// persistieren
+		// -----------------------------------------------------------------------------------
 //		user.setUserRolesList(Arrays.asList(userRoles)); 		
 //		UserRoles userRoles = new UserRoles();
 //		userRoles.setRole("Benutzer");
 //		userRoles.setUserName(benutzername);
 //		userRoles.setUserid(user);
 //		userRolesFacadeLocal.create(userRoles);
-		
-        save();
-		
-        return "ok";
-       
-    }
-	
+
+		save();
+
+		return "ok";
+
+	}
 
 	public boolean isSkip() {
 		return skip;
@@ -303,10 +297,12 @@ public class RegistrierungController implements Serializable {
 	}
 
 	public void save() {
-		//FacesMessage msg = new FacesMessage("Erfolgreiche Registrierung", "Herzlichen Willkommen bei WBS Lotto :" + getVorname()+" "+getName());
-		//FacesContext.getCurrentInstance().addMessage(null, msg);
-		
-		successMessage = "Herzlich Willkommen bei WBS Lotto : " + getVorname()+" "+getName()+" !!";
+		// FacesMessage msg = new FacesMessage("Erfolgreiche Registrierung",
+		// "Herzlichen Willkommen bei WBS Lotto :" + getVorname()+" "+getName());
+		// FacesContext.getCurrentInstance().addMessage(null, msg);
+
+		successMessage = "Herzlich Willkommen bei WBS Lotto : " + getVorname() + " "
+			+ getName() + " !!";
 	}
 
 	public String getBenutzername() {

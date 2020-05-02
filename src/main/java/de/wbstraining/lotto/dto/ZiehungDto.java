@@ -1,8 +1,8 @@
 package de.wbstraining.lotto.dto;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Date;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -14,16 +14,15 @@ public class ZiehungDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Date ziehungsDatum;
+	private LocalDate ziehungsDatum;
 	private int[] ziehungsZahlen;
 	private int spiel77;
 	private int super6;
 	private int superzahl;
-	
-	
+
 	// muss
 	public ZiehungDto() {
-		
+
 	}
 
 	public ZiehungDto(Ziehung ziehung) {
@@ -35,11 +34,11 @@ public class ZiehungDto implements Serializable {
 		superzahl = ziehung.getSuperzahl();
 	}
 
-	public Date getZiehungsDatum() {
+	public LocalDate getZiehungsDatum() {
 		return ziehungsDatum;
 	}
 
-	public void setZiehungsDatum(Date ziehungsDatum) {
+	public void setZiehungsDatum(LocalDate ziehungsDatum) {
 		this.ziehungsDatum = ziehungsDatum;
 	}
 
@@ -48,7 +47,7 @@ public class ZiehungDto implements Serializable {
 	}
 
 	public void setZiehungsZahlen(int[] ziehungsZahlen) {
-		//TODO
+		// TODO
 		this.ziehungsZahlen = ziehungsZahlen;
 	}
 
@@ -78,10 +77,9 @@ public class ZiehungDto implements Serializable {
 
 	@Override
 	public String toString() {
-		return "ZiehungDto [ziehungsDatum=" + ziehungsDatum + ", ziehungsZahlen=" + Arrays.toString(ziehungsZahlen)
-				+ ", spiel77=" + spiel77 + ", super6=" + super6 + ", superzahl=" + superzahl + "]\n";
+		return "ZiehungDto [ziehungsDatum=" + ziehungsDatum + ", ziehungsZahlen="
+			+ Arrays.toString(ziehungsZahlen) + ", spiel77=" + spiel77 + ", super6="
+			+ super6 + ", superzahl=" + superzahl + "]\n";
 	}
-	
-	
 
 }

@@ -8,8 +8,8 @@ package de.wbstraining.lotto.web.lottospieler.controller;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -148,11 +148,14 @@ public class LottoscheinEinreichenController implements Serializable {
 		this.anzahlTipps = anzahlTipps;
 	}
 
-	public void validateKundeId(FacesContext context, UIComponent toValidate, Object value) {
+	public void validateKundeId(FacesContext context, UIComponent toValidate,
+		Object value) {
 		Long kundeId = (Long) value;
 		List<Kunde> allKundeId = kundeFacadeLocal.findAll();
 
-		if (allKundeId.parallelStream().noneMatch(k -> k.getKundeid().equals(kundeId))) {
+		if (allKundeId.parallelStream()
+			.noneMatch(k -> k.getKundeid()
+				.equals(kundeId))) {
 			((UIInput) toValidate).setValid(false);
 
 			FacesMessage message = new FacesMessage("Invalid KundeId");
@@ -175,12 +178,13 @@ public class LottoscheinEinreichenController implements Serializable {
 		System.out.println("KundeId: " + kundeId);
 		System.out.println("Kunde: " + kunde);
 
-		Date datum = new Date();
+		LocalDateTime datum = LocalDateTime.now();
 		Lottoschein schein = new Lottoschein();
 
 		schein.setKundeid(kunde);
 		schein.setAbgabedatum(datum);
-		schein.setBelegnummer((BigInteger.valueOf((long) (Math.random() * 1_000_000_000))));
+		schein.setBelegnummer(
+			(BigInteger.valueOf((long) (Math.random() * 1_000_000_000))));
 		schein.setCreated(datum);
 		schein.setLastmodified(datum);
 		schein.setIsabgeschlossen(Boolean.FALSE);
@@ -215,8 +219,8 @@ public class LottoscheinEinreichenController implements Serializable {
 		System.out.println(spiele.contains("super6"));
 		System.out.println(spiele.contains("spiel77"));
 
-		if (!laufzeit.isEmpty() && (ziehungstage.contains("isMittwoch") || ziehungstage.contains("isSamstag"))
-				&& anzahlTipps > 0) {
+		if (!laufzeit.isEmpty() && (ziehungstage.contains("isMittwoch")
+			|| ziehungstage.contains("isSamstag")) && anzahlTipps > 0) {
 			// TODO
 			KostenDetailedDto dto = new KostenDetailedDto();
 			dto.setAnzahlTipps(0);
@@ -226,7 +230,8 @@ public class LottoscheinEinreichenController implements Serializable {
 			 * int kosten =
 			 * lottoscheinEinreichenKostenErmitteln.kostenermitteln(LocalDate.now(),
 			 * Integer.parseInt(laufzeit), ziehungstage.contains("isMittwoch"),
-			 * ziehungstage.contains("isSamstag"), anzahlTipps, spiele.contains("super6"),
+			 * ziehungstage.contains("isSamstag"), anzahlTipps,
+			 * spiele.contains("super6"),
 			 * spiele.contains("spiel77"));
 			 */
 			int kosten = 123;

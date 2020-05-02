@@ -1,13 +1,10 @@
 package de.wbstraining.lotto.business.lottogesellschaft;
 
 import java.math.BigInteger;
-import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Period;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -93,7 +90,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 
 	private long einsatzSpiel77;
 	private long einsatzLotto;
-	private Date jetzt;
+	private LocalDateTime jetzt;
 // Value: anzGewinner dieser Gewinnklasse
 	private ConcurrentMap<Gewinnklasse, Integer> anzGewinnerProKlasse;
 
@@ -109,7 +106,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 
 //	############### Konstruktor ###############
 	public ZiehungAuswerten() {
-		jetzt = new Date();
+		jetzt = LocalDateTime.now();
 		anzSpiel77 = new AtomicInteger();
 		anzSuper6 = new AtomicInteger();
 		summeAnzahlTipps = new AtomicInteger();
@@ -206,7 +203,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 	 */
 	private void loadData(Ziehung ziehung) {
 		this.zie = ziehung;
-		Date ziehungsdatum = zie.getZiehungsdatum();
+		LocalDate ziehungsdatum = zie.getZiehungsdatum();
 
 		geb = kostenErmitteln.findGebuehrForSpielTag(gebuehrFacade.findAll(),
 			ziehungsdatum);
@@ -665,65 +662,27 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
               .filter(jp -> jp.getGewinnklasseid().getSpielid().getName().equals(spielName))
               .filter(jp -> jp.getZiehungid().getStatus()==1)   //TODO For Christian --- it is Important
               // would be good, if indexing and sorting in DB
-              .filter(jp -> (jp.getZiehungid().getZiehungsdatum().before(ziehung.getZiehungsdatum())))                                                                                                                                                                                                                                 
+              .filter(jp -> (jp.getZiehungid().getZiehungsdatum().isBefore(ziehung.getZiehungsdatum())))                                                                                                                                                                                                                                 
               .max((jp1, jp2) -> jp1.getZiehungid().getZiehungsdatum()
                               .compareTo(jp2.getZiehungid().getZiehungsdatum()));
     }
 
-    ////// find day of last "Ziehung" .START:
+    ////// find day of current "Ziehung" .START:
      log.info("Jackpot calculate for ZiehungsDate " + ziehung.getZiehungsdatum());
 
-    ////// find day of last "Ziehung" .START:
-
-    Calendar cal = Calendar.getInstance();
-    cal.setFirstDayOfWeek(Calendar.SUNDAY);
-
-    Date ziehDatum = ziehung.getZiehungsdatum();
-
-    Date parsedZiehDate = new Date();
-    try {
-            parsedZiehDate = new SimpleDateFormat("yyyy-MM-dd").parse("" + ziehDatum);
-    } catch (Exception e) {
-            e.getMessage();
+    ////// find day of last "Ziehung" .START:   
+    LocalDate aktZieDate = ziehung.getZiehungsdatum();
+    DayOfWeek dow = aktZieDate.getDayOfWeek();
+    LocalDate lastZieDate;
+    if(dow == DayOfWeek.WEDNESDAY) {
+    	lastZieDate = aktZieDate.minusDays(4);
+    }else if(dow == DayOfWeek.SATURDAY) {
+    	lastZieDate = aktZieDate.minusDays(3) ;
+    }else {
+    	throw new IllegalArgumentException("invalid ziehungsDatum...");
     }
-
-     log.info("parsedZiehDate=new SimpleDateFormat(\"yyyy-MM-dd\").parse(\"\"+ziehDatum):" + parsedZiehDate);
-
-    
-    Date ziehDate = Date.from(parsedZiehDate.toInstant());
-     log.info("Date.from(parsedZiehDate.toInstant()" + ziehDate);
-    
-    LocalDateTime ldtZiehDate = LocalDateTime.ofInstant(ziehDate.toInstant(), ZoneId.systemDefault());
-                     
-
-    cal.setTime(Date.from(ziehDate.toInstant().plus(Period.ofDays(0))));
-
-
-    cal.set(Calendar.YEAR, ldtZiehDate.getYear());
-    cal.set(Calendar.MONTH, ldtZiehDate.getMonthValue() - 1);
-    cal.set(Calendar.DAY_OF_MONTH, ldtZiehDate.getDayOfMonth());
-    cal.set(Calendar.HOUR_OF_DAY, 0); // <--because we need only date
-    cal.set(Calendar.MINUTE, 0); // <--because we need only date
-    cal.set(Calendar.SECOND, 0);
-    cal.set(Calendar.MILLISECOND, 0); // <--because we need only date
-//                System.out.println("Instant of callender ZiehungDatum:" + cal.toInstant());
-
-    int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK); // "1" is Sanday
-    //
-    if (dayOfWeek == Calendar.SATURDAY) {
-            cal.add(Calendar.DAY_OF_MONTH, -3);
-//             log.info("If saturday :" + cal);
-    } else if (dayOfWeek == Calendar.WEDNESDAY) {
-            cal.add(Calendar.DAY_OF_MONTH, -4);
-//             log.info("If WEDNESDEy :" + cal);
-    }
-
-    Date lastZiehDate = Date.from(cal.toInstant().atZone(ZoneId.systemDefault()).toInstant());
-//    System.out.println("lastZiehDate: " + lastZiehDate);
-//    System.out.println("lastJackpotDate: "
-//                    + (lastJkpotBeforeZieh_opt.isPresent() ? lastJkpotBeforeZieh_opt.get().getZiehungid().getZiehungsdatum()
-//                                    : null));
-    ////// find day of last "Ziehung" <<<< END
+//    log.info("aktZiehDatum: " + aktZieDate + "    lastZiehDatum: " + lastZieDate);
+////// find day of last "Ziehung" <<<< END
 
 //    System.out.println(" ============== Jackpot ENTWURF STEP 1 ===================");
     long jackPotGewinn = 0L; // TODO 1) JPQL Metode, SELECT last Jackpot649 of Jackpots before Ziehung
@@ -749,7 +708,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 
     // Preparation Jackpot. "Templ" is "Tamplate"
     // ==================
-    Date jpTemplDate = new Date();
+    LocalDateTime jpTemplDate = LocalDateTime.now();
     Jackpot jackpotToPersist = new Jackpot();
     jackpotToPersist.setCreated(jpTemplDate);
     jackpotToPersist.setZiehungid(ziehung);
@@ -796,7 +755,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
     // If date is old (Jackpot is won before) -> we must have new Jackpot wit Nr 1
     // from "anzahlziehungen"
     else if (lastJkpotBeforeZieh_opt.isPresent()
-                && (lastJkpotBeforeZieh_opt.get().getZiehungid().getZiehungsdatum().before(lastZiehDate))) {
+                && (lastJkpotBeforeZieh_opt.get().getZiehungid().getZiehungsdatum().isBefore(lastZieDate))) {
         // Someone had won before
         
         commulJPotGewinn = jackPotGewinn;
@@ -809,8 +768,8 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
     // If Standard
     else if (lastJkpotBeforeZieh_opt.isPresent()
         && lastJkpotBeforeZieh_opt.get().getAnzahlziehungen() < (maxTimesJpot - 1)
-        && lastJkpotBeforeZieh_opt.get().getZiehungid().getZiehungsdatum().before(ziehung.getZiehungsdatum())
-        && lastJkpotBeforeZieh_opt.get().getZiehungid().getZiehungsdatum().compareTo(lastZiehDate) >= 0) {
+        && lastJkpotBeforeZieh_opt.get().getZiehungid().getZiehungsdatum().isBefore(aktZieDate)
+        && lastJkpotBeforeZieh_opt.get().getZiehungid().getZiehungsdatum().compareTo(lastZieDate) >= 0) {
         
         if (gwnkls1.getIsabsolut()) {
             commulJPotGewinn = lastJkpotBeforeZieh_opt.get().getBetragkumuliert() + jackPotGewinn;
@@ -1029,6 +988,6 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 		// mit anzGewinner=0 initialisieren
 		anzGewinnerProKlasse = gewinnklassen.stream()
 			.collect(Collectors.toConcurrentMap(gkl -> gkl, gkl -> 0));
-		jetzt = new Date();
+		jetzt = LocalDateTime.now();
 	}
 }
