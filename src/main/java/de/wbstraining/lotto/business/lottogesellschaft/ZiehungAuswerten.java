@@ -368,7 +368,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 						(Gewinnklasse g, Integer anzGew) -> ++anzGew);
 
 				if (gkl.getGewinnklassenr() == 9) {
-					lzLotto.setGewinn(BigInteger.valueOf(gkl.getBetrag()));
+					lzLotto.setGewinn(gkl.getBetrag());
 				} else {
 					lzLottosOhneGkl9.add(lzLotto);
 				}
@@ -624,7 +624,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 													.getGewinnklasseid())
 											.collect(Collectors.toList())));
 
-			lzLotto.setGewinn(BigInteger.valueOf(gklZieQuo.getQuote()));
+			lzLotto.setGewinn(gklZieQuo.getQuote());
 			lzLotto.setVersion(getUpdatedVersion(lzLotto.getVersion()));
 			lzLotto.setLastmodified(jetzt);
 			lottoscheinziehung6aus49Facade.edit(lzLotto);
