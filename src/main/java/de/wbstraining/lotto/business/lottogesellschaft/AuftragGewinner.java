@@ -23,8 +23,8 @@ public class AuftragGewinner implements Serializable {
 	private Lottoscheinziehung6aus49 lottoscheinziehung6aus49;
 
 	public AuftragGewinner(Lottoschein lottoschein, Kunde kunde, Ziehung ziehung,
-		Lottoscheinziehung lottoscheinziehung,
-		Lottoscheinziehung6aus49 lottoscheinziehung6aus49) {
+			Lottoscheinziehung lottoscheinziehung,
+			Lottoscheinziehung6aus49 lottoscheinziehung6aus49) {
 		this.lottoschein = lottoschein;
 		this.lottoscheinziehung = lottoscheinziehung;
 		this.kunde = kunde;
@@ -58,7 +58,7 @@ public class AuftragGewinner implements Serializable {
 
 	public long getGewinnklsseid() {
 		return gewinnklasseziehungquote.getGewinnklasse()
-			.getGewinnklasseid();
+				.getGewinnklasseid();
 	}
 
 	public long getQuote() {
@@ -67,22 +67,21 @@ public class AuftragGewinner implements Serializable {
 
 	public long getGewinnspiel77() {
 		if (lottoscheinziehung.getGewinnspiel77() != null)
-			return lottoscheinziehung.getGewinnspiel77()
-				.longValue();
+			return lottoscheinziehung.getGewinnspiel77();
 		return 0;
 	}
 
 	public long getGewinnsuper6() {
 		if (lottoscheinziehung.getGewinnsuper6() != null)
 			return lottoscheinziehung.getGewinnsuper6()
-				.longValue();
+					.longValue();
 		return 0;
 	}
 
 	public long getGewinn() {
 		if (lottoscheinziehung6aus49 != null)
 			return lottoscheinziehung6aus49.getGewinn()
-				.longValue();
+					.longValue();
 		return 0;
 	}
 
