@@ -6,7 +6,6 @@
 package de.wbstraining.lotto.persistence.model;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -72,9 +71,9 @@ public class Kunde implements Serializable {
 	@Column(name = "vorname")
 	private String vorname;
 	@Column(name = "guthaben")
-	private BigInteger guthaben;
+	private long guthaben;
 	@Column(name = "dispo")
-	private BigInteger dispo;
+	private long dispo;
 	@Column(name = "gesperrt")
 	@Convert(converter = LocalDateTimeAttributeConverter.class)
 	private LocalDateTime gesperrt;
@@ -149,19 +148,19 @@ public class Kunde implements Serializable {
 		this.vorname = vorname;
 	}
 
-	public BigInteger getGuthaben() {
+	public long getGuthaben() {
 		return guthaben;
 	}
 
-	public void setGuthaben(BigInteger guthaben) {
+	public void setGuthaben(long guthaben) {
 		this.guthaben = guthaben;
 	}
 
-	public BigInteger getDispo() {
+	public long getDispo() {
 		return dispo;
 	}
 
-	public void setDispo(BigInteger dispo) {
+	public void setDispo(long dispo) {
 		this.dispo = dispo;
 	}
 
