@@ -71,7 +71,7 @@ public class Lottoscheinziehung6aus49 implements Serializable {
 	private Gewinnklasse gewinnklasse;
 	@JoinColumn(name = "lottoscheinziehungid", referencedColumnName = "lottoscheinziehungid")
 	@ManyToOne(optional = false)
-	private Lottoscheinziehung lottoscheinziehungid;
+	private Lottoscheinziehung lottoscheinziehung;
 
 	public Lottoscheinziehung6aus49() {
 	}
@@ -144,12 +144,12 @@ public class Lottoscheinziehung6aus49 implements Serializable {
 		this.gewinnklasse = gewinnklasseid;
 	}
 
-	public Lottoscheinziehung getLottoscheinziehungid() {
-		return lottoscheinziehungid;
+	public Lottoscheinziehung getLottoscheinziehung() {
+		return lottoscheinziehung;
 	}
 
-	public void setLottoscheinziehungid(Lottoscheinziehung lottoscheinziehungid) {
-		this.lottoscheinziehungid = lottoscheinziehungid;
+	public void setLottoscheinziehung(Lottoscheinziehung lottoscheinziehungid) {
+		this.lottoscheinziehung = lottoscheinziehungid;
 	}
 
 	@Override

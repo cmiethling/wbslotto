@@ -361,7 +361,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 				lzLotto.setCreated(jetzt);
 				lzLotto.setLastmodified(jetzt);
 				lzLotto.setTippnr(i + 1);
-				lzLotto.setLottoscheinziehungid(lz);
+				lzLotto.setLottoscheinziehung(lz);
 
 				lzLotto.setGewinnklasse(gkl);
 				anzGewinnerProKlasse.computeIfPresent(gkl,
