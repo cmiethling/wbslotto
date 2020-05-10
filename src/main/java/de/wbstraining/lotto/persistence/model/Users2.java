@@ -43,7 +43,7 @@ public class Users2 implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
 	@Column(name = "user_id")
-	private Integer userId;
+	private Long userId;
 	@Basic(optional = false)
 	@NotNull
 	@Size(min = 1, max = 10)
@@ -64,11 +64,11 @@ public class Users2 implements Serializable {
 	public Users2() {
 	}
 
-	public Users2(Integer userId) {
+	public Users2(Long userId) {
 		this.userId = userId;
 	}
 
-	public Users2(Integer userId, String username, String password) {
+	public Users2(Long userId, String username, String password) {
 		this.userId = userId;
 		this.username = username;
 		this.password = password;
