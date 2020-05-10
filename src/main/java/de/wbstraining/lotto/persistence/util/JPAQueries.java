@@ -118,7 +118,7 @@ public class JPAQueries implements JPAQueriesLocal {
 //              System.out
 //                      .println("/n---------- gewinnklassen.len: ____" + gewinnklassen.size());
 		if (gewinnklassen.stream().count() != gewinnklassen.stream().map((gkl) -> {
-			String str = "" + gkl.getSpielid().getSpielid();
+			String str = "" + gkl.getSpiel().getSpielid();
 			str += "_" + gkl.getGewinnklassenr();
 			return str;
 		}).distinct().count()) {
@@ -126,7 +126,7 @@ public class JPAQueries implements JPAQueriesLocal {
 			Map<String, Gewinnklasse> map = new HashMap<String, Gewinnklasse>();
 
 			for (Gewinnklasse gwnKl : gewinnklassen) {
-				String strKey = "" + (Long) gwnKl.getSpielid().getSpielid() + "_" + gwnKl.getGewinnklassenr();
+				String strKey = "" + (Long) gwnKl.getSpiel().getSpielid() + "_" + gwnKl.getGewinnklassenr();
 				if (map.containsKey(strKey)) {
 					map.compute(strKey, (k, v) -> v.getGueltigab().compareTo(gwnKl.getGueltigab()) < 0 ? v = gwnKl : v);
 				} else {

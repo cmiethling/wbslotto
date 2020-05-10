@@ -227,7 +227,7 @@ public class RegistrierungController implements Serializable {
 		Adresse adresse;
 		kunde.setAdresseList(new ArrayList<Adresse>());
 		adresse = new Adresse();
-		adresse.setKundeid(kunde);
+		adresse.setKunde(kunde);
 		adresse.setAdressenr(1);
 		adresse.setStrasse(strasse);
 		adresse.setHausnummer(hausnummer);
@@ -242,7 +242,7 @@ public class RegistrierungController implements Serializable {
 		// Bankverbindung anlegen
 		Bankverbindung bankverbindung;
 		bankverbindung = new Bankverbindung();
-		bankverbindung.setKundeid(kunde);
+		bankverbindung.setKunde(kunde);
 		bankverbindung.setBankverbindungnr(1);
 		bankverbindung.setIban(iban);
 		bankverbindung.setBic(bic);
@@ -260,7 +260,7 @@ public class RegistrierungController implements Serializable {
 //		user.setKundeid(kunde);
 
 		kundeFacadeLocal.create(kunde);
-		user.setKundeid(kunde);
+		user.setKunde(kunde);
 		users2FacadeLocal.create(user);
 
 		// ToDo Verbindung User zu UserRoles aufbauen; entsprechend UserRoles

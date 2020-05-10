@@ -35,18 +35,18 @@ import de.wbstraining.lotto.persistence.util.LocalDateTimeAttributeConverter;
 @Entity
 @Table(name = "kunde")
 @NamedQueries({
-	@NamedQuery(name = "Kunde.findAll", query = "SELECT k FROM Kunde k"),
-	@NamedQuery(name = "Kunde.findByKundeid", query = "SELECT k FROM Kunde k WHERE k.kundeid = :kundeid"),
-	@NamedQuery(name = "Kunde.findByName", query = "SELECT k FROM Kunde k WHERE k.name = :name"),
-	@NamedQuery(name = "Kunde.findByEmail", query = "SELECT k FROM Kunde k WHERE k.email = :email"),
-	@NamedQuery(name = "Kunde.findByVorname", query = "SELECT k FROM Kunde k WHERE k.vorname = :vorname"),
-	@NamedQuery(name = "Kunde.findByGuthaben", query = "SELECT k FROM Kunde k WHERE k.guthaben = :guthaben"),
-	@NamedQuery(name = "Kunde.findByDispo", query = "SELECT k FROM Kunde k WHERE k.dispo = :dispo"),
-	@NamedQuery(name = "Kunde.findByGesperrt", query = "SELECT k FROM Kunde k WHERE k.gesperrt = :gesperrt"),
-	@NamedQuery(name = "Kunde.findByIsannahmestelle", query = "SELECT k FROM Kunde k WHERE k.isannahmestelle = :isannahmestelle"),
-	@NamedQuery(name = "Kunde.findByCreated", query = "SELECT k FROM Kunde k WHERE k.created = :created"),
-	@NamedQuery(name = "Kunde.findByLastmodified", query = "SELECT k FROM Kunde k WHERE k.lastmodified = :lastmodified"),
-	@NamedQuery(name = "Kunde.findByVersion", query = "SELECT k FROM Kunde k WHERE k.version = :version") })
+		@NamedQuery(name = "Kunde.findAll", query = "SELECT k FROM Kunde k"),
+		@NamedQuery(name = "Kunde.findByKundeid", query = "SELECT k FROM Kunde k WHERE k.kundeid = :kundeid"),
+		@NamedQuery(name = "Kunde.findByName", query = "SELECT k FROM Kunde k WHERE k.name = :name"),
+		@NamedQuery(name = "Kunde.findByEmail", query = "SELECT k FROM Kunde k WHERE k.email = :email"),
+		@NamedQuery(name = "Kunde.findByVorname", query = "SELECT k FROM Kunde k WHERE k.vorname = :vorname"),
+		@NamedQuery(name = "Kunde.findByGuthaben", query = "SELECT k FROM Kunde k WHERE k.guthaben = :guthaben"),
+		@NamedQuery(name = "Kunde.findByDispo", query = "SELECT k FROM Kunde k WHERE k.dispo = :dispo"),
+		@NamedQuery(name = "Kunde.findByGesperrt", query = "SELECT k FROM Kunde k WHERE k.gesperrt = :gesperrt"),
+		@NamedQuery(name = "Kunde.findByIsannahmestelle", query = "SELECT k FROM Kunde k WHERE k.isannahmestelle = :isannahmestelle"),
+		@NamedQuery(name = "Kunde.findByCreated", query = "SELECT k FROM Kunde k WHERE k.created = :created"),
+		@NamedQuery(name = "Kunde.findByLastmodified", query = "SELECT k FROM Kunde k WHERE k.lastmodified = :lastmodified"),
+		@NamedQuery(name = "Kunde.findByVersion", query = "SELECT k FROM Kunde k WHERE k.version = :version") })
 public class Kunde implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -92,13 +92,13 @@ public class Kunde implements Serializable {
 	private LocalDateTime lastmodified;
 	@Column(name = "version")
 	private Integer version;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "kundeid")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "kunde")
 	private List<Lottoschein> lottoscheinList;
-	@OneToOne(mappedBy = "kundeid")
+	@OneToOne(mappedBy = "kunde")
 	private Users users;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "kundeid")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "kunde")
 	private List<Bankverbindung> bankverbindungList;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "kundeid")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "kunde")
 	private List<Adresse> adresseList;
 
 	public Kunde() {
@@ -109,7 +109,7 @@ public class Kunde implements Serializable {
 	}
 
 	public Kunde(Long kundeid, String name, String email, LocalDateTime created,
-		LocalDateTime lastmodified) {
+			LocalDateTime lastmodified) {
 		this.kundeid = kundeid;
 		this.name = name;
 		this.email = email;
@@ -253,7 +253,7 @@ public class Kunde implements Serializable {
 		}
 		Kunde other = (Kunde) object;
 		if ((this.kundeid == null && other.kundeid != null)
-			|| (this.kundeid != null && !this.kundeid.equals(other.kundeid))) {
+				|| (this.kundeid != null && !this.kundeid.equals(other.kundeid))) {
 			return false;
 		}
 		return true;

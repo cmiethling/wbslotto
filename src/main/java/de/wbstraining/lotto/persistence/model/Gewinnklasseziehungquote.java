@@ -68,10 +68,10 @@ public class Gewinnklasseziehungquote implements Serializable {
 	private Integer version;
 	@JoinColumn(name = "gewinnklasseid", referencedColumnName = "gewinnklasseid")
 	@ManyToOne(optional = false)
-	private Gewinnklasse gewinnklasseid;
+	private Gewinnklasse gewinnklasse;
 	@JoinColumn(name = "ziehungid", referencedColumnName = "ziehungid")
 	@ManyToOne(optional = false)
-	private Ziehung ziehungid;
+	private Ziehung ziehung;
 
 	public Gewinnklasseziehungquote() {
 	}
@@ -138,20 +138,20 @@ public class Gewinnklasseziehungquote implements Serializable {
 		this.version = version;
 	}
 
-	public Gewinnklasse getGewinnklasseid() {
-		return gewinnklasseid;
+	public Gewinnklasse getGewinnklasse() {
+		return gewinnklasse;
 	}
 
-	public void setGewinnklasseid(Gewinnklasse gewinnklasseid) {
-		this.gewinnklasseid = gewinnklasseid;
+	public void setGewinnklasse(Gewinnklasse gewinnklasseid) {
+		this.gewinnklasse = gewinnklasseid;
 	}
 
-	public Ziehung getZiehungid() {
-		return ziehungid;
+	public Ziehung getZiehung() {
+		return ziehung;
 	}
 
-	public void setZiehungid(Ziehung ziehungid) {
-		this.ziehungid = ziehungid;
+	public void setZiehung(Ziehung ziehungid) {
+		this.ziehung = ziehungid;
 	}
 
 	@Override

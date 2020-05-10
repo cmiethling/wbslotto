@@ -58,7 +58,7 @@ public class LottoscheinEinreichenREST {
 		Long kundid = dto.getKundeid();
 		Kunde kunde = kundeFacade.find(kundid);
 		Lottoschein schein = new Lottoschein();
-		schein.setKundeid(kunde);
+		schein.setKunde(kunde);
 		schein.setAbgabedatum(dto.getAbgabeDatum());
 		schein.setBelegnummer(
 			(BigInteger.valueOf((long) (Math.random() * 100_000_000_000L))));
