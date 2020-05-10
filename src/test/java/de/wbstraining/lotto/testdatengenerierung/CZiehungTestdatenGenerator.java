@@ -5,7 +5,6 @@
  */
 package de.wbstraining.lotto.testdatengenerierung;
 
-import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -38,7 +37,7 @@ import de.wbstraining.lotto.util.LottoDatum8Util;
 @Stateless
 @PermitAll
 public class CZiehungTestdatenGenerator
-	implements CZiehungTestdatenGeneratorLocal {
+		implements CZiehungTestdatenGeneratorLocal {
 
 	@EJB
 	private KundeFacadeLocal kundeFacadeLocal;
@@ -56,7 +55,7 @@ public class CZiehungTestdatenGenerator
 	private AtomicLong belegNummer;
 	private List<Kunde> kunden;
 	private static final Logger logger = Logger
-		.getLogger("wbs.corejpa.testdatengenerierung");
+			.getLogger("wbs.corejpa.testdatengenerierung");
 
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	private void setInitialValues(int blocksize, long belegnummernStart) {
@@ -77,8 +76,8 @@ public class CZiehungTestdatenGenerator
 
 	// @TransactionAttribute(TransactionAttributeType.REQUIRED)
 	private void generateSchein(LocalDate abgabeDatum, Kunde kunde, int losnummer,
-		byte[] tipps, int kosten, boolean isMittwoch, boolean isSamstag,
-		long belegnummer, Ziehung ziehung, boolean isSpiel77, boolean isSuper6) {
+			byte[] tipps, int kosten, boolean isMittwoch, boolean isSamstag,
+			long belegnummer, Ziehung ziehung, boolean isSpiel77, boolean isSuper6) {
 		Lottoschein schein = new Lottoschein();
 		LocalDateTime date = LocalDateTime.now();
 
@@ -94,7 +93,7 @@ public class CZiehungTestdatenGenerator
 		schein.setLosnummer(losnummer);
 		schein.setTipps(tipps);
 		schein.setKosten(kosten);
-		schein.setBelegnummer(BigInteger.valueOf(belegnummer));
+		schein.setBelegnummer(belegnummer);
 		schein.setLaufzeit(1);
 		// schein.setIsspiel77(isSpiel77);
 		// schein.setIssuper6(isSuper6);
@@ -115,18 +114,18 @@ public class CZiehungTestdatenGenerator
 
 	// @TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	private void generateScheine6Aus49(CZiehung config, Ziehung ziehung,
-		AtomicLong belegNr) {
+			AtomicLong belegNr) {
 		int anzahlBloecke;
 		int anzahlRest;
 		Anzahl6Aus49ProGkl anzahl6Aus49ProGkl = config.getAnzahl6Aus49ProGkl();
 		writeLog("generateScheine6Aus49");
 		for (int gkl = 0; gkl < anzahl6Aus49ProGkl.getAnzahl()
-			.size(); gkl++) {
+				.size(); gkl++) {
 			writeLog("gkl: " + gkl);
 			anzahlBloecke = anzahl6Aus49ProGkl.getAnzahl()
-				.get(gkl) / blockSize;
+					.get(gkl) / blockSize;
 			anzahlRest = anzahl6Aus49ProGkl.getAnzahl()
-				.get(gkl) % blockSize;
+					.get(gkl) % blockSize;
 			for (int i = 0; i < anzahlBloecke; i++) {
 				writeLog("block: " + i);
 				generateScheine6Aus49Block(gkl, config, ziehung, blockSize, belegNr);
@@ -138,119 +137,121 @@ public class CZiehungTestdatenGenerator
 
 	// @TransactionAttribute(TransactionAttributeType.REQUIRED)
 	private void generateScheine6Aus49Block(int gkl, CZiehung config,
-		Ziehung ziehung, int anzahl, AtomicLong belegNr) {
+			Ziehung ziehung, int anzahl, AtomicLong belegNr) {
 		int losnummer = TestdatenGeneratorUtil.generateLosnummer6Aus49(
-			config.getSuperzahl(), config.getSpiel77(), config.getSuper6(), gkl);
+				config.getSuperzahl(), config.getSpiel77(), config.getSuper6(), gkl);
 		byte[] tipps = TestdatenGeneratorUtil.generateTippsFuerEinenSchein(
-			config.getZahlenAlsBits(), gkl, config.getAnzahlTippsProSchein());
+				config.getZahlenAlsBits(), gkl, config.getAnzahlTippsProSchein());
 		int kosten = 0;
 		boolean isMittwoch = TestdatenGeneratorUtil
-			.isMittwoch(ziehung.getZiehungsdatum());
+				.isMittwoch(ziehung.getZiehungsdatum());
 		boolean isSamstag = TestdatenGeneratorUtil
-			.isSamstag(ziehung.getZiehungsdatum());
+				.isSamstag(ziehung.getZiehungsdatum());
 		int anzahlKunden = kunden.size();
 		LocalDate abgabeDatum = ziehung.getZiehungsdatum();
 		int kdnr;
 		for (int i = 0; i < anzahl; i++) {
 			kdnr = (int) (Math.random() * anzahlKunden);
 			generateSchein(abgabeDatum, kunden.get(kdnr), losnummer, tipps, kosten,
-				isMittwoch, isSamstag, belegNr.getAndIncrement(), ziehung, false,
-				false);
+					isMittwoch, isSamstag, belegNr.getAndIncrement(), ziehung, false,
+					false);
 		}
 	}
 
 	// @TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	private void generateScheineSpiel77(CZiehung config, Ziehung ziehung,
-		AtomicLong belegNr) {
+			AtomicLong belegNr) {
 		int anzahlBloecke;
 		int anzahlRest;
 		AnzahlSpiel77ProGkl anzahlSpiel77ProGkl = config.getAnzahlSpiel77ProGkl();
 		int[] losnummernSpiel77 = TestdatenGeneratorUtil
-			.generateLosnummernSpiel77(config.getSpiel77());
+				.generateLosnummernSpiel77(config.getSpiel77());
 		writeLog("generateScheineSpiel77");
 		for (int gkl = 0; gkl < anzahlSpiel77ProGkl.getAnzahl()
-			.size(); gkl++) {
+				.size(); gkl++) {
 			writeLog("gkl: " + gkl);
 			anzahlBloecke = anzahlSpiel77ProGkl.getAnzahl()
-				.get(gkl) / blockSize;
+					.get(gkl) / blockSize;
 			anzahlRest = anzahlSpiel77ProGkl.getAnzahl()
-				.get(gkl) % blockSize;
+					.get(gkl) % blockSize;
 			for (int i = 0; i < anzahlBloecke; i++) {
 				writeLog("block: " + i);
 				generateScheineSpiel77Block(losnummernSpiel77[gkl], config, ziehung,
-					blockSize, belegNr);
+						blockSize, belegNr);
 			}
 			writeLog("rest: " + anzahlRest);
 			generateScheineSpiel77Block(losnummernSpiel77[gkl], config, ziehung,
-				anzahlRest, belegNr);
+					anzahlRest, belegNr);
 		}
 	}
 
 	// @TransactionAttribute(TransactionAttributeType.REQUIRED)
 	private void generateScheineSpiel77Block(int losnummer, CZiehung config,
-		Ziehung ziehung, int anzahl, AtomicLong belegNr) {
+			Ziehung ziehung, int anzahl, AtomicLong belegNr) {
 		byte[] tipps = TestdatenGeneratorUtil.generateTippsFuerEinenSchein(
-			config.getZahlenAlsBits(), 0, config.getAnzahlTippsProSchein());
+				config.getZahlenAlsBits(), 0, config.getAnzahlTippsProSchein());
 		int kosten = 0;
 		boolean isMittwoch = TestdatenGeneratorUtil
-			.isMittwoch(ziehung.getZiehungsdatum());
+				.isMittwoch(ziehung.getZiehungsdatum());
 		boolean isSamstag = TestdatenGeneratorUtil
-			.isSamstag(ziehung.getZiehungsdatum());
+				.isSamstag(ziehung.getZiehungsdatum());
 		int anzahlKunden = kunden.size();
 		LocalDate abgabeDatum = ziehung.getZiehungsdatum();
 		int kdnr;
 		for (int i = 0; i < anzahl; i++) {
 			kdnr = (int) (Math.random() * anzahlKunden);
 			generateSchein(abgabeDatum, kunden.get(kdnr), losnummer, tipps, kosten,
-				isMittwoch, isSamstag, belegNr.getAndIncrement(), ziehung, true, false);
+					isMittwoch, isSamstag, belegNr.getAndIncrement(), ziehung, true,
+					false);
 		}
 
 	}
 
 	// @TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	private void generateScheineSuper6(CZiehung config, Ziehung ziehung,
-		AtomicLong belegNr) {
+			AtomicLong belegNr) {
 		int anzahlBloecke;
 		int anzahlRest;
 		AnzahlSuper6ProGkl anzahlSuper6ProGkl = config.getAnzahlSuper6ProGkl();
 		int[] losnummernSuper6 = TestdatenGeneratorUtil
-			.generateLosnummernSuper6(config.getSuper6());
+				.generateLosnummernSuper6(config.getSuper6());
 		writeLog("generateScheineSuper6");
 		for (int gkl = 0; gkl < anzahlSuper6ProGkl.getAnzahl()
-			.size(); gkl++) {
+				.size(); gkl++) {
 			writeLog("gkl: " + gkl);
 			anzahlBloecke = anzahlSuper6ProGkl.getAnzahl()
-				.get(gkl) / blockSize;
+					.get(gkl) / blockSize;
 			anzahlRest = anzahlSuper6ProGkl.getAnzahl()
-				.get(gkl) % blockSize;
+					.get(gkl) % blockSize;
 			for (int i = 0; i < anzahlBloecke; i++) {
 				writeLog("block: " + i);
 				generateScheineSuper6Block(losnummernSuper6[gkl], config, ziehung,
-					blockSize, belegNr);
+						blockSize, belegNr);
 			}
 			writeLog("rest: " + anzahlRest);
 			generateScheineSuper6Block(losnummernSuper6[gkl], config, ziehung,
-				anzahlRest, belegNr);
+					anzahlRest, belegNr);
 		}
 	}
 
 	// @TransactionAttribute(TransactionAttributeType.REQUIRED)
 	private void generateScheineSuper6Block(int losnummer, CZiehung config,
-		Ziehung ziehung, int anzahl, AtomicLong belegNr) {
+			Ziehung ziehung, int anzahl, AtomicLong belegNr) {
 		byte[] tipps = TestdatenGeneratorUtil.generateTippsFuerEinenSchein(
-			config.getZahlenAlsBits(), 0, config.getAnzahlTippsProSchein());
+				config.getZahlenAlsBits(), 0, config.getAnzahlTippsProSchein());
 		int kosten = 0;
 		boolean isMittwoch = TestdatenGeneratorUtil
-			.isMittwoch(ziehung.getZiehungsdatum());
+				.isMittwoch(ziehung.getZiehungsdatum());
 		boolean isSamstag = TestdatenGeneratorUtil
-			.isSamstag(ziehung.getZiehungsdatum());
+				.isSamstag(ziehung.getZiehungsdatum());
 		int anzahlKunden = kunden.size();
 		LocalDate abgabeDatum = ziehung.getZiehungsdatum();
 		int kdnr;
 		for (int i = 0; i < anzahl; i++) {
 			kdnr = (int) (Math.random() * anzahlKunden);
 			generateSchein(abgabeDatum, kunden.get(kdnr), losnummer, tipps, kosten,
-				isMittwoch, isSamstag, belegNr.getAndIncrement(), ziehung, false, true);
+					isMittwoch, isSamstag, belegNr.getAndIncrement(), ziehung, false,
+					true);
 		}
 
 	}
@@ -263,13 +264,13 @@ public class CZiehungTestdatenGenerator
 		ziehung.setCreated(date);
 		ziehung.setLastmodified(date);
 		ziehung.setZiehungsdatum(ziehungsDatum);
-		ziehung.setZahlenalsbits(BigInteger.valueOf(config.getZahlenAlsBits()));
+		ziehung.setZahlenalsbits(config.getZahlenAlsBits());
 		ziehung.setSpiel77(config.getSpiel77());
 		ziehung.setSuper6(config.getSuper6());
 		ziehung.setSuperzahl(config.getSuperzahl());
-		ziehung.setEinsatzlotto(BigInteger.ZERO);
-		ziehung.setEinsatzspiel77(BigInteger.ZERO);
-		ziehung.setEinsatzsuper6(BigInteger.ZERO);
+		ziehung.setEinsatzlotto(0L);
+		ziehung.setEinsatzspiel77(0L);
+		ziehung.setEinsatzsuper6(0L);
 		ziehung.setStatus(1);
 		ziehungFacadeLocal.create(ziehung);
 		return ziehung;
@@ -278,7 +279,7 @@ public class CZiehungTestdatenGenerator
 	// generierung von testdaten für eine ziehung
 	// @TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	private void generiereTestDatenFuerEineZiehung(CZiehung config,
-		LocalDate datum, AtomicLong belegNr) {
+			LocalDate datum, AtomicLong belegNr) {
 		Ziehung ziehung = createZiehung(config, datum);
 		writeLog("ziehungId: " + ziehung.getZiehungid());
 		writeLog("datum: " + ziehung.getZiehungsdatum());
@@ -292,27 +293,27 @@ public class CZiehungTestdatenGenerator
 	// @TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	@Override
 	public void generiereTestDatenFuerMehrereZiehungen(
-		Testdatengenerator generator) {
+			Testdatengenerator generator) {
 		long belegNummernStart = generator.belegnummernStart;
 		AtomicLong belegNr = new AtomicLong(belegNummernStart);
 		int blockSize = generator.getTxBlocksize();
 
 		XMLGregorianCalendar xmlGregCal = generator.datumErsteZiehung;
 		LocalDateTime dateErsteZie = xmlGregCal.toGregorianCalendar()
-			.toZonedDateTime()
-			.toLocalDateTime();
+				.toZonedDateTime()
+				.toLocalDateTime();
 //		writeLog("datumErsteZiehung: " + dateErsteZie);
 
 		List<CZiehung> configList = generator.getCZiehung();
 		setInitialValues(blockSize, belegNummernStart);
 		List<LocalDate> ziehungsTage = LottoDatum8Util.ziehungsTage(
-			dateErsteZie.toLocalDate(), dateErsteZie.toLocalTime(), true, true, 18,
-			19, generator.getCZiehung()
-				.size());
+				dateErsteZie.toLocalDate(), dateErsteZie.toLocalTime(), true, true, 18,
+				19, generator.getCZiehung()
+						.size());
 
 		int i = 0;
 		writeLog(
-			"start generierung der ziehungen gemaess testdatengenerator.xml...");
+				"start generierung der ziehungen gemaess testdatengenerator.xml...");
 		writeLog("anzahl ziehungen: " + configList.size());
 		writeLog("txBlocksize: " + generator.getTxBlocksize());
 		for (CZiehung config : configList) {

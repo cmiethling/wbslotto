@@ -6,7 +6,6 @@
 package de.wbstraining.lotto.web.lottospieler.controller;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -213,9 +212,9 @@ public class RegistrierungController implements Serializable {
 
 		// Kundendaten
 		Kunde kunde = new Kunde();
-		kunde.setDispo(BigInteger.ZERO);
+		kunde.setDispo(0L);
 		kunde.setGesperrt(null);
-		kunde.setGuthaben(BigInteger.ZERO);
+		kunde.setGuthaben(0L);
 		kunde.setIsannahmestelle(Boolean.FALSE);
 		kunde.setName(name);
 		kunde.setVorname(vorname);
@@ -302,7 +301,7 @@ public class RegistrierungController implements Serializable {
 		// FacesContext.getCurrentInstance().addMessage(null, msg);
 
 		successMessage = "Herzlich Willkommen bei WBS Lotto : " + getVorname() + " "
-			+ getName() + " !!";
+				+ getName() + " !!";
 	}
 
 	public String getBenutzername() {
