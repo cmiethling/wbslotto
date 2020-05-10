@@ -1,6 +1,5 @@
 package de.wbstraining.lotto.web.rest.service;
 
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 
 import javax.ejb.EJB;
@@ -60,8 +59,7 @@ public class LottoscheinEinreichenREST {
 		Lottoschein schein = new Lottoschein();
 		schein.setKunde(kunde);
 		schein.setAbgabedatum(dto.getAbgabeDatum());
-		schein.setBelegnummer(
-			(BigInteger.valueOf((long) (Math.random() * 100_000_000_000L))));
+		schein.setBelegnummer((long) (Math.random() * 100_000_000_000L));
 		schein.setCreated(date);
 		schein.setLastmodified(date);
 		schein.setIsabgeschlossen(Boolean.FALSE);

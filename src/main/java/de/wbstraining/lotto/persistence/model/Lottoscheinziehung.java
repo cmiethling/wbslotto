@@ -6,7 +6,6 @@
 package de.wbstraining.lotto.persistence.model;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -75,9 +74,9 @@ public class Lottoscheinziehung implements Serializable {
 	@Column(name = "version")
 	private Integer version;
 	@Column(name = "gewinnspiel77")
-	private BigInteger gewinnspiel77;
+	private Long gewinnspiel77;
 	@Column(name = "gewinnsuper6")
-	private BigInteger gewinnsuper6;
+	private Long gewinnsuper6;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "lottoscheinziehung")
 	private List<Lottoscheinziehung6aus49> lottoscheinziehung6aus49List;
 	@JoinColumn(name = "gewinnklasseidspiel77", referencedColumnName = "gewinnklasseid")
@@ -164,19 +163,19 @@ public class Lottoscheinziehung implements Serializable {
 		this.version = version;
 	}
 
-	public BigInteger getGewinnspiel77() {
+	public Long getGewinnspiel77() {
 		return gewinnspiel77;
 	}
 
-	public void setGewinnspiel77(BigInteger gewinnspiel77) {
+	public void setGewinnspiel77(Long gewinnspiel77) {
 		this.gewinnspiel77 = gewinnspiel77;
 	}
 
-	public BigInteger getGewinnsuper6() {
+	public Long getGewinnsuper6() {
 		return gewinnsuper6;
 	}
 
-	public void setGewinnsuper6(BigInteger gewinnsuper6) {
+	public void setGewinnsuper6(Long gewinnsuper6) {
 		this.gewinnsuper6 = gewinnsuper6;
 	}
 

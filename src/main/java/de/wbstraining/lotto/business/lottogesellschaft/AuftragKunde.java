@@ -1,7 +1,6 @@
 package de.wbstraining.lotto.business.lottogesellschaft;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -38,11 +37,11 @@ public class AuftragKunde implements Serializable {
 		return kunde.getVorname();
 	}
 
-	public BigInteger getGuthaben() {
+	public long getGuthaben() {
 		return kunde.getGuthaben();
 	}
 
-	public BigInteger getDispo() {
+	public long getDispo() {
 		return kunde.getDispo();
 	}
 

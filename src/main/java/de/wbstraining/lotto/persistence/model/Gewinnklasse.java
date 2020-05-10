@@ -6,7 +6,6 @@
 package de.wbstraining.lotto.persistence.model;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -76,7 +75,7 @@ public class Gewinnklasse implements Serializable {
 	@Column(name = "isabsolut")
 	private boolean isabsolut;
 	@Column(name = "betrag")
-	private BigInteger betrag;
+	private Long betrag;
 	@Column(name = "gueltigab")
 	@Convert(converter = LocalDateAttributeConverter.class)
 	private LocalDate gueltigab;
@@ -168,11 +167,11 @@ public class Gewinnklasse implements Serializable {
 		this.isabsolut = isabsolut;
 	}
 
-	public BigInteger getBetrag() {
+	public Long getBetrag() {
 		return betrag;
 	}
 
-	public void setBetrag(BigInteger betrag) {
+	public void setBetrag(Long betrag) {
 		this.betrag = betrag;
 	}
 

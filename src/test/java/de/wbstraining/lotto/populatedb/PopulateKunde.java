@@ -5,7 +5,6 @@
  */
 package de.wbstraining.lotto.populatedb;
 
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -50,9 +49,9 @@ public class PopulateKunde implements PopulateKundeLocal {
 		// auch seine adresse und seine bankverbindung persistiert.
 
 		String[] vornamen = { "alfred", "ulla", "marilyn", "arthur", "berenice",
-			"michail", "dulcinea", "ursula", "carolin", "krabat" };
+				"michail", "dulcinea", "ursula", "carolin", "krabat" };
 		String[] namen = { "jarry", "hahn", "monroe", "miller", "dante", "bulgakow",
-			"don quijote", "poznanski", "emcke", "kantorka" };
+				"don quijote", "poznanski", "emcke", "kantorka" };
 		Kunde kunde;
 		Adresse adresse;
 		Bankverbindung bankverbindung;
@@ -64,8 +63,8 @@ public class PopulateKunde implements PopulateKundeLocal {
 			kunde.setEmail("email_" + i);
 			kunde.setName(namen[i]);
 			kunde.setVorname(vornamen[i]);
-			kunde.setDispo(BigInteger.ZERO);
-			kunde.setGuthaben(BigInteger.ZERO);
+			kunde.setDispo(0L);
+			kunde.setGuthaben(0L);
 			kunde.setIsannahmestelle(Boolean.FALSE);
 			kunde.setGesperrt(null);
 			kunde.setCreated(now);
@@ -87,7 +86,7 @@ public class PopulateKunde implements PopulateKundeLocal {
 
 			adresse.setKunde(kunde);
 			kunde.getAdresseList()
-				.add(adresse);
+					.add(adresse);
 
 			bankverbindung = new Bankverbindung();
 			bankverbindung.setBic("bic_" + i);
@@ -100,7 +99,7 @@ public class PopulateKunde implements PopulateKundeLocal {
 
 			bankverbindung.setKunde(kunde);
 			kunde.getBankverbindungList()
-				.add(bankverbindung);
+					.add(bankverbindung);
 
 			kundeFacadeLocal.create(kunde);
 		}

@@ -6,7 +6,6 @@
 package de.wbstraining.lotto.persistence.model;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -64,7 +63,7 @@ public class Ziehung implements Serializable {
 	@Convert(converter = LocalDateAttributeConverter.class)
 	private LocalDate ziehungsdatum;
 	@Column(name = "zahlenalsbits")
-	private BigInteger zahlenalsbits;
+	private Long zahlenalsbits;
 	@Column(name = "superzahl")
 	private Integer superzahl;
 	@Column(name = "spiel77")
@@ -72,11 +71,11 @@ public class Ziehung implements Serializable {
 	@Column(name = "super6")
 	private Integer super6;
 	@Column(name = "einsatzlotto")
-	private BigInteger einsatzlotto;
+	private Long einsatzlotto;
 	@Column(name = "einsatzspiel77")
-	private BigInteger einsatzspiel77;
+	private Long einsatzspiel77;
 	@Column(name = "einsatzsuper6")
-	private BigInteger einsatzsuper6;
+	private Long einsatzsuper6;
 	@Column(name = "status")
 	private Integer status;
 	@Basic(optional = false)
@@ -130,11 +129,11 @@ public class Ziehung implements Serializable {
 		this.ziehungsdatum = ziehungsdatum;
 	}
 
-	public BigInteger getZahlenalsbits() {
+	public Long getZahlenalsbits() {
 		return zahlenalsbits;
 	}
 
-	public void setZahlenalsbits(BigInteger zahlenalsbits) {
+	public void setZahlenalsbits(Long zahlenalsbits) {
 		this.zahlenalsbits = zahlenalsbits;
 	}
 
@@ -162,27 +161,27 @@ public class Ziehung implements Serializable {
 		this.super6 = super6;
 	}
 
-	public BigInteger getEinsatzlotto() {
+	public Long getEinsatzlotto() {
 		return einsatzlotto;
 	}
 
-	public void setEinsatzlotto(BigInteger einsatzlotto) {
+	public void setEinsatzlotto(Long einsatzlotto) {
 		this.einsatzlotto = einsatzlotto;
 	}
 
-	public BigInteger getEinsatzspiel77() {
+	public Long getEinsatzspiel77() {
 		return einsatzspiel77;
 	}
 
-	public void setEinsatzspiel77(BigInteger einsatzspiel77) {
+	public void setEinsatzspiel77(Long einsatzspiel77) {
 		this.einsatzspiel77 = einsatzspiel77;
 	}
 
-	public BigInteger getEinsatzsuper6() {
+	public Long getEinsatzsuper6() {
 		return einsatzsuper6;
 	}
 
-	public void setEinsatzsuper6(BigInteger einsatzsuper6) {
+	public void setEinsatzsuper6(Long einsatzsuper6) {
 		this.einsatzsuper6 = einsatzsuper6;
 	}
 

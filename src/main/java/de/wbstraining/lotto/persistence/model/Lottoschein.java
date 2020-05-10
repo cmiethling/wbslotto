@@ -6,7 +6,6 @@
 package de.wbstraining.lotto.persistence.model;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -61,7 +60,7 @@ public class Lottoschein implements Serializable {
 	@Column(name = "lottoscheinid")
 	private Long lottoscheinid;
 	@Column(name = "belegnummer")
-	private BigInteger belegnummer;
+	private Long belegnummer;
 	@Basic(optional = false)
 	@NotNull
 	@Column(name = "losnummer")
@@ -133,11 +132,11 @@ public class Lottoschein implements Serializable {
 		this.lottoscheinid = lottoscheinid;
 	}
 
-	public BigInteger getBelegnummer() {
+	public Long getBelegnummer() {
 		return belegnummer;
 	}
 
-	public void setBelegnummer(BigInteger belegnummer) {
+	public void setBelegnummer(Long belegnummer) {
 		this.belegnummer = belegnummer;
 	}
 
