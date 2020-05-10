@@ -50,7 +50,7 @@ public class PdfReportGenerator {
 				e.getMessage();
 			}
 
-			document.add(new Paragraph("Report von Ziehung " + jackpot.get(0).getZiehungid().getZiehungid())
+			document.add(new Paragraph("Report von Ziehung " + jackpot.get(0).getZiehung().getZiehungid())
 					.addStyle(new Style().setFontSize(30)).setTextAlignment(TextAlignment.CENTER).setBold()
 					.setFontColor(new DeviceRgb(143, 210, 247)));
 			document.add(new Paragraph("Jackpot")

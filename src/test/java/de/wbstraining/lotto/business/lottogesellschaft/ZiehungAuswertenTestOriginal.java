@@ -127,7 +127,7 @@ public class ZiehungAuswertenTestOriginal {
 				.forEach(s -> spielMap.put(s.getName(), s));
 
 		TypedQuery<Lottoscheinziehung> query = em.createQuery(
-				"SELECT lz FROM Lottoscheinziehung lz where lz.ziehungid.ziehungid = 1L",
+				"SELECT lz FROM Lottoscheinziehung lz where lz.ziehung.ziehungid = 1L",
 				Lottoscheinziehung.class);
 
 		List<Lottoscheinziehung> lzList = query.getResultList();

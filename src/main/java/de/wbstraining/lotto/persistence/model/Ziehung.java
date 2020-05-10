@@ -36,20 +36,20 @@ import de.wbstraining.lotto.persistence.util.LocalDateTimeAttributeConverter;
 @Entity
 @Table(name = "ziehung")
 @NamedQueries({
-	@NamedQuery(name = "Ziehung.findAll", query = "SELECT z FROM Ziehung z"),
-	@NamedQuery(name = "Ziehung.findByZiehungid", query = "SELECT z FROM Ziehung z WHERE z.ziehungid = :ziehungid"),
-	@NamedQuery(name = "Ziehung.findByZiehungsdatum", query = "SELECT z FROM Ziehung z WHERE z.ziehungsdatum = :ziehungsdatum"),
-	@NamedQuery(name = "Ziehung.findByZahlenalsbits", query = "SELECT z FROM Ziehung z WHERE z.zahlenalsbits = :zahlenalsbits"),
-	@NamedQuery(name = "Ziehung.findBySuperzahl", query = "SELECT z FROM Ziehung z WHERE z.superzahl = :superzahl"),
-	@NamedQuery(name = "Ziehung.findBySpiel77", query = "SELECT z FROM Ziehung z WHERE z.spiel77 = :spiel77"),
-	@NamedQuery(name = "Ziehung.findBySuper6", query = "SELECT z FROM Ziehung z WHERE z.super6 = :super6"),
-	@NamedQuery(name = "Ziehung.findByEinsatzlotto", query = "SELECT z FROM Ziehung z WHERE z.einsatzlotto = :einsatzlotto"),
-	@NamedQuery(name = "Ziehung.findByEinsatzspiel77", query = "SELECT z FROM Ziehung z WHERE z.einsatzspiel77 = :einsatzspiel77"),
-	@NamedQuery(name = "Ziehung.findByEinsatzsuper6", query = "SELECT z FROM Ziehung z WHERE z.einsatzsuper6 = :einsatzsuper6"),
-	@NamedQuery(name = "Ziehung.findByStatus", query = "SELECT z FROM Ziehung z WHERE z.status = :status"),
-	@NamedQuery(name = "Ziehung.findByCreated", query = "SELECT z FROM Ziehung z WHERE z.created = :created"),
-	@NamedQuery(name = "Ziehung.findByLastmodified", query = "SELECT z FROM Ziehung z WHERE z.lastmodified = :lastmodified"),
-	@NamedQuery(name = "Ziehung.findByVersion", query = "SELECT z FROM Ziehung z WHERE z.version = :version") })
+		@NamedQuery(name = "Ziehung.findAll", query = "SELECT z FROM Ziehung z"),
+		@NamedQuery(name = "Ziehung.findByZiehungid", query = "SELECT z FROM Ziehung z WHERE z.ziehungid = :ziehungid"),
+		@NamedQuery(name = "Ziehung.findByZiehungsdatum", query = "SELECT z FROM Ziehung z WHERE z.ziehungsdatum = :ziehungsdatum"),
+		@NamedQuery(name = "Ziehung.findByZahlenalsbits", query = "SELECT z FROM Ziehung z WHERE z.zahlenalsbits = :zahlenalsbits"),
+		@NamedQuery(name = "Ziehung.findBySuperzahl", query = "SELECT z FROM Ziehung z WHERE z.superzahl = :superzahl"),
+		@NamedQuery(name = "Ziehung.findBySpiel77", query = "SELECT z FROM Ziehung z WHERE z.spiel77 = :spiel77"),
+		@NamedQuery(name = "Ziehung.findBySuper6", query = "SELECT z FROM Ziehung z WHERE z.super6 = :super6"),
+		@NamedQuery(name = "Ziehung.findByEinsatzlotto", query = "SELECT z FROM Ziehung z WHERE z.einsatzlotto = :einsatzlotto"),
+		@NamedQuery(name = "Ziehung.findByEinsatzspiel77", query = "SELECT z FROM Ziehung z WHERE z.einsatzspiel77 = :einsatzspiel77"),
+		@NamedQuery(name = "Ziehung.findByEinsatzsuper6", query = "SELECT z FROM Ziehung z WHERE z.einsatzsuper6 = :einsatzsuper6"),
+		@NamedQuery(name = "Ziehung.findByStatus", query = "SELECT z FROM Ziehung z WHERE z.status = :status"),
+		@NamedQuery(name = "Ziehung.findByCreated", query = "SELECT z FROM Ziehung z WHERE z.created = :created"),
+		@NamedQuery(name = "Ziehung.findByLastmodified", query = "SELECT z FROM Ziehung z WHERE z.lastmodified = :lastmodified"),
+		@NamedQuery(name = "Ziehung.findByVersion", query = "SELECT z FROM Ziehung z WHERE z.version = :version") })
 public class Ziehung implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -92,11 +92,11 @@ public class Ziehung implements Serializable {
 
 	@Column(name = "version")
 	private Integer version;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "ziehungid")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "ziehung")
 	private List<Lottoscheinziehung> lottoscheinziehungList;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "ziehungid")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "ziehung")
 	private List<Jackpot> jackpotList;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "ziehungid")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "ziehung")
 	private List<Gewinnklasseziehungquote> gewinnklasseziehungquoteList;
 
 	public Ziehung() {
@@ -107,7 +107,7 @@ public class Ziehung implements Serializable {
 	}
 
 	public Ziehung(Long ziehungid, LocalDate ziehungsdatum, LocalDateTime created,
-		LocalDateTime lastmodified) {
+			LocalDateTime lastmodified) {
 		this.ziehungid = ziehungid;
 		this.ziehungsdatum = ziehungsdatum;
 		this.created = created;
@@ -223,7 +223,7 @@ public class Ziehung implements Serializable {
 	}
 
 	public void setLottoscheinziehungList(
-		List<Lottoscheinziehung> lottoscheinziehungList) {
+			List<Lottoscheinziehung> lottoscheinziehungList) {
 		this.lottoscheinziehungList = lottoscheinziehungList;
 	}
 
@@ -240,7 +240,7 @@ public class Ziehung implements Serializable {
 	}
 
 	public void setGewinnklasseziehungquoteList(
-		List<Gewinnklasseziehungquote> gewinnklasseziehungquoteList) {
+			List<Gewinnklasseziehungquote> gewinnklasseziehungquoteList) {
 		this.gewinnklasseziehungquoteList = gewinnklasseziehungquoteList;
 	}
 
@@ -260,7 +260,8 @@ public class Ziehung implements Serializable {
 		}
 		Ziehung other = (Ziehung) object;
 		if ((this.ziehungid == null && other.ziehungid != null)
-			|| (this.ziehungid != null && !this.ziehungid.equals(other.ziehungid))) {
+				|| (this.ziehungid != null
+						&& !this.ziehungid.equals(other.ziehungid))) {
 			return false;
 		}
 		return true;

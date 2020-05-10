@@ -43,27 +43,27 @@ import de.wbstraining.lotto.testdatengenerierung.Testdatengenerator;
 public class ZiehungAuswertenTest {
 
 	private static String schemaPath = "testdatengenerator.xsd";
-//	private static String xmlPath = "testdatengenerator.xml";
-	private static String xmlPath = "testdatengenerator_2o2m2o2m.xml";
+	private static String xmlPath = "testdatengenerator.xml";
+//	private static String xmlPath = "testdatengenerator_2o2m2o2m.xml";
 //	private static String xmlPath = "testdatengenerator_15zieOhneGkl1.xml";
 
 	@Deployment
 	public static Archive<?> createTestArchive() {
 		WebArchive archive = ShrinkWrap.create(WebArchive.class, "test.war")
-			.addPackages(true, "de.wbstraining.lotto.persistence",
-				"de.wbstraining.lotto.populatedb", "de.wbstraining.lotto.util",
-				"de.wbstraining.lotto.business.lottospieler",
-				"de.wbstraining.lotto.cache", "de.wbstraining.lotto.mail",
-				"de.wbstraining.lotto.dto",
-				"de.wbstraining.lotto.business.lottogesellschaft",
-				"de.wbstraining.lotto.web.lottospieler.controller",
-				"org.primefaces.event", "de.wbstraining.lotto.testdatengenerierung")
-			.addAsResource(
-				new File("src/test/resources/testdatengenerator/" + xmlPath))
-			.addAsResource(
-				new File("src/test/resources/testdatengenerator/" + schemaPath))
-			.addAsResource("META-INF/persistence.xml")
-			.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+				.addPackages(true, "de.wbstraining.lotto.persistence",
+						"de.wbstraining.lotto.populatedb", "de.wbstraining.lotto.util",
+						"de.wbstraining.lotto.business.lottospieler",
+						"de.wbstraining.lotto.cache", "de.wbstraining.lotto.mail",
+						"de.wbstraining.lotto.dto",
+						"de.wbstraining.lotto.business.lottogesellschaft",
+						"de.wbstraining.lotto.web.lottospieler.controller",
+						"org.primefaces.event", "de.wbstraining.lotto.testdatengenerierung")
+				.addAsResource(
+						new File("src/test/resources/testdatengenerator/" + xmlPath))
+				.addAsResource(
+						new File("src/test/resources/testdatengenerator/" + schemaPath))
+				.addAsResource("META-INF/persistence.xml")
+				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 		return archive;
 	}
 
@@ -95,9 +95,9 @@ public class ZiehungAuswertenTest {
 	public void ziehungAuswerten() throws Exception {
 
 		StreamSource schemaSource = new StreamSource(getClass().getClassLoader()
-			.getResourceAsStream(schemaPath));
+				.getResourceAsStream(schemaPath));
 		SchemaFactory schemaFactory = SchemaFactory
-			.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+				.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 		Schema schema = schemaFactory.newSchema(schemaSource);
 
 		JAXBContext context = JAXBContext.newInstance(Testdatengenerator.class);
@@ -105,8 +105,8 @@ public class ZiehungAuswertenTest {
 		Unmarshaller um = context.createUnmarshaller();
 		um.setSchema(schema);
 		JAXBElement<Testdatengenerator> nodeElement = um
-			.unmarshal(new StreamSource(getClass().getClassLoader()
-				.getResourceAsStream(xmlPath)), Testdatengenerator.class);
+				.unmarshal(new StreamSource(getClass().getClassLoader()
+						.getResourceAsStream(xmlPath)), Testdatengenerator.class);
 		Testdatengenerator generator = nodeElement.getValue();
 		System.out.println(generator.getBelegnummernStart());
 
@@ -114,7 +114,7 @@ public class ZiehungAuswertenTest {
 
 		populateDatabase.populateDatabase();
 		cZiehungTestdatenGenerator
-			.generiereTestDatenFuerMehrereZiehungen(generator);
+				.generiereTestDatenFuerMehrereZiehungen(generator);
 
 //		Alle Ziehungen auswerten
 		List<Ziehung> ziehungen = ziehungFacade.findAll();
@@ -127,28 +127,29 @@ public class ZiehungAuswertenTest {
 		long anzahlSuper6TotalExpected = 21;
 		long anzahlSpiel77TotalExpected = 28;
 		spiele.stream()
-			.forEach(s -> spielMap.put(s.getName(), s));
+				.forEach(s -> spielMap.put(s.getName(), s));
 
 		TypedQuery<Lottoscheinziehung> query = em.createQuery(
-			"SELECT lz FROM Lottoscheinziehung lz where lz.ziehungid.ziehungid = 1L",
-			Lottoscheinziehung.class);
+				"SELECT lz FROM Lottoscheinziehung lz where lz.ziehung.ziehungid = 1L",
+				Lottoscheinziehung.class);
 
 		List<Lottoscheinziehung> lzList = query.getResultList();
 		anzahlSpiel77TotalActual = lzList.stream()
 
-			.filter(lz -> lz.getGewinnklasseidspiel77() != null
-				&& lz.getGewinnklasseidspiel77()
-					.getSpielid()
-					.getName()
-					.equals("Spiel 77"))
-			.count();
+				.filter(lz -> lz.getGewinnklasseidspiel77() != null
+						&& lz.getGewinnklasseidspiel77()
+								.getSpiel()
+								.getName()
+								.equals("Spiel 77"))
+				.count();
+		System.out.println("aF");
 		anzahlSuper6TotalActual = lzList.stream()
-			.filter(lz -> lz.getGewinnklasseidsuper6() != null
-				&& lz.getGewinnklasseidsuper6()
-					.getSpielid()
-					.getName()
-					.equals("Super 6"))
-			.count();
+				.filter(lz -> lz.getGewinnklasseidsuper6() != null
+						&& lz.getGewinnklasseidsuper6()
+								.getSpiel()
+								.getName()
+								.equals("Super 6"))
+				.count();
 		assertEquals(anzahlSuper6TotalExpected, anzahlSuper6TotalActual);
 		assertEquals(anzahlSpiel77TotalExpected, anzahlSpiel77TotalActual);
 

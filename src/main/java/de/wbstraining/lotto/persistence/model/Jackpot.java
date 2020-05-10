@@ -76,7 +76,7 @@ public class Jackpot implements Serializable {
 	private Gewinnklasse gewinnklasse;
 	@JoinColumn(name = "ziehungid", referencedColumnName = "ziehungid")
 	@ManyToOne(optional = false)
-	private Ziehung ziehungid;
+	private Ziehung ziehung;
 
 	public Jackpot() {
 	}
@@ -159,12 +159,12 @@ public class Jackpot implements Serializable {
 		this.gewinnklasse = gewinnklasseid;
 	}
 
-	public Ziehung getZiehungid() {
-		return ziehungid;
+	public Ziehung getZiehung() {
+		return ziehung;
 	}
 
-	public void setZiehungid(Ziehung ziehungid) {
-		this.ziehungid = ziehungid;
+	public void setZiehung(Ziehung ziehungid) {
+		this.ziehung = ziehungid;
 	}
 
 	@Override

@@ -157,7 +157,7 @@ public class PopulateZiehungUndLottoschein
 			lottoscheinziehung = new Lottoscheinziehung();
 			lottoscheinziehung.setLottoscheinid(schein);
 			lottoscheinziehung.setZiehungnr(nr);
-			lottoscheinziehung.setZiehungid(ziehung);
+			lottoscheinziehung.setZiehung(ziehung);
 			lottoscheinziehung.setGewinnklasseidspiel77(null);
 			lottoscheinziehung.setGewinnklasseidsuper6(null);
 			lottoscheinziehung.setIsabgeschlossen(false);

@@ -422,7 +422,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 			Gewinnklasseziehungquote gklZieQuo = new Gewinnklasseziehungquote();
 			gklZieQuo.setCreated(jetzt);
 			gklZieQuo.setLastmodified(jetzt);
-			gklZieQuo.setZiehungid(zie);
+			gklZieQuo.setZiehung(zie);
 			gklZieQuo.setAnzahlgewinner(anzGewinnerProKlasse.get(gkl));
 
 			gklZieQuo.setGewinnklasse(gkl);
@@ -660,11 +660,11 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
     if (!jpList.isEmpty()) {
             lastJkpotBeforeZieh_opt = jpList.stream()
               .filter(jp -> jp.getGewinnklasse().getSpiel().getName().equals(spielName))
-              .filter(jp -> jp.getZiehungid().getStatus()==1)   //TODO For Christian --- it is Important
+              .filter(jp -> jp.getZiehung().getStatus()==1)   //TODO For Christian --- it is Important
               // would be good, if indexing and sorting in DB
-              .filter(jp -> (jp.getZiehungid().getZiehungsdatum().isBefore(ziehung.getZiehungsdatum())))                                                                                                                                                                                                                                 
-              .max((jp1, jp2) -> jp1.getZiehungid().getZiehungsdatum()
-                              .compareTo(jp2.getZiehungid().getZiehungsdatum()));
+              .filter(jp -> (jp.getZiehung().getZiehungsdatum().isBefore(ziehung.getZiehungsdatum())))                                                                                                                                                                                                                                 
+              .max((jp1, jp2) -> jp1.getZiehung().getZiehungsdatum()
+                              .compareTo(jp2.getZiehung().getZiehungsdatum()));
     }
 
     ////// find day of current "Ziehung" .START:
@@ -711,7 +711,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
     LocalDateTime jpTemplDate = LocalDateTime.now();
     Jackpot jackpotToPersist = new Jackpot();
     jackpotToPersist.setCreated(jpTemplDate);
-    jackpotToPersist.setZiehungid(ziehung);
+    jackpotToPersist.setZiehung(ziehung);
     jackpotToPersist.setVersion(1);
     jackpotToPersist.setLastmodified(jpTemplDate);
 
@@ -755,7 +755,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
     // If date is old (Jackpot is won before) -> we must have new Jackpot wit Nr 1
     // from "anzahlziehungen"
     else if (lastJkpotBeforeZieh_opt.isPresent()
-                && (lastJkpotBeforeZieh_opt.get().getZiehungid().getZiehungsdatum().isBefore(lastZieDate))) {
+                && (lastJkpotBeforeZieh_opt.get().getZiehung().getZiehungsdatum().isBefore(lastZieDate))) {
         // Someone had won before
         
         commulJPotGewinn = jackPotGewinn;
@@ -768,8 +768,8 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
     // If Standard
     else if (lastJkpotBeforeZieh_opt.isPresent()
         && lastJkpotBeforeZieh_opt.get().getAnzahlziehungen() < (maxTimesJpot - 1)
-        && lastJkpotBeforeZieh_opt.get().getZiehungid().getZiehungsdatum().isBefore(aktZieDate)
-        && lastJkpotBeforeZieh_opt.get().getZiehungid().getZiehungsdatum().compareTo(lastZieDate) >= 0) {
+        && lastJkpotBeforeZieh_opt.get().getZiehung().getZiehungsdatum().isBefore(aktZieDate)
+        && lastJkpotBeforeZieh_opt.get().getZiehung().getZiehungsdatum().compareTo(lastZieDate) >= 0) {
         
         if (gwnkls1.getIsabsolut()) {
             commulJPotGewinn = lastJkpotBeforeZieh_opt.get().getBetragkumuliert() + jackPotGewinn;
@@ -957,7 +957,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 			.filter(g -> g.getGewinnklasse()
 				.getGewinnklasseid() == gkl.getGewinnklasseid())
 //	Fehlersuche erfolgreich!
-			.filter(g -> g.getZiehungid() // gklZieQuo zur richtigen Ziehung!
+			.filter(g -> g.getZiehung() // gklZieQuo zur richtigen Ziehung!
 				.getZiehungid() == zie.getZiehungid())
 			.findAny()
 			.orElseThrow(() -> new NoSuchElementException(

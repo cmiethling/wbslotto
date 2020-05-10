@@ -40,7 +40,7 @@ public class GewinnErmitteln implements GewinnErmittelnLocal {
 		schein = query.getSingleResult();
 		lzs = schein.getLottoscheinziehungList();
 		lziehung = lzs.stream()
-			.filter(lz -> lz.getZiehungid()
+			.filter(lz -> lz.getZiehung()
 				.getZiehungsdatum()
 				.equals(ziehungsDatum))
 			.findAny()
@@ -58,7 +58,7 @@ public class GewinnErmitteln implements GewinnErmittelnLocal {
 		GewinnDetailedDto dto = new GewinnDetailedDto();
 
 		dto.setBelegNr(belegNr);
-		dto.setZiehungsDatum(lziehung.getZiehungid()
+		dto.setZiehungsDatum(lziehung.getZiehung()
 			.getZiehungsdatum());
 		dto.setGklSpiel77(gklSpiel77);
 		dto.setQuoteSpiel77(quoteSpiel77);
