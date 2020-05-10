@@ -404,7 +404,7 @@ public class PdfQuittungGenerator {
 		Map<LocalDate, Item> tipps = kostenDetailedDto.getEinsatzTipps();
 		Map<LocalDate, Item> sp77 = kostenDetailedDto.getEinsatzSpiel77();
 		Map<LocalDate, Item> sup6 = kostenDetailedDto.getEinsatzSuper6();
-		LocalDate abgabeDatum = kostenDetailedDto.getAbgabeDatum()
+		LocalDate abgabeZeitpunkt = kostenDetailedDto.getAbgabeZeitpunkt()
 			.toLocalDate();
 
 		Set<LocalDate> dates = tipps.keySet();
@@ -422,8 +422,8 @@ public class PdfQuittungGenerator {
 				.getGrundEinsatz() / 100.0) + "\t €";
 			gebuehrzeile[3] = myFormatter.format(sup6.get(date)
 				.getGrundEinsatz() / 100.0) + "\t €";
-			if (abgabeDatum.isAfter(date)) {
-				date = abgabeDatum;
+			if (abgabeZeitpunkt.isAfter(date)) {
+				date = abgabeZeitpunkt;
 			}
 			gebuehrmap.put(date, gebuehrzeile);
 		}

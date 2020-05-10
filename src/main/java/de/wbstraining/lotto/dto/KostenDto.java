@@ -10,7 +10,7 @@ public class KostenDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private LocalDateTime abgabeDatum;
+	private LocalDateTime abgabeZeitpunkt;
 	private int laufzeit;
 	private int anzahlTipps;
 	private boolean isMittwoch;
@@ -18,12 +18,12 @@ public class KostenDto implements Serializable {
 	private boolean isSpiel77;
 	private boolean isSuper6;
 
-	public LocalDateTime getAbgabeDatum() {
-		return abgabeDatum;
+	public LocalDateTime getAbgabeZeitpunkt() {
+		return abgabeZeitpunkt;
 	}
 
-	public void setAbgabeDatum(LocalDateTime abgabeDatum) {
-		this.abgabeDatum = abgabeDatum;
+	public void setAbgabeZeitpunkt(LocalDateTime abgabeZeitpunkt) {
+		this.abgabeZeitpunkt = abgabeZeitpunkt;
 	}
 
 	public int getLaufzeit() {

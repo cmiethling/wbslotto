@@ -64,38 +64,38 @@ public final class LottoDatum8Util {
 //##############################################################
 //	########### Helper Meth ###############################
 
-	private static LocalDate mittwochUndSamstag(LocalDateTime abgabeDatum,
+	private static LocalDate mittwochUndSamstag(LocalDateTime abgabeZeitpunkt,
 		int abgabeschlussMittwoch, int abgabeschlussSamstag) {
 		DayOfWeek mi = DayOfWeek.WEDNESDAY;
 		DayOfWeek sa = DayOfWeek.SATURDAY;
-		DayOfWeek tag = abgabeDatum.getDayOfWeek();
-		int stunde = abgabeDatum.getHour();
+		DayOfWeek tag = abgabeZeitpunkt.getDayOfWeek();
+		int stunde = abgabeZeitpunkt.getHour();
 		if (tag == DayOfWeek.WEDNESDAY && stunde < abgabeschlussMittwoch) {
-			return abgabeDatum.toLocalDate();
+			return abgabeZeitpunkt.toLocalDate();
 		} else if (tag == sa && stunde < abgabeschlussSamstag) {
-			return abgabeDatum.toLocalDate();
+			return abgabeZeitpunkt.toLocalDate();
 		} else if ((tag == mi && stunde >= abgabeschlussMittwoch)
 			|| tag == DayOfWeek.THURSDAY || tag == DayOfWeek.FRIDAY) {
-			return naechsterWochentag(abgabeDatum, sa);
+			return naechsterWochentag(abgabeZeitpunkt, sa);
 		} else {
-			return naechsterWochentag(abgabeDatum, mi);
+			return naechsterWochentag(abgabeZeitpunkt, mi);
 		}
 	}
 
-	private static LocalDate nurEinTag(LocalDateTime abgabeDatum,
+	private static LocalDate nurEinTag(LocalDateTime abgabeZeitpunkt,
 		int abgabeschlussTag, DayOfWeek tag) {
 
-		if (abgabeDatum.getDayOfWeek() == tag
-			&& abgabeDatum.getHour() < abgabeschlussTag) {
-			return abgabeDatum.toLocalDate();
+		if (abgabeZeitpunkt.getDayOfWeek() == tag
+			&& abgabeZeitpunkt.getHour() < abgabeschlussTag) {
+			return abgabeZeitpunkt.toLocalDate();
 		} else {
-			return naechsterWochentag(abgabeDatum, tag);
+			return naechsterWochentag(abgabeZeitpunkt, tag);
 		}
 	}
 
-	private static LocalDate naechsterWochentag(LocalDateTime abgabeDatum,
+	private static LocalDate naechsterWochentag(LocalDateTime abgabeZeitpunkt,
 		DayOfWeek tag) {
-		return abgabeDatum.with(TemporalAdjusters.next(tag))
+		return abgabeZeitpunkt.with(TemporalAdjusters.next(tag))
 			.toLocalDate();
 	}
 

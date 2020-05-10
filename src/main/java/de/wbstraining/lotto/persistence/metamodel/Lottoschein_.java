@@ -31,7 +31,7 @@ public class Lottoschein_ {
     public static volatile ListAttribute<Lottoschein, Lottoscheinziehung> lottoscheinziehungList;
     public static volatile SingularAttribute<Lottoschein, Date> lastmodified;
     public static volatile SingularAttribute<Lottoschein, Boolean> ismittwoch;
-    public static volatile SingularAttribute<Lottoschein, Date> abgabedatum;
+    public static volatile SingularAttribute<Lottoschein, Date> abgabezeitpunkt;
     public static volatile SingularAttribute<Lottoschein, Boolean> issamstag;
     public static volatile SingularAttribute<Lottoschein, Kunde> kundeid;
     public static volatile SingularAttribute<Lottoschein, Integer> status;
