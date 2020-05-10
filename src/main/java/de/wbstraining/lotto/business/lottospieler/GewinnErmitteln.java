@@ -46,11 +46,11 @@ public class GewinnErmitteln implements GewinnErmittelnLocal {
 			.findAny()
 			.get();
 
-		gklSpiel77 = lziehung.getGewinnklasseidspiel77()
+		gklSpiel77 = lziehung.getGewinnklassespiel77()
 			.getGewinnklassenr();
 		quoteSpiel77 = lziehung.getGewinnspiel77()
 			.longValue();
-		gklSuper6 = lziehung.getGewinnklasseidsuper6()
+		gklSuper6 = lziehung.getGewinnklassesuper6()
 			.getGewinnklassenr();
 		quoteSuper6 = lziehung.getGewinnsuper6()
 			.longValue();

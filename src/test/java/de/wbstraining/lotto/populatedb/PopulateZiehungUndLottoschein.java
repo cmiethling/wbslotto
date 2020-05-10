@@ -158,8 +158,8 @@ public class PopulateZiehungUndLottoschein
 			lottoscheinziehung.setLottoschein(schein);
 			lottoscheinziehung.setZiehungnr(nr);
 			lottoscheinziehung.setZiehung(ziehung);
-			lottoscheinziehung.setGewinnklasseidspiel77(null);
-			lottoscheinziehung.setGewinnklasseidsuper6(null);
+			lottoscheinziehung.setGewinnklassespiel77(null);
+			lottoscheinziehung.setGewinnklassesuper6(null);
 			lottoscheinziehung.setIsabgeschlossen(false);
 			lottoscheinziehung.setIsletzteziehung(nr == (dateList.size()));
 			lottoscheinziehung.setCreated(datum);

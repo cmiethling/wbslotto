@@ -136,16 +136,16 @@ public class ZiehungAuswertenTest {
 		List<Lottoscheinziehung> lzList = query.getResultList();
 		anzahlSpiel77TotalActual = lzList.stream()
 
-				.filter(lz -> lz.getGewinnklasseidspiel77() != null
-						&& lz.getGewinnklasseidspiel77()
+				.filter(lz -> lz.getGewinnklassespiel77() != null
+						&& lz.getGewinnklassespiel77()
 								.getSpiel()
 								.getName()
 								.equals("Spiel 77"))
 				.count();
 		System.out.println("aF");
 		anzahlSuper6TotalActual = lzList.stream()
-				.filter(lz -> lz.getGewinnklasseidsuper6() != null
-						&& lz.getGewinnklasseidsuper6()
+				.filter(lz -> lz.getGewinnklassesuper6() != null
+						&& lz.getGewinnklassesuper6()
 								.getSpiel()
 								.getName()
 								.equals("Super 6"))

@@ -121,8 +121,8 @@ public class LottoscheinEinreichen implements LottoscheinEinreichenLocal {
 			lottoscheinziehung = new Lottoscheinziehung();
 			lottoscheinziehung.setZiehung(ziehung);
 			lottoscheinziehung.setLottoschein(schein);
-			lottoscheinziehung.setGewinnklasseidspiel77(null);
-			lottoscheinziehung.setGewinnklasseidsuper6(null);
+			lottoscheinziehung.setGewinnklassespiel77(null);
+			lottoscheinziehung.setGewinnklassesuper6(null);
 			lottoscheinziehung.setIsabgeschlossen(false);
 			lottoscheinziehung.setZiehungnr(nr);
 			lottoscheinziehung.setCreated(datum);

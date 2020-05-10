@@ -272,7 +272,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 			lz.setVersion(getUpdatedVersion(lz.getVersion()));
 			lz.setLastmodified(jetzt);
 
-			lz.setGewinnklasseidsuper6(gkl);
+			lz.setGewinnklassesuper6(gkl);
 			// Bei Super6 alle Gewinne absolut
 			lz.setGewinnsuper6(gkl.getBetrag());
 
@@ -298,7 +298,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 			lz.setVersion(getUpdatedVersion(lz.getVersion()));
 			lz.setLastmodified(jetzt);
 
-			lz.setGewinnklasseidspiel77(gkl);
+			lz.setGewinnklassespiel77(gkl);
 
 			if (gkl.getGewinnklassenr() != 1) {
 				lz.setGewinnspiel77(gkl.getBetrag());

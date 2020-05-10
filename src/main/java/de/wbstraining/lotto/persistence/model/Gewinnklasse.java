@@ -98,9 +98,9 @@ public class Gewinnklasse implements Serializable {
 	private Integer version;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "gewinnklasse")
 	private List<Lottoscheinziehung6aus49> lottoscheinziehung6aus49List;
-	@OneToMany(mappedBy = "gewinnklasseidspiel77")
+	@OneToMany(mappedBy = "gewinnklassespiel77") // JavaObject
 	private List<Lottoscheinziehung> lottoscheinziehungList;
-	@OneToMany(mappedBy = "gewinnklasseidsuper6")
+	@OneToMany(mappedBy = "gewinnklassesuper6") // JavaObject
 	private List<Lottoscheinziehung> lottoscheinziehungList1;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "gewinnklasse") // JavaObject
 	private List<Jackpot> jackpotList;
