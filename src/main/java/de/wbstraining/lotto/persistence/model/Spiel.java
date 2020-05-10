@@ -33,14 +33,14 @@ import de.wbstraining.lotto.persistence.util.LocalDateTimeAttributeConverter;
 @Entity
 @Table(name = "spiel")
 @NamedQueries({
-	@NamedQuery(name = "Spiel.findAll", query = "SELECT s FROM Spiel s"),
-	@NamedQuery(name = "Spiel.findBySpielid", query = "SELECT s FROM Spiel s WHERE s.spielid = :spielid"),
-	@NamedQuery(name = "Spiel.findByName", query = "SELECT s FROM Spiel s WHERE s.name = :name"),
-	@NamedQuery(name = "Spiel.findByBeschreibung", query = "SELECT s FROM Spiel s WHERE s.beschreibung = :beschreibung"),
-	@NamedQuery(name = "Spiel.findByPfadanleitung", query = "SELECT s FROM Spiel s WHERE s.pfadanleitung = :pfadanleitung"),
-	@NamedQuery(name = "Spiel.findByCreated", query = "SELECT s FROM Spiel s WHERE s.created = :created"),
-	@NamedQuery(name = "Spiel.findByLastmodified", query = "SELECT s FROM Spiel s WHERE s.lastmodified = :lastmodified"),
-	@NamedQuery(name = "Spiel.findByVersion", query = "SELECT s FROM Spiel s WHERE s.version = :version") })
+		@NamedQuery(name = "Spiel.findAll", query = "SELECT s FROM Spiel s"),
+		@NamedQuery(name = "Spiel.findBySpielid", query = "SELECT s FROM Spiel s WHERE s.spielid = :spielid"),
+		@NamedQuery(name = "Spiel.findByName", query = "SELECT s FROM Spiel s WHERE s.name = :name"),
+		@NamedQuery(name = "Spiel.findByBeschreibung", query = "SELECT s FROM Spiel s WHERE s.beschreibung = :beschreibung"),
+		@NamedQuery(name = "Spiel.findByPfadanleitung", query = "SELECT s FROM Spiel s WHERE s.pfadanleitung = :pfadanleitung"),
+		@NamedQuery(name = "Spiel.findByCreated", query = "SELECT s FROM Spiel s WHERE s.created = :created"),
+		@NamedQuery(name = "Spiel.findByLastmodified", query = "SELECT s FROM Spiel s WHERE s.lastmodified = :lastmodified"),
+		@NamedQuery(name = "Spiel.findByVersion", query = "SELECT s FROM Spiel s WHERE s.version = :version") })
 public class Spiel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -75,7 +75,7 @@ public class Spiel implements Serializable {
 
 	@Column(name = "version")
 	private Integer version;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "spielid")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "spiel") // JavaObject
 	private List<Gewinnklasse> gewinnklasseList;
 
 	public Spiel() {
@@ -86,7 +86,7 @@ public class Spiel implements Serializable {
 	}
 
 	public Spiel(Long spielid, String name, String beschreibung,
-		LocalDateTime created, LocalDateTime lastmodified) {
+			LocalDateTime created, LocalDateTime lastmodified) {
 		this.spielid = spielid;
 		this.name = name;
 		this.beschreibung = beschreibung;
@@ -174,7 +174,7 @@ public class Spiel implements Serializable {
 		}
 		Spiel other = (Spiel) object;
 		if ((this.spielid == null && other.spielid != null)
-			|| (this.spielid != null && !this.spielid.equals(other.spielid))) {
+				|| (this.spielid != null && !this.spielid.equals(other.spielid))) {
 			return false;
 		}
 		return true;

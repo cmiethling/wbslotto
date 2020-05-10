@@ -106,7 +106,7 @@ public class Gewinnklasse implements Serializable {
 	private List<Jackpot> jackpotList;
 	@JoinColumn(name = "spielid", referencedColumnName = "spielid")
 	@ManyToOne(optional = false)
-	private Spiel spielid;
+	private Spiel spiel;
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "gewinnklasseid")
 	private List<Gewinnklasseziehungquote> gewinnklasseziehungquoteList;
 
@@ -251,12 +251,12 @@ public class Gewinnklasse implements Serializable {
 		this.jackpotList = jackpotList;
 	}
 
-	public Spiel getSpielid() {
-		return spielid;
+	public Spiel getSpiel() {
+		return spiel;
 	}
 
-	public void setSpielid(Spiel spielid) {
-		this.spielid = spielid;
+	public void setSpiel(Spiel spielid) {
+		this.spiel = spielid;
 	}
 
 	public List<Gewinnklasseziehungquote> getGewinnklasseziehungquoteList() {

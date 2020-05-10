@@ -429,7 +429,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 
 //	setBetrag: falls Gkl1 aus Spiel 77 dann Ausnahme!
 			Optional<Gewinnklasse> gkl1AusSpiel77 = Optional.of(gkl)
-				.filter(g -> g.getSpielid()
+				.filter(g -> g.getSpiel()
 					.getName()
 					.equals(SPIEL77_NAME))
 				.filter(g -> g.getGewinnklassenr() == 1);
@@ -652,14 +652,14 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
     
 
     Gewinnklasse gwnkls1 = gwklZquoteByGkl_Map.keySet().stream().filter(gkl -> gkl.getGewinnklassenr() == 1)
-                    .filter(gkl -> gkl.getSpielid().getName().equals(spielName)).findAny().get();
+                    .filter(gkl -> gkl.getSpiel().getName().equals(spielName)).findAny().get();
 
     List<Jackpot> jpList = jackpotFacade.findAll();
     // Last jackpot in Spiel 6 aus 49:
     Optional<Jackpot> lastJkpotBeforeZieh_opt = Optional.empty();
     if (!jpList.isEmpty()) {
             lastJkpotBeforeZieh_opt = jpList.stream()
-              .filter(jp -> jp.getGewinnklasseid().getSpielid().getName().equals(spielName))
+              .filter(jp -> jp.getGewinnklasseid().getSpiel().getName().equals(spielName))
               .filter(jp -> jp.getZiehungid().getStatus()==1)   //TODO For Christian --- it is Important
               // would be good, if indexing and sorting in DB
               .filter(jp -> (jp.getZiehungid().getZiehungsdatum().isBefore(ziehung.getZiehungsdatum())))                                                                                                                                                                                                                                 
@@ -804,7 +804,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
     
     ///////////////////////////
     Optional<Gewinnklasse> gkl1Winners_any = gklSet.stream()
-        .filter(gkl -> gkl.getSpielid().getName().equals(spielName)).filter(gkl -> gkl.getGewinnklassenr() == 1)
+        .filter(gkl -> gkl.getSpiel().getName().equals(spielName)).filter(gkl -> gkl.getGewinnklassenr() == 1)
         .filter(gkl -> gwklZquoteByGkl_Map.get(gkl).getAnzahlgewinner() > 0).findAny();
 
     // if (isGkl1WinnerInJkpot)==true ->NOT Persistence Jackpot6_49
@@ -812,7 +812,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 
     
     Optional<Gewinnklasse> gklJackPotLow = gklSet.stream()
-        .filter(gkl -> gkl.getSpielid().getName().equals(spielName))
+        .filter(gkl -> gkl.getSpiel().getName().equals(spielName))
         .filter(gkl -> gwklZquoteByGkl_Map.get(gkl).getAnzahlgewinner() > 0)
         .filter(gkl -> gkl.getGewinnklassenr() > 1)
         .min((gkl1, gkl2) -> Integer.valueOf(gkl1.getGewinnklassenr())
@@ -912,7 +912,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 	private Optional<Gewinnklasse> findGklForScheinZie(String spielName,
 		int computedKlssNumber, List<Gewinnklasse> gwnClassesForZhng) {
 		return gwnClassesForZhng.stream()
-			.filter(g -> g.getSpielid()
+			.filter(g -> g.getSpiel()
 				.getName()
 				.equals(spielName))
 			.filter(g -> g.getGewinnklassenr() == computedKlssNumber)
@@ -930,7 +930,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 			.entrySet()
 			.stream()
 			.filter(e -> e.getKey()
-				.getSpielid()
+				.getSpiel()
 				.getName()
 				.equals(spielX))
 			.collect(Collectors.toMap(e -> e.getKey()
@@ -941,7 +941,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 	private List<Gewinnklasse> getGewinnklassenLotto(
 		List<Gewinnklasse> gewinnklassen) {
 		return gewinnklassen.stream()
-			.filter(g -> g.getSpielid()
+			.filter(g -> g.getSpiel()
 				.getName()
 				.equals(Sp6AUS49_NAME))
 //				.sorted((g1, g2) -> Long.compare(g1.getGewinnklasseid(),
