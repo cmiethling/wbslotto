@@ -11,7 +11,7 @@ public class LottoscheinEinreichenDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long kundeid;
-	private LocalDateTime abgabeDatum;
+	private LocalDateTime abgabeZeitpunkt;
 	private int laufzeit;
 	private String tippsBase64;
 	private boolean isMittwoch;
@@ -28,8 +28,8 @@ public class LottoscheinEinreichenDto implements Serializable {
 		this.kundeid = kundeid;
 	}
 
-	public LocalDateTime getAbgabeDatum() {
-		return abgabeDatum;
+	public LocalDateTime getAbgabeZeitpunkt() {
+		return abgabeZeitpunkt;
 	}
 
 	public int getLosnummer() {
@@ -40,8 +40,8 @@ public class LottoscheinEinreichenDto implements Serializable {
 		this.losnummer = losnummer;
 	}
 
-	public void setAbgabeDatum(LocalDateTime abgabeDatum) {
-		this.abgabeDatum = abgabeDatum;
+	public void setAbgabeZeitpunkt(LocalDateTime abgabeZeitpunkt) {
+		this.abgabeZeitpunkt = abgabeZeitpunkt;
 	}
 
 	public int getLaufzeit() {

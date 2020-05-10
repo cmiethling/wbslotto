@@ -45,7 +45,7 @@ import de.wbstraining.lotto.persistence.util.LocalDateTimeAttributeConverter;
 		@NamedQuery(name = "Lottoschein.findByIssamstag", query = "SELECT l FROM Lottoschein l WHERE l.issamstag = :issamstag"),
 		@NamedQuery(name = "Lottoschein.findByLaufzeit", query = "SELECT l FROM Lottoschein l WHERE l.laufzeit = :laufzeit"),
 		@NamedQuery(name = "Lottoschein.findByIsabgeschlossen", query = "SELECT l FROM Lottoschein l WHERE l.isabgeschlossen = :isabgeschlossen"),
-		@NamedQuery(name = "Lottoschein.findByAbgabedatum", query = "SELECT l FROM Lottoschein l WHERE l.abgabedatum = :abgabedatum"),
+		@NamedQuery(name = "Lottoschein.findByAbgabezeitpunkt", query = "SELECT l FROM Lottoschein l WHERE l.abgabezeitpunkt = :abgabezeitpunkt"),
 		@NamedQuery(name = "Lottoschein.findByKosten", query = "SELECT l FROM Lottoschein l WHERE l.kosten = :kosten"),
 		@NamedQuery(name = "Lottoschein.findByStatus", query = "SELECT l FROM Lottoschein l WHERE l.status = :status"),
 		@NamedQuery(name = "Lottoschein.findByCreated", query = "SELECT l FROM Lottoschein l WHERE l.created = :created"),
@@ -82,9 +82,9 @@ public class Lottoschein implements Serializable {
 	private Boolean isabgeschlossen;
 	@Basic(optional = false)
 	@NotNull
-	@Column(name = "abgabedatum")
+	@Column(name = "abgabezeitpunkt")
 	@Convert(converter = LocalDateTimeAttributeConverter.class)
-	private LocalDateTime abgabedatum;
+	private LocalDateTime abgabezeitpunkt;
 	@Column(name = "kosten")
 	private Integer kosten;
 	@Column(name = "status")
@@ -115,11 +115,11 @@ public class Lottoschein implements Serializable {
 	}
 
 	public Lottoschein(Long lottoscheinid, int losnummer,
-			LocalDateTime abgabedatum, LocalDateTime created,
+			LocalDateTime abgabeZeitpunkt, LocalDateTime created,
 			LocalDateTime lastmodified) {
 		this.lottoscheinid = lottoscheinid;
 		this.losnummer = losnummer;
-		this.abgabedatum = abgabedatum;
+		this.abgabezeitpunkt = abgabeZeitpunkt;
 		this.created = created;
 		this.lastmodified = lastmodified;
 	}
@@ -204,12 +204,12 @@ public class Lottoschein implements Serializable {
 		this.isabgeschlossen = isabgeschlossen;
 	}
 
-	public LocalDateTime getAbgabedatum() {
-		return abgabedatum;
+	public LocalDateTime getAbgabezeitpunkt() {
+		return abgabezeitpunkt;
 	}
 
-	public void setAbgabedatum(LocalDateTime abgabedatum) {
-		this.abgabedatum = abgabedatum;
+	public void setAbgabezeitpunkt(LocalDateTime abgabeZeitpunkt) {
+		this.abgabezeitpunkt = abgabeZeitpunkt;
 	}
 
 	public Integer getKosten() {

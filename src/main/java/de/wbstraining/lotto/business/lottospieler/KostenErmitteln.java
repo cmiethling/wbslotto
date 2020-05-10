@@ -50,9 +50,9 @@ public class KostenErmitteln implements KostenErmittelnLocal {
 	@Override
 	public int kostenErmitteln(Lottoschein schein) {
 
-		LocalDateTime abgabeDatum = schein.getAbgabedatum();
+		LocalDateTime abgabeZeitpunkt = schein.getAbgabezeitpunkt();
 		List<LocalDate> scheinDatums = LottoDatum8Util.ziehungsTage(
-			abgabeDatum.toLocalDate(), abgabeDatum.toLocalTime(),
+			abgabeZeitpunkt.toLocalDate(), abgabeZeitpunkt.toLocalTime(),
 			schein.getIsmittwoch(), schein.getIssamstag(), ABGABESCHLUSSMITTWOCH,
 			ABGABESCHLUSSSAMSTAG, schein.getLaufzeit());
 
@@ -100,7 +100,7 @@ public class KostenErmitteln implements KostenErmittelnLocal {
 	public int kostenErmitteln(KostenDto kosten) {
 
 		Lottoschein schein = new Lottoschein();
-		schein.setAbgabedatum(kosten.getAbgabeDatum());
+		schein.setAbgabezeitpunkt(kosten.getAbgabeZeitpunkt());
 		schein.setLaufzeit(kosten.getLaufzeit());
 
 		schein.setTipps(LottoUtil.randomTippsAsByteArray(kosten.getAnzahlTipps()));
@@ -114,13 +114,13 @@ public class KostenErmitteln implements KostenErmittelnLocal {
 
 	@Override
 	public KostenDetailedDto kostenErmittelnDetailed(KostenDto kosten) {
-		LocalDateTime abgabeDatum = kosten.getAbgabeDatum();
+		LocalDateTime abgabeZeitpunkt = kosten.getAbgabeZeitpunkt();
 		boolean isMittwoch = kosten.isMittwoch();
 		boolean isSamstag = kosten.isSamstag();
 
 		KostenDetailedDto detailedKosten = new KostenDetailedDto();
 
-		detailedKosten.setAbgabeDatum(abgabeDatum);
+		detailedKosten.setAbgabeZeitpunkt(abgabeZeitpunkt);
 		detailedKosten.setLaufzeit(kosten.getLaufzeit());
 		detailedKosten.setAnzahlTipps(kosten.getAnzahlTipps());
 		detailedKosten.setMittwoch(isMittwoch);
@@ -129,7 +129,7 @@ public class KostenErmitteln implements KostenErmittelnLocal {
 		detailedKosten.setSuper6(kosten.isSuper6());
 
 		LocalDate erstesZiehungsdatum = LottoDatum8Util.ersterZiehungstag(
-			abgabeDatum.toLocalDate(), abgabeDatum.toLocalTime(), isMittwoch,
+			abgabeZeitpunkt.toLocalDate(), abgabeZeitpunkt.toLocalTime(), isMittwoch,
 			isSamstag, ABGABESCHLUSSMITTWOCH, ABGABESCHLUSSSAMSTAG);
 
 		detailedKosten.setDatumErsteZiehung(erstesZiehungsdatum);
@@ -137,7 +137,7 @@ public class KostenErmitteln implements KostenErmittelnLocal {
 		List<Gebuehr> gebuehren = gebuehrFacade.findAll();
 
 		List<LocalDate> ziehungsDatums = LottoDatum8Util.ziehungsTage(
-			abgabeDatum.toLocalDate(), abgabeDatum.toLocalTime(), isMittwoch,
+			abgabeZeitpunkt.toLocalDate(), abgabeZeitpunkt.toLocalTime(), isMittwoch,
 			isSamstag, ABGABESCHLUSSMITTWOCH, ABGABESCHLUSSSAMSTAG,
 			kosten.getLaufzeit());
 

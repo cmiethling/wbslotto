@@ -37,7 +37,7 @@ public class LottoscheinEinreichenREST {
 	 * @Produces({ "application/xml", "application/json" })
 	 * public LottoscheinEinreichenDto einreichen() {
 	 * LottoscheinEinreichenDto dto = new LottoscheinEinreichenDto();
-	 * dto.setAbgabeDatum(new Date());
+	 * dto.setAbgabeZeitpunkt(LocalDateTime.now());
 	 * dto.setKundeid(1L);
 	 * dto.setMittwoch(true);
 	 * dto.setSamstag(true);
@@ -58,7 +58,7 @@ public class LottoscheinEinreichenREST {
 		Kunde kunde = kundeFacade.find(kundid);
 		Lottoschein schein = new Lottoschein();
 		schein.setKunde(kunde);
-		schein.setAbgabedatum(dto.getAbgabeDatum());
+		schein.setAbgabezeitpunkt(dto.getAbgabeZeitpunkt());
 		schein.setBelegnummer((long) (Math.random() * 100_000_000_000L));
 		schein.setCreated(date);
 		schein.setLastmodified(date);

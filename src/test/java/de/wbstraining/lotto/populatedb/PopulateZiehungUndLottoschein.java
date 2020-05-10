@@ -119,7 +119,7 @@ public class PopulateZiehungUndLottoschein
 		LocalDateTime datum = LocalDateTime.now();
 		boolean isMittwoch = random.nextBoolean();
 		schein.setKunde(kunde);
-		schein.setAbgabedatum(abgabeDatum.atStartOfDay());
+		schein.setAbgabezeitpunkt(abgabeDatum.atStartOfDay());
 		schein.setBelegnummer((long) (Math.random() * 1_000_000_000));
 		schein.setCreated(datum);
 		schein.setLastmodified(datum);
@@ -144,10 +144,10 @@ public class PopulateZiehungUndLottoschein
 		LocalDateTime datum = LocalDateTime.now();
 		List<LocalDate> dateList;
 		lottoscheinFacade.create(schein);
-		LocalDateTime abgabeDatum = schein.getAbgabedatum();
+		LocalDateTime abgabeZeitpunkt = schein.getAbgabezeitpunkt();
 
-		dateList = LottoDatum8Util.ziehungsTage(abgabeDatum.toLocalDate(),
-				abgabeDatum.toLocalTime(), schein.getIsmittwoch(),
+		dateList = LottoDatum8Util.ziehungsTage(abgabeZeitpunkt.toLocalDate(),
+				abgabeZeitpunkt.toLocalTime(), schein.getIsmittwoch(),
 				schein.getIssamstag(), 18, 19, schein.getLaufzeit());
 		int nr = 1;
 		for (LocalDate date : dateList) {

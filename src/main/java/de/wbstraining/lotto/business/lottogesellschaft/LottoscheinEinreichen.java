@@ -63,12 +63,12 @@ public class LottoscheinEinreichen implements LottoscheinEinreichenLocal {
 		List<LocalDate> dateList;
 		lottoscheinFacadeLocal.create(schein);
 
-		LocalDateTime abgabeDatum = schein.getAbgabedatum();
-		dateList = LottoDatum8Util.ziehungsTage(abgabeDatum.toLocalDate(),
-			abgabeDatum.toLocalTime(), schein.getIsmittwoch(), schein.getIssamstag(),
+		LocalDateTime abgabeZeitpunkt = schein.getAbgabezeitpunkt();
+		dateList = LottoDatum8Util.ziehungsTage(abgabeZeitpunkt.toLocalDate(),
+			abgabeZeitpunkt.toLocalTime(), schein.getIsmittwoch(), schein.getIssamstag(),
 			18, 19, schein.getLaufzeit());
 
-		kostenDto.setAbgabeDatum(schein.getAbgabedatum());
+		kostenDto.setAbgabeZeitpunkt(schein.getAbgabezeitpunkt());
 		kostenDto
 			.setAnzahlTipps(ByteLongConverter.byteToLong(schein.getTipps()).length);
 		kostenDto.setLaufzeit(schein.getLaufzeit());

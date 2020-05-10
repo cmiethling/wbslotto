@@ -26,7 +26,7 @@ public class KostenDetailedREST {
 	@Produces({ "application/xml", "application/json" })
 	public KostenDto kosten() {
 		KostenDto dto = new KostenDto();
-		dto.setAbgabeDatum(LocalDateTime.now());
+		dto.setAbgabeZeitpunkt(LocalDateTime.now());
 		dto.setAnzahlTipps(10);
 		dto.setLaufzeit(5);
 		dto.setMittwoch(Boolean.TRUE);

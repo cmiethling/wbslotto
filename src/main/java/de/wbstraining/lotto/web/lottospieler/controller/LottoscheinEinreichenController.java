@@ -181,7 +181,7 @@ public class LottoscheinEinreichenController implements Serializable {
 		Lottoschein schein = new Lottoschein();
 
 		schein.setKunde(kunde);
-		schein.setAbgabedatum(datum);
+		schein.setAbgabezeitpunkt(datum);
 		schein.setBelegnummer((long) Math.random() * 1_000_000_000);
 		schein.setCreated(datum);
 		schein.setLastmodified(datum);
@@ -222,7 +222,7 @@ public class LottoscheinEinreichenController implements Serializable {
 			// TODO
 			KostenDetailedDto dto = new KostenDetailedDto();
 			dto.setAnzahlTipps(0);
-			dto.setAbgabeDatum(null);
+			dto.setAbgabeZeitpunkt(null);
 			// ...
 			/*
 			 * int kosten =

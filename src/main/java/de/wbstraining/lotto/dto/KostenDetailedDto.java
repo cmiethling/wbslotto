@@ -64,7 +64,7 @@ public class KostenDetailedDto implements Serializable {
 		}
 	}
 
-	private LocalDateTime abgabeDatum;
+	private LocalDateTime abgabeZeitpunkt;
 	private LocalDate datumErsteZiehung;
 
 	private int laufzeit;
@@ -110,12 +110,12 @@ public class KostenDetailedDto implements Serializable {
 	}
 
 //        Getter+Setter
-	public LocalDateTime getAbgabeDatum() {
-		return abgabeDatum;
+	public LocalDateTime getAbgabeZeitpunkt() {
+		return abgabeZeitpunkt;
 	}
 
-	public void setAbgabeDatum(LocalDateTime abgabeDatum) {
-		this.abgabeDatum = abgabeDatum;
+	public void setAbgabeZeitpunkt(LocalDateTime abgabeZeitpunkt) {
+		this.abgabeZeitpunkt = abgabeZeitpunkt;
 	}
 
 	public LocalDate getDatumErsteZiehung() {

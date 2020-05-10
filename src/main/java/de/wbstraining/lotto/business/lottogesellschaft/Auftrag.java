@@ -37,7 +37,7 @@ import javax.validation.constraints.NotNull;
 		@NamedQuery(name = "Auftrag.findByIsMittwoch", query = "SELECT l FROM Auftrag l WHERE l.isMittwoch = :isMittwoch"),
 		@NamedQuery(name = "Auftrag.findByIsSamstag", query = "SELECT l FROM Auftrag l WHERE l.isSamstag = :isSamstag"),
 		@NamedQuery(name = "Auftrag.findByLaufzeit", query = "SELECT l FROM Auftrag l WHERE l.laufzeit = :laufzeit"),
-		@NamedQuery(name = "Auftrag.findByAbgabeDatum", query = "SELECT l FROM Lottoschein l WHERE l.abgabedatum = :abgabedatum"),
+		@NamedQuery(name = "Auftrag.findByAbgabeZeitpunkt", query = "SELECT l FROM Lottoschein l WHERE l.abgabezeitpunkt = :abgabezeitpunkt"),
 		@NamedQuery(name = "Auftrag.findByKosten", query = "SELECT l FROM Lottoschein l WHERE l.kosten = :kosten"),
 		@NamedQuery(name = "Auftrag.findByVersion", query = "SELECT k FROM Auftrag k WHERE k.version = :version") })
 public class Auftrag implements Serializable {
