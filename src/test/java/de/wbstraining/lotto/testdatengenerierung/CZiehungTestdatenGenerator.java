@@ -85,7 +85,7 @@ public class CZiehungTestdatenGenerator
 		schein.setCreated(date);
 		schein.setLastmodified(date);
 		schein.setAbgabedatum(abgabeDatum.atStartOfDay());
-		schein.setKundeid(kunde);
+		schein.setKunde(kunde);
 		schein.setIsabgeschlossen(Boolean.FALSE);
 		schein.setIsmittwoch(isMittwoch);
 		schein.setIssamstag(isSamstag);
@@ -105,11 +105,11 @@ public class CZiehungTestdatenGenerator
 		lottoscheinziehung.setLastmodified(date);
 		lottoscheinziehung.setIsabgeschlossen(false);
 		lottoscheinziehung.setIsletzteziehung(true);
-		lottoscheinziehung.setZiehungid(ziehung);
+		lottoscheinziehung.setZiehung(ziehung);
 		lottoscheinziehung.setZiehungnr(1);
-		lottoscheinziehung.setLottoscheinid(schein);
-		lottoscheinziehung.setGewinnklasseidspiel77(null);
-		lottoscheinziehung.setGewinnklasseidsuper6(null);
+		lottoscheinziehung.setLottoschein(schein);
+		lottoscheinziehung.setGewinnklassespiel77(null);
+		lottoscheinziehung.setGewinnklassesuper6(null);
 		lottoscheinziehungFacadeLocal.create(lottoscheinziehung);
 	}
 

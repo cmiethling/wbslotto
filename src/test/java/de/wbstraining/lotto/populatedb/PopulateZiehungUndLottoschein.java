@@ -119,7 +119,7 @@ public class PopulateZiehungUndLottoschein
 		Lottoschein schein = new Lottoschein();
 		LocalDateTime datum = LocalDateTime.now();
 		boolean isMittwoch = random.nextBoolean();
-		schein.setKundeid(kunde);
+		schein.setKunde(kunde);
 		schein.setAbgabedatum(abgabeDatum.atStartOfDay());
 		schein.setBelegnummer(
 			BigInteger.valueOf((long) (Math.random() * 1_000_000_000)));
@@ -155,11 +155,11 @@ public class PopulateZiehungUndLottoschein
 		for (LocalDate date : dateList) {
 			ziehung = ziehungenByDate.get(date);
 			lottoscheinziehung = new Lottoscheinziehung();
-			lottoscheinziehung.setLottoscheinid(schein);
+			lottoscheinziehung.setLottoschein(schein);
 			lottoscheinziehung.setZiehungnr(nr);
-			lottoscheinziehung.setZiehungid(ziehung);
-			lottoscheinziehung.setGewinnklasseidspiel77(null);
-			lottoscheinziehung.setGewinnklasseidsuper6(null);
+			lottoscheinziehung.setZiehung(ziehung);
+			lottoscheinziehung.setGewinnklassespiel77(null);
+			lottoscheinziehung.setGewinnklassesuper6(null);
 			lottoscheinziehung.setIsabgeschlossen(false);
 			lottoscheinziehung.setIsletzteziehung(nr == (dateList.size()));
 			lottoscheinziehung.setCreated(datum);

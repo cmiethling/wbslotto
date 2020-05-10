@@ -67,7 +67,7 @@ public class Users implements Serializable {
     private List<Groups> groupsList;
     @JoinColumn(name = "kundeid", referencedColumnName = "kundeid")
     @OneToOne
-    private Kunde kundeid;
+    private Kunde kunde;
 
     public Users() {
     }
@@ -138,12 +138,12 @@ public class Users implements Serializable {
         this.groupsList = groupsList;
     }
 
-    public Kunde getKundeid() {
-        return kundeid;
+    public Kunde getKunde() {
+        return kunde;
     }
 
-    public void setKundeid(Kunde kundeid) {
-        this.kundeid = kundeid;
+    public void setKunde(Kunde kundeid) {
+        this.kunde = kundeid;
     }
 
     @Override

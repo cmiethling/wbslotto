@@ -42,7 +42,7 @@ public class PopulateSpielUndGewinnklasse
 
 			gewinnklasse = new Gewinnklasse();
 
-			gewinnklasse.setSpielid(spiel);
+			gewinnklasse.setSpiel(spiel);
 			// das müssen wir noch automatisch machen
 			gewinnklasse.setCreated(gueltigAb.atStartOfDay());
 			// das müssen wir noch automatisch machen

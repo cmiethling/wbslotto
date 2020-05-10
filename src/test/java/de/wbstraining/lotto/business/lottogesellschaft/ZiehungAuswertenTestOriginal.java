@@ -40,12 +40,7 @@ import de.wbstraining.lotto.testdatengenerierung.CZiehungTestdatenGeneratorLocal
 import de.wbstraining.lotto.testdatengenerierung.Testdatengenerator;
 
 @RunWith(Arquillian.class)
-public class ZiehungAuswertenTest {
-
-	private static String schemaPath = "testdatengenerator.xsd";
-	private static String xmlPath = "testdatengenerator.xml";
-//	private static String xmlPath = "testdatengenerator_2o2m2o2m.xml";
-//	private static String xmlPath = "testdatengenerator_15zieOhneGkl1.xml";
+public class ZiehungAuswertenTestOriginal {
 
 	@Deployment
 	public static Archive<?> createTestArchive() {
@@ -58,10 +53,10 @@ public class ZiehungAuswertenTest {
 						"de.wbstraining.lotto.business.lottogesellschaft",
 						"de.wbstraining.lotto.web.lottospieler.controller",
 						"org.primefaces.event", "de.wbstraining.lotto.testdatengenerierung")
-				.addAsResource(
-						new File("src/test/resources/testdatengenerator/" + xmlPath))
-				.addAsResource(
-						new File("src/test/resources/testdatengenerator/" + schemaPath))
+				.addAsResource(new File(
+						"src/test/resources/testdatengenerator/testdatengenerator.xml"))
+				.addAsResource(new File(
+						"src/test/resources/testdatengenerator/testdatengenerator.xsd"))
 				.addAsResource("META-INF/persistence.xml")
 				.addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
 		return archive;
@@ -94,6 +89,9 @@ public class ZiehungAuswertenTest {
 	@Test
 	public void ziehungAuswerten() throws Exception {
 
+		String schemaPath = "testdatengenerator.xsd";
+		String xmlPath = "testdatengenerator.xml";
+
 		StreamSource schemaSource = new StreamSource(getClass().getClassLoader()
 				.getResourceAsStream(schemaPath));
 		SchemaFactory schemaFactory = SchemaFactory
@@ -116,9 +114,8 @@ public class ZiehungAuswertenTest {
 		cZiehungTestdatenGenerator
 				.generiereTestDatenFuerMehrereZiehungen(generator);
 
-//		Alle Ziehungen auswerten
-		List<Ziehung> ziehungen = ziehungFacade.findAll();
-		ziehungen.forEach(ziehungAuswerten::ziehungAuswerten);
+		Ziehung ziehung = ziehungFacade.find(1L);
+		ziehungAuswerten.ziehungAuswerten(ziehung);
 
 		List<Spiel> spiele = spielFacade.findAll();
 		Map<String, Spiel> spielMap = new HashMap<>();
@@ -142,7 +139,6 @@ public class ZiehungAuswertenTest {
 								.getName()
 								.equals("Spiel 77"))
 				.count();
-		System.out.println("aF");
 		anzahlSuper6TotalActual = lzList.stream()
 				.filter(lz -> lz.getGewinnklassesuper6() != null
 						&& lz.getGewinnklassesuper6()

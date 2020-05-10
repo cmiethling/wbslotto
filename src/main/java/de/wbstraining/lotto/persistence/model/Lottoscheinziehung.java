@@ -35,16 +35,16 @@ import de.wbstraining.lotto.persistence.util.LocalDateTimeAttributeConverter;
 @Entity
 @Table(name = "lottoscheinziehung")
 @NamedQueries({
-	@NamedQuery(name = "Lottoscheinziehung.findAll", query = "SELECT l FROM Lottoscheinziehung l"),
-	@NamedQuery(name = "Lottoscheinziehung.findByLottoscheinziehungid", query = "SELECT l FROM Lottoscheinziehung l WHERE l.lottoscheinziehungid = :lottoscheinziehungid"),
-	@NamedQuery(name = "Lottoscheinziehung.findByZiehungnr", query = "SELECT l FROM Lottoscheinziehung l WHERE l.ziehungnr = :ziehungnr"),
-	@NamedQuery(name = "Lottoscheinziehung.findByIsabgeschlossen", query = "SELECT l FROM Lottoscheinziehung l WHERE l.isabgeschlossen = :isabgeschlossen"),
-	@NamedQuery(name = "Lottoscheinziehung.findByIsletzteziehung", query = "SELECT l FROM Lottoscheinziehung l WHERE l.isletzteziehung = :isletzteziehung"),
-	@NamedQuery(name = "Lottoscheinziehung.findByCreated", query = "SELECT l FROM Lottoscheinziehung l WHERE l.created = :created"),
-	@NamedQuery(name = "Lottoscheinziehung.findByLastmodified", query = "SELECT l FROM Lottoscheinziehung l WHERE l.lastmodified = :lastmodified"),
-	@NamedQuery(name = "Lottoscheinziehung.findByVersion", query = "SELECT l FROM Lottoscheinziehung l WHERE l.version = :version"),
-	@NamedQuery(name = "Lottoscheinziehung.findByGewinnspiel77", query = "SELECT l FROM Lottoscheinziehung l WHERE l.gewinnspiel77 = :gewinnspiel77"),
-	@NamedQuery(name = "Lottoscheinziehung.findByGewinnsuper6", query = "SELECT l FROM Lottoscheinziehung l WHERE l.gewinnsuper6 = :gewinnsuper6") })
+		@NamedQuery(name = "Lottoscheinziehung.findAll", query = "SELECT l FROM Lottoscheinziehung l"),
+		@NamedQuery(name = "Lottoscheinziehung.findByLottoscheinziehungid", query = "SELECT l FROM Lottoscheinziehung l WHERE l.lottoscheinziehungid = :lottoscheinziehungid"),
+		@NamedQuery(name = "Lottoscheinziehung.findByZiehungnr", query = "SELECT l FROM Lottoscheinziehung l WHERE l.ziehungnr = :ziehungnr"),
+		@NamedQuery(name = "Lottoscheinziehung.findByIsabgeschlossen", query = "SELECT l FROM Lottoscheinziehung l WHERE l.isabgeschlossen = :isabgeschlossen"),
+		@NamedQuery(name = "Lottoscheinziehung.findByIsletzteziehung", query = "SELECT l FROM Lottoscheinziehung l WHERE l.isletzteziehung = :isletzteziehung"),
+		@NamedQuery(name = "Lottoscheinziehung.findByCreated", query = "SELECT l FROM Lottoscheinziehung l WHERE l.created = :created"),
+		@NamedQuery(name = "Lottoscheinziehung.findByLastmodified", query = "SELECT l FROM Lottoscheinziehung l WHERE l.lastmodified = :lastmodified"),
+		@NamedQuery(name = "Lottoscheinziehung.findByVersion", query = "SELECT l FROM Lottoscheinziehung l WHERE l.version = :version"),
+		@NamedQuery(name = "Lottoscheinziehung.findByGewinnspiel77", query = "SELECT l FROM Lottoscheinziehung l WHERE l.gewinnspiel77 = :gewinnspiel77"),
+		@NamedQuery(name = "Lottoscheinziehung.findByGewinnsuper6", query = "SELECT l FROM Lottoscheinziehung l WHERE l.gewinnsuper6 = :gewinnsuper6") })
 public class Lottoscheinziehung implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -78,20 +78,20 @@ public class Lottoscheinziehung implements Serializable {
 	private BigInteger gewinnspiel77;
 	@Column(name = "gewinnsuper6")
 	private BigInteger gewinnsuper6;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "lottoscheinziehungid")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "lottoscheinziehung")
 	private List<Lottoscheinziehung6aus49> lottoscheinziehung6aus49List;
 	@JoinColumn(name = "gewinnklasseidspiel77", referencedColumnName = "gewinnklasseid")
 	@ManyToOne
-	private Gewinnklasse gewinnklasseidspiel77;
+	private Gewinnklasse gewinnklassespiel77;
 	@JoinColumn(name = "gewinnklasseidsuper6", referencedColumnName = "gewinnklasseid")
 	@ManyToOne
-	private Gewinnklasse gewinnklasseidsuper6;
+	private Gewinnklasse gewinnklassesuper6;
 	@JoinColumn(name = "lottoscheinid", referencedColumnName = "lottoscheinid")
 	@ManyToOne(optional = false)
-	private Lottoschein lottoscheinid;
+	private Lottoschein lottoschein;
 	@JoinColumn(name = "ziehungid", referencedColumnName = "ziehungid")
 	@ManyToOne(optional = false)
-	private Ziehung ziehungid;
+	private Ziehung ziehung;
 
 	public Lottoscheinziehung() {
 	}
@@ -101,7 +101,7 @@ public class Lottoscheinziehung implements Serializable {
 	}
 
 	public Lottoscheinziehung(Long lottoscheinziehungid, int ziehungnr,
-		LocalDateTime created, LocalDateTime lastmodified) {
+			LocalDateTime created, LocalDateTime lastmodified) {
 		this.lottoscheinziehungid = lottoscheinziehungid;
 		this.ziehungnr = ziehungnr;
 		this.created = created;
@@ -185,47 +185,47 @@ public class Lottoscheinziehung implements Serializable {
 	}
 
 	public void setLottoscheinziehung6aus49List(
-		List<Lottoscheinziehung6aus49> lottoscheinziehung6aus49List) {
+			List<Lottoscheinziehung6aus49> lottoscheinziehung6aus49List) {
 		this.lottoscheinziehung6aus49List = lottoscheinziehung6aus49List;
 	}
 
-	public Gewinnklasse getGewinnklasseidspiel77() {
-		return gewinnklasseidspiel77;
+	public Gewinnklasse getGewinnklassespiel77() {
+		return gewinnklassespiel77;
 	}
 
-	public void setGewinnklasseidspiel77(Gewinnklasse gewinnklasseidspiel77) {
-		this.gewinnklasseidspiel77 = gewinnklasseidspiel77;
+	public void setGewinnklassespiel77(Gewinnklasse gewinnklasseidspiel77) {
+		this.gewinnklassespiel77 = gewinnklasseidspiel77;
 	}
 
-	public Gewinnklasse getGewinnklasseidsuper6() {
-		return gewinnklasseidsuper6;
+	public Gewinnklasse getGewinnklassesuper6() {
+		return gewinnklassesuper6;
 	}
 
-	public void setGewinnklasseidsuper6(Gewinnklasse gewinnklasseidsuper6) {
-		this.gewinnklasseidsuper6 = gewinnklasseidsuper6;
+	public void setGewinnklassesuper6(Gewinnklasse gewinnklasseidsuper6) {
+		this.gewinnklassesuper6 = gewinnklasseidsuper6;
 	}
 
-	public Lottoschein getLottoscheinid() {
-		return lottoscheinid;
+	public Lottoschein getLottoschein() {
+		return lottoschein;
 	}
 
-	public void setLottoscheinid(Lottoschein lottoscheinid) {
-		this.lottoscheinid = lottoscheinid;
+	public void setLottoschein(Lottoschein lottoscheinid) {
+		this.lottoschein = lottoscheinid;
 	}
 
-	public Ziehung getZiehungid() {
-		return ziehungid;
+	public Ziehung getZiehung() {
+		return ziehung;
 	}
 
-	public void setZiehungid(Ziehung ziehungid) {
-		this.ziehungid = ziehungid;
+	public void setZiehung(Ziehung ziehungid) {
+		this.ziehung = ziehungid;
 	}
 
 	@Override
 	public int hashCode() {
 		int hash = 0;
 		hash += (lottoscheinziehungid != null ? lottoscheinziehungid.hashCode()
-			: 0);
+				: 0);
 		return hash;
 	}
 
@@ -238,9 +238,9 @@ public class Lottoscheinziehung implements Serializable {
 		}
 		Lottoscheinziehung other = (Lottoscheinziehung) object;
 		if ((this.lottoscheinziehungid == null
-			&& other.lottoscheinziehungid != null)
-			|| (this.lottoscheinziehungid != null
-				&& !this.lottoscheinziehungid.equals(other.lottoscheinziehungid))) {
+				&& other.lottoscheinziehungid != null)
+				|| (this.lottoscheinziehungid != null
+						&& !this.lottoscheinziehungid.equals(other.lottoscheinziehungid))) {
 			return false;
 		}
 		return true;
@@ -249,7 +249,7 @@ public class Lottoscheinziehung implements Serializable {
 	@Override
 	public String toString() {
 		return "wbs.corejpa.persistence.Lottoscheinziehung[ lottoscheinziehungid="
-			+ lottoscheinziehungid + " ]";
+				+ lottoscheinziehungid + " ]";
 	}
 
 }

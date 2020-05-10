@@ -82,14 +82,14 @@ public class LottoscheinEinreichen implements LottoscheinEinreichenLocal {
 		int kosten = kostenDetailedDto.getGesamtbetrag();
 
 		List<Adresse> adreseeList = adresseCache
-			.getAdresseListByKundeId(schein.getKundeid());
-		Auftrag auftrag = new Auftrag(schein.getBelegnummer(), schein.getKundeid()
+			.getAdresseListByKundeId(schein.getKunde());
+		Auftrag auftrag = new Auftrag(schein.getBelegnummer(), schein.getKunde()
 			.getName(), schein.getLaufzeit(), kosten, schein.getVersion(),
 			schein.getLosnummer(), schein.getIsspiel77(), schein.getIssuper6(),
 			schein.getIsmittwoch(), schein.getIssamstag(),
 			schein.getTipps().length / 8);
 
-		AuftragKunde auftragKunde = new AuftragKunde(schein.getKundeid(),
+		AuftragKunde auftragKunde = new AuftragKunde(schein.getKunde(),
 			adreseeList);
 
 		StringBuilder sbContent = new StringBuilder("");
@@ -97,7 +97,7 @@ public class LottoscheinEinreichen implements LottoscheinEinreichenLocal {
 		sbContent.append("\t\t\t\t\t\t Dresden, den " + datum.toLocalDate()
 			.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) + "\n\n\n");
 
-		sbContent.append("Hallo Frau/Herr " + schein.getKundeid()
+		sbContent.append("Hallo Frau/Herr " + schein.getKunde()
 			.getName() + ",\n");
 		sbContent.append("\n");
 		sbContent.append(
@@ -119,10 +119,10 @@ public class LottoscheinEinreichen implements LottoscheinEinreichenLocal {
 		for (LocalDate date : dateList) {
 			ziehung = dBCacheLocal.ziehungByDatum(date);
 			lottoscheinziehung = new Lottoscheinziehung();
-			lottoscheinziehung.setZiehungid(ziehung);
-			lottoscheinziehung.setLottoscheinid(schein);
-			lottoscheinziehung.setGewinnklasseidspiel77(null);
-			lottoscheinziehung.setGewinnklasseidsuper6(null);
+			lottoscheinziehung.setZiehung(ziehung);
+			lottoscheinziehung.setLottoschein(schein);
+			lottoscheinziehung.setGewinnklassespiel77(null);
+			lottoscheinziehung.setGewinnklassesuper6(null);
 			lottoscheinziehung.setIsabgeschlossen(false);
 			lottoscheinziehung.setZiehungnr(nr);
 			lottoscheinziehung.setCreated(datum);

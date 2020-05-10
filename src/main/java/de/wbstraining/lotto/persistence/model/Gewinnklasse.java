@@ -39,18 +39,18 @@ import de.wbstraining.lotto.persistence.util.LocalDateTimeAttributeConverter;
 @Entity
 @Table(name = "gewinnklasse")
 @NamedQueries({
-	@NamedQuery(name = "Gewinnklasse.findAll", query = "SELECT g FROM Gewinnklasse g"),
-	@NamedQuery(name = "Gewinnklasse.findByGewinnklasseid", query = "SELECT g FROM Gewinnklasse g WHERE g.gewinnklasseid = :gewinnklasseid"),
-	@NamedQuery(name = "Gewinnklasse.findByGewinnklassenr", query = "SELECT g FROM Gewinnklasse g WHERE g.gewinnklassenr = :gewinnklassenr"),
-	@NamedQuery(name = "Gewinnklasse.findByBezeichnunglatein", query = "SELECT g FROM Gewinnklasse g WHERE g.bezeichnunglatein = :bezeichnunglatein"),
-	@NamedQuery(name = "Gewinnklasse.findByBeschreibung", query = "SELECT g FROM Gewinnklasse g WHERE g.beschreibung = :beschreibung"),
-	@NamedQuery(name = "Gewinnklasse.findByIsabsolut", query = "SELECT g FROM Gewinnklasse g WHERE g.isabsolut = :isabsolut"),
-	@NamedQuery(name = "Gewinnklasse.findByBetrag", query = "SELECT g FROM Gewinnklasse g WHERE g.betrag = :betrag"),
-	@NamedQuery(name = "Gewinnklasse.findByGueltigab", query = "SELECT g FROM Gewinnklasse g WHERE g.gueltigab = :gueltigab"),
-	@NamedQuery(name = "Gewinnklasse.findByGueltigbis", query = "SELECT g FROM Gewinnklasse g WHERE g.gueltigbis = :gueltigbis"),
-	@NamedQuery(name = "Gewinnklasse.findByCreated", query = "SELECT g FROM Gewinnklasse g WHERE g.created = :created"),
-	@NamedQuery(name = "Gewinnklasse.findByLastmodified", query = "SELECT g FROM Gewinnklasse g WHERE g.lastmodified = :lastmodified"),
-	@NamedQuery(name = "Gewinnklasse.findByVersion", query = "SELECT g FROM Gewinnklasse g WHERE g.version = :version") })
+		@NamedQuery(name = "Gewinnklasse.findAll", query = "SELECT g FROM Gewinnklasse g"),
+		@NamedQuery(name = "Gewinnklasse.findByGewinnklasseid", query = "SELECT g FROM Gewinnklasse g WHERE g.gewinnklasseid = :gewinnklasseid"),
+		@NamedQuery(name = "Gewinnklasse.findByGewinnklassenr", query = "SELECT g FROM Gewinnklasse g WHERE g.gewinnklassenr = :gewinnklassenr"),
+		@NamedQuery(name = "Gewinnklasse.findByBezeichnunglatein", query = "SELECT g FROM Gewinnklasse g WHERE g.bezeichnunglatein = :bezeichnunglatein"),
+		@NamedQuery(name = "Gewinnklasse.findByBeschreibung", query = "SELECT g FROM Gewinnklasse g WHERE g.beschreibung = :beschreibung"),
+		@NamedQuery(name = "Gewinnklasse.findByIsabsolut", query = "SELECT g FROM Gewinnklasse g WHERE g.isabsolut = :isabsolut"),
+		@NamedQuery(name = "Gewinnklasse.findByBetrag", query = "SELECT g FROM Gewinnklasse g WHERE g.betrag = :betrag"),
+		@NamedQuery(name = "Gewinnklasse.findByGueltigab", query = "SELECT g FROM Gewinnklasse g WHERE g.gueltigab = :gueltigab"),
+		@NamedQuery(name = "Gewinnklasse.findByGueltigbis", query = "SELECT g FROM Gewinnklasse g WHERE g.gueltigbis = :gueltigbis"),
+		@NamedQuery(name = "Gewinnklasse.findByCreated", query = "SELECT g FROM Gewinnklasse g WHERE g.created = :created"),
+		@NamedQuery(name = "Gewinnklasse.findByLastmodified", query = "SELECT g FROM Gewinnklasse g WHERE g.lastmodified = :lastmodified"),
+		@NamedQuery(name = "Gewinnklasse.findByVersion", query = "SELECT g FROM Gewinnklasse g WHERE g.version = :version") })
 public class Gewinnklasse implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -96,18 +96,18 @@ public class Gewinnklasse implements Serializable {
 	private LocalDateTime lastmodified;
 	@Column(name = "version")
 	private Integer version;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "gewinnklasseid")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "gewinnklasse")
 	private List<Lottoscheinziehung6aus49> lottoscheinziehung6aus49List;
-	@OneToMany(mappedBy = "gewinnklasseidspiel77")
+	@OneToMany(mappedBy = "gewinnklassespiel77") // JavaObject
 	private List<Lottoscheinziehung> lottoscheinziehungList;
-	@OneToMany(mappedBy = "gewinnklasseidsuper6")
+	@OneToMany(mappedBy = "gewinnklassesuper6") // JavaObject
 	private List<Lottoscheinziehung> lottoscheinziehungList1;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "gewinnklasseid")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "gewinnklasse") // JavaObject
 	private List<Jackpot> jackpotList;
 	@JoinColumn(name = "spielid", referencedColumnName = "spielid")
 	@ManyToOne(optional = false)
-	private Spiel spielid;
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "gewinnklasseid")
+	private Spiel spiel;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "gewinnklasse") // JavaObject
 	private List<Gewinnklasseziehungquote> gewinnklasseziehungquoteList;
 
 	public Gewinnklasse() {
@@ -118,8 +118,8 @@ public class Gewinnklasse implements Serializable {
 	}
 
 	public Gewinnklasse(Long gewinnklasseid, int gewinnklassenr,
-		String bezeichnunglatein, boolean isabsolut, LocalDateTime created,
-		LocalDateTime lastmodified) {
+			String bezeichnunglatein, boolean isabsolut, LocalDateTime created,
+			LocalDateTime lastmodified) {
 		this.gewinnklasseid = gewinnklasseid;
 		this.gewinnklassenr = gewinnklassenr;
 		this.bezeichnunglatein = bezeichnunglatein;
@@ -221,7 +221,7 @@ public class Gewinnklasse implements Serializable {
 	}
 
 	public void setLottoscheinziehung6aus49List(
-		List<Lottoscheinziehung6aus49> lottoscheinziehung6aus49List) {
+			List<Lottoscheinziehung6aus49> lottoscheinziehung6aus49List) {
 		this.lottoscheinziehung6aus49List = lottoscheinziehung6aus49List;
 	}
 
@@ -230,7 +230,7 @@ public class Gewinnklasse implements Serializable {
 	}
 
 	public void setLottoscheinziehungList(
-		List<Lottoscheinziehung> lottoscheinziehungList) {
+			List<Lottoscheinziehung> lottoscheinziehungList) {
 		this.lottoscheinziehungList = lottoscheinziehungList;
 	}
 
@@ -239,7 +239,7 @@ public class Gewinnklasse implements Serializable {
 	}
 
 	public void setLottoscheinziehungList1(
-		List<Lottoscheinziehung> lottoscheinziehungList1) {
+			List<Lottoscheinziehung> lottoscheinziehungList1) {
 		this.lottoscheinziehungList1 = lottoscheinziehungList1;
 	}
 
@@ -251,12 +251,12 @@ public class Gewinnklasse implements Serializable {
 		this.jackpotList = jackpotList;
 	}
 
-	public Spiel getSpielid() {
-		return spielid;
+	public Spiel getSpiel() {
+		return spiel;
 	}
 
-	public void setSpielid(Spiel spielid) {
-		this.spielid = spielid;
+	public void setSpiel(Spiel spielid) {
+		this.spiel = spielid;
 	}
 
 	public List<Gewinnklasseziehungquote> getGewinnklasseziehungquoteList() {
@@ -264,7 +264,7 @@ public class Gewinnklasse implements Serializable {
 	}
 
 	public void setGewinnklasseziehungquoteList(
-		List<Gewinnklasseziehungquote> gewinnklasseziehungquoteList) {
+			List<Gewinnklasseziehungquote> gewinnklasseziehungquoteList) {
 		this.gewinnklasseziehungquoteList = gewinnklasseziehungquoteList;
 	}
 
@@ -284,8 +284,8 @@ public class Gewinnklasse implements Serializable {
 		}
 		Gewinnklasse other = (Gewinnklasse) object;
 		if ((this.gewinnklasseid == null && other.gewinnklasseid != null)
-			|| (this.gewinnklasseid != null
-				&& !this.gewinnklasseid.equals(other.gewinnklasseid))) {
+				|| (this.gewinnklasseid != null
+						&& !this.gewinnklasseid.equals(other.gewinnklasseid))) {
 			return false;
 		}
 		return true;
@@ -294,7 +294,7 @@ public class Gewinnklasse implements Serializable {
 	@Override
 	public String toString() {
 		return "wbs.corejpa.persistence.Gewinnklasse[ gewinnklasseid="
-			+ gewinnklasseid + " ]";
+				+ gewinnklasseid + " ]";
 	}
 
 }

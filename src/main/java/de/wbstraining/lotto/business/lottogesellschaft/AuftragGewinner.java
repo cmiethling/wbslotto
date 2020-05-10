@@ -57,7 +57,7 @@ public class AuftragGewinner implements Serializable {
 	}
 
 	public long getGewinnklsseid() {
-		return gewinnklasseziehungquote.getGewinnklasseid()
+		return gewinnklasseziehungquote.getGewinnklasse()
 			.getGewinnklasseid();
 	}
 
