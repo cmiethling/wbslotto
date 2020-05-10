@@ -28,7 +28,7 @@ public class AdresseCache implements AdresseCacheLocal {
 	public List<Adresse> getAdresseListByKundeId(Kunde kunde) {
 		//System.out.println("im AdresseCacheMethode");
 		List<Adresse> adresseList = new ArrayList<Adresse>();
-		adressen.stream().filter(a-> a.getKundeid().getKundeid() == kunde.getKundeid()).forEach(a -> adresseList.add(a));
+		adressen.stream().filter(a-> a.getKunde().getKundeid() == kunde.getKundeid()).forEach(a -> adresseList.add(a));
 		return adresseList;
 	}
 

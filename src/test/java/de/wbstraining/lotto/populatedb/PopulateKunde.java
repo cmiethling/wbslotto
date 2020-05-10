@@ -85,7 +85,7 @@ public class PopulateKunde implements PopulateKundeLocal {
 			adresse.setCreated(now);
 			adresse.setLastmodified(now);
 
-			adresse.setKundeid(kunde);
+			adresse.setKunde(kunde);
 			kunde.getAdresseList()
 				.add(adresse);
 
@@ -98,7 +98,7 @@ public class PopulateKunde implements PopulateKundeLocal {
 			bankverbindung.setCreated(now);
 			bankverbindung.setLastmodified(now);
 
-			bankverbindung.setKundeid(kunde);
+			bankverbindung.setKunde(kunde);
 			kunde.getBankverbindungList()
 				.add(bankverbindung);
 

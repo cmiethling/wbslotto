@@ -99,7 +99,7 @@ public class Adresse implements Serializable {
 	private Integer version;
 	@JoinColumn(name = "kundeid", referencedColumnName = "kundeid")
 	@ManyToOne(optional = false)
-	private Kunde kundeid;
+	private Kunde kunde;
 
 	public Adresse() {
 	}
@@ -210,12 +210,12 @@ public class Adresse implements Serializable {
 		this.version = version;
 	}
 
-	public Kunde getKundeid() {
-		return kundeid;
+	public Kunde getKunde() {
+		return kunde;
 	}
 
-	public void setKundeid(Kunde kundeid) {
-		this.kundeid = kundeid;
+	public void setKunde(Kunde kundeid) {
+		this.kunde = kundeid;
 	}
 
 	@Override

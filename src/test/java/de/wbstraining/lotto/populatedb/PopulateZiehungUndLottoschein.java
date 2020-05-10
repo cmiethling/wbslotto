@@ -119,7 +119,7 @@ public class PopulateZiehungUndLottoschein
 		Lottoschein schein = new Lottoschein();
 		LocalDateTime datum = LocalDateTime.now();
 		boolean isMittwoch = random.nextBoolean();
-		schein.setKundeid(kunde);
+		schein.setKunde(kunde);
 		schein.setAbgabedatum(abgabeDatum.atStartOfDay());
 		schein.setBelegnummer(
 			BigInteger.valueOf((long) (Math.random() * 1_000_000_000)));

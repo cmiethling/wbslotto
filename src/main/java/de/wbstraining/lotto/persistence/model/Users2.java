@@ -55,7 +55,7 @@ public class Users2 implements Serializable {
 
     @JoinColumn(name = "kundeid", referencedColumnName = "kundeid")
     @OneToOne
-    private Kunde kundeid; 
+    private Kunde kunde; 
     
     public Users2() {
     }
@@ -86,12 +86,12 @@ public class Users2 implements Serializable {
         this.password = password;
     }
 
-    public Kunde getKundeid() {
-        return kundeid;
+    public Kunde getKunde() {
+        return kunde;
     }
 
-    public void setKundeid(Kunde kundeid) {
-        this.kundeid = kundeid;
+    public void setKunde(Kunde kundeid) {
+        this.kunde = kundeid;
     } 
 
 //    public List<UserRoles> getUserRolesList() {

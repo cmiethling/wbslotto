@@ -104,7 +104,7 @@ public class Lottoschein implements Serializable {
 	private Integer version;
 	@JoinColumn(name = "kundeid", referencedColumnName = "kundeid")
 	@ManyToOne(optional = false)
-	private Kunde kundeid;
+	private Kunde kunde;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "lottoscheinid")
 	private List<Lottoscheinziehung> lottoscheinziehungList;
 
@@ -253,12 +253,12 @@ public class Lottoschein implements Serializable {
 		this.version = version;
 	}
 
-	public Kunde getKundeid() {
-		return kundeid;
+	public Kunde getKunde() {
+		return kunde;
 	}
 
-	public void setKundeid(Kunde kundeid) {
-		this.kundeid = kundeid;
+	public void setKunde(Kunde kundeid) {
+		this.kunde = kundeid;
 	}
 
 	public List<Lottoscheinziehung> getLottoscheinziehungList() {

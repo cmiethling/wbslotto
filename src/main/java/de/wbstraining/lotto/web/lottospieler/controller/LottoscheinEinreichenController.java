@@ -181,7 +181,7 @@ public class LottoscheinEinreichenController implements Serializable {
 		LocalDateTime datum = LocalDateTime.now();
 		Lottoschein schein = new Lottoschein();
 
-		schein.setKundeid(kunde);
+		schein.setKunde(kunde);
 		schein.setAbgabedatum(datum);
 		schein.setBelegnummer(
 			(BigInteger.valueOf((long) (Math.random() * 1_000_000_000))));
