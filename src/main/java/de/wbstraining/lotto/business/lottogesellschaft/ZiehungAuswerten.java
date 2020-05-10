@@ -240,14 +240,14 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 	 * 
 	 */
 	private void updateValuesForZiehung(Lottoscheinziehung lz) {
-		if (lz.getLottoscheinid()
+		if (lz.getLottoschein()
 			.getIsspiel77())
 			anzSpiel77.incrementAndGet();
-		if (lz.getLottoscheinid()
+		if (lz.getLottoschein()
 			.getIssuper6())
 			anzSuper6.incrementAndGet();
 		summeAnzahlTipps
-			.addAndGet(ByteLongConverter.byteToLong(lz.getLottoscheinid()
+			.addAndGet(ByteLongConverter.byteToLong(lz.getLottoschein()
 				.getTipps()).length);
 	}
 
@@ -259,7 +259,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 // was sagt isAbgeschlossen? >> ev. ist schon bezahlt? 1 = ja
 
 //	Super 6
-		int gklNr = LottoUtil.gklSuper6(this.zie.getSuper6(), lz.getLottoscheinid()
+		int gklNr = LottoUtil.gklSuper6(this.zie.getSuper6(), lz.getLottoschein()
 			.getLosnummer());
 		Optional<Gewinnklasse> gklSuper6 = findGklForScheinZie(SUPER6_NAME, gklNr,
 			this.gewinnklassen);
@@ -277,15 +277,15 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 			lz.setGewinnsuper6(gkl.getBetrag());
 
 			log.fine("\t" + SUPER6_NAME + ": zieId: " + zie.getZiehungid()
-				+ "   ScheinId: " + lz.getLottoscheinid()
+				+ "   ScheinId: " + lz.getLottoschein()
 					.getLottoscheinid()
-				+ "  >> Zie: " + zie.getSuper6() + " <-> " + lz.getLottoscheinid()
+				+ "  >> Zie: " + zie.getSuper6() + " <-> " + lz.getLottoschein()
 					.getLosnummer()
 				+ ": Losnr, " + gkl.getBeschreibung());
 		});
 
 // Spiel 77
-		gklNr = LottoUtil.gklSpiel77(this.zie.getSpiel77(), lz.getLottoscheinid()
+		gklNr = LottoUtil.gklSpiel77(this.zie.getSpiel77(), lz.getLottoschein()
 			.getLosnummer());
 		Optional<Gewinnklasse> gklSpiel77 = findGklForScheinZie(SPIEL77_NAME, gklNr,
 			this.gewinnklassen);
@@ -308,9 +308,9 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 			}
 
 			log.fine(SPIEL77_NAME + ": zieId: " + zie.getZiehungid() + "   ScheinId: "
-				+ lz.getLottoscheinid()
+				+ lz.getLottoschein()
 					.getLottoscheinid()
-				+ "  >> Zie: " + zie.getSpiel77() + " <-> " + lz.getLottoscheinid()
+				+ "  >> Zie: " + zie.getSpiel77() + " <-> " + lz.getLottoschein()
 					.getLosnummer()
 				+ ": Losnr, " + gkl.getBeschreibung());
 		}); // endSpiel77
@@ -323,7 +323,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 	 */
 	private void createLottoscheinziehung6aus49(Lottoscheinziehung lz) {
 		Lottoscheinziehung6aus49 lzLotto = new Lottoscheinziehung6aus49();
-		Lottoschein schein = lz.getLottoscheinid();
+		Lottoschein schein = lz.getLottoschein();
 
 		int gkl6Aus49;
 		long ziehungsZahlen;
@@ -380,10 +380,10 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 					+ "   tippnr: " + (i + 1) + "   tipp: " + LottoUtil.tippAsString(tipp)
 					+ " >> " + LottoUtil.tippAsString(ziehungsZahlen) + ": ziehung  >> "
 					+ gkl.getBeschreibung() + "   GewKla: " + gkl6Aus49 + "       Losnr: "
-					+ lz.getLottoscheinid()
+					+ lz.getLottoschein()
 						.getLosnummer()
 					+ " >> " + zie.getSuperzahl() + ": Superzahl  (scheinId: "
-					+ lz.getLottoscheinid()
+					+ lz.getLottoschein()
 						.getLottoscheinid()
 					+ ")");
 			}

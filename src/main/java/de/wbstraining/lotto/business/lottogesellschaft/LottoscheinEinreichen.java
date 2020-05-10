@@ -120,7 +120,7 @@ public class LottoscheinEinreichen implements LottoscheinEinreichenLocal {
 			ziehung = dBCacheLocal.ziehungByDatum(date);
 			lottoscheinziehung = new Lottoscheinziehung();
 			lottoscheinziehung.setZiehung(ziehung);
-			lottoscheinziehung.setLottoscheinid(schein);
+			lottoscheinziehung.setLottoschein(schein);
 			lottoscheinziehung.setGewinnklasseidspiel77(null);
 			lottoscheinziehung.setGewinnklasseidsuper6(null);
 			lottoscheinziehung.setIsabgeschlossen(false);

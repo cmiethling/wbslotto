@@ -36,22 +36,22 @@ import de.wbstraining.lotto.persistence.util.LocalDateTimeAttributeConverter;
 @Entity
 @Table(name = "lottoschein")
 @NamedQueries({
-	@NamedQuery(name = "Lottoschein.findAll", query = "SELECT l FROM Lottoschein l"),
-	@NamedQuery(name = "Lottoschein.findByLottoscheinid", query = "SELECT l FROM Lottoschein l WHERE l.lottoscheinid = :lottoscheinid"),
-	@NamedQuery(name = "Lottoschein.findByBelegnummer", query = "SELECT l FROM Lottoschein l WHERE l.belegnummer = :belegnummer"),
-	@NamedQuery(name = "Lottoschein.findByLosnummer", query = "SELECT l FROM Lottoschein l WHERE l.losnummer = :losnummer"),
-	@NamedQuery(name = "Lottoschein.findByIsspiel77", query = "SELECT l FROM Lottoschein l WHERE l.isspiel77 = :isspiel77"),
-	@NamedQuery(name = "Lottoschein.findByIssuper6", query = "SELECT l FROM Lottoschein l WHERE l.issuper6 = :issuper6"),
-	@NamedQuery(name = "Lottoschein.findByIsmittwoch", query = "SELECT l FROM Lottoschein l WHERE l.ismittwoch = :ismittwoch"),
-	@NamedQuery(name = "Lottoschein.findByIssamstag", query = "SELECT l FROM Lottoschein l WHERE l.issamstag = :issamstag"),
-	@NamedQuery(name = "Lottoschein.findByLaufzeit", query = "SELECT l FROM Lottoschein l WHERE l.laufzeit = :laufzeit"),
-	@NamedQuery(name = "Lottoschein.findByIsabgeschlossen", query = "SELECT l FROM Lottoschein l WHERE l.isabgeschlossen = :isabgeschlossen"),
-	@NamedQuery(name = "Lottoschein.findByAbgabedatum", query = "SELECT l FROM Lottoschein l WHERE l.abgabedatum = :abgabedatum"),
-	@NamedQuery(name = "Lottoschein.findByKosten", query = "SELECT l FROM Lottoschein l WHERE l.kosten = :kosten"),
-	@NamedQuery(name = "Lottoschein.findByStatus", query = "SELECT l FROM Lottoschein l WHERE l.status = :status"),
-	@NamedQuery(name = "Lottoschein.findByCreated", query = "SELECT l FROM Lottoschein l WHERE l.created = :created"),
-	@NamedQuery(name = "Lottoschein.findByLastmodified", query = "SELECT l FROM Lottoschein l WHERE l.lastmodified = :lastmodified"),
-	@NamedQuery(name = "Lottoschein.findByVersion", query = "SELECT l FROM Lottoschein l WHERE l.version = :version") })
+		@NamedQuery(name = "Lottoschein.findAll", query = "SELECT l FROM Lottoschein l"),
+		@NamedQuery(name = "Lottoschein.findByLottoscheinid", query = "SELECT l FROM Lottoschein l WHERE l.lottoscheinid = :lottoscheinid"),
+		@NamedQuery(name = "Lottoschein.findByBelegnummer", query = "SELECT l FROM Lottoschein l WHERE l.belegnummer = :belegnummer"),
+		@NamedQuery(name = "Lottoschein.findByLosnummer", query = "SELECT l FROM Lottoschein l WHERE l.losnummer = :losnummer"),
+		@NamedQuery(name = "Lottoschein.findByIsspiel77", query = "SELECT l FROM Lottoschein l WHERE l.isspiel77 = :isspiel77"),
+		@NamedQuery(name = "Lottoschein.findByIssuper6", query = "SELECT l FROM Lottoschein l WHERE l.issuper6 = :issuper6"),
+		@NamedQuery(name = "Lottoschein.findByIsmittwoch", query = "SELECT l FROM Lottoschein l WHERE l.ismittwoch = :ismittwoch"),
+		@NamedQuery(name = "Lottoschein.findByIssamstag", query = "SELECT l FROM Lottoschein l WHERE l.issamstag = :issamstag"),
+		@NamedQuery(name = "Lottoschein.findByLaufzeit", query = "SELECT l FROM Lottoschein l WHERE l.laufzeit = :laufzeit"),
+		@NamedQuery(name = "Lottoschein.findByIsabgeschlossen", query = "SELECT l FROM Lottoschein l WHERE l.isabgeschlossen = :isabgeschlossen"),
+		@NamedQuery(name = "Lottoschein.findByAbgabedatum", query = "SELECT l FROM Lottoschein l WHERE l.abgabedatum = :abgabedatum"),
+		@NamedQuery(name = "Lottoschein.findByKosten", query = "SELECT l FROM Lottoschein l WHERE l.kosten = :kosten"),
+		@NamedQuery(name = "Lottoschein.findByStatus", query = "SELECT l FROM Lottoschein l WHERE l.status = :status"),
+		@NamedQuery(name = "Lottoschein.findByCreated", query = "SELECT l FROM Lottoschein l WHERE l.created = :created"),
+		@NamedQuery(name = "Lottoschein.findByLastmodified", query = "SELECT l FROM Lottoschein l WHERE l.lastmodified = :lastmodified"),
+		@NamedQuery(name = "Lottoschein.findByVersion", query = "SELECT l FROM Lottoschein l WHERE l.version = :version") })
 public class Lottoschein implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -105,7 +105,7 @@ public class Lottoschein implements Serializable {
 	@JoinColumn(name = "kundeid", referencedColumnName = "kundeid")
 	@ManyToOne(optional = false)
 	private Kunde kunde;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "lottoscheinid")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "lottoschein")
 	private List<Lottoscheinziehung> lottoscheinziehungList;
 
 	public Lottoschein() {
@@ -116,8 +116,8 @@ public class Lottoschein implements Serializable {
 	}
 
 	public Lottoschein(Long lottoscheinid, int losnummer,
-		LocalDateTime abgabedatum, LocalDateTime created,
-		LocalDateTime lastmodified) {
+			LocalDateTime abgabedatum, LocalDateTime created,
+			LocalDateTime lastmodified) {
 		this.lottoscheinid = lottoscheinid;
 		this.losnummer = losnummer;
 		this.abgabedatum = abgabedatum;
@@ -266,7 +266,7 @@ public class Lottoschein implements Serializable {
 	}
 
 	public void setLottoscheinziehungList(
-		List<Lottoscheinziehung> lottoscheinziehungList) {
+			List<Lottoscheinziehung> lottoscheinziehungList) {
 		this.lottoscheinziehungList = lottoscheinziehungList;
 	}
 
@@ -286,8 +286,8 @@ public class Lottoschein implements Serializable {
 		}
 		Lottoschein other = (Lottoschein) object;
 		if ((this.lottoscheinid == null && other.lottoscheinid != null)
-			|| (this.lottoscheinid != null
-				&& !this.lottoscheinid.equals(other.lottoscheinid))) {
+				|| (this.lottoscheinid != null
+						&& !this.lottoscheinid.equals(other.lottoscheinid))) {
 			return false;
 		}
 		return true;
@@ -296,7 +296,7 @@ public class Lottoschein implements Serializable {
 	@Override
 	public String toString() {
 		return "wbs.corejpa.persistence.Lottoschein[ lottoscheinid=" + lottoscheinid
-			+ " ]";
+				+ " ]";
 	}
 
 }

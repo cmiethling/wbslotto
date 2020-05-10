@@ -107,7 +107,7 @@ public class CZiehungTestdatenGenerator
 		lottoscheinziehung.setIsletzteziehung(true);
 		lottoscheinziehung.setZiehung(ziehung);
 		lottoscheinziehung.setZiehungnr(1);
-		lottoscheinziehung.setLottoscheinid(schein);
+		lottoscheinziehung.setLottoschein(schein);
 		lottoscheinziehung.setGewinnklasseidspiel77(null);
 		lottoscheinziehung.setGewinnklasseidsuper6(null);
 		lottoscheinziehungFacadeLocal.create(lottoscheinziehung);

@@ -155,7 +155,7 @@ public class PopulateZiehungUndLottoschein
 		for (LocalDate date : dateList) {
 			ziehung = ziehungenByDate.get(date);
 			lottoscheinziehung = new Lottoscheinziehung();
-			lottoscheinziehung.setLottoscheinid(schein);
+			lottoscheinziehung.setLottoschein(schein);
 			lottoscheinziehung.setZiehungnr(nr);
 			lottoscheinziehung.setZiehung(ziehung);
 			lottoscheinziehung.setGewinnklasseidspiel77(null);
