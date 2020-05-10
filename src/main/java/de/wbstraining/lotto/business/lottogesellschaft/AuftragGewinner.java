@@ -1,7 +1,6 @@
 package de.wbstraining.lotto.business.lottogesellschaft;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.time.LocalDate;
 
 import de.wbstraining.lotto.persistence.model.Gewinnklasseziehungquote;
@@ -32,7 +31,7 @@ public class AuftragGewinner implements Serializable {
 		this.lottoscheinziehung6aus49 = lottoscheinziehung6aus49;
 	}
 
-	public BigInteger getBelegnummer() {
+	public Long getBelegnummer() {
 		return lottoschein.getBelegnummer();
 	}
 
@@ -67,7 +66,8 @@ public class AuftragGewinner implements Serializable {
 
 	public long getGewinnspiel77() {
 		if (lottoscheinziehung.getGewinnspiel77() != null)
-			return lottoscheinziehung.getGewinnspiel77();
+			return lottoscheinziehung.getGewinnspiel77()
+					.longValue();
 		return 0;
 	}
 
