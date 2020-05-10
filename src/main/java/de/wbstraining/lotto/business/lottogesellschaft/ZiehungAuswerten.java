@@ -1,6 +1,5 @@
 package de.wbstraining.lotto.business.lottogesellschaft;
 
-import java.math.BigInteger;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -399,9 +398,9 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 		einsatzSpiel77 = anzSpiel77.get() * geb.getEinsatzspiel77();
 		einsatzLotto = summeAnzahlTipps.get() * geb.getEinsatzprotipp();
 
-		zie.setEinsatzspiel77(BigInteger.valueOf(einsatzSpiel77));
-		zie.setEinsatzsuper6(BigInteger.valueOf(einsatzSuper6));
-		zie.setEinsatzlotto(BigInteger.valueOf(einsatzLotto));
+		zie.setEinsatzspiel77(einsatzSpiel77);
+		zie.setEinsatzsuper6(einsatzSuper6);
+		zie.setEinsatzlotto(einsatzLotto);
 
 		ziehungFacade.edit(zie);
 

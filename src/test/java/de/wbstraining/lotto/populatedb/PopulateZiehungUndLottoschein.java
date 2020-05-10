@@ -1,6 +1,5 @@
 package de.wbstraining.lotto.populatedb;
 
-import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -100,13 +99,13 @@ public class PopulateZiehungUndLottoschein
 		LocalDateTime aktuellesDatum = LocalDateTime.now();
 		Ziehung ziehung = new Ziehung();
 
-		ziehung.setEinsatzlotto(BigInteger.ZERO);
-		ziehung.setEinsatzspiel77(BigInteger.ZERO);
-		ziehung.setEinsatzsuper6(BigInteger.ZERO);
+		ziehung.setEinsatzlotto(0L);
+		ziehung.setEinsatzspiel77(0L);
+		ziehung.setEinsatzsuper6(0L);
 		ziehung.setSpiel77(0);
 		ziehung.setSuper6(0);
 		ziehung.setSuperzahl(0);
-		ziehung.setZahlenalsbits(BigInteger.ZERO);
+		ziehung.setZahlenalsbits(0L);
 		ziehung.setStatus(0);
 		ziehung.setZiehungsdatum(ziehungsDatum);
 		ziehung.setCreated(aktuellesDatum);

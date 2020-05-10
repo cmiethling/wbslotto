@@ -5,7 +5,6 @@
  */
 package de.wbstraining.lotto.web.lottospieler.controller;
 
-import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Locale;
@@ -52,13 +51,13 @@ public class ZiehungErfassenController {
 		Ziehung ziehung = new Ziehung();
 
 		LocalDateTime date = LocalDateTime.now();
-		ziehung.setEinsatzlotto(BigInteger.ZERO);
-		ziehung.setEinsatzspiel77(BigInteger.ZERO);
-		ziehung.setEinsatzsuper6(BigInteger.ZERO);
+		ziehung.setEinsatzlotto(0L);
+		ziehung.setEinsatzspiel77(0L);
+		ziehung.setEinsatzsuper6(0L);
 		ziehung.setSpiel77(Integer.parseInt(spiel77));
 		ziehung.setSuper6(Integer.parseInt(super6));
 		ziehung.setSuperzahl(superzahl);
-		ziehung.setZahlenalsbits(BigInteger.valueOf(convertToLong(zahlenAlsBits)));
+		ziehung.setZahlenalsbits(convertToLong(zahlenAlsBits));
 		ziehung.setStatus(0);
 		ziehung.setZiehungsdatum(ziehungsDatum);
 		ziehung.setCreated(date);
@@ -86,8 +85,8 @@ public class ZiehungErfassenController {
 		}
 		if (isOk) {
 			if (Long.bitCount(zahlenAlsLong) != 6
-				|| Long.highestOneBit(zahlenAlsLong) > (1L << 49)
-				|| zahlenAlsLong % 2 == 1 || zahlenAlsLong < 0) {
+					|| Long.highestOneBit(zahlenAlsLong) > (1L << 49)
+					|| zahlenAlsLong % 2 == 1 || zahlenAlsLong < 0) {
 				isOk = false;
 			}
 		}
@@ -95,15 +94,15 @@ public class ZiehungErfassenController {
 	}
 
 	public void validate(FacesContext context, UIComponent component, Object obj)
-		throws ValidatorException {
+			throws ValidatorException {
 		String zahlenAlsString = (String) obj;
 		long zahlenAlsLong = convertToLong(zahlenAlsString);
 		if (zahlenAlsLong < 0) {
 			Locale locale = FacesContext.getCurrentInstance()
-				.getViewRoot()
-				.getLocale();
+					.getViewRoot()
+					.getLocale();
 			String msg = ResourceBundle.getBundle("messages", locale)
-				.getString("errZiehungszahlen");
+					.getString("errZiehungszahlen");
 			FacesMessage message = new FacesMessage(msg);
 			throw new ValidatorException(message);
 		}

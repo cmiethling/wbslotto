@@ -5,7 +5,6 @@
  */
 package de.wbstraining.lotto.testdatengenerierung;
 
-import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -265,13 +264,13 @@ public class CZiehungTestdatenGenerator
 		ziehung.setCreated(date);
 		ziehung.setLastmodified(date);
 		ziehung.setZiehungsdatum(ziehungsDatum);
-		ziehung.setZahlenalsbits(BigInteger.valueOf(config.getZahlenAlsBits()));
+		ziehung.setZahlenalsbits(config.getZahlenAlsBits());
 		ziehung.setSpiel77(config.getSpiel77());
 		ziehung.setSuper6(config.getSuper6());
 		ziehung.setSuperzahl(config.getSuperzahl());
-		ziehung.setEinsatzlotto(BigInteger.ZERO);
-		ziehung.setEinsatzspiel77(BigInteger.ZERO);
-		ziehung.setEinsatzsuper6(BigInteger.ZERO);
+		ziehung.setEinsatzlotto(0L);
+		ziehung.setEinsatzspiel77(0L);
+		ziehung.setEinsatzsuper6(0L);
 		ziehung.setStatus(1);
 		ziehungFacadeLocal.create(ziehung);
 		return ziehung;
