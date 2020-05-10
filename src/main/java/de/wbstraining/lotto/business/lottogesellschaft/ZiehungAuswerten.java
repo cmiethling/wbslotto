@@ -363,7 +363,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 				lzLotto.setTippnr(i + 1);
 				lzLotto.setLottoscheinziehungid(lz);
 
-				lzLotto.setGewinnklasseid(gkl);
+				lzLotto.setGewinnklasse(gkl);
 				anzGewinnerProKlasse.computeIfPresent(gkl,
 					(Gewinnklasse g, Integer anzGew) -> ++anzGew);
 
@@ -425,7 +425,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 			gklZieQuo.setZiehungid(zie);
 			gklZieQuo.setAnzahlgewinner(anzGewinnerProKlasse.get(gkl));
 
-			gklZieQuo.setGewinnklasseid(gkl);
+			gklZieQuo.setGewinnklasse(gkl);
 
 //	setBetrag: falls Gkl1 aus Spiel 77 dann Ausnahme!
 			Optional<Gewinnklasse> gkl1AusSpiel77 = Optional.of(gkl)
@@ -474,7 +474,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 		Map<Gewinnklasse, Gewinnklasseziehungquote> gklZieQuoProGkl = //
 			zie.getGewinnklasseziehungquoteList()
 				.stream()
-				.collect(Collectors.toMap(gklZieQuo -> gklZieQuo.getGewinnklasseid(),
+				.collect(Collectors.toMap(gklZieQuo -> gklZieQuo.getGewinnklasse(),
 					gklZieQuo -> gklZieQuo));
 
 		int prozenteMal100FuerGlk1 = gewinnklassen.get(0)
@@ -559,10 +559,10 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 		jackpotsPlusParams.forEach((jp, bools) -> {
 			zie.getGewinnklasseziehungquoteList()
 				.stream()
-				.filter(g -> g.getGewinnklasseid()
-					.getGewinnklasseid() == jp.getGewinnklasseid()
+				.filter(g -> g.getGewinnklasse()
+					.getGewinnklasseid() == jp.getGewinnklasse()
 						.getGewinnklasseid())
-				.filter(g -> anzGewinnerProKlasse.get(jp.getGewinnklasseid()) > 0)
+				.filter(g -> anzGewinnerProKlasse.get(jp.getGewinnklasse()) > 0)
 				.findAny()
 				.ifPresent((Gewinnklasseziehungquote gklZieQuoForJackpot) -> {
 					boolean is12times = bools[1];
@@ -577,15 +577,15 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 					long neuerGesamtGewinn = is12times
 						? jp.getBetragkumuliert() - jp.getBetrag()
 							+ (gklZieQuoForJackpot.getQuote() * anzGewinnerProKlasse
-								.get(gklZieQuoForJackpot.getGewinnklasseid()))
+								.get(gklZieQuoForJackpot.getGewinnklasse()))
 						: jp.getBetragkumuliert();
 					long neueQuote = neuerGesamtGewinn
-						/ anzGewinnerProKlasse.get(gklZieQuoForJackpot.getGewinnklasseid());
+						/ anzGewinnerProKlasse.get(gklZieQuoForJackpot.getGewinnklasse());
 
 					log.fine("JackpotKumuliert: " + jp.getBetragkumuliert());
 					log.info("");
 					log.info("!!!!!!!!!! JACKPOT !!!!!!! fuer Gkl "
-						+ gklZieQuoForJackpot.getGewinnklasseid()
+						+ gklZieQuoForJackpot.getGewinnklasse()
 							.getGewinnklasseid()
 						+ " >> GesamtBetrag mit Jackpot: " + neuerGesamtGewinn
 						+ "   >> Quote pro Gewinner: " + neueQuote + " !!!!!");
@@ -608,17 +608,17 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 
 		lzLottosOhneGkl9.forEach(lzLotto -> {
 			Gewinnklasseziehungquote gklZieQuo = gklZieQuos.stream()
-				.filter(g -> g.getGewinnklasseid()
-					.getGewinnklasseid() == lzLotto.getGewinnklasseid()
+				.filter(g -> g.getGewinnklasse()
+					.getGewinnklasseid() == lzLotto.getGewinnklasse()
 						.getGewinnklasseid()) // mit long vergleichen
 				.findAny()
 				.orElseThrow(() -> new NoSuchElementException(
 					"invalid record in gewinnklasseziehungsquote or "
 						+ "lottoscheinziehung6aus49...  lzLottoGklId: "
-						+ lzLotto.getGewinnklasseid()
+						+ lzLotto.getGewinnklasse()
 							.getGewinnklasseid()
 						+ "   gklZieQuosGklIds: " + gklZieQuos.stream()
-							.map(g -> g.getGewinnklasseid()
+							.map(g -> g.getGewinnklasse()
 								.getGewinnklasseid())
 							.collect(Collectors.toList())));
 
@@ -659,7 +659,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
     Optional<Jackpot> lastJkpotBeforeZieh_opt = Optional.empty();
     if (!jpList.isEmpty()) {
             lastJkpotBeforeZieh_opt = jpList.stream()
-              .filter(jp -> jp.getGewinnklasseid().getSpiel().getName().equals(spielName))
+              .filter(jp -> jp.getGewinnklasse().getSpiel().getName().equals(spielName))
               .filter(jp -> jp.getZiehungid().getStatus()==1)   //TODO For Christian --- it is Important
               // would be good, if indexing and sorting in DB
               .filter(jp -> (jp.getZiehungid().getZiehungsdatum().isBefore(ziehung.getZiehungsdatum())))                                                                                                                                                                                                                                 
@@ -824,7 +824,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
     Gewinnklasse gklJackPotLowKlasse = (gklJackPotLow.isPresent()) ? gklJackPotLow.get() : null;
 
     ///////// Who is Jkpot Winner?
-    jackpotToPersist.setGewinnklasseid(isGkl1WinnerInJkpot ? gkl1Winners_any.get()
+    jackpotToPersist.setGewinnklasse(isGkl1WinnerInJkpot ? gkl1Winners_any.get()
                     : (gklJackPotLowKlasse != null ? gklJackPotLowKlasse : gwnkls1));
 
     // ----------------------------------
@@ -868,7 +868,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 //			keinen Jackpot record erstellen
 			} else {
 // im Jackpot steht falsche Gkl! (gklJackPotLowKlasse)
-				jackpot.setGewinnklasseid(gkl);
+				jackpot.setGewinnklasse(gkl);
 				jackpotFacade.create(jackpot);
 			}
 		}
@@ -954,7 +954,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 		Gewinnklasseziehungquote gklZieQuo = gewinnklasseziehungquoteFacade
 			.findAll()
 			.stream()
-			.filter(g -> g.getGewinnklasseid()
+			.filter(g -> g.getGewinnklasse()
 				.getGewinnklasseid() == gkl.getGewinnklasseid())
 //	Fehlersuche erfolgreich!
 			.filter(g -> g.getZiehungid() // gklZieQuo zur richtigen Ziehung!

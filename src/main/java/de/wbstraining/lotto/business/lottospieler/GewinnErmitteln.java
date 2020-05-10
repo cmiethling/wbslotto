@@ -66,7 +66,7 @@ public class GewinnErmitteln implements GewinnErmittelnLocal {
 		dto.setQuoteSuper6(quoteSuper6);
 		for (Lottoscheinziehung6aus49 l6Aus49 : lziehung
 			.getLottoscheinziehung6aus49List()) {
-			gkl6Aus49 = l6Aus49.getGewinnklasseid()
+			gkl6Aus49 = l6Aus49.getGewinnklasse()
 				.getGewinnklassenr();
 			dto.addPair6Aus49(l6Aus49.getTippnr(), gkl6Aus49, l6Aus49.getGewinn()
 				.longValue());

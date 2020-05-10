@@ -104,7 +104,7 @@ public class PdfReportGenerator {
 		for (Jackpot j : jackpot) {
 
 			String str;
-			if (j.getGewinnklasseid().getGewinnklasseid() == 10) {
+			if (j.getGewinnklasse().getGewinnklasseid() == 10) {
 				str = "Spiel77";
 				color1 = new DeviceRgb(210, 238, 252);
 			} else {
@@ -117,7 +117,7 @@ public class PdfReportGenerator {
 					.setBorderRight(new SolidBorder(color, .1f)).setBackgroundColor(color1));
 			table.addCell(createTextCell(String.valueOf(j.getBetrag()), 100, style)
 					.setBorderRight(new SolidBorder(color, .1f)).setBackgroundColor(color1));
-			table.addCell(createTextCell(String.valueOf(j.getGewinnklasseid().getGewinnklasseid()), 100, style)
+			table.addCell(createTextCell(String.valueOf(j.getGewinnklasse().getGewinnklasseid()), 100, style)
 					.setBorderRight(new SolidBorder(color, .1f)).setBackgroundColor(color1));
 			table.addCell(createTextCell(str, 100, style).setBorderRight(new SolidBorder(color, .1f))
 					.setBackgroundColor(color1));
@@ -156,11 +156,11 @@ public class PdfReportGenerator {
 		for (Gewinnklasseziehungquote g : gewinnklasseziehungquoteList) {
 			String str;
 
-			if (g.getGewinnklasseid().getGewinnklasseid() < 10) {
+			if (g.getGewinnklasse().getGewinnklasseid() < 10) {
 				str = "Spiel6aus49";
 				color1 = new DeviceRgb(210, 238, 252);
-			} else if (g.getGewinnklasseid().getGewinnklasseid() < 17
-					&& g.getGewinnklasseid().getGewinnklasseid() > 9) {
+			} else if (g.getGewinnklasse().getGewinnklasseid() < 17
+					&& g.getGewinnklasse().getGewinnklasseid() > 9) {
 				str = "Spiel77";
 				color1 = new DeviceRgb(227, 242, 250);
 			} else {
@@ -173,7 +173,7 @@ public class PdfReportGenerator {
 						.setBorderRight(new SolidBorder(color, .1f)).setBackgroundColor(color1));
 				table.addCell(createTextCell(String.valueOf(g.getAnzahlgewinner()), 100, style)
 						.setBorderRight(new SolidBorder(color, .1f)).setBackgroundColor(color1));
-				table.addCell(createTextCell(String.valueOf(g.getGewinnklasseid().getGewinnklasseid()), 100, style)
+				table.addCell(createTextCell(String.valueOf(g.getGewinnklasse().getGewinnklasseid()), 100, style)
 						.setBorderRight(new SolidBorder(color, .1f)).setBackgroundColor(color1));
 				table.addCell(createTextCell(str, 100, style).setBorderRight(new SolidBorder(color, .1f))
 						.setBackgroundColor(color1));
@@ -206,11 +206,11 @@ public class PdfReportGenerator {
 
 		for (Gewinnklasseziehungquote g : gewinnklasseziehungquoteList) {
 
-			if (g.getGewinnklasseid().getGewinnklasseid() < 10) {
+			if (g.getGewinnklasse().getGewinnklasseid() < 10) {
 				gesamtSpiel6aus49 += g.getAnzahlgewinner() * g.getQuote();
 				color1 = new DeviceRgb(210, 238, 252);
-			} else if (g.getGewinnklasseid().getGewinnklasseid() < 17
-					&& g.getGewinnklasseid().getGewinnklasseid() > 9) {
+			} else if (g.getGewinnklasse().getGewinnklasseid() < 17
+					&& g.getGewinnklasse().getGewinnklasseid() > 9) {
 				gesamtSpiel77 += g.getAnzahlgewinner() * g.getQuote();
 				color1 = new DeviceRgb(227, 242, 250);
 			} else {
