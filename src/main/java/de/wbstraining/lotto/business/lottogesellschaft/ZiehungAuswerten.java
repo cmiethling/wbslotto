@@ -742,9 +742,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
     // was no records
     final String commulateGewString = " === !lastJkpotBeforeZieh_opt.isPresent())==>jackPotGewinn, commulJPotGewinn ";
     if (!lastJkpotBeforeZieh_opt.isPresent()) {
-        // first record in Table
-
-        
+        // first record in Table        
         commulJPotGewinn = jackPotGewinn;
         jackpotToPersist.setAnzahlziehungen(1);
         jackpotToPersist.setBetrag(jackPotGewinn);
@@ -753,13 +751,11 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
         
         log.info(commulateGewString + jackPotGewinn+", "+commulJPotGewinn);
     }
-
     // If date is old (Jackpot is won before) -> we must have new Jackpot wit Nr 1
     // from "anzahlziehungen"
     else if (lastJkpotBeforeZieh_opt.isPresent()
                 && (lastJkpotBeforeZieh_opt.get().getZiehung().getZiehungsdatum().isBefore(lastZieDate))) {
-        // Someone had won before
-        
+        // Someone had won before        
         commulJPotGewinn = jackPotGewinn;
         jackpotToPersist.setAnzahlziehungen(1);
         jackpotToPersist.setBetrag(jackPotGewinn);
@@ -773,10 +769,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
         && lastJkpotBeforeZieh_opt.get().getZiehung().getZiehungsdatum().isBefore(aktZieDate)
         && lastJkpotBeforeZieh_opt.get().getZiehung().getZiehungsdatum().compareTo(lastZieDate) >= 0) {
         
-        if (gwnkls1.getIsabsolut()) {
             commulJPotGewinn = lastJkpotBeforeZieh_opt.get().getBetragkumuliert() + jackPotGewinn;
-        }else {
-		        commulJPotGewinn = lastJkpotBeforeZieh_opt.get().getBetragkumuliert() + jackPotGewinn;}
 		        jackpotToPersist.setBetrag(jackPotGewinn);
 		        jackpotToPersist.setBetragkumuliert(commulJPotGewinn);
 		        jackpotToPersist.setAnzahlziehungen(lastJkpotBeforeZieh_opt.get().getAnzahlziehungen() + 1);
@@ -986,9 +979,9 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 		anzSpiel77.set(0);
 		anzSuper6.set(0);
 		summeAnzahlTipps.set(0);
-		lzLottosOhneGkl9.removeAll(lzLottosOhneGkl9);
+		lzLottosOhneGkl9.clear();
 		// V1.1
-		lzSpiel77Gkl1.removeAll(lzSpiel77Gkl1);
+		lzSpiel77Gkl1.clear();
 		// mit anzGewinner=0 initialisieren
 		anzGewinnerProKlasse = gewinnklassen.stream()
 				.collect(Collectors.toConcurrentMap(gkl -> gkl, gkl -> 0));
