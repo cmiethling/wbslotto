@@ -1,6 +1,7 @@
 package de.wbstraining.lotto.business.lottogesellschaft;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -205,57 +206,25 @@ public class Auftrag implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null || getClass() != obj.getClass()) {
 			return false;
-		if (getClass() != obj.getClass())
-			return false;
+		}
 		Auftrag other = (Auftrag) obj;
-		if (anzahlTipps != other.anzahlTipps)
-			return false;
-		if (belegnummer == null) {
-			if (other.belegnummer != null)
-				return false;
-		} else if (!belegnummer.equals(other.belegnummer))
-			return false;
-		if (isMittwoch == null) {
-			if (other.isMittwoch != null)
-				return false;
-		} else if (!isMittwoch.equals(other.isMittwoch))
-			return false;
-		if (isSamstag == null) {
-			if (other.isSamstag != null)
-				return false;
-		} else if (!isSamstag.equals(other.isSamstag))
-			return false;
-		if (isSpiel77 == null) {
-			if (other.isSpiel77 != null)
-				return false;
-		} else if (!isSpiel77.equals(other.isSpiel77))
-			return false;
-		if (isSuper6 == null) {
-			if (other.isSuper6 != null)
-				return false;
-		} else if (!isSuper6.equals(other.isSuper6))
-			return false;
-		if (kosten != other.kosten)
-			return false;
-		if (laufzeit != other.laufzeit)
-			return false;
-		if (losnummer != other.losnummer)
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (version == null) {
-			if (other.version != null)
-				return false;
-		} else if (!version.equals(other.version))
-			return false;
-		return true;
+		// field comparison
+		return Objects.equals(anzahlTipps, other.anzahlTipps)
+				&& Objects.equals(belegnummer, other.belegnummer)
+				&& Objects.equals(isMittwoch, other.isMittwoch)
+				&& Objects.equals(isSamstag, other.isSamstag)
+				&& Objects.equals(isSpiel77, other.isSpiel77)
+				&& Objects.equals(isSuper6, other.isSuper6)
+				&& Objects.equals(kosten, other.kosten)
+				&& Objects.equals(laufzeit, other.laufzeit)
+				&& Objects.equals(losnummer, other.losnummer)
+				&& Objects.equals(name, other.name)
+				&& Objects.equals(version, other.version);
 	}
 
 	@Override
