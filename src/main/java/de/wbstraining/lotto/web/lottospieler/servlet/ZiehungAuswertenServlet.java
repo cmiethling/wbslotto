@@ -84,14 +84,19 @@ public class ZiehungAuswertenServlet extends HttpServlet {
 		try {
 			processRequest(request, response);
 		} catch (ServletException | IOException e) {
-			throw new RuntimeException(e);
+			log.log(Level.SEVERE, e.getLocalizedMessage());
 		}
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		processRequest(request, response);
+			HttpServletResponse response) {
+		try {
+			processRequest(request, response);
+		} catch (ServletException | IOException e) {
+			log.log(Level.SEVERE, e.getLocalizedMessage());
+
+		}
 	}
 
 	@Override
