@@ -556,8 +556,9 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 			zie.getGewinnklasseziehungquoteList()
 					.stream()
 					.filter(g -> g.getGewinnklasse()
-							.getGewinnklasseid() == jp.getGewinnklasse()
-									.getGewinnklasseid())
+							.getGewinnklasseid()
+							.equals(jp.getGewinnklasse()
+									.getGewinnklasseid()))
 					.filter(g -> anzGewinnerProKlasse.get(jp.getGewinnklasse()) > 0)
 					.findAny()
 					.ifPresent((Gewinnklasseziehungquote gklZieQuoForJackpot) -> {
@@ -606,8 +607,9 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 		lzLottosOhneGkl9.forEach(lzLotto -> {
 			Gewinnklasseziehungquote gklZieQuo = gklZieQuos.stream()
 					.filter(g -> g.getGewinnklasse()
-							.getGewinnklasseid() == lzLotto.getGewinnklasse()
-									.getGewinnklasseid()) // mit long vergleichen
+							.getGewinnklasseid()
+							.equals(lzLotto.getGewinnklasse()
+									.getGewinnklasseid())) // mit long vergleichen
 					.findAny()
 					.orElseThrow(() -> new NoSuchElementException(
 							"invalid record in gewinnklasseziehungsquote or "
@@ -649,7 +651,8 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
     
 
     Gewinnklasse gwnkls1 = gwklZquoteByGkl_Map.keySet().stream().filter(gkl -> gkl.getGewinnklassenr() == 1)
-                    .filter(gkl -> gkl.getSpiel().getName().equals(spielName)).findAny().get();
+                    .filter(gkl -> gkl.getSpiel().getName().equals(spielName))
+                    .findAny().orElseThrow(()-> new IllegalArgumentException("invalid Gewinnklasse..."));
 
     List<Jackpot> jpList = jackpotFacade.findAll();
     // Last jackpot in Spiel 6 aus 49:
@@ -712,7 +715,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
     jackpotToPersist.setVersion(1);
     jackpotToPersist.setLastmodified(jpTemplDate);
 
-    if (spielName.equals(this.LOTTO)) {
+    if (spielName.equals(LOTTO)) {
         if (gwnkls1.getIsabsolut()) {
             jackPotGewinn = gwnkls1.getBetrag();
             commulJPotGewinn = jackPotGewinn;
@@ -725,7 +728,7 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
         }
     }
 
-    if (spielName.equals(this.SPIEL77)) {
+    if (spielName.equals(SPIEL77)) {
         if (gwnkls1.getIsabsolut()) {
             jackPotGewinn = gwnkls1.getBetrag();
             commulJPotGewinn = jackPotGewinn;
@@ -954,10 +957,12 @@ public class ZiehungAuswerten implements ZiehungAuswertenLocal {
 				.findAll()
 				.stream()
 				.filter(g -> g.getGewinnklasse()
-						.getGewinnklasseid() == gkl.getGewinnklasseid())
+						.getGewinnklasseid()
+						.equals(gkl.getGewinnklasseid()))
 //	Fehlersuche erfolgreich!
 				.filter(g -> g.getZiehung() // gklZieQuo zur richtigen Ziehung!
-						.getZiehungid() == zie.getZiehungid())
+						.getZiehungid()
+						.equals(zie.getZiehungid()))
 				.findAny()
 				.orElseThrow(() -> new NoSuchElementException(
 						"no valid record in gewinnklasseziehungquote..."));
