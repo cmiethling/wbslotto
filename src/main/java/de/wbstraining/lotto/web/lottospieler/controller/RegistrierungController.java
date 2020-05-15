@@ -98,14 +98,6 @@ public class RegistrierungController implements Serializable {
 		this.name = name;
 	}
 
-	public void setBenutzerName(String benutzername) {
-		this.benutzername = benutzername;
-	}
-
-	public String getBenutzerName() {
-		return benutzername;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -124,6 +116,22 @@ public class RegistrierungController implements Serializable {
 
 	public String getEmail() {
 		return email;
+	}
+
+	public String getBenutzername() {
+		return benutzername;
+	}
+
+	public void setBenutzername(String benutzername) {
+		this.benutzername = benutzername;
+	}
+
+	public String getPasswort() {
+		return passwort;
+	}
+
+	public void setPasswort(String passwort) {
+		this.passwort = passwort;
 	}
 
 	public String getAdresszusatz() {
@@ -303,21 +311,4 @@ public class RegistrierungController implements Serializable {
 		successMessage = "Herzlich Willkommen bei WBS Lotto : " + getVorname() + " "
 				+ getName() + " !!";
 	}
-
-	public String getBenutzername() {
-		return benutzername;
-	}
-
-	public void setBenutzername(String benutzername) {
-		this.benutzername = benutzername;
-	}
-
-	public String getPasswort() {
-		return passwort;
-	}
-
-	public void setPasswort(String passwort) {
-		this.passwort = passwort;
-	}
-
 }
