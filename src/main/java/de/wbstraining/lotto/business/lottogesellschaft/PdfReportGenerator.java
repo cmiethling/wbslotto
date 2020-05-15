@@ -72,7 +72,7 @@ public class PdfReportGenerator {
 
 			document.add(gesamteZahlungTable(gewinnklasseziehungquoteList));
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 
 	}

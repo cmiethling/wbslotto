@@ -16,12 +16,14 @@ import de.wbstraining.lotto.business.lottogesellschaft.ZiehungAuswertenLocal;
 import de.wbstraining.lotto.persistence.dao.ZiehungFacadeLocal;
 import de.wbstraining.lotto.persistence.model.Ziehung;
 
-@WebServlet(name = "ZiehungAuswertenServlet", urlPatterns = { "/ZiehungAuswertenServlet" })
+@WebServlet(name = "ZiehungAuswertenServlet", urlPatterns = {
+		"/ZiehungAuswertenServlet" })
 public class ZiehungAuswertenServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	private final static Logger log = Logger.getLogger("wbs.servlet.ZiehungAuswerten");
+	private final static Logger log = Logger
+			.getLogger("wbs.servlet.ZiehungAuswerten");
 
 //	@EJB
 //	private PopulateDatabaseLocal populateDatabase;
@@ -35,8 +37,8 @@ public class ZiehungAuswertenServlet extends HttpServlet {
 	@EJB
 	private ZiehungFacadeLocal ziehungFacade;
 
-	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void processRequest(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		try (PrintWriter out = response.getWriter()) {
 			out.println("<!DOCTYPE html>");
@@ -45,7 +47,8 @@ public class ZiehungAuswertenServlet extends HttpServlet {
 			out.println("<title>Servlet ZiehungAuswertenServlet</title>");
 			out.println("</head>");
 			out.println("<body>");
-			out.println("<h1>Servlet ZiehungAuswertenServlet at " + request.getContextPath() + "</h1>");
+			out.println("<h1>Servlet ZiehungAuswertenServlet at "
+					+ request.getContextPath() + "</h1>");
 			out.println("Ziehung Auswerten...<br>");
 			long t1; // Zeit1
 			long t2;// Zeit2
@@ -66,7 +69,8 @@ public class ZiehungAuswertenServlet extends HttpServlet {
 			ziehungAuswerten.ziehungAuswerten(zie);
 			t2 = System.currentTimeMillis();
 			out.println("ZiehungAuswerten benoetigte Zeit: " + (t2 - t1) + "ms<br>");
-			log.log(Level.INFO, "ZiehungAuswerten benoetigte Zeit: " + (t2 - t1) + "ms");
+			log.log(Level.INFO,
+					"ZiehungAuswerten benoetigte Zeit: " + (t2 - t1) + "ms");
 
 			out.println("done...");
 			out.println("</body>");
@@ -75,14 +79,18 @@ public class ZiehungAuswertenServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		processRequest(request, response);
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			processRequest(request, response);
+		} catch (ServletException | IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		processRequest(request, response);
 	}
 

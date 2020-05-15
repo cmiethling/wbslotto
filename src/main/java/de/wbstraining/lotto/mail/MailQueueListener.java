@@ -33,14 +33,12 @@ public class MailQueueListener implements MessageListener {
 	@EJB
 	private MailQueueSenderLocal mailProducer;
 
-	private static final Logger LOG = Logger.getLogger(MailQueueListener.class.getName());
+	private static final Logger LOG = Logger
+			.getLogger(MailQueueListener.class.getName());
 	private byte[] inMemoryPDF;
 	private String toEmailAddress;
 	private String mailSubject;
 	private String mailContent;
-
-	public MailQueueListener() {
-	}
 
 	@Override
 	public void onMessage(Message message) {
@@ -52,33 +50,36 @@ public class MailQueueListener implements MessageListener {
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.port", "25");
 
-		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-			@Override
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("lottouser", "test");
-			}
-		});
+		Session session = Session.getInstance(props,
+				new javax.mail.Authenticator() {
+					@Override
+					protected PasswordAuthentication getPasswordAuthentication() {
+						return new PasswordAuthentication("lottouser", "test");
+					}
+				});
 
 		try {
 
 			javax.mail.Message mailMessage = new MimeMessage(session);
 			mailMessage.setFrom(new InternetAddress("lottouser@lotto.test"));
-			mailMessage.setRecipients(javax.mail.Message.RecipientType.TO, InternetAddress.parse(toEmailAddress));
+			mailMessage.setRecipients(javax.mail.Message.RecipientType.TO,
+					InternetAddress.parse(toEmailAddress));
 			mailMessage.setSubject(mailSubject);
 
 			MimeBodyPart content = new MimeBodyPart();
 			content.setText(mailContent);
-			
+
 			Multipart multipart = new MimeMultipart();
 			multipart.addBodyPart(content);
-			
+
 			// add attachments
 			MimeBodyPart attachment = new MimeBodyPart();
-			ByteArrayDataSource source = new ByteArrayDataSource(inMemoryPDF, "application/pdf");
+			ByteArrayDataSource source = new ByteArrayDataSource(inMemoryPDF,
+					"application/pdf");
 			attachment.setDataHandler(new DataHandler(source));
 			attachment.setFileName("Quittung.pdf");
 			multipart.addBodyPart(attachment);
-			
+
 			mailMessage.setContent(multipart);
 
 			Transport.send(mailMessage);
@@ -86,7 +87,8 @@ public class MailQueueListener implements MessageListener {
 			LOG.log(Level.INFO, "Email from queue sent.");
 		} catch (MailConnectException mce) {
 			LOG.log(Level.WARNING, "cannot connect to mail server");
-			mailProducer.sendEmail(toEmailAddress, mailSubject, mailContent, inMemoryPDF, 2000L);
+			mailProducer.sendEmail(toEmailAddress, mailSubject, mailContent,
+					inMemoryPDF, 2000L);
 		} catch (MessagingException e) {
 			LOG.log(Level.INFO, "email apparently not sent", e);
 		}
@@ -105,7 +107,8 @@ public class MailQueueListener implements MessageListener {
 			mailContent = mapMsg.getString("mailContent");
 
 		} catch (JMSException ex) {
-			Logger.getLogger(MailQueueListener.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(MailQueueListener.class.getName())
+					.log(Level.SEVERE, null, ex);
 		}
 	}
 

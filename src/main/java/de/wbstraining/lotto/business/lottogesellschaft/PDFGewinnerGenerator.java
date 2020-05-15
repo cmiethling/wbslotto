@@ -45,9 +45,9 @@ public class PDFGewinnerGenerator {
 			spiel = "Super6";
 			betrag = auftrag.getGewinnsuper6();
 			betrag = betrag / 100;
-		} else
+		} else {
 			spiel = "kein Gewinn!";
-
+		}
 		try (
 				PdfWriter writer = new PdfWriter(
 						new FileOutputStream(DEST + auftrag.getName() + ".pdf"));
@@ -77,7 +77,7 @@ public class PDFGewinnerGenerator {
 			document.add(newLine());
 			document.add(newLine());
 		} catch (IOException e1) {
-			e1.printStackTrace();
+			throw new RuntimeException(e1);
 		}
 
 		// return os.toByteArray();
