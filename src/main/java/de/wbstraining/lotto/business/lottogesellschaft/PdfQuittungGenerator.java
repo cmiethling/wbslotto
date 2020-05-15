@@ -36,13 +36,13 @@ import de.wbstraining.lotto.persistence.model.Gebuehr;
 
 public class PdfQuittungGenerator {
 
-	public static final String path = "../standalone/deployments/wbslotto.war/resources/images/";
-	public static final String unterschrift = path + "unterschrift.png";
-	public static final String WBS = path + "wbs.png";
-	public static final String bezahlt = path + "bezahlt.png";
+	public static final String PATH = "../standalone/deployments/wbslotto.war/resources/images/";
+	public static final String SIGNATURE = PATH + "SIGNATURE.png";
+	public static final String WBS = PATH + "wbs.png";
+	public static final String PAID = PATH + "PAID.png";
 
-	public static final String decimalFormat = "#,##0.00";
-	public static final String dateTimeFormat = "dd.MM.yyyy";
+	public static final String DECIMAL_FORMAT = "#,##0.00";
+	public static final String DATETIME_FORMAT = "dd.MM.yyyy";
 
 	public static byte[] createPDFAsByteArray(Auftrag auftrag, AuftragKunde kunde,
 			KostenDetailedDto kostenDetailedDto) {
@@ -91,7 +91,7 @@ public class PdfQuittungGenerator {
 		p.addStyle(style);
 		document.add(p);
 		document.add(newLine());
-		DecimalFormat myFormatter = new DecimalFormat(decimalFormat);
+		DecimalFormat myFormatter = new DecimalFormat(DECIMAL_FORMAT);
 
 		document.add(new Paragraph("Grundgebühr: \t"
 				+ myFormatter.format(kostenDetailedDto.getGrundgebuehr() / 100.0)
@@ -104,15 +104,15 @@ public class PdfQuittungGenerator {
 		// add Ende
 		document.add(newLine());
 		document.add(newLine());
-		document.add(new Paragraph("Die Rechnung wurde bereits bezahlt."));
+		document.add(new Paragraph("Die Rechnung wurde bereits PAID."));
 		document.add(newLine());
 		try {
-			document.add(createImageUnterschrift(unterschrift));
+			document.add(createImageUnterschrift(SIGNATURE));
 		} catch (MalformedURLException e) {
 		}
 		// add image
 		try {
-			document.add(createImageCell(bezahlt));
+			document.add(createImageCell(PAID));
 		} catch (MalformedURLException e) {
 			e.getMessage();
 		}
@@ -175,7 +175,7 @@ public class PdfQuittungGenerator {
 				.get();
 		Gebuehr ersteGebuehr = gebueren.remove(ersteDatum);
 
-		DecimalFormat myFormatter = new DecimalFormat(decimalFormat);
+		DecimalFormat myFormatter = new DecimalFormat(DECIMAL_FORMAT);
 
 		document.add(new Paragraph("Grundgebühr: \t"
 				+ myFormatter.format(ersteGebuehr.getGrundgebuehr()) + "\t €"));
@@ -185,15 +185,15 @@ public class PdfQuittungGenerator {
 		// add Ende
 		document.add(newLine());
 		document.add(newLine());
-		document.add(new Paragraph("Die Rechnung wurde bereits bezahlt."));
+		document.add(new Paragraph("Die Rechnung wurde bereits PAID."));
 		document.add(newLine());
 		try {
-			document.add(createImageUnterschrift(unterschrift));
+			document.add(createImageUnterschrift(SIGNATURE));
 		} catch (MalformedURLException e) {
 		}
 		// add image
 		try {
-			document.add(createImageCell(bezahlt));
+			document.add(createImageCell(PAID));
 		} catch (MalformedURLException e) {
 			e.getMessage();
 		}
@@ -284,7 +284,7 @@ public class PdfQuittungGenerator {
 		String str;
 		LocalDate date = LocalDate.now();
 //                DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateTimeFormat);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_FORMAT);
 
 		style = new Style().setFontSize(12)
 				.setTextAlignment(TextAlignment.RIGHT);
@@ -348,7 +348,7 @@ public class PdfQuittungGenerator {
 
 		Table table = new Table(4);
 
-		DecimalFormat myFormatter = new DecimalFormat(decimalFormat);
+		DecimalFormat myFormatter = new DecimalFormat(DECIMAL_FORMAT);
 
 		table.addCell(createTextCell("Pos", 50, TextAlignment.JUSTIFIED)
 				.setBorderBottom(new SolidBorder(color, .1f))
@@ -414,7 +414,7 @@ public class PdfQuittungGenerator {
 
 		Set<LocalDate> dates = tipps.keySet();
 
-		DecimalFormat myFormatter = new DecimalFormat(decimalFormat);
+		DecimalFormat myFormatter = new DecimalFormat(DECIMAL_FORMAT);
 
 		Map<LocalDate, String[]> gebuehrmap = new TreeMap<>();
 		for (LocalDate date : dates) {
@@ -437,7 +437,7 @@ public class PdfQuittungGenerator {
 		// Ziehungen
 		gebuehrmap.forEach((date, zeile) -> {
 			table.addCell(createTextCell(
-					date.format(DateTimeFormatter.ofPattern(dateTimeFormat)), 100,
+					date.format(DateTimeFormatter.ofPattern(DATETIME_FORMAT)), 100,
 					TextAlignment.JUSTIFIED).setBorderBottom(new SolidBorder(color, .1f))
 							.setBorderRight(new SolidBorder(color, .1f)));
 			// diese Zeile "Grundgebühr" wird ersetzt durch Anzahl Ziehungen
@@ -508,7 +508,7 @@ public class PdfQuittungGenerator {
 
 		gebueren.forEach((date, gebuehr) -> {
 			table.addCell(createTextCell(
-					date.format(DateTimeFormatter.ofPattern(dateTimeFormat)), 100,
+					date.format(DateTimeFormatter.ofPattern(DATETIME_FORMAT)), 100,
 					TextAlignment.JUSTIFIED).setBorderBottom(new SolidBorder(color, .1f))
 							.setBorderRight(new SolidBorder(color, .1f)));
 			table.addCell(createTextCell(String.valueOf(gebuehr.getEinsatzprotipp()),

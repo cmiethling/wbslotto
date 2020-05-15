@@ -24,10 +24,10 @@ public class LottozahlenEingebenController implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private static final String radioButtonStr = "radioButton";
-	private static final String buttonGrayStr = "buttonGray";
-	private static final String buttonYellowStr = "buttonYellow";
-	private static final String radioButtonSelStr = "radioButtonSelected";
+	private static final String RADIO_BUTTON = "radioButton";
+	private static final String BUTTON_GRAY = "buttonGray";
+	private static final String BUTTON_YELLOW = "buttonYellow";
+	private static final String RADIO_BUTTON_SELECTED = "radioButtonSelected";
 
 	private int zahl;
 	private String zahlen;
@@ -48,18 +48,18 @@ public class LottozahlenEingebenController implements Serializable {
 	private String tipp11;
 	private String tipp12;
 
-	private String radioBtn1Class = radioButtonStr;
-	private String radioBtn2Class = radioButtonStr;
-	private String radioBtn3Class = radioButtonStr;
-	private String radioBtn4Class = radioButtonStr;
-	private String radioBtn5Class = radioButtonStr;
-	private String radioBtn6Class = radioButtonStr;
-	private String radioBtn7Class = radioButtonStr;
-	private String radioBtn8Class = radioButtonStr;
-	private String radioBtn9Class = radioButtonStr;
-	private String radioBtn10Class = radioButtonStr;
-	private String radioBtn11Class = radioButtonStr;
-	private String radioBtn12Class = radioButtonStr;
+	private String radioBtn1Class = RADIO_BUTTON;
+	private String radioBtn2Class = RADIO_BUTTON;
+	private String radioBtn3Class = RADIO_BUTTON;
+	private String radioBtn4Class = RADIO_BUTTON;
+	private String radioBtn5Class = RADIO_BUTTON;
+	private String radioBtn6Class = RADIO_BUTTON;
+	private String radioBtn7Class = RADIO_BUTTON;
+	private String radioBtn8Class = RADIO_BUTTON;
+	private String radioBtn9Class = RADIO_BUTTON;
+	private String radioBtn10Class = RADIO_BUTTON;
+	private String radioBtn11Class = RADIO_BUTTON;
+	private String radioBtn12Class = RADIO_BUTTON;
 
 	private int isValid1;
 	private int isValid2;
@@ -87,55 +87,55 @@ public class LottozahlenEingebenController implements Serializable {
 	private String valid11Class;
 	private String valid12Class;
 
-	private String btn1Class = buttonGrayStr;
-	private String btn2Class = buttonGrayStr;
-	private String btn3Class = buttonGrayStr;
-	private String btn4Class = buttonGrayStr;
-	private String btn5Class = buttonGrayStr;
-	private String btn6Class = buttonGrayStr;
-	private String btn7Class = buttonGrayStr;
-	private String btn8Class = buttonGrayStr;
-	private String btn9Class = buttonGrayStr;
-	private String btn10Class = buttonGrayStr;
-	private String btn11Class = buttonGrayStr;
-	private String btn12Class = buttonGrayStr;
-	private String btn13Class = buttonGrayStr;
-	private String btn14Class = buttonGrayStr;
-	private String btn15Class = buttonGrayStr;
-	private String btn16Class = buttonGrayStr;
-	private String btn17Class = buttonGrayStr;
-	private String btn18Class = buttonGrayStr;
-	private String btn19Class = buttonGrayStr;
-	private String btn20Class = buttonGrayStr;
-	private String btn21Class = buttonGrayStr;
-	private String btn22Class = buttonGrayStr;
-	private String btn23Class = buttonGrayStr;
-	private String btn24Class = buttonGrayStr;
-	private String btn25Class = buttonGrayStr;
-	private String btn26Class = buttonGrayStr;
-	private String btn27Class = buttonGrayStr;
-	private String btn28Class = buttonGrayStr;
-	private String btn29Class = buttonGrayStr;
-	private String btn30Class = buttonGrayStr;
-	private String btn31Class = buttonGrayStr;
-	private String btn32Class = buttonGrayStr;
-	private String btn33Class = buttonGrayStr;
-	private String btn34Class = buttonGrayStr;
-	private String btn35Class = buttonGrayStr;
-	private String btn36Class = buttonGrayStr;
-	private String btn37Class = buttonGrayStr;
-	private String btn38Class = buttonGrayStr;
-	private String btn39Class = buttonGrayStr;
-	private String btn40Class = buttonGrayStr;
-	private String btn41Class = buttonGrayStr;
-	private String btn42Class = buttonGrayStr;
-	private String btn43Class = buttonGrayStr;
-	private String btn44Class = buttonGrayStr;
-	private String btn45Class = buttonGrayStr;
-	private String btn46Class = buttonGrayStr;
-	private String btn47Class = buttonGrayStr;
-	private String btn48Class = buttonGrayStr;
-	private String btn49Class = buttonGrayStr;
+	private String btn1Class = BUTTON_GRAY;
+	private String btn2Class = BUTTON_GRAY;
+	private String btn3Class = BUTTON_GRAY;
+	private String btn4Class = BUTTON_GRAY;
+	private String btn5Class = BUTTON_GRAY;
+	private String btn6Class = BUTTON_GRAY;
+	private String btn7Class = BUTTON_GRAY;
+	private String btn8Class = BUTTON_GRAY;
+	private String btn9Class = BUTTON_GRAY;
+	private String btn10Class = BUTTON_GRAY;
+	private String btn11Class = BUTTON_GRAY;
+	private String btn12Class = BUTTON_GRAY;
+	private String btn13Class = BUTTON_GRAY;
+	private String btn14Class = BUTTON_GRAY;
+	private String btn15Class = BUTTON_GRAY;
+	private String btn16Class = BUTTON_GRAY;
+	private String btn17Class = BUTTON_GRAY;
+	private String btn18Class = BUTTON_GRAY;
+	private String btn19Class = BUTTON_GRAY;
+	private String btn20Class = BUTTON_GRAY;
+	private String btn21Class = BUTTON_GRAY;
+	private String btn22Class = BUTTON_GRAY;
+	private String btn23Class = BUTTON_GRAY;
+	private String btn24Class = BUTTON_GRAY;
+	private String btn25Class = BUTTON_GRAY;
+	private String btn26Class = BUTTON_GRAY;
+	private String btn27Class = BUTTON_GRAY;
+	private String btn28Class = BUTTON_GRAY;
+	private String btn29Class = BUTTON_GRAY;
+	private String btn30Class = BUTTON_GRAY;
+	private String btn31Class = BUTTON_GRAY;
+	private String btn32Class = BUTTON_GRAY;
+	private String btn33Class = BUTTON_GRAY;
+	private String btn34Class = BUTTON_GRAY;
+	private String btn35Class = BUTTON_GRAY;
+	private String btn36Class = BUTTON_GRAY;
+	private String btn37Class = BUTTON_GRAY;
+	private String btn38Class = BUTTON_GRAY;
+	private String btn39Class = BUTTON_GRAY;
+	private String btn40Class = BUTTON_GRAY;
+	private String btn41Class = BUTTON_GRAY;
+	private String btn42Class = BUTTON_GRAY;
+	private String btn43Class = BUTTON_GRAY;
+	private String btn44Class = BUTTON_GRAY;
+	private String btn45Class = BUTTON_GRAY;
+	private String btn46Class = BUTTON_GRAY;
+	private String btn47Class = BUTTON_GRAY;
+	private String btn48Class = BUTTON_GRAY;
+	private String btn49Class = BUTTON_GRAY;
 
 	private int[] btn = new int[50];
 
@@ -149,103 +149,103 @@ public class LottozahlenEingebenController implements Serializable {
 
 	public void setZahlen() {
 		btn[1] = 0;
-		btn1Class = buttonGrayStr;
+		btn1Class = BUTTON_GRAY;
 		btn[2] = 0;
-		btn2Class = buttonGrayStr;
+		btn2Class = BUTTON_GRAY;
 		btn[3] = 0;
-		btn3Class = buttonGrayStr;
+		btn3Class = BUTTON_GRAY;
 		btn[4] = 0;
-		btn4Class = buttonGrayStr;
+		btn4Class = BUTTON_GRAY;
 		btn[5] = 0;
-		btn5Class = buttonGrayStr;
+		btn5Class = BUTTON_GRAY;
 		btn[6] = 0;
-		btn6Class = buttonGrayStr;
+		btn6Class = BUTTON_GRAY;
 		btn[7] = 0;
-		btn7Class = buttonGrayStr;
+		btn7Class = BUTTON_GRAY;
 		btn[8] = 0;
-		btn8Class = buttonGrayStr;
+		btn8Class = BUTTON_GRAY;
 		btn[9] = 0;
-		btn9Class = buttonGrayStr;
+		btn9Class = BUTTON_GRAY;
 		btn[10] = 0;
-		btn10Class = buttonGrayStr;
+		btn10Class = BUTTON_GRAY;
 		btn[11] = 0;
-		btn11Class = buttonGrayStr;
+		btn11Class = BUTTON_GRAY;
 		btn[12] = 0;
-		btn12Class = buttonGrayStr;
+		btn12Class = BUTTON_GRAY;
 		btn[13] = 0;
-		btn13Class = buttonGrayStr;
+		btn13Class = BUTTON_GRAY;
 		btn[14] = 0;
-		btn14Class = buttonGrayStr;
+		btn14Class = BUTTON_GRAY;
 		btn[15] = 0;
-		btn15Class = buttonGrayStr;
+		btn15Class = BUTTON_GRAY;
 		btn[16] = 0;
-		btn16Class = buttonGrayStr;
+		btn16Class = BUTTON_GRAY;
 		btn[17] = 0;
-		btn17Class = buttonGrayStr;
+		btn17Class = BUTTON_GRAY;
 		btn[18] = 0;
-		btn18Class = buttonGrayStr;
+		btn18Class = BUTTON_GRAY;
 		btn[19] = 0;
-		btn19Class = buttonGrayStr;
+		btn19Class = BUTTON_GRAY;
 		btn[20] = 0;
-		btn20Class = buttonGrayStr;
+		btn20Class = BUTTON_GRAY;
 		btn[21] = 0;
-		btn21Class = buttonGrayStr;
+		btn21Class = BUTTON_GRAY;
 		btn[22] = 0;
-		btn22Class = buttonGrayStr;
+		btn22Class = BUTTON_GRAY;
 		btn[23] = 0;
-		btn23Class = buttonGrayStr;
+		btn23Class = BUTTON_GRAY;
 		btn[24] = 0;
-		btn24Class = buttonGrayStr;
+		btn24Class = BUTTON_GRAY;
 		btn[25] = 0;
-		btn25Class = buttonGrayStr;
+		btn25Class = BUTTON_GRAY;
 		btn[26] = 0;
-		btn26Class = buttonGrayStr;
+		btn26Class = BUTTON_GRAY;
 		btn[27] = 0;
-		btn27Class = buttonGrayStr;
+		btn27Class = BUTTON_GRAY;
 		btn[28] = 0;
-		btn28Class = buttonGrayStr;
+		btn28Class = BUTTON_GRAY;
 		btn[29] = 0;
-		btn29Class = buttonGrayStr;
+		btn29Class = BUTTON_GRAY;
 		btn[30] = 0;
-		btn30Class = buttonGrayStr;
+		btn30Class = BUTTON_GRAY;
 		btn[31] = 0;
-		btn31Class = buttonGrayStr;
+		btn31Class = BUTTON_GRAY;
 		btn[32] = 0;
-		btn32Class = buttonGrayStr;
+		btn32Class = BUTTON_GRAY;
 		btn[33] = 0;
-		btn33Class = buttonGrayStr;
+		btn33Class = BUTTON_GRAY;
 		btn[34] = 0;
-		btn34Class = buttonGrayStr;
+		btn34Class = BUTTON_GRAY;
 		btn[35] = 0;
-		btn35Class = buttonGrayStr;
+		btn35Class = BUTTON_GRAY;
 		btn[36] = 0;
-		btn36Class = buttonGrayStr;
+		btn36Class = BUTTON_GRAY;
 		btn[37] = 0;
-		btn37Class = buttonGrayStr;
+		btn37Class = BUTTON_GRAY;
 		btn[38] = 0;
-		btn38Class = buttonGrayStr;
+		btn38Class = BUTTON_GRAY;
 		btn[39] = 0;
-		btn39Class = buttonGrayStr;
+		btn39Class = BUTTON_GRAY;
 		btn[40] = 0;
-		btn40Class = buttonGrayStr;
+		btn40Class = BUTTON_GRAY;
 		btn[41] = 0;
-		btn41Class = buttonGrayStr;
+		btn41Class = BUTTON_GRAY;
 		btn[42] = 0;
-		btn42Class = buttonGrayStr;
+		btn42Class = BUTTON_GRAY;
 		btn[43] = 0;
-		btn43Class = buttonGrayStr;
+		btn43Class = BUTTON_GRAY;
 		btn[44] = 0;
-		btn44Class = buttonGrayStr;
+		btn44Class = BUTTON_GRAY;
 		btn[45] = 0;
-		btn45Class = buttonGrayStr;
+		btn45Class = BUTTON_GRAY;
 		btn[46] = 0;
-		btn46Class = buttonGrayStr;
+		btn46Class = BUTTON_GRAY;
 		btn[47] = 0;
-		btn47Class = buttonGrayStr;
+		btn47Class = BUTTON_GRAY;
 		btn[48] = 0;
-		btn48Class = buttonGrayStr;
+		btn48Class = BUTTON_GRAY;
 		btn[49] = 0;
-		btn49Class = buttonGrayStr;
+		btn49Class = BUTTON_GRAY;
 
 		int i;
 		int count = 0;
@@ -270,18 +270,18 @@ public class LottozahlenEingebenController implements Serializable {
 
 	public String select(int i) {
 		if (tipp > 0) {
-			radioBtn1Class = radioButtonStr;
-			radioBtn2Class = radioButtonStr;
-			radioBtn3Class = radioButtonStr;
-			radioBtn4Class = radioButtonStr;
-			radioBtn5Class = radioButtonStr;
-			radioBtn6Class = radioButtonStr;
-			radioBtn7Class = radioButtonStr;
-			radioBtn8Class = radioButtonStr;
-			radioBtn9Class = radioButtonStr;
-			radioBtn10Class = radioButtonStr;
-			radioBtn11Class = radioButtonStr;
-			radioBtn12Class = radioButtonStr;
+			radioBtn1Class = RADIO_BUTTON;
+			radioBtn2Class = RADIO_BUTTON;
+			radioBtn3Class = RADIO_BUTTON;
+			radioBtn4Class = RADIO_BUTTON;
+			radioBtn5Class = RADIO_BUTTON;
+			radioBtn6Class = RADIO_BUTTON;
+			radioBtn7Class = RADIO_BUTTON;
+			radioBtn8Class = RADIO_BUTTON;
+			radioBtn9Class = RADIO_BUTTON;
+			radioBtn10Class = RADIO_BUTTON;
+			radioBtn11Class = RADIO_BUTTON;
+			radioBtn12Class = RADIO_BUTTON;
 			switch (tipp) {
 			case 1:
 				zahlen = tipp1;
@@ -332,51 +332,51 @@ public class LottozahlenEingebenController implements Serializable {
 		switch (tipp) {
 		case 1:
 			zahlen = tipp1;
-			radioBtn1Class = radioButtonSelStr;
+			radioBtn1Class = RADIO_BUTTON_SELECTED;
 			break;
 		case 2:
 			zahlen = tipp2;
-			radioBtn2Class = radioButtonSelStr;
+			radioBtn2Class = RADIO_BUTTON_SELECTED;
 			break;
 		case 3:
 			zahlen = tipp3;
-			radioBtn3Class = radioButtonSelStr;
+			radioBtn3Class = RADIO_BUTTON_SELECTED;
 			break;
 		case 4:
 			zahlen = tipp4;
-			radioBtn4Class = radioButtonSelStr;
+			radioBtn4Class = RADIO_BUTTON_SELECTED;
 			break;
 		case 5:
 			zahlen = tipp5;
-			radioBtn5Class = radioButtonSelStr;
+			radioBtn5Class = RADIO_BUTTON_SELECTED;
 			break;
 		case 6:
 			zahlen = tipp6;
-			radioBtn6Class = radioButtonSelStr;
+			radioBtn6Class = RADIO_BUTTON_SELECTED;
 			break;
 		case 7:
 			zahlen = tipp7;
-			radioBtn7Class = radioButtonSelStr;
+			radioBtn7Class = RADIO_BUTTON_SELECTED;
 			break;
 		case 8:
 			zahlen = tipp8;
-			radioBtn8Class = radioButtonSelStr;
+			radioBtn8Class = RADIO_BUTTON_SELECTED;
 			break;
 		case 9:
 			zahlen = tipp9;
-			radioBtn9Class = radioButtonSelStr;
+			radioBtn9Class = RADIO_BUTTON_SELECTED;
 			break;
 		case 10:
 			zahlen = tipp10;
-			radioBtn10Class = radioButtonSelStr;
+			radioBtn10Class = RADIO_BUTTON_SELECTED;
 			break;
 		case 11:
 			zahlen = tipp11;
-			radioBtn11Class = radioButtonSelStr;
+			radioBtn11Class = RADIO_BUTTON_SELECTED;
 			break;
 		case 12:
 			zahlen = tipp12;
-			radioBtn12Class = radioButtonSelStr;
+			radioBtn12Class = RADIO_BUTTON_SELECTED;
 			break;
 		default:
 			assert false;
@@ -428,295 +428,295 @@ public class LottozahlenEingebenController implements Serializable {
 			case 1:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn1Class = buttonYellowStr;
+					btn1Class = BUTTON_YELLOW;
 				}
 				break;
 			case 2:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn2Class = buttonYellowStr;
+					btn2Class = BUTTON_YELLOW;
 				}
 				break;
 			case 3:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn3Class = buttonYellowStr;
+					btn3Class = BUTTON_YELLOW;
 				}
 				break;
 			case 4:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn4Class = buttonYellowStr;
+					btn4Class = BUTTON_YELLOW;
 				}
 				break;
 			case 5:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn5Class = buttonYellowStr;
+					btn5Class = BUTTON_YELLOW;
 				}
 				break;
 			case 6:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn6Class = buttonYellowStr;
+					btn6Class = BUTTON_YELLOW;
 				}
 				break;
 			case 7:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn7Class = buttonYellowStr;
+					btn7Class = BUTTON_YELLOW;
 				}
 				break;
 			case 8:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn8Class = buttonYellowStr;
+					btn8Class = BUTTON_YELLOW;
 				}
 				break;
 			case 9:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn9Class = buttonYellowStr;
+					btn9Class = BUTTON_YELLOW;
 				}
 				break;
 			case 10:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn10Class = buttonYellowStr;
+					btn10Class = BUTTON_YELLOW;
 				}
 				break;
 			case 11:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn11Class = buttonYellowStr;
+					btn11Class = BUTTON_YELLOW;
 				}
 				break;
 			case 12:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn12Class = buttonYellowStr;
+					btn12Class = BUTTON_YELLOW;
 				}
 				break;
 			case 13:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn13Class = buttonYellowStr;
+					btn13Class = BUTTON_YELLOW;
 				}
 				break;
 			case 14:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn14Class = buttonYellowStr;
+					btn14Class = BUTTON_YELLOW;
 				}
 				break;
 			case 15:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn15Class = buttonYellowStr;
+					btn15Class = BUTTON_YELLOW;
 				}
 				break;
 			case 16:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn16Class = buttonYellowStr;
+					btn16Class = BUTTON_YELLOW;
 				}
 				break;
 			case 17:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn17Class = buttonYellowStr;
+					btn17Class = BUTTON_YELLOW;
 				}
 				break;
 			case 18:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn18Class = buttonYellowStr;
+					btn18Class = BUTTON_YELLOW;
 				}
 				break;
 			case 19:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn19Class = buttonYellowStr;
+					btn19Class = BUTTON_YELLOW;
 				}
 				break;
 			case 20:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn20Class = buttonYellowStr;
+					btn20Class = BUTTON_YELLOW;
 				}
 				break;
 			case 21:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn21Class = buttonYellowStr;
+					btn21Class = BUTTON_YELLOW;
 				}
 				break;
 			case 22:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn22Class = buttonYellowStr;
+					btn22Class = BUTTON_YELLOW;
 				}
 				break;
 			case 23:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn23Class = buttonYellowStr;
+					btn23Class = BUTTON_YELLOW;
 				}
 				break;
 			case 24:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn24Class = buttonYellowStr;
+					btn24Class = BUTTON_YELLOW;
 				}
 				break;
 			case 25:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn25Class = buttonYellowStr;
+					btn25Class = BUTTON_YELLOW;
 				}
 				break;
 			case 26:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn26Class = buttonYellowStr;
+					btn26Class = BUTTON_YELLOW;
 				}
 				break;
 			case 27:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn27Class = buttonYellowStr;
+					btn27Class = BUTTON_YELLOW;
 				}
 				break;
 			case 28:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn28Class = buttonYellowStr;
+					btn28Class = BUTTON_YELLOW;
 				}
 				break;
 			case 29:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn29Class = buttonYellowStr;
+					btn29Class = BUTTON_YELLOW;
 				}
 				break;
 			case 30:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn30Class = buttonYellowStr;
+					btn30Class = BUTTON_YELLOW;
 				}
 				break;
 			case 31:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn31Class = buttonYellowStr;
+					btn31Class = BUTTON_YELLOW;
 				}
 				break;
 			case 32:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn32Class = buttonYellowStr;
+					btn32Class = BUTTON_YELLOW;
 				}
 				break;
 			case 33:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn33Class = buttonYellowStr;
+					btn33Class = BUTTON_YELLOW;
 				}
 				break;
 			case 34:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn34Class = buttonYellowStr;
+					btn34Class = BUTTON_YELLOW;
 				}
 				break;
 			case 35:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn35Class = buttonYellowStr;
+					btn35Class = BUTTON_YELLOW;
 				}
 				break;
 			case 36:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn36Class = buttonYellowStr;
+					btn36Class = BUTTON_YELLOW;
 				}
 				break;
 			case 37:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn37Class = buttonYellowStr;
+					btn37Class = BUTTON_YELLOW;
 				}
 				break;
 			case 38:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn38Class = buttonYellowStr;
+					btn38Class = BUTTON_YELLOW;
 				}
 				break;
 			case 39:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn39Class = buttonYellowStr;
+					btn39Class = BUTTON_YELLOW;
 				}
 				break;
 			case 40:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn40Class = buttonYellowStr;
+					btn40Class = BUTTON_YELLOW;
 				}
 				break;
 			case 41:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn41Class = buttonYellowStr;
+					btn41Class = BUTTON_YELLOW;
 				}
 				break;
 			case 42:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn42Class = buttonYellowStr;
+					btn42Class = BUTTON_YELLOW;
 				}
 				break;
 			case 43:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn43Class = buttonYellowStr;
+					btn43Class = BUTTON_YELLOW;
 				}
 				break;
 			case 44:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn44Class = buttonYellowStr;
+					btn44Class = BUTTON_YELLOW;
 				}
 				break;
 			case 45:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn45Class = buttonYellowStr;
+					btn45Class = BUTTON_YELLOW;
 				}
 				break;
 			case 46:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn46Class = buttonYellowStr;
+					btn46Class = BUTTON_YELLOW;
 				}
 				break;
 			case 47:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn47Class = buttonYellowStr;
+					btn47Class = BUTTON_YELLOW;
 				}
 				break;
 			case 48:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn48Class = buttonYellowStr;
+					btn48Class = BUTTON_YELLOW;
 				}
 				break;
 			case 49:
 				if (btn[i] == 1) {
 					zahlen = zahlen + i + " ";
-					btn49Class = buttonYellowStr;
+					btn49Class = BUTTON_YELLOW;
 				}
 				break;
 			default:
@@ -809,7 +809,7 @@ public class LottozahlenEingebenController implements Serializable {
 		zahl = i;
 		if (tipp == 0) {
 			select(1);
-			radioBtn1Class = radioButtonSelStr;
+			radioBtn1Class = RADIO_BUTTON_SELECTED;
 		}
 		switch (tipp) {
 		case 1:

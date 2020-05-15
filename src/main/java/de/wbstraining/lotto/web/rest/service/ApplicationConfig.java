@@ -15,8 +15,8 @@ import javax.ws.rs.core.Application;
  */
 
 // url-beginn: http://localhost:8080/wbslotto/lottoapi/
-// corejpa: context-path
-// lottoapi: application-path
+// corejpa: context-PATH
+// lottoapi: application-PATH
 
 // http://localhost:8080/wbslotto/lottoapi/ziehungen
 

@@ -18,7 +18,7 @@ import com.itextpdf.layout.property.UnitValue;
 public class PDFGewinnerGenerator {
 
 	private static String DEST = "C:\\GewinerPDF\\";
-	public static final String gratulation = "../standalone/deployments/wbslotto.war/resources/images/gratulation.jpg";
+	public static final String GRATULATION = "../standalone/deployments/wbslotto.war/resources/images/GRATULATION.jpg";
 	// Table : getBelegnummer , getLosnummer , Betrag : getGewinnspiel77 oder
 	// getGewinnsuper6
 
@@ -56,7 +56,7 @@ public class PDFGewinnerGenerator {
 
 			// add image
 			try {
-				document.add(createImageCell(gratulation))
+				document.add(createImageCell(GRATULATION))
 						.setWidth(1024);
 			} catch (MalformedURLException e) {
 				e.getMessage();

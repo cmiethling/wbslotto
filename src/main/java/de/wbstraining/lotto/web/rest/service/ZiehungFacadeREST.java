@@ -23,9 +23,9 @@ import de.wbstraining.lotto.persistence.dao.ZiehungFacadeLocal;
  */
 
 // url-beginn: http://localhost:8080/corejpa/lottoapi/ziehungen
-// corejpa: context-path
-// lottoapi: application-path
-// ziehungen: path
+// corejpa: context-PATH
+// lottoapi: application-PATH
+// ziehungen: PATH
 
 @Stateless
 @Path("/ziehungen")
