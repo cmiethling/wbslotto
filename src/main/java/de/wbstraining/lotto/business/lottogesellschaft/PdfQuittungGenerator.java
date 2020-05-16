@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ThreadLocalRandom;
@@ -109,6 +110,7 @@ public class PdfQuittungGenerator {
 		try {
 			document.add(createImageUnterschrift(SIGNATURE));
 		} catch (MalformedURLException e) {
+			e.getMessage();
 		}
 		// add image
 		try {
@@ -170,9 +172,8 @@ public class PdfQuittungGenerator {
 
 		LocalDate ersteDatum = gebueren.keySet()
 				.stream()
-				.limit(1)
 				.findFirst()
-				.get();
+				.orElseThrow(() -> new NoSuchElementException("nothing in map..."));
 		Gebuehr ersteGebuehr = gebueren.remove(ersteDatum);
 
 		DecimalFormat myFormatter = new DecimalFormat(DECIMAL_FORMAT);
@@ -190,6 +191,7 @@ public class PdfQuittungGenerator {
 		try {
 			document.add(createImageUnterschrift(SIGNATURE));
 		} catch (MalformedURLException e) {
+			e.getMessage();
 		}
 		// add image
 		try {
@@ -296,9 +298,9 @@ public class PdfQuittungGenerator {
 		table.addCell(createTextCell(str, 400, 80, style, VerticalAlignment.TOP));
 
 		str = "Rechnungdatum: " + date.format(formatter) + "\n" + "Rechnungnummer: "
-				+ String.valueOf(ThreadLocalRandom.current()
-						.nextInt(10_000_000, 99_999_999))
-				+ "\n" + "Kundenummer: " + String.valueOf(kundeId) + "\n";
+				+ ThreadLocalRandom.current()
+						.nextInt(10_000_000, 99_999_999)
+				+ "\n" + "Kundenummer: " + kundeId + "\n";
 		table
 				.addCell(createTextCell(str, 400, 70, style, VerticalAlignment.BOTTOM));
 
@@ -325,8 +327,9 @@ public class PdfQuittungGenerator {
 		String artikel;
 		// Color color = new DeviceRgb(175, 205, 222);
 		Color color = Color.LIGHT_GRAY;
-		String AnzahlTipps = "AnzahlTipps \t" + auftrag.getAnzahlTipps();
-		String einsatSpiel77 = auftrag.getIsSpiel77() ? "Spiel77 \t Ja"
+		String anzahlTipps = "AnzahlTipps \t" + auftrag.getAnzahlTipps();
+		String einsatSpiel77 = Boolean.TRUE.equals(auftrag.getIsSpiel77())
+				? "Spiel77 \t Ja"
 				: "Spiel77 \t Nein";
 		String einsatSuper6 = auftrag.getIsSuper6() ? "Super6 \t Ja"
 				: "Super6 \t Nein";
@@ -342,7 +345,7 @@ public class PdfQuittungGenerator {
 
 		String laufzeit = "Laufzeit \t" + auftrag.getLaufzeit() + woche;
 
-		artikel = "Lottoschein 6 aus 49\n" + AnzahlTipps + "\n" + einsatSpiel77
+		artikel = "Lottoschein 6 aus 49\n" + anzahlTipps + "\n" + einsatSpiel77
 				+ "\n" + einsatSuper6 + "\n" + mittwoch + "\n" + samstag + "\n"
 				+ laufzeit;
 
@@ -539,8 +542,7 @@ public class PdfQuittungGenerator {
 		SolidLine lineDrawer = new SolidLine(2F);
 		lineDrawer.setLineWidth(3F);
 		lineDrawer.setColor(color);
-		LineSeparator lineSeparator = new LineSeparator(lineDrawer);
-		return lineSeparator;
+		return new LineSeparator(lineDrawer);
 	}
 
 	private static Cell createTextCell(String text, float width,

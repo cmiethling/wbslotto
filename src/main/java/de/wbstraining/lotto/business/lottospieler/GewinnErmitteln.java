@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.ejb.NoSuchEntityException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -35,41 +36,41 @@ public class GewinnErmitteln implements GewinnErmittelnLocal {
 		int gkl6Aus49;
 
 		query = em
-			.createNamedQuery("Lottoschein.findByBelegnummer", Lottoschein.class)
-			.setParameter("belegnummer", BigInteger.valueOf(belegNr));
+				.createNamedQuery("Lottoschein.findByBelegnummer", Lottoschein.class)
+				.setParameter("belegnummer", BigInteger.valueOf(belegNr));
 		schein = query.getSingleResult();
 		lzs = schein.getLottoscheinziehungList();
 		lziehung = lzs.stream()
-			.filter(lz -> lz.getZiehung()
-				.getZiehungsdatum()
-				.equals(ziehungsDatum))
-			.findAny()
-			.get();
+				.filter(lz -> lz.getZiehung()
+						.getZiehungsdatum()
+						.equals(ziehungsDatum))
+				.findAny()
+				.orElseThrow(NoSuchEntityException::new);
 
 		gklSpiel77 = lziehung.getGewinnklassespiel77()
-			.getGewinnklassenr();
+				.getGewinnklassenr();
 		quoteSpiel77 = lziehung.getGewinnspiel77()
-			.longValue();
+				.longValue();
 		gklSuper6 = lziehung.getGewinnklassesuper6()
-			.getGewinnklassenr();
+				.getGewinnklassenr();
 		quoteSuper6 = lziehung.getGewinnsuper6()
-			.longValue();
+				.longValue();
 
 		GewinnDetailedDto dto = new GewinnDetailedDto();
 
 		dto.setBelegNr(belegNr);
 		dto.setZiehungsDatum(lziehung.getZiehung()
-			.getZiehungsdatum());
+				.getZiehungsdatum());
 		dto.setGklSpiel77(gklSpiel77);
 		dto.setQuoteSpiel77(quoteSpiel77);
 		dto.setGklSuper6(gklSuper6);
 		dto.setQuoteSuper6(quoteSuper6);
 		for (Lottoscheinziehung6aus49 l6Aus49 : lziehung
-			.getLottoscheinziehung6aus49List()) {
+				.getLottoscheinziehung6aus49List()) {
 			gkl6Aus49 = l6Aus49.getGewinnklasse()
-				.getGewinnklassenr();
+					.getGewinnklassenr();
 			dto.addPair6Aus49(l6Aus49.getTippnr(), gkl6Aus49, l6Aus49.getGewinn()
-				.longValue());
+					.longValue());
 		}
 		return dto;
 	}
