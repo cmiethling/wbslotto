@@ -42,6 +42,9 @@ public class LottoscheinEinreichenController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private static final String IS_SAMSTAG = "isSamstag";
+	private static final String IS_MITTW = "isMittwoch";
+
 	@EJB
 	private KostenErmittelnLocal lottoscheinEinreichenKostenErmitteln;
 
@@ -191,9 +194,9 @@ public class LottoscheinEinreichenController implements Serializable {
 		schein.setLaufzeit(Integer.parseInt(laufzeit));
 		schein.setIsmittwoch(Boolean.FALSE);
 		schein.setIssamstag(Boolean.FALSE);
-		if (ziehungstage.contains("isSamstag"))
+		if (ziehungstage.contains(IS_SAMSTAG))
 			schein.setIssamstag(Boolean.TRUE);
-		if (ziehungstage.contains("isMittwoch"))
+		if (ziehungstage.contains(IS_MITTW))
 			schein.setIsmittwoch(Boolean.TRUE);
 
 		schein.setKosten(0);
@@ -211,14 +214,14 @@ public class LottoscheinEinreichenController implements Serializable {
 
 		System.out.println(LocalDate.now());
 		System.out.println(laufzeit);
-		System.out.println(ziehungstage.contains("isMittwoch"));
-		System.out.println(ziehungstage.contains("isSamstag"));
+		System.out.println(ziehungstage.contains(IS_MITTW));
+		System.out.println(ziehungstage.contains(IS_SAMSTAG));
 		System.out.println(anzahlTipps);
 		System.out.println(spiele.contains("super6"));
 		System.out.println(spiele.contains("spiel77"));
 
-		if (!laufzeit.isEmpty() && (ziehungstage.contains("isMittwoch")
-				|| ziehungstage.contains("isSamstag")) && anzahlTipps > 0) {
+		if (!laufzeit.isEmpty() && (ziehungstage.contains(IS_MITTW)
+				|| ziehungstage.contains(IS_SAMSTAG)) && anzahlTipps > 0) {
 			// TODO
 			KostenDetailedDto dto = new KostenDetailedDto();
 			dto.setAnzahlTipps(0);
@@ -227,8 +230,8 @@ public class LottoscheinEinreichenController implements Serializable {
 			/*
 			 * int kosten =
 			 * lottoscheinEinreichenKostenErmitteln.kostenermitteln(LocalDate.now(),
-			 * Integer.parseInt(laufzeit), ziehungstage.contains("isMittwoch"),
-			 * ziehungstage.contains("isSamstag"), anzahlTipps,
+			 * Integer.parseInt(laufzeit), ziehungstage.contains(isMittwochStr),
+			 * ziehungstage.contains(isSamstagStr), anzahlTipps,
 			 * spiele.contains("super6"),
 			 * spiele.contains("spiel77"));
 			 */
